@@ -633,3 +633,22 @@ a.dl small{font-weight:500;color:var(--mut);font-size:12.5px}
 .thseg{display:flex;gap:8px}.thseg button{flex:1;border:1.5px solid var(--line);background:none;color:var(--tx);font:inherit;font-size:13px;font-weight:650;padding:12px 0;border-radius:12px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px}
 .thseg button.on{border-color:var(--gold);background:var(--goldsoft)}.thseg svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .gwrap,.ayw{padding:0 20px 24px}#t4>.empty{margin-left:20px;margin-right:20px}
+
+/* 0.10.4: slayt geçişi (eski kart sola kayıp solar, yeni kart gelir; geri yönde ters). Yalnız yeni satırlar. */
+.hcar{position:relative}
+.hcar .sl.out{position:absolute;left:0;right:0;top:0;margin:0;pointer-events:none;z-index:2}
+.hcar .sl.out.ol{animation:hOutL .6s cubic-bezier(.4,0,.2,1) forwards}
+.hcar .sl.out.or{animation:hOutR .6s cubic-bezier(.4,0,.2,1) forwards}
+.hcar .sl.fx.fxs{animation:hInS .6s cubic-bezier(.4,0,.2,1)}
+.hcar .sl.fx.fxr{animation:hInR .6s cubic-bezier(.4,0,.2,1)}
+@keyframes hOutL{from{opacity:1;transform:none}to{opacity:0;transform:translateX(-28px)}}
+@keyframes hOutR{from{opacity:1;transform:none}to{opacity:0;transform:translateX(28px)}}
+@keyframes hInS{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+@keyframes hInR{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .hcar .sl.out.ol,.hcar .sl.out.or{animation:hOutF .3s linear forwards}
+  .hcar .sl.fx.fxs,.hcar .sl.fx.fxr{animation:hInF .3s linear}
+  @keyframes hOutF{from{opacity:1}to{opacity:0}}
+  @keyframes hInF{from{opacity:0}to{opacity:1}}
+}
+.hcar{overflow-x:clip}

@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.10.3'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.10.4'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -331,7 +331,7 @@
     return '<div class="hr"><div class="ring' + (les ? '' : ' br') + '" data-lv="r"><svg viewBox="0 0 180 180" aria-hidden="true">' + TICKS + '<circle class="tr" cx="90" cy="90" r="78"/><circle class="pg' + (les && left <= 300 ? ' son' : '') + '" cx="90" cy="90" r="78" stroke-dasharray="' + Cc.toFixed(1) + '" stroke-dashoffset="' + (Cc * (1 - fr)).toFixed(1) + '"/></svg><div class="rc"><b class="d">' + kalan.slice(0, -1) + '<span class="sd">' + kalan.slice(-1) + '</span></b><span>kalan süre</span></div></div><div class="hs"><div class="ey' + (les ? '' : ' br') + '">' + esc(c[1]) + '</div><div class="cap">' + (les ? 'ders bitimine' : (c[0] === 'öğle' ? 'öğle arasının bitimine' : 'teneffüsün bitimine')) + ' kadar</div>' + (n ? '<div class="nx">Sonra ' + esc(n[1].toLowerCase()) + ', ' + n[2] + '</div>' : '<div class="nx">Günün son dersi</div>') + sinif + '</div></div>' + cetvel(C, mine);
   }
   // ---- Üst alan: panel düzeni. Ders/teneffüste geri sayım, ders dışında slayt; düğmeyle geçiş
-  var HI = 0, HX = true, HSON = Date.now(), HLAST = Date.now(), HFX = false, HO = null, SLAYT_MS = 10000, GERI_MS = 300000;
+  var HI = 0, HX = true, HSON = Date.now(), HLAST = Date.now(), HFX = false, HYON = 0, HO = null, SLAYT_MS = 10000, GERI_MS = 300000;
   var IK_ONC = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>', IK_SON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>';
   var IK_DUR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg>', IK_OYN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" style="fill:currentColor"/></svg>';
   var IK_SAYAC = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="7.5"/><path d="M12 9v4l2.5 1.5M9.5 2.5h5"/></svg>', IK_SLAYT = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="2.5"/><path d="M8 21h8"/></svg>';
@@ -489,7 +489,7 @@
     var cur = s[HI], body = cur.h, fx = HFX; HFX = false;
     if (body && cur.id !== 'gokyuzu') body = body.replace('<span class="hcnt"></span>', '<span class="hcnt">' + (HI + 1) + ' / ' + n + '</span>');
     if (cur.id === 'gokyuzu') { window.SKCTX = ''; body = '<div class="skyc" id="skyc">' + skSkeleton() + '</div>' + SKY_BIT; }
-    h = '<div class="hcar"><div class="sl' + (n === 1 ? ' one' : '') + (fx ? ' fx' : '') + '"' + (cur.dt ? ' data-dt="' + esc(cur.dt) + '"' : '') + '>' + body + '</div>';
+    h = '<div class="hcar"><div class="sl' + (n === 1 ? ' one' : '') + (fx ? ' fx' + (HYON > 0 ? ' fxs' : (HYON < 0 ? ' fxr' : '')) : '') + '"' + (cur.dt ? ' data-dt="' + esc(cur.dt) + '"' : '') + '>' + body + '</div>';
     if (n > 1 || akt) {
       h += '<div class="hct">';
       if (n > 1) {
@@ -502,9 +502,27 @@
     }
     return h + '</div>';
   }
+  // Slayt geçişi: eski kart sola (geri yönde sağa) kayıp solar, yeni kart karşı yönden kayarak gelir.
+  // Eski kartın dokunulmaz bir kopyası ~0,6 sn üstte kalır; durum/mantık değişmez, yalnız görsel katman.
+  function slaytKopya() {
+    var sl = document.querySelector('#top .hcar > .sl'); if (!sl) return null;
+    var k = sl.cloneNode(true), q = [k].concat([].slice.call(k.querySelectorAll('*')));
+    q.forEach(function (e) { ['id', 'data-hc', 'data-dt', 'data-lv', 'data-i', 'data-sk'].forEach(function (a) { e.removeAttribute(a); }); });
+    k.classList.remove('fx', 'fxs', 'fxr', 'one'); k.setAttribute('aria-hidden', 'true'); k.setAttribute('inert', '');
+    return k;
+  }
+  function slaytGecis(degis, yon) {
+    var onceki = HI, kopya = slaytKopya();
+    degis();
+    var hc = document.querySelector('#top .hcar');
+    if (!kopya || !hc || HI === onceki) return;
+    kopya.classList.add('out', yon > 0 ? 'ol' : 'or'); hc.appendChild(kopya);
+    setTimeout(function () { if (kopya.parentNode) kopya.parentNode.removeChild(kopya); }, 700);
+  }
   function heroGit(j) {
     var s = heroSlaytlar(CTX || baglam()), n = s.length; if (n < 2) return;
-    HI = ((j % n) + n) % n; HFX = true; HSON = Date.now(); HLAST = HSON; tick(true);
+    var yon = j >= HI ? 1 : -1;
+    slaytGecis(function () { HI = ((j % n) + n) % n; HFX = true; HYON = yon; HSON = Date.now(); HLAST = HSON; tick(true); HYON = 0; }, yon);
   }
   function secH(t, s) { return '<h2>' + esc(t) + (s ? '<span>' + esc(s) + '</span>' : '') + '</h2>'; }
 
@@ -1212,8 +1230,11 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     CTX = C;
     if (TAB === 0 || (TAB === 1 && PS === 0)) {
       var tp = $('top'), hh = topHTML(C), k1 = hh.replace(/-?\d+\.\d+s/g, ''), k0 = (tp.dataset.h || '').replace(/-?\d+\.\d+s/g, '');
+      // Geçiş animasyonu sınıfları (fx/fxs/fxr) yalnız ilk çizimde bulunur; sonraki turda yok diye ekran yeniden çizilip animasyon yarıda kesilmesin.
+      var fxSil = function (x) { return x.replace(/(class="sl(?: one)?)(?: fx(?: fx[sr])?)?"/g, '$1"'); };
+      k1 = fxSil(k1); k0 = fxSil(k0);
       var b1 = skyBol(k1), b0 = skyBol(k0), skyAyni = !!$('skyc') && hh.indexOf('id="skyc"') >= 0 && b1[0] === b0[0] && b1[1] === b0[1];
-      if (!skyAyni && tp.dataset.h !== hh) {
+      if (!skyAyni && fxSil(tp.dataset.h || '') !== fxSil(hh)) {
         var kk = hh.replace(/\d+/g, '#');
         if (tp.dataset.kk === kk && tp.querySelector('[data-lv]')) {
           var tmp = document.createElement('div'); tmp.innerHTML = hh;
@@ -1816,7 +1837,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     if (document.hidden || kilit || !HX || TAB !== 0 || !CTX || DT.acik) return;
     var n = Date.now(); if (n - HSON < SLAYT_MS || n - HLAST < SLAYT_MS) return;
     if (heroKip(CTX, 0) !== 'slayt' || heroSlaytlar(CTX).length < 2) return;
-    HLAST = n; HI++; HFX = true; tick(true);
+    slaytGecis(function () { HLAST = n; HI++; HFX = true; HYON = 1; tick(true); HYON = 0; }, 1);
   }, 1000);
   setInterval(function () { if (!document.hidden && !kilit) tick(); }, 1000);
   setInterval(function () { if (!document.hidden && !kilit && Date.now() - sonYenileme > A.YENILE_DK * 60000) yenile(false); }, 60000);
