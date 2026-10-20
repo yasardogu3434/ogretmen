@@ -1,0 +1,2 @@
+// Açılış ekranı: önbellekteki kişi adını (varsa) anında gösterir; yoksa yalnız 'Hoş geldiniz'.
+(function(){var s=document.getElementById('spl');try{var o=JSON.parse(localStorage.getItem('ogr_onbellek')||'null'),a=o&&o.y&&o.y.kisi&&o.y.kisi.ad;if(a)document.getElementById('splh').textContent='Hoş geldiniz, '+String(a).trim();}catch(e){}window.__splT=Date.now();setTimeout(function(){s.classList.add('bit')},15000);})();
