@@ -497,3 +497,48 @@ a.dl small{font-weight:500;color:var(--mut);font-size:12.5px}
 #t0>.sec[data-r],#t1>.sec[data-r],#t2>.sec[data-r],#t3>.sec[data-r]{--mut:#586478}
 @media(prefers-color-scheme:dark){:root:not([data-th=light]) #t0>.sec[data-r],:root:not([data-th=light]) #t1>.sec[data-r],:root:not([data-th=light]) #t2>.sec[data-r],:root:not([data-th=light]) #t3>.sec[data-r]{--mut:#8E9CBA}}
 :root[data-th=dark] #t0>.sec[data-r],:root[data-th=dark] #t1>.sec[data-r],:root[data-th=dark] #t2>.sec[data-r],:root[data-th=dark] #t3>.sec[data-r]{--mut:#8E9CBA}
+
+/* ===== Giriş ekranı: açık, 3 boyutlu logo (panelin giriş ekranındaki efektle aynı) ===== */
+.logo3d{position:relative;width:132px;height:132px;margin:0 auto}
+.logo3d::before{content:"";position:absolute;left:6%;right:-4%;bottom:-12px;height:18px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(11,31,63,.55) 0%,rgba(11,31,63,.28) 45%,rgba(11,31,63,0) 72%);filter:blur(3px)}
+.logo3d::after{content:"";position:absolute;inset:2px;border-radius:50%;pointer-events:none;z-index:2;background:radial-gradient(circle at 30% 22%,rgba(255,255,255,.20) 0%,rgba(255,255,255,0) 40%);box-shadow:inset 1.5px 2px 2px rgba(255,255,255,.7),inset -2px -3px 4px rgba(11,31,63,.30)}
+.lock .logo3d img{position:relative;z-index:1;width:100%;height:100%;border-radius:0;background:none;padding:0;object-fit:contain;display:block;filter:drop-shadow(1px 2px 1px rgba(11,31,63,.55)) drop-shadow(4px 8px 7px rgba(11,31,63,.38)) drop-shadow(10px 18px 16px rgba(11,31,63,.22))}
+.lock{background:radial-gradient(120% 70% at 50% 6%,#FFFFFF 0,#EAF1FC 52%,#D5E3F6 100%);color:#13244A;padding-top:54px;align-items:stretch}
+.lock h1{color:#13244A;text-align:center;margin-top:34px}
+.lock p,.lock p.sub{color:#4A5A7C;text-align:center}
+.lock .cod i{border:1.5px solid #B9C6DE;background:#fff;color:#13244A;box-shadow:0 1px 3px rgba(19,36,74,.06)}
+.lock .cod i.f{border-color:var(--gold);box-shadow:0 0 0 3px rgba(200,147,43,.2)}
+.lock .kp button{background:#fff;color:#13244A;box-shadow:0 2px 7px rgba(19,36,74,.10),0 0 0 1px rgba(19,36,74,.05)}
+.lock .kp button:active{background:#EEF3FB}
+.lock .er{color:#B3392C;text-align:center}
+.lock .geri{color:#4A5A7C;align-self:center}
+@media(prefers-color-scheme:dark){:root:not([data-th=light]) .lock{background:radial-gradient(120% 70% at 50% 6%,#1E3563 0,#14264E 55%,#0B1429 100%);color:#fff}:root:not([data-th=light]) .lock h1{color:#fff}:root:not([data-th=light]) .lock p,:root:not([data-th=light]) .lock p.sub{color:rgba(255,255,255,.7)}:root:not([data-th=light]) .lock .cod i{background:transparent;border-color:rgba(255,255,255,.28);color:#fff;box-shadow:none}:root:not([data-th=light]) .lock .kp button{background:rgba(255,255,255,.1);color:#fff;box-shadow:none}:root:not([data-th=light]) .lock .er{color:#ffb4a8}:root:not([data-th=light]) .lock .geri{color:rgba(255,255,255,.75)}}
+:root[data-th=dark] .lock{background:radial-gradient(120% 70% at 50% 6%,#1E3563 0,#14264E 55%,#0B1429 100%);color:#fff}:root[data-th=dark] .lock h1{color:#fff}:root[data-th=dark] .lock p,:root[data-th=dark] .lock p.sub{color:rgba(255,255,255,.7)}:root[data-th=dark] .lock .cod i{background:transparent;border-color:rgba(255,255,255,.28);color:#fff;box-shadow:none}:root[data-th=dark] .lock .kp button{background:rgba(255,255,255,.1);color:#fff;box-shadow:none}:root[data-th=dark] .lock .er{color:#ffb4a8}:root[data-th=dark] .lock .geri{color:rgba(255,255,255,.75)}
+/* Üst çubuktaki küçük logo: aynı madalyon hissi */
+.bar .lg{width:36px;height:36px;box-shadow:0 2px 6px rgba(0,0,0,.35),inset 1px 1px 1px rgba(255,255,255,.85),inset -1px -2px 3px rgba(11,31,63,.25)}
+.bar .lg img{width:32px;height:32px;filter:drop-shadow(0 1px 1px rgba(11,31,63,.4))}
+
+/* ===== Kategori kartları (A: cam kart) ===== */
+#t0>.sec[data-r],#t1>.sec[data-r],#t2>.sec[data-r],#t3>.sec[data-r]{padding:14px 14px}
+.kart{position:relative;padding:20px 16px 22px;border-radius:26px;background:color-mix(in srgb,var(--surf) 62%,transparent);border:1px solid color-mix(in srgb,var(--sc) 30%,transparent);box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 10px 28px -14px color-mix(in srgb,var(--sc) 55%,transparent);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.kart>h2{margin-top:0}
+.kart>h2::before{content:'';width:9px;height:9px;border-radius:50%;background:var(--sc);align-self:center;flex:none;box-shadow:0 0 0 4px color-mix(in srgb,var(--sc) 22%,transparent)}
+.kart .pano,.kart .gstrip,.kart .ystrip{margin-left:-16px;margin-right:-16px;padding-left:16px;padding-right:16px}
+:root[data-th=dark] .kart{background:color-mix(in srgb,var(--surf) 55%,transparent);box-shadow:0 10px 28px -14px color-mix(in srgb,var(--sc) 45%,transparent)}
+@media(prefers-color-scheme:dark){:root:not([data-th=light]) .kart{background:color-mix(in srgb,var(--surf) 55%,transparent);box-shadow:0 10px 28px -14px color-mix(in srgb,var(--sc) 45%,transparent)}}
+/* Derslerim */
+.dg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.dk{appearance:none;text-align:left;background:var(--surf);border:1px solid var(--line);border-radius:16px;padding:12px 14px;font:inherit;color:var(--tx);cursor:pointer;display:flex;flex-direction:column;gap:2px}
+.dk b{font-family:'Bricolage Grotesque';font-size:26px;font-weight:600;letter-spacing:-.4px}
+.dk span{font-size:13.5px;font-weight:600;line-height:1.25}
+.dk em{font-style:normal;font-size:12px;color:var(--mut);margin-top:2px}
+.dk:active{transform:scale(.98)}
+.dk span{text-transform:none;letter-spacing:0;font-size:13.5px;color:var(--tx)}
+.dk em{text-transform:none;letter-spacing:0}
+
+/* ===== Cam etkisi: arkada renk bulutları + daha saydam, buzlu kart ===== */
+#t0>.sec[data-r],#t1>.sec[data-r],#t2>.sec[data-r],#t3>.sec[data-r]{position:relative;overflow:hidden;isolation:isolate}
+#t0>.sec[data-r]::before,#t1>.sec[data-r]::before,#t2>.sec[data-r]::before,#t3>.sec[data-r]::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(120px 90px at 12% 18%,color-mix(in srgb,var(--sc) 42%,transparent),transparent 70%),radial-gradient(150px 110px at 92% 55%,color-mix(in srgb,var(--sc) 34%,transparent),transparent 72%),radial-gradient(110px 80px at 30% 98%,color-mix(in srgb,var(--sc) 28%,transparent),transparent 70%)}
+.kart{background:linear-gradient(135deg,rgba(255,255,255,.52),rgba(255,255,255,.22));border:1px solid rgba(255,255,255,.75);box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 0 0 1px color-mix(in srgb,var(--sc) 22%,transparent),0 12px 30px -14px color-mix(in srgb,var(--sc) 60%,transparent);-webkit-backdrop-filter:blur(14px) saturate(1.5);backdrop-filter:blur(14px) saturate(1.5)}
+:root[data-th=dark] .kart{background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.18);box-shadow:0 1px 0 rgba(255,255,255,.12) inset,0 12px 30px -14px color-mix(in srgb,var(--sc) 55%,transparent)}
+@media(prefers-color-scheme:dark){:root:not([data-th=light]) .kart{background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.18);box-shadow:0 1px 0 rgba(255,255,255,.12) inset,0 12px 30px -14px color-mix(in srgb,var(--sc) 55%,transparent)}}
