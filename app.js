@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.9.0'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.9.3'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -143,6 +143,12 @@
     var s = String(v), i = s.indexOf(' ');
     return { sinif: i < 0 ? s : s.slice(0, i), ders: i < 0 ? '' : s.slice(i + 1) };
   }
+  function dersiz(y) {
+    var p = programVar(y); if (!p) return false;
+    for (var wd = 1; wd <= 5; wd++) { var g = p.matris[String(wd)] || {}, no; for (no in g) if (hucre(g[no])) return false; }
+    return true;
+  }
+  function nobetsiz(y) { var n = nobetim(y); return !n.liste.length && !(n.gelecek && n.gelecek.liste && n.gelecek.liste.length); }
   function programVar(y) { var p = kisisel(y, 'program'); return (p && p.matris && typeof p.matris === 'object') ? p : null; }
   function hucreAl(y, wd, no) { var p = programVar(y); if (!p) return null; var g = p.matris[String(wd)]; return g ? hucre(g[String(no)]) : null; }
   var DERS_TAM = { mat: 'Matematik', tur: 'Türkçe', fen: 'Fen Bilimleri', ing: 'İngilizce', sos: 'Sosyal Bilgiler', ita: 'T.C. İnkılap Tarihi ve Atatürkçülük', dkab: 'Din Kültürü ve Ahlak Bilgisi', muz: 'Müzik', bes: 'Beden Eğitimi ve Spor', gs: 'Görsel Sanatlar' };
@@ -155,7 +161,47 @@
     out.forEach(function (x, i) { x.i = i; x.tam = dersTam(x.ders); });
     return out;
   }
+  var GKAT = [['zumre', 'Zümre görevi'], ['rehber', 'Sınıf rehberliği'], ['kurul', 'Kurul ve komisyonlar'], ['ekip', 'Ekipler'], ['kulup', 'Kulüpler'], ['proje', 'Projeler'], ['gun', 'Belirli günler']];
+  function kurulListe(y, bg) {
+    var d = kisisel(y, 'gorevler'); if (!d || !Array.isArray(d.liste)) return [];
+    var l = d.liste.filter(function (k) { return k && typeof k.ad === 'string' && k.ad && k.kat && (k.kat !== 'gun' || !bg || !k.bit || k.bit >= bg); }).slice(0, 80), out = [];
+    GKAT.forEach(function (g) { l.forEach(function (k) { if (k.kat === g[0]) out.push(k); }); });
+    return out;
+  }
   function doldurmaListe(y) { var d = kisisel(y, 'doldurma'); return (d && Array.isArray(d.liste)) ? d.liste.filter(function (x) { return x && /^\d{4}-\d{2}-\d{2}$/.test(x.tarih || ''); }) : []; }
+  // Ders doldurma: kişisel liste (doldurmaListe) + herkese açık günlük liste (ortak 'doldurmatoplu')
+  function topluDoldurma(y, ds) {
+    var o = ortak(y, 'doldurmatoplu'); if (!o || o.tarih !== ds || !Array.isArray(o.liste)) return [];
+    return o.liste.filter(function (x) { return x && +x.saat >= 1 && +x.saat <= 12 && x.giren; }).map(function (x) { return { saat: +x.saat, sinif: String(x.sinif || ''), giren: String(x.giren), yerine: String(x.yerine || '') }; })
+      .sort(function (a, b) { return a.saat - b.saat || (a.sinif < b.sinif ? -1 : a.sinif > b.sinif ? 1 : 0); });
+  }
+  // Bugünkü kendi doldurma derslerim (bitmemiş olanlar)
+  function benimDoldurma(C) {
+    var out = [], tl = null;
+    if (!C.y || C.gb.tip !== 'ders') return out;
+    C.gb.ders.forEach(function (r, i) {
+      var cv = C.COV[i + 1]; if (!cv || mdk(r[2]) * 60 <= C.T) return;
+      var yer = cv.yerine ? String(cv.yerine) : '';
+      if (!yer) { tl = tl || topluDoldurma(C.y, C.gb.ds); tl.forEach(function (x) { if (!yer && x.saat === i + 1 && C.ben && norm(x.giren) === C.ben) yer = x.yerine; }); }
+      out.push({ no: i + 1, bas: r[1], bit: r[2], sinif: String(cv.sinif || ''), yerine: yer });
+    });
+    return out;
+  }
+  function cvYerine(y, ds, no, cv) {
+    if (cv && cv.yerine) return String(cv.yerine);
+    var ben = norm(y && y.kisi && y.kisi.ad), yer = '';
+    topluDoldurma(y, ds).forEach(function (x) { if (!yer && x.saat === +no && ben && norm(x.giren) === ben) yer = x.yerine; });
+    return yer;
+  }
+  function cvOzet(l) { return l.map(function (x) { return x.no + '. ders ' + x.bas + (x.sinif ? ' · ' + x.sinif : ''); }).join('  ·  '); }
+  function cvBaslik(l) {
+    if (l.every(function (x) { return x.sinif; })) {
+      if (l.length === 1) return 'Bugün ' + l[0].sinif + ' seninle';
+      if (l.length === 2) return 'Bugün ' + l[0].sinif + ' ve ' + l[1].sinif + ' seninle';
+      return 'Bugün ' + l.length + ' sınıf seninle';
+    }
+    return l.length === 1 ? 'Bugün ' + l[0].no + '. ders seninle' : 'Bugün ' + l.length + ' ders seninle';
+  }
   function nobetim(y) {
     var n = kisisel(y, 'nobetim'); if (!n) return { liste: [], gelecek: null };
     return { liste: Array.isArray(n.liste) ? n.liste.filter(function (x) { return x && +x.gun >= 1 && +x.gun <= 7 && x.yer; }) : [], gelecek: (n.gelecek && Array.isArray(n.gelecek.liste) && /^\d{4}-\d{2}-\d{2}$/.test(n.gelecek.bas || '')) ? n.gelecek : null };
@@ -288,7 +334,7 @@
     if (HO === true && Date.now() - HSON > GERI_MS) HO = null;
     return HO === true ? 'slayt' : 'sayac';
   }
-  var ONE_RENK = { 'Yarına bakış': '#79D1C3', 'Ders başlamadan': '#79D1C3', 'Gün tamamlandı': '#79D1C3', 'Hafta sonu': '#79D1C3', 'Bugün okul tatil': '#79D1C3', 'Belirli gün': '#B5A3FF', 'Nöbet düzeni': 'var(--gold)', 'Okuldan': 'var(--gold)', 'Duyuru': 'var(--gold)', 'Etkinlik': '#B5A3FF', 'Hatırlatma': '#79D1C3', 'Bugün sende': '#79D1C3', 'Nöbetin': '#7DB6F2', 'Yaklaşan sınav': '#B5A3FF', 'Sonraki tatil': '#F08A7E', 'Bu haftanın kazanımı': 'var(--gold)', 'Eğitim haftası': '#79D1C3', 'Derslerin': '#B5A3FF' };
+  var ONE_RENK = { 'Yarına bakış': '#79D1C3', 'Ders başlamadan': '#79D1C3', 'Gün tamamlandı': '#79D1C3', 'Hafta sonu': '#79D1C3', 'Bugün okul tatil': '#79D1C3', 'Belirli gün': '#B5A3FF', 'Nöbet düzeni': 'var(--gold)', 'Okuldan': 'var(--gold)', 'Duyuru': 'var(--gold)', 'Etkinlik': '#B5A3FF', 'Hatırlatma': '#79D1C3', 'Bugün sende': '#79D1C3', 'Nöbetin': '#7DB6F2', 'Yaklaşan sınav': '#B5A3FF', 'Sonraki tatil': '#F08A7E', 'Bu haftanın kazanımı': 'var(--gold)', 'Eğitim haftası': '#79D1C3', 'Derslerin': '#B5A3FF', 'Ders doldurma': '#5CC4B5', 'Görevin': '#B5A3FF' };
   var IKN = {
     'Bugün sende': '<path d="M5 4h10a3 3 0 013 3v13H8a3 3 0 01-3-3zM5 17a3 3 0 013-3h10"/>',
     'Nöbetin': '<path d="M4 9a6 6 0 016-5h7M17 4l-2.5-2M17 4l-2.5 2.5M20 15a6 6 0 01-6 5H7M7 20l2.5 2M7 20l2.5-2.5"/>',
@@ -296,6 +342,8 @@
     'Sonraki tatil': '<circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6L7 7M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4"/>',
     'Bu haftanın kazanımı': '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4"/><path d="M12 12l5-5"/>',
     'Derslerin': '<path d="M5 4h10a3 3 0 013 3v13H8a3 3 0 01-3-3zM5 17a3 3 0 013-3h10M9 8h5"/>',
+    'Görevin': '<path d="M6 21V4M6 5h11l-2 3.5 2 3.5H6"/>',
+    'Ders doldurma': '<path d="M5 4h10a3 3 0 013 3v13H8a3 3 0 01-3-3zM5 17a3 3 0 013-3h10M9 8h5"/>',
     'Eğitim haftası': '<rect x="4" y="5.5" width="16" height="14" rx="2.5"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/>',
     'Okuldan': '<path d="M4 10v4h3l5 4V6L7 10H4zM16 9.5a3.5 3.5 0 010 5M18.5 7a7 7 0 010 10"/>',
     'Etkinlik': '<rect x="4" y="5.5" width="16" height="14" rx="2.5"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/>',
@@ -368,6 +416,18 @@
       for (i = 1; i <= C.gb.ders.length; i++) if (hucreAl(y, C.gb.wd, i)) { n++; if (!ilk) ilk = i; }
       if (n) { var ih = hucreAl(y, C.gb.wd, ilk); out.push({ k: 'Bugün sende', t: 'Bugün ' + n + ' dersin var', s: 'İlk dersin ' + C.gb.ders[ilk - 1][1] + '\'da' + (ih ? ', ' + ih.sinif : ''), dt: 'gun:' + bg }); }
     }
+    // 1b) Ders doldurma: yalnız bugün kendi doldurması varsa ve bitmediyse
+    var bdl = benimDoldurma(C);
+    if (bdl.length) out.push({ k: 'Ders doldurma', t: cvBaslik(bdl), s: cvOzet(bdl), dt: 'dn:' + bg + ':' + bdl[0].no });
+    // 1c) Belirli gün görevi: günü başlamasına 7 gün kala (ve süren günlerde) yalnız görevli öğretmene
+    var kg = kurulListe(y, bg), kn = 0;
+    kg.forEach(function (k, ki) {
+      if (kn >= 2 || k.kat !== 'gun' || !k.bas) return;
+      var f = gunFark(bg, k.bas), bit = k.bit || k.bas; if (!(f <= 7 && bit >= bg)) return;
+      kn++;
+      var sure = f <= 0 ? 'Bugün görevlisin' : (f === 1 ? 'Yarın görevlisin' : 'Görevlisin') + ' · ' + aralik(k.bas, bit) + (f > 1 ? ', ' + f + ' gün sonra' : '');
+      out.push({ k: 'Görevin', t: k.ad, s: sure, dt: 'kv:' + ki });
+    });
     // 2) Nöbetin (bu hafta ya da gelecek 7 gün içindeki ilk nöbet günü)
     for (var j = (bitti ? 1 : 0); j <= 7; j++) {
       var dj = gunEkle(C.d, j), gj = gunBilgi(y, dj); if (gj.tip !== 'ders') continue;
@@ -488,14 +548,14 @@
       return '<div class="nc" style="--c:' + c + '" data-dt="du:' + di + '"><span class="hic"><svg viewBox="0 0 24 24" aria-hidden="true">' + NIK[ad] + '</svg></span><div class="a"><b>' + esc(d.baslik) + (yeniMi(duyuruAnahtar(d)) ? '<i class="dot"></i>' : '') + '</b>' + (par.metin ? '<span class="s">' + esc(par.metin) + '</span>' : '') + par.linkler.map(linkHTML).join('') + '</div><span class="z">' + esc(z) + '</span></div>';
     }).join('') + '</div></div>';
   }
-  function sAkis(C, mine) {
+  function sAkis(C, mine, baslik) {
     if (C.gb.tip !== 'ders' || !C.sc.length) return '';
     var nBen = 0, nCov = 0, yer = mine ? nobetYer(C.y, C.gb.wd, C.gb.ds) : '';
     C.gb.ders.forEach(function (x, i) { if (C.MY[i + 1]) nBen++; if (C.COV[i + 1]) nCov++; });
     var alt = mine ? (nBen + ' ders' + (nCov ? ', ' + nCov + ' doldurma' : '') + (yer ? ', nöbet' : '')) : (C.gb.ders.length + ' ders');
     var h = '';
     if (mine && yer) h += '<div class="sec" data-k="nobet"><div class="rot" data-dt="nbd"><p>Nöbet yerin</p><div class="d" style="font-size:20px;font-weight:600;margin-top:6px;letter-spacing:-.3px">' + esc(yer) + '</div></div></div>';
-    h += '<div class="sec" data-k="akis">' + secH(mine ? 'Bugünkü programın' : 'Gün akışı', alt) + '<div class="flow"><div class="rail"><i></i></div><div class="cur"></div>';
+    h += '<div class="sec" data-k="akis">' + secH(mine ? 'Bugünkü programın' : (baslik || 'Gün akışı'), alt) + '<div class="flow"><div class="rail"><i></i></div><div class="cur"></div>';
     C.sc.forEach(function (r, ri) {
       var les = r[0] === 'ders', no = dersNo(r), my = mine && les && C.MY[no], cv = mine && les && C.COV[no];
       if (!les && mine) return;
@@ -504,7 +564,7 @@
       if (my) sag = '<span class="c2">' + esc(my.sinif) + (my.ders ? ' · ' + esc(my.ders) : '') + '</span>';
       else if (cv) sag = '<span class="c2">' + esc(cv.sinif || '') + '</span>';
       else if (mine && les) sag = '<span class="c2">Boş</span>';
-      h += '<div class="fr ' + (les ? 'l' : 'k') + ((my || cv) ? ' my' : '') + (mine && les && !my && !cv ? ' dim' : '') + '" data-s="' + mdk(r[2]) * 60 + '" data-e="' + mdk(r[3]) * 60 + '" data-dt="ak:' + C.gb.ds + ':' + ri + '"><span class="tm">' + r[2] + '</span><b>' + esc(etiket) + '</b>' + sag + (cv ? '<span class="nb">Ders doldurma</span>' : '') + '</div>';
+      h += '<div class="fr ' + (les ? 'l' : 'k') + ((my || cv) ? ' my' : '') + (cv ? ' cvr' : '') + (mine && les && !my && !cv ? ' dim' : '') + '" data-s="' + mdk(r[2]) * 60 + '" data-e="' + mdk(r[3]) * 60 + '" data-dt="ak:' + C.gb.ds + ':' + ri + '"><span class="tm">' + r[2] + '</span><b>' + esc(etiket) + '</b>' + sag + (cv ? '<span class="nb">Doldurma</span>' : '') + '</div>';
     });
     return h + '</div></div>';
   }
@@ -514,6 +574,24 @@
     return '<div class="sec" data-k="nobet">' + secH('Bugün nöbetçi', nb.liste.length + ' kişi') + '<div class="rows">' + nb.liste.map(function (k, ki) {
       return '<div class="rw' + (C.ben && norm(k.ad) === C.ben ? ' me' : '') + '" data-dt="nb:' + ki + '"><div class="a"><b>' + esc(k.ad) + '</b></div><span class="z">' + esc(k.yer || '') + '</span></div>';
     }).join('') + '</div></div>';
+  }
+  // Slaytın hemen altındaki kısa özet (yalnız kendi doldurması varsa)
+  function doldurmaSerit(C) {
+    var l = benimDoldurma(C); if (!l.length) return '';
+    return '<button type="button" class="cvs" data-dt="dn:' + C.gb.ds + ':' + l[0].no + '"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h10a3 3 0 013 3v13H8a3 3 0 01-3-3zM5 17a3 3 0 013-3h10M9 8h5"/></svg></span><span class="tx"><small>Ders doldurma</small><b>' + esc(cvOzet(l)) + '</b></span><span class="go"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></span></button>';
+  }
+  // Herkese açık günlük liste: gelmeyen öğretmen yerine giren nöbetçiler (saat imleci tick() içinde ilerler)
+  function sDoldurmaToplu(C) {
+    if (C.gb.tip !== 'ders') return '';
+    var l = topluDoldurma(C.y, C.gb.ds); if (!l.length) return '';
+    var ds = C.gb.ds;
+    var rows = l.map(function (x) {
+      var r = C.gb.ders[x.saat - 1]; if (!r) return '';
+      var sen = C.ben && norm(x.giren) === C.ben;
+      return '<div class="cr' + (sen ? ' me' : '') + '" data-s="' + mdk(r[1]) * 60 + '" data-e="' + mdk(r[2]) * 60 + '"' + (sen ? ' data-dt="dn:' + ds + ':' + x.saat + '"' : '') + '><div class="sa"><b>' + x.saat + '. ders</b><small>' + esc(r[1]) + '</small></div><div class="sn">' + esc(x.sinif || '·') + '</div><div class="nm"><small class="g">' + esc(x.yerine ? x.yerine + ' yerine' : 'Gelmeyen öğretmen yerine') + '</small><span class="d2">' + esc(x.giren) + '</span><small class="k"></small></div></div>';
+    }).join('');
+    if (!rows) return '';
+    return '<div class="sec" data-k="dolt">' + secH('Bugün ders doldurma', l.length + ' ders') + '<div class="cvhd"><i></i>Gelmeyen öğretmenlerin yerine giren nöbetçiler</div><div class="tl2"><div class="rl"><i></i></div><div class="im"><b></b></div>' + rows + '</div></div>';
   }
   function haberAnahtar(h) { return 'h:' + h.baslik + '|' + (h.kat || ''); }
   function sPanoOzet(C) {
@@ -576,7 +654,7 @@
     for (var i = 0; i < 60; i++) { var q0 = pt(i * 6, 106), q1 = pt(i * 6, i % 5 ? 109 : 112); sv += '<line class="dtk" x1="' + q0[0].toFixed(1) + '" y1="' + q0[1].toFixed(1) + '" x2="' + q1[0].toFixed(1) + '" y2="' + q1[1].toFixed(1) + '"/>'; }
     les.forEach(function (x) {
       var s0 = mdk(x.r[2]) * 60, e0 = mdk(x.r[3]) * 60, a0 = (s0 - A0) / span * 360 + 1.4, a1 = (e0 - A0) / span * 360 - 1.4, m = pt((a0 + a1) / 2, R);
-      sv += '<path class="ar gx' + (x.m ? ' my' : (planli ? ' bos' : '')) + '" d="' + arc(a0, a1) + '" data-s="' + s0 + '" data-e="' + e0 + '" data-no="' + x.no + '" data-t="' + esc(x.r[2] + ' – ' + x.r[3]) + '" data-c="' + gunSinif(x, planli) + '" data-dt="ak:' + esc(x.ds) + ':' + x.ri + '"/><text class="dno" x="' + m[0].toFixed(1) + '" y="' + (m[1] + 4).toFixed(1) + '">' + x.no + '</text>';
+      sv += '<path class="ar gx' + (x.m ? ' my' : (planli ? ' bos' : '')) + (x.cv ? ' cv' : '') + '" d="' + arc(a0, a1) + '" data-s="' + s0 + '" data-e="' + e0 + '" data-no="' + x.no + '" data-t="' + esc(x.r[2] + ' – ' + x.r[3]) + '" data-c="' + gunSinif(x, planli) + '" data-dt="ak:' + esc(x.ds) + ':' + x.ri + '"/><text class="dno" x="' + m[0].toFixed(1) + '" y="' + (m[1] + 4).toFixed(1) + '">' + x.no + '</text>';
     });
     sv += '<g class="nd" data-a0="' + A0 + '" data-z0="' + Z0 + '" style="display:none"><line x1="120" y1="12" x2="120" y2="32"/><circle cx="120" cy="22" r="5"/></g></svg>';
     var ilk = les[0], son = les[les.length - 1];
@@ -590,23 +668,23 @@
       var hv = '<div class="gakis" id="gs" data-bg="' + (bugun ? 1 : 0) + '"><div class="grl"></div>';
       les.forEach(function (x, i) {
         if (i) hv += '<div class="gp" data-s="' + mdk(les[i - 1].r[3]) * 60 + '" data-e="' + mdk(x.r[2]) * 60 + '"></div>';
-        hv += '<button type="button" class="gx gv' + (x.m ? ' my' : (planli ? ' bos' : '')) + '" data-s="' + mdk(x.r[2]) * 60 + '" data-e="' + mdk(x.r[3]) * 60 + '" data-dt="ak:' + ds + ':' + x.ri + '"><span class="tm"><b>' + esc(x.r[2]) + '</b><small>' + esc(x.r[3]) + '</small></span><span class="a"><b>' + x.no + '. ders</b><span class="k"></span></span><span class="c">' + gunSinif(x, planli) + '</span><i class="pb"><u></u></i></button>';
+        hv += '<button type="button" class="gx gv' + (x.m ? ' my' : (planli ? ' bos' : '')) + (x.cv ? ' cv' : '') + '" data-s="' + mdk(x.r[2]) * 60 + '" data-e="' + mdk(x.r[3]) * 60 + '" data-dt="ak:' + ds + ':' + x.ri + '"><span class="tm"><b>' + esc(x.r[2]) + '</b><small>' + esc(x.r[3]) + '</small></span><span class="a"><b>' + x.no + '. ders</b>' + (x.cv ? '<span class="tg2">doldurma</span>' : '') + '<span class="k"></span></span><span class="c">' + gunSinif(x, planli) + '</span><i class="pb"><u></u></i></button>';
       });
       return hv + '<div class="gnd" aria-hidden="true"><i></i></div></div>';
     }
     if (st === 'b') return '<div class="glist" id="gs" data-bg="' + (bugun ? 1 : 0) + '">' + les.map(function (x) {
-      return '<button type="button" class="gx gr' + (x.m ? ' my' : (planli ? ' bos' : '')) + '" data-s="' + mdk(x.r[2]) * 60 + '" data-e="' + mdk(x.r[3]) * 60 + '" data-dt="ak:' + ds + ':' + x.ri + '"><span class="tm">' + esc(x.r[2]) + '</span><span class="a"><b>' + x.no + '. ders</b><span class="k"></span></span><span class="c">' + gunSinif(x, planli) + '</span><i class="pb"><u></u></i></button>';
+      return '<button type="button" class="gx gr' + (x.m ? ' my' : (planli ? ' bos' : '')) + (x.cv ? ' cv' : '') + '" data-s="' + mdk(x.r[2]) * 60 + '" data-e="' + mdk(x.r[3]) * 60 + '" data-dt="ak:' + ds + ':' + x.ri + '"><span class="tm">' + esc(x.r[2]) + '</span><span class="a"><b>' + x.no + '. ders</b>' + (x.cv ? '<span class="tg2">doldurma</span>' : '') + '<span class="k"></span></span><span class="c">' + gunSinif(x, planli) + '</span><i class="pb"><u></u></i></button>';
     }).join('') + '</div>';
     return '<div class="ggrid" id="gs" data-bg="' + (bugun ? 1 : 0) + '">' + les.map(function (x) {
-      return '<button type="button" class="gx gt' + (x.m ? ' my' : (planli ? ' bos' : '')) + '" data-s="' + mdk(x.r[2]) * 60 + '" data-e="' + mdk(x.r[3]) * 60 + '" data-dt="ak:' + ds + ':' + x.ri + '"><span class="n">' + x.no + '. ders</span><b class="d">' + esc(x.r[2]) + '</b><span class="c">' + gunSinif(x, planli) + '</span><span class="k"></span><i class="pb"><u></u></i></button>';
+      return '<button type="button" class="gx gt' + (x.m ? ' my' : (planli ? ' bos' : '')) + (x.cv ? ' cv' : '') + '" data-s="' + mdk(x.r[2]) * 60 + '" data-e="' + mdk(x.r[3]) * 60 + '" data-dt="ak:' + ds + ':' + x.ri + '"><span class="n">' + x.no + '. ders</span><b class="d">' + esc(x.r[2]) + '</b><span class="c">' + gunSinif(x, planli) + '</span>' + (x.cv ? '<span class="tg2">doldurma</span>' : '') + '<span class="k"></span><i class="pb"><u></u></i></button>';
     }).join('') + '</div>';
   }
   function sGunum(C) {
     var H = gunumHedef(C); if (!H) return '';
-    var G = H.G, ds = G.gb.ds, bugun = H.v === 'b', planli = !!programVar(C.y), les = [], bos = [], benim = 0;
-    G.sc.forEach(function (r, ri) { if (r[0] !== 'ders') return; var no = dersNo(r), m = G.MY[no] || G.COV[no]; les.push({ r: r, ri: ri, no: no, m: m }); if (m) benim++; else bos.push(no); });
+    var G = H.G, ds = G.gb.ds, bugun = H.v === 'b', planli = !!programVar(C.y), les = [], bos = [], benim = 0, dols = 0;
+    G.sc.forEach(function (r, ri) { if (r[0] !== 'ders') return; var no = dersNo(r), m = G.MY[no] || G.COV[no]; les.push({ r: r, ri: ri, no: no, m: m, cv: !!G.COV[no] }); if (m) { benim++; if (G.COV[no]) dols++; } else bos.push(no); });
     var seg = '<div class="sg" id="gv"><button type="button" data-v="b"' + (bugun ? ' class="on"' : '') + (C.gb.tip !== 'ders' ? ' disabled' : '') + '>Bugün</button>' + (H.nx ? '<button type="button" data-v="y"' + (bugun ? '' : ' class="on"') + '>' + esc(H.nx.etiket) + '</button>' : '') + '</div>';
-    var alt = les.length + ' ders' + (planli ? ', ' + benim + ' sende' : '');
+    var alt = les.length + ' ders' + (planli ? ', ' + (benim - dols) + ' sende' + (dols ? ', ' + dols + ' doldurma' : '') : '');
     var h = '<div class="sec" data-k="akis"><h2>Günüm<span>' + esc(alt) + '</span></h2>' + seg;
     var shf = olaylar(C.y).filter(function (o) { return o.hafta && o.bas <= ds && ds <= o.bit; })[0];
     if (G.gb.gecici || G.gb.yarim || shf) h += '<div class="chp" style="margin:12px 0 0">' + (shf ? '<span style="background:#7F62E038;background:color-mix(in srgb,#7F62E0 22%,transparent)">' + esc(shf.ad) + '</span>' : '') + (G.gb.yarim ? '<span>Yarım gün' + (G.gb.ad ? ', ' + esc(G.gb.ad) : '') + '</span>' : '') + (G.gb.gecici ? '<span>' + esc(G.gb.gecici) + '</span>' : '') + '</div>';
@@ -697,8 +775,8 @@
     if (!y) return damga(C) + '<div class="empty"><b>' + (durum.yenileniyor ? 'Bilgiler getiriliyor' : 'Bilgiler alınamadı') + '</b>' + (durum.yenileniyor ? '' : 'İnternet bağlantısını kontrol edip yenile.') + '</div>';
     if (eskiMi(onbellek())) return damga(C) + '<div class="empty"><b>Bilgiler eski olduğu için gizlendi</b>Son güncelleme ' + A.ESKI_SAAT + ' saatten önce. İnternete bağlanınca otomatik yenilenir.</div>';
     if (y.yayinDurumu !== 'acik') return damga(C) + '<div class="empty"><b>Yayın şu an kapalı</b>Okul yönetimi açtığında bilgiler burada görünecek.</div>';
-    var p = [sGunum(C), sNobetci(C), sDuyuru(C), sYaklasan(C), sPanoOzet(C)].join('');
-    return damga(C) + (p || '<div class="empty"><b>Bugün paylaşılan bir şey yok</b>Yeni bir duyuru ya da bilgi paylaşıldığında bu sayfada görünür.</div>');
+    var p = [dersiz(y) ? sAkis(C, 0, 'Okulun bugünü') : sGunum(C), sNobetci(C), sDoldurmaToplu(C), sDuyuru(C), sYaklasan(C), sPanoOzet(C)].join('');
+    return doldurmaSerit(C) + damga(C) + (p || '<div class="empty"><b>Bugün paylaşılan bir şey yok</b>Yeni bir duyuru ya da bilgi paylaşıldığında bu sayfada görünür.</div>');
   }
   function yayinKapali(C) { return !C.y || eskiMi(onbellek()) || C.y.yayinDurumu !== 'acik'; }
 
@@ -742,6 +820,21 @@
     var l = dersGruplari(C.y); if (!l.length) return '';
     return '<div class="sec">' + secH('Derslerim', l.length + ' ders-şube') + '<div class="dg">' + l.map(function (x) { return '<button type="button" class="dkart" data-dt="dr:' + x.i + '"><b class="d">' + esc(x.sinif) + '</b><span>' + esc(x.tam) + '</span><em>haftada ' + x.slots.length + ' saat</em></button>'; }).join('') + '</div></div>';
   }
+  function gorevHTML(C) {
+      var kl = kurulListe(C.y, C.gb.ds), khtml = '';
+      if (kl.length) {
+        khtml += '<div class="sec" data-k="kurul">' + secH('Görevlerim', kl.length + ' görev');
+        GKAT.forEach(function (g) {
+          var gl = kl.filter(function (k) { return k.kat === g[0]; }); if (!gl.length) return;
+          khtml += '<div class="gkl">' + esc(g[1]) + '</div><div class="rows">' + gl.map(function (k) {
+            var alt = k.gorev || 'Üye'; if (k.bas) alt = aralik(k.bas, k.bit || k.bas) + ' · ' + alt;
+            return dtSatir('kv:' + kl.indexOf(k), '', k.ad, alt, '');
+          }).join('') + '</div>';
+        });
+        khtml += '</div>';
+      }
+    return khtml;
+  }
   function programHTML(C) {
     var y = C.y, p = programVar(y);
     if (!p) return '<div class="empty"><b>Programın henüz yayınlanmadı</b>Okul yönetimi ders programını paylaştığında burada görünür.</div>';
@@ -779,17 +872,25 @@
   }
   function t1HTML(C) {
     if (yayinKapali(C)) return '<div class="empty"><b>Bilgiler şu an gösterilemiyor</b>Bugün sekmesinden durumu görebilirsin.</div>';
+    if (PS === 0 && dersiz(C.y)) return gorevHTML(C) + bugunHatirlat(C) + (C.gb.tip === 'ders' ? sAkis(C, 0, 'Okulun bugünü') : '<div class="empty"><b>' + (C.gb.tip === 'hs' ? 'Hafta sonu' : 'Bugün okul tatil') + '</b>İyi dinlenmeler.</div>');
     if (PS === 0) {
       var h = '', bg = C.gb.ds, ben = C.COV;
       var ilk = null; Object.keys(ben).forEach(function (no) { if (!ilk) ilk = ben[no]; });
-      if (C.gb.tip === 'ders' && ilk) h += '<div class="sec" data-k="cov"><div class="rot" data-dt="gun:' + bg + '"><p>Ders doldurma</p><div class="d" style="font-size:20px;font-weight:600;margin-top:6px;letter-spacing:-.3px">' + Object.keys(ben).map(function (no) { return no + '. ders, ' + esc(ben[no].sinif || ''); }).join('<br>') + '</div></div></div>';
+      if (C.gb.tip === 'ders' && ilk) {
+        var cvn = Object.keys(ben).map(Number).sort(function (a, b) { return a - b; });
+        h += '<div class="sec" data-k="cov"><h2>Ders doldurma<span>bugün ' + cvn.length + ' ders</span></h2><div class="cvbox">' + cvn.map(function (no) {
+          var r = C.gb.ders[no - 1], cy = cvYerine(C.y, bg, no, ben[no]);
+          return '<div class="l" data-dt="dn:' + bg + ':' + no + '"><b class="d">' + no + '. ders</b><span class="cvt">' + (r ? esc(r[1]) + '–' + esc(r[2]) : '') + '<br><strong>' + esc(ben[no].sinif || '') + '</strong></span><em>' + esc(cy ? cy + ' yerine' : 'Gelmeyen öğretmen yerine') + '</em></div>';
+        }).join('') + '</div></div>';
+      }
       h += bugunHatirlat(C);
+      var khtml = gorevHTML(C);
       if (C.gb.tip === 'ders') h += sAkis(C, 1);
       else if (C.gb.tip === 'hs' || C.gb.tip === 'tatil') {
         var nx = sonrakiOkul(C), c1 = nx ? hucreAl(C.y, nx.gb.wd, 1) : null;
         h += '<div class="empty"><b>' + (C.gb.tip === 'hs' ? 'Hafta sonu' : 'Bugün okul tatil') + '</b>' + (nx ? esc(nx.etiket) + ' dersler ' + esc(nx.ilk) + '\'da başlıyor' + (c1 ? '; ilk dersin ' + esc(c1.sinif) + ' sınıfında.' : '.') : '') + '</div>';
       } else h += '<div class="empty"><b>Ders saatleri henüz yayınlanmadı</b>Okul yönetimi paylaştığında burada görünür.</div>';
-      return h;
+      return h + khtml;
     }
     if (PS === 1) return programHTML(C);
     if (PS === 2) return nobetSekmesi(C);
@@ -805,6 +906,7 @@
     var gc = ortak(y, 'gecici'); if (gc && Array.isArray(gc.liste)) gc.liste.forEach(function (g) { (g.tarihler || []).forEach(function (t) { if (t && t.bas <= b && (t.bit || t.bas) >= a) { var s = t.bas < a ? a : t.bas, d = dersListe(g.ders); ev.push([s, etiket(s), 'Geçici ders saatleri', d.length ? 'Çıkış ' + d[d.length - 1][2] : String(g.ad || '')]); } }); });
     var bg = ortak(y, 'slayt:belirliGun'); if (bg && Array.isArray(bg.satirlar)) bg.satirlar.forEach(function (x) { if (x && x.bas <= b && (x.bit || x.bas) >= a) ev.push([x.bas < a ? a : x.bas, etiket(x.bas < a ? a : x.bas), String(x.ad), aralik(x.bas, x.bit)]); });
     olaylar(y).forEach(function (o) { if (o.k === 'sinav' && !/sınav günü/i.test(o.ad) && o.bas >= a && o.bas <= b) ev.push([o.bas, etiket(o.bas), o.ad, o.alt]); });
+    kurulListe(y, a).forEach(function (k) { if (k.kat === 'gun' && k.bas && k.bas <= b && (k.bit || k.bas) >= a) ev.push([k.bas < a ? a : k.bas, etiket(k.bas < a ? a : k.bas), 'Görevlisin: ' + k.ad, k.gorev || 'Görevli']); });
     ev.sort(function (p, q) { return p[0] < q[0] ? -1 : p[0] > q[0] ? 1 : 0; });
     return ev;
   }
@@ -847,11 +949,12 @@
     var y = C.y;
     if (TAB === 0) return logoBar(C, 'Öğretmen ekranı') + (yayinKapali(C) ? '' : hero(C, 0)) + (yayinKapali(C) ? selamHTML(C) : '');
     if (TAB === 1) {
+      if (dersiz(y) && PS === 1) PS = 0; if (dersiz(y) && nobetsiz(y) && PS === 2) PS = 0;
       var ad = (y && y.kisi && y.kisi.ad) || '', kim = kisisel(y, 'kimlik'), p = programVar(y), sayi = 0;
       if (p) for (var wd = 1; wd <= 5; wd++) sayi += Object.keys(p.matris[String(wd)] || {}).filter(function (no) { return hucre(p.matris[String(wd)][no]); }).length;
-      var alt = [(kim && kim.brans) || '', p ? sayi + ' ders' : ''].filter(Boolean).join(', ');
+      var alt = [(kim && kim.brans) || '', p && sayi ? sayi + ' ders' : ''].filter(Boolean).join(', ');
       var simdiTxt = (PS === 0 && !yayinKapali(C)) ? hero(C, 1) : '';
-      return logoBar(C, 'Programım') + '<div class="who"><div class="av">' + esc(ilkHarfler(ad)) + '</div><div><b class="d" style="font-size:19px">' + esc(ad) + '</b><span>' + esc(alt) + '</span></div><span style="font-size:12px;color:rgba(255,255,255,.6)">Bu cihaza bağlı</span></div><div class="ptabs" id="pt">' + ['Bugün', 'Program', 'Nöbet', 'Notlarım'].map(function (x, i) { return '<button type="button" data-p="' + i + '"' + (PS === i ? ' class="on"' : '') + '>' + x + '</button>'; }).join('') + '</div>' + simdiTxt;
+      return logoBar(C, 'Programım') + '<div class="who"><div class="av">' + esc(ilkHarfler(ad)) + '</div><div><b class="d" style="font-size:19px">' + esc(ad) + '</b><span>' + esc(alt) + '</span></div><span style="font-size:12px;color:rgba(255,255,255,.6)">Bu cihaza bağlı</span></div><div class="ptabs" id="pt">' + ['Bugün', 'Program', 'Nöbet', 'Notlarım'].map(function (x, i) { return [x, i]; }).filter(function (t) { return !(dersiz(y) && (t[1] === 1 || (t[1] === 2 && nobetsiz(y)))); }).map(function (t) { return '<button type="button" data-p="' + t[1] + '"' + (PS === t[1] ? ' class="on"' : '') + '>' + t[0] + '</button>'; }).join('') + '</div>' + simdiTxt;
     }
     if (TAB === 3) {
       var cats = ['Tümü']; haberListe(y).forEach(function (h) { var k = h.kat || 'Bilgi'; if (cats.indexOf(k) < 0) cats.push(k); });
@@ -1017,6 +1120,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
   var BR = { gunum: 'var(--c-gunum)', yarin: 'var(--c-yarin)', yaklasan: 'var(--c-yaklasan)', neler: 'var(--c-neler)', nobet: 'var(--c-nobet)', pano: 'var(--c-pano)', not: 'var(--c-not)' };
   function bolgeAdi(e) {
     var t = (e.textContent || '').slice(0, 48).toLocaleLowerCase('tr'), k = e.getAttribute('data-k');
+    if (k === 'dolt') return 'nobet';
     if (t.indexOf('okuldan duyurular') === 0) return 'neler';
     if (t.indexOf('belirli gün') === 0) return 'yaklasan';
     if (t.indexOf('haberler') === 0) return 'pano';
@@ -1094,6 +1198,24 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
       rows.forEach(function (r) { var s = +r.dataset.s, e = +r.dataset.e; r.classList.toggle('past', C.T >= e); r.classList.toggle('now', C.T >= s && C.T < e); if (C.T >= s && C.T < e) r.setAttribute('data-k', 'kalan ' + sureTxt(e - C.T)); else r.removeAttribute('data-k'); if (C.T >= s && C.T < e) yy = r.offsetTop + (C.T - s) / (e - s) * r.offsetHeight; });
       if (yy == null && rows.length) yy = C.T < +rows[0].dataset.s ? rows[0].offsetTop : rows[rows.length - 1].offsetTop + rows[rows.length - 1].offsetHeight;
       if (yy != null) { el.querySelector('.rail i').style.height = yy + 'px'; el.querySelector('.cur').style.top = yy + 'px'; }
+    });
+    [].forEach.call(document.querySelectorAll('.tl2'), function (el) {
+      var rows = [].slice.call(el.querySelectorAll('.cr')), im = el.querySelector('.im'), rl = el.querySelector('.rl i'), yy = null, prev = null, next = null;
+      if (!rows.length || !im || !rl) return;
+      rows.forEach(function (r) {
+        var s0 = +r.dataset.s, e0 = +r.dataset.e, now = C.T >= s0 && C.T < e0, kk = r.querySelector('.k');
+        r.classList.toggle('past', C.T >= e0); r.classList.toggle('now', now);
+        if (kk) kk.textContent = now ? 'kalan ' + sureTxt(e0 - C.T) : '';
+        if (now && yy == null) yy = r.offsetTop + (C.T - s0) / (e0 - s0) * r.offsetHeight;
+        if (C.T >= e0) prev = r; else if (C.T < s0 && !next) next = r;
+      });
+      if (yy == null) {
+        if (!prev) yy = rows[0].offsetTop;
+        else if (!next) yy = prev.offsetTop + prev.offsetHeight;
+        else { var pb = prev.offsetTop + prev.offsetHeight, f = (C.T - (+prev.dataset.e)) / Math.max(1, (+next.dataset.s) - (+prev.dataset.e)); yy = pb + f * Math.max(0, next.offsetTop - pb); }
+      }
+      im.style.top = yy.toFixed(1) + 'px'; rl.style.height = yy.toFixed(1) + 'px';
+      var lb = im.querySelector('b'); if (lb) lb.textContent = f2(Math.floor(C.T / 3600)) + ':' + f2(Math.floor(C.T % 3600 / 60));
     });
     [].forEach.call(document.querySelectorAll('[data-bg="1"] .gk, [data-bg="1"] .gx'), function (k) {
       var s0 = +k.dataset.s, e0 = +k.dataset.e, now = C.T >= s0 && C.T < e0;
@@ -1222,6 +1344,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     if (t === 'ol') return dtOlay(+p[1]);
     if (t === 'dr') return dtDers(+p[1]);
     if (t === 'dl') return dtDersListe(p[1]);
+    if (t === 'kv') return dtKurul(+p[1]);
   }
   function dtHucre(kk) {
     var C = CTX || baglam(), a = String(kk).split(','), g = haftaGunleri(C.d)[+a[0]]; if (!g) return;
@@ -1351,10 +1474,10 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     var les = r[0] === 'ders', no = dersNo(r), bugun = ds === iso(simdi()), T = saniye(), s0 = mdk(r[2]) * 60, e0 = mdk(r[3]) * 60, du = '';
     if (bugun) du = T >= e0 ? 'Bitti' : (T >= s0 ? 'Şu an, ' + sureTxt(e0 - T) + ' kaldı' : sureTxt(s0 - T) + ' sonra');
     var my = les && G.MY[no], cv = les && G.COV[no];
-    var h = '<div class="dbig d">' + esc(r[2]) + ' – ' + esc(r[3]) + '</div><div class="dsub">' + esc(GUN[d.getDay()] + ', ' + gunAy(ds)) + (du ? ' · ' + esc(du) : '') + '</div><div class="kvs">';
+    var h = '<div class="dbig d">' + esc(r[2]) + ' – ' + esc(r[3]) + '</div><div class="dsub">' + esc(GUN[d.getDay()] + ', ' + gunAy(ds)) + (du ? ' · ' + esc(du) : '') + '</div>' + (cv ? '<div class="chp" style="margin-top:12px"><span class="cvlbl2">Ders doldurma</span></div>' : '') + '<div class="kvs">';
     if (les) {
       if (my) h += kvH('Sınıf', my.sinif) + (my.ders ? kvH('Ders', my.ders) : '');
-      if (cv) h += kvH('Ders doldurma', cv.sinif || 'Evet');
+      if (cv) { var cy = cvYerine(G.y, ds, no, cv); if (cv.sinif) h += kvH('Sınıf', cv.sinif); h += kvH((cy ? cy + ' yerine' : 'Gelmeyen öğretmen yerine'), 'sen'); }
       if (!my && !cv && programVar(G.y)) h += kvH('Durum', 'Boş ders');
     } else h += kvH('Süre', ((e0 - s0) / 60) + ' dk');
     h += '</div><div class="rows">';
@@ -1398,6 +1521,19 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     var h = '<div class="dbig d">' + esc(k.yer || '') + '</div><div class="dsub">' + esc(k.ad) + (C.ben && norm(k.ad) === C.ben ? ' · sen' : '') + '</div><div class="sec" style="margin-top:22px">' + secH('Bugün nöbetçi', nb.liste.length + ' kişi') + '<div class="rows">';
     nb.liste.forEach(function (x, j) { h += dtSatir('nb:' + j, '', x.ad, '', x.yer || '', (j === i ? 'sel' : '')); });
     dtGoster('Nöbetçi', h + '</div></div>');
+  }
+  function dtKurul(i) {
+    var C = CTX || baglam(), k = kurulListe(C.y, C.gb.ds)[i]; if (!k) return;
+    var ben = C.ben, u = Array.isArray(k.uyeler) ? k.uyeler.slice(0, 60) : [], gad = '';
+    GKAT.forEach(function (g) { if (g[0] === k.kat) gad = g[1]; });
+    var h = '<div class="dbig d">' + esc(k.ad) + '</div><div class="dsub">' + esc(gad) + ' · Görevin: ' + esc(k.gorev || 'Üye') + (k.bas ? ' · ' + esc(aralik(k.bas, k.bit || k.bas)) : '') + '</div><div class="rows">';
+    u.forEach(function (x) {
+      if (!x || !x.ad) return;
+      var sen = !x.dis && ben && norm(x.ad) === ben;
+      h += '<div class="rw"><div class="a"><b>' + esc(x.ad) + (sen ? ' (sen)' : '') + '</b></div><span class="z">' + esc(x.gorev || 'Üye') + '</span></div>';
+    });
+    h += '</div>';
+    dtGoster(gad || 'Görev', h);
   }
   function dtNbd() { var C = CTX || baglam(); dtGoster('Nöbet düzenin', nobetSekmesi(C)); }
   function dtDers(i) {
@@ -1443,7 +1579,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
   }
 
   // ================= AYARLAR =================
-  var TOG = [['pano', 'Slaytta yarın ve belirli günler'], ['notes', 'Okulda neler var'], ['yk', 'Yaklaşanlar'], ['board', 'Panoda yeni'], ['nobet', 'Nöbetçiler'], ['akis', 'Günüm']];
+  var TOG = [['pano', 'Slaytta yarın ve belirli günler'], ['notes', 'Okulda neler var'], ['yk', 'Yaklaşanlar'], ['board', 'Panoda yeni'], ['nobet', 'Nöbetçiler'], ['dolt', 'Bugün ders doldurma listesi'], ['akis', 'Günüm']];
   function secenek(id, deger, liste) { return '<div class="opts" id="' + id + '">' + liste.map(function (x) { return '<button type="button" data-v="' + esc(x[0]) + '"' + (deger === x[0] ? ' class="on"' : '') + '>' + esc(x[1]) + '</button>'; }).join('') + '</div>'; }
 
   var GVO = [['a', 'Izgara', '<span class="th tha"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span>'], ['b', 'Liste', '<span class="th thb"><i></i><i></i><i class="on"></i><i></i><i></i></span>'], ['v', 'Akış', '<span class="th thv"><i></i><i></i><i class="on"></i><i></i></span>'], ['d', 'Kadran', '<span class="th thd"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" class="g0"/><path d="M20 6a14 14 0 0 1 12.1 7" class="g1"/><path d="M33 16a14 14 0 0 1 0 8" class="g1"/><path d="M31 27a14 14 0 0 1-9 7.5" class="g2"/><path d="M17 34.4a14 14 0 0 1-9-6" class="g1"/><path d="M6.7 23a14 14 0 0 1 0-6" class="g1"/></svg></span>']];

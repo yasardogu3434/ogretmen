@@ -542,3 +542,56 @@ a.dl small{font-weight:500;color:var(--mut);font-size:12.5px}
 .kart{background:linear-gradient(135deg,rgba(255,255,255,.52),rgba(255,255,255,.22));border:1px solid rgba(255,255,255,.75);box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 0 0 1px color-mix(in srgb,var(--sc) 22%,transparent),0 12px 30px -14px color-mix(in srgb,var(--sc) 60%,transparent);-webkit-backdrop-filter:blur(14px) saturate(1.5);backdrop-filter:blur(14px) saturate(1.5)}
 :root[data-th=dark] .kart{background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.18);box-shadow:0 1px 0 rgba(255,255,255,.12) inset,0 12px 30px -14px color-mix(in srgb,var(--sc) 55%,transparent)}
 @media(prefers-color-scheme:dark){:root:not([data-th=light]) .kart{background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.18);box-shadow:0 1px 0 rgba(255,255,255,.12) inset,0 12px 30px -14px color-mix(in srgb,var(--sc) 55%,transparent)}}
+
+/* ===== 0.9.3 Ders doldurma ===== */
+:root{--cv:#1F8F86}
+.gt.cv{background:linear-gradient(165deg,color-mix(in srgb,var(--cv) 20%,var(--surf)),var(--surf));box-shadow:inset 0 0 0 2px var(--cv)}
+.gt.cv .tg2{font-size:10.5px;font-weight:700;color:var(--cv);line-height:1.1}
+.gr.cv,.gv.cv{box-shadow:inset 3px 0 0 var(--cv)}
+.gr .tg2,.gv .tg2{font-size:11.5px;font-weight:700;color:var(--cv)}
+.ar.cv{stroke:var(--cv)}
+@supports not (background:color-mix(in srgb,red 50%,blue)){.gt.cv{background:var(--surf)}}
+.cvs{display:flex;align-items:center;gap:12px;width:calc(100% - 40px);margin:14px 20px 0;padding:11px 14px;border:0;font:inherit;color:var(--tx);text-align:left;cursor:pointer;border-radius:18px;background:linear-gradient(120deg,color-mix(in srgb,var(--cv) 16%,var(--surf)),var(--surf) 70%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--cv) 30%,var(--line))}
+.cvs:active{transform:scale(.985)}
+.cvs .ic{width:30px;height:30px;border-radius:10px;background:color-mix(in srgb,var(--cv) 22%,transparent);color:var(--cv);display:grid;place-items:center;flex:none}
+.cvs .ic svg,.cvs .go svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cvs .tx{flex:1;min-width:0}.cvs .tx small{display:block;font-size:11.5px;font-weight:700;color:var(--cv);text-transform:uppercase;letter-spacing:.4px}
+.cvs .tx b{display:block;font-size:14.5px;font-weight:650;margin-top:1px}
+.cvs .go{width:26px;height:26px;border-radius:50%;background:color-mix(in srgb,var(--cv) 14%,transparent);display:grid;place-items:center;color:var(--cv);flex:none}.cvs .go svg{width:14px;height:14px;stroke-width:2.6}
+@supports not (background:color-mix(in srgb,red 50%,blue)){.cvs{background:var(--surf);box-shadow:inset 0 0 0 1px var(--line)}}
+.cvhd{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12.5px;color:var(--mut)}.cvhd i{width:7px;height:7px;border-radius:50%;background:var(--cv)}
+.cvbox{border-radius:18px;padding:6px 16px;background:linear-gradient(120deg,color-mix(in srgb,var(--cv) 14%,var(--surf)),var(--surf) 65%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--cv) 28%,var(--line));margin-top:12px}
+.cvbox .l{display:flex;gap:12px;align-items:center;padding:10px 0;cursor:pointer}.cvbox .l+.l{border-top:1px solid color-mix(in srgb,var(--cv) 18%,var(--line))}
+.cvbox .l b{font-size:19px;font-weight:600;min-width:62px;white-space:nowrap}
+.cvbox .cvt{font-size:13px;color:var(--mut);flex:1;white-space:nowrap;line-height:1.35}.cvbox .cvt strong{color:var(--tx);font-size:15px}
+.cvbox .l em{font-style:normal;font-size:12px;font-weight:700;color:var(--cv);text-align:right;max-width:110px;line-height:1.25}
+.fr .nb{margin-left:8px;color:var(--cv)!important}
+.fr.cvr .c2{color:var(--tx);font-weight:700}
+.cvlbl2{background:color-mix(in srgb,var(--cv) 18%,transparent)!important;color:var(--cv)}
+/* toplu liste + saat imleci */
+.tl2{position:relative;margin-top:12px;padding-left:20px}
+.tl2 .rl{position:absolute;left:6px;top:4px;bottom:4px;width:2px;border-radius:2px;background:repeating-linear-gradient(to bottom,var(--line) 0 4px,transparent 4px 9px)}
+.tl2 .rl i{position:absolute;left:0;top:0;width:100%;height:0;background:linear-gradient(to bottom,var(--gold),#E3B24E);border-radius:2px;box-shadow:0 0 8px rgba(200,147,43,.45)}
+.tl2 .im{position:absolute;left:-1px;top:0;width:16px;height:16px;margin-top:-8px;border-radius:50%;background:var(--gold);animation:cvp 2.4s ease-out infinite;z-index:3}
+.tl2 .im::after{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--paper)}
+.tl2 .im b{position:absolute;left:24px;top:-3px;font-size:11px;font-weight:700;background:var(--gold);color:#fff;padding:2px 8px;border-radius:8px;white-space:nowrap;font-variant-numeric:tabular-nums}
+@keyframes cvp{0%{box-shadow:0 0 0 0 rgba(200,147,43,.55)}75%,100%{box-shadow:0 0 0 12px rgba(200,147,43,0)}}
+.cr{display:flex;gap:10px;align-items:center;padding:11px 10px;margin:0 -4px;border-radius:14px;position:relative}
+.cr .sa{width:62px;flex:none}.cr .sa b{font-family:'Bricolage Grotesque','Hanken Grotesk',sans-serif;font-size:14.5px;font-weight:600;display:block;line-height:1.1;white-space:nowrap}.cr .sa small{font-size:11.5px;color:var(--mut)}
+.cr .sn{width:40px;flex:none;font-family:'Bricolage Grotesque','Hanken Grotesk',sans-serif;font-size:19px;font-weight:600}
+.cr .nm{flex:1;min-width:0;line-height:1.25}
+.cr .nm .g{display:block;font-size:12px;font-weight:500;color:var(--mut);margin:0 0 2px}
+.cr .nm .d2{display:block;font-size:15px;font-weight:700}
+.cr .nm small.k{display:block;font-size:12px;font-weight:700;color:var(--goldt);margin-top:3px}.cr .nm small.k:empty{display:none}
+.cr.past{opacity:.48}
+.cr.past .sa b::before{content:"";display:inline-block;width:4px;height:8px;border:solid var(--teal);border-width:0 2px 2px 0;transform:rotate(40deg);margin:0 6px 2px 0}
+.cr.now{background:linear-gradient(90deg,color-mix(in srgb,var(--gold) 20%,var(--surf)),color-mix(in srgb,var(--surf) 60%,transparent));box-shadow:inset 3px 0 0 var(--gold)}
+.cr.me{box-shadow:inset 0 0 0 1.5px var(--cv);cursor:pointer}
+.cr.now.me{box-shadow:inset 3px 0 0 var(--gold),inset 0 0 0 1.5px var(--cv)}
+.cr.me .sn::after{content:"sen";display:block;font-size:10.5px;font-weight:700;color:var(--cv);margin-top:1px;font-family:'Hanken Grotesk',sans-serif}
+@supports not (background:color-mix(in srgb,red 50%,blue)){.cr.now{background:var(--goldsoft)}.cvbox{background:var(--surf)}}
+@media (prefers-reduced-motion:reduce){.tl2 .im{animation:none}}
+
+/* 0.9.3 Görevlerim */
+.gkl{margin:14px 0 0;font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut,#5b6b85)}
+.gkl:first-of-type{margin-top:8px}
