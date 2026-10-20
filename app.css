@@ -595,3 +595,41 @@ a.dl small{font-weight:500;color:var(--mut);font-size:12.5px}
 /* 0.9.3 Görevlerim */
 .gkl{margin:14px 0 0;font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut,#5b6b85)}
 .gkl:first-of-type{margin-top:8px}
+
+/* ===== 0.10.0: çekmece (sol üstteki isim), Görevlerim ve Ayarlar sayfaları ===== */
+.cov{position:absolute;inset:0;background:rgba(10,18,40,.42);opacity:0;pointer-events:none;transition:opacity .25s;z-index:36}.cov.on{opacity:1;pointer-events:auto}
+.cek{position:absolute;top:0;bottom:0;left:0;width:54%;max-width:260px;z-index:37;transform:translateX(-104%);transition:transform .28s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;padding:calc(18px + env(safe-area-inset-top)) 0 calc(14px + env(safe-area-inset-bottom));
+  background:rgba(240,244,251,.8);-webkit-backdrop-filter:blur(20px) saturate(1.3);backdrop-filter:blur(20px) saturate(1.3);border-right:1px solid rgba(255,255,255,.7);box-shadow:8px 0 30px rgba(10,18,40,.25);color:var(--ink);border-radius:0 22px 22px 0;visibility:hidden}
+.cek.on{transform:none;visibility:visible}
+@media(prefers-color-scheme:dark){:root:not([data-th=light]) .cek{background:rgba(22,36,72,.7);color:#E8EDF8;border-right-color:rgba(255,255,255,.12)}}
+:root[data-th=dark] .cek{background:rgba(22,36,72,.7);color:#E8EDF8;border-right-color:rgba(255,255,255,.12)}
+.cpr{padding:0 16px 14px;border-bottom:1px solid rgba(19,36,74,.14)}.cpr .av{width:46px;height:46px;border-radius:50%;background:var(--gold);color:#fff;display:grid;place-items:center;font-weight:700;font-family:'Bricolage Grotesque';margin-bottom:8px}
+.cpr b{display:block;font-size:15.5px;font-weight:650}.cpr span{display:block;font-size:12px;opacity:.7;margin-top:1px}
+.clst{flex:1;overflow-y:auto;padding:6px 8px}.cgr{font-size:11px;font-weight:800;letter-spacing:.6px;opacity:.55;padding:12px 10px 4px}
+.cek button{width:100%;border:0;background:none;color:inherit;font:inherit;font-size:14.5px;font-weight:650;display:flex;gap:11px;align-items:center;padding:11px 10px;border-radius:12px;cursor:pointer;text-align:left}
+.cek button.on{background:rgba(255,255,255,.7)}
+@media(prefers-color-scheme:dark){:root:not([data-th=light]) .cek button.on{background:rgba(255,255,255,.14)}}
+:root[data-th=dark] .cek button.on{background:rgba(255,255,255,.14)}
+.cek svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.cbt{padding:6px 8px 0;border-top:1px solid rgba(19,36,74,.14)}
+/* Programım: Görevlerim bağlantı satırı + bitti bildirimi */
+.gsat{display:flex;align-items:center;gap:10px;width:calc(100% - 40px);margin:14px 20px 0;border:1.5px solid var(--line);background:var(--surf);color:var(--tx);font:inherit;padding:13px 14px;border-radius:14px;cursor:pointer;text-align:left}
+.gsat b{font-size:15px;font-weight:650;flex:1}.gsat span{font-size:13px;color:var(--mut)}.gsat i{font-style:normal;color:var(--gold);font-weight:700}
+.gbit{margin-top:14px;background:var(--goldsoft);border-radius:14px;padding:13px 14px;font-size:13.5px;color:var(--mut)}.gbit b{display:block;font-size:15px;color:var(--tx);margin-bottom:2px}
+/* Görevlerim: kapalı renkli kartlar */
+.gwrap{margin-top:16px}
+.gck{margin-bottom:10px;border:1.5px solid var(--c);border-radius:14px;background:var(--surf);overflow:hidden}
+@supports(background:color-mix(in srgb,red 10%,white)){.gck{background:color-mix(in srgb,var(--c) 9%,var(--surf))}}
+.gch{width:100%;border:0;background:none;color:var(--tx);font:inherit;display:flex;align-items:center;gap:10px;padding:14px;cursor:pointer;text-align:left}
+.gch i{width:10px;height:10px;border-radius:50%;background:var(--c);flex:none}.gch b{flex:1;font-size:15.5px;font-weight:650}.gch em{font-style:normal;font-size:12.5px;font-weight:700;color:var(--c)}
+.gch .chv,.ach .chv{color:var(--c,var(--gold));font-weight:700;font-size:18px;transition:transform .2s}.gck.open .chv,.acd.open .chv{transform:rotate(90deg)}
+.gin{display:none;padding:0 14px 8px}.gck.open .gin{display:block}.gin .rows{margin-top:0}
+.gin .rw{border-bottom:1px solid color-mix(in srgb,var(--c) 22%,transparent)}
+/* Ayarlar: açılır kapanır bölümler + gece/gündüz seçimi */
+.ayw{margin-top:16px}.ayw h4{font-size:13px;color:var(--mut);margin:18px 0 8px;font-weight:600}.ayw h4:first-child{margin-top:4px}
+.acd{border:1.5px solid var(--line);border-radius:14px;margin-bottom:10px;background:var(--surf)}
+.ach{width:100%;border:0;background:none;color:var(--tx);font:inherit;font-size:15.5px;font-weight:650;display:flex;justify-content:space-between;align-items:center;padding:14px;cursor:pointer;text-align:left}
+.acn{display:none;padding:0 14px 14px}.acd.open .acn{display:block}
+.thseg{display:flex;gap:8px}.thseg button{flex:1;border:1.5px solid var(--line);background:none;color:var(--tx);font:inherit;font-size:13px;font-weight:650;padding:12px 0;border-radius:12px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px}
+.thseg button.on{border-color:var(--gold);background:var(--goldsoft)}.thseg svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.gwrap,.ayw{padding:0 20px 24px}#t4>.empty{margin-left:20px;margin-right:20px}
