@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.10.1'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.10.3'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -303,8 +303,15 @@
     var fr = Math.min(1, Math.max(0, (C.T - A0) / span));
     return h + '<em style="left:' + (fr * 100).toFixed(2) + '%" data-t="' + f2(Math.floor(C.T / 3600)) + ':' + f2(Math.floor(C.T % 3600 / 60)) + '"></em></div>';
   }
+  // Gökyüzü kartı her saniye kendini canlandırdığı için üst alan karşılaştırılırken kartın İÇİ yok sayılır; kartın dışındaki kısım (başlık, düğmeler, noktalar) ise karşılaştırılır.
+  var SKY_BIT = '<!--/sk-->';
+  function skyBol(s) {
+    var j = s.indexOf('<div class="sk"'), i = s.indexOf(SKY_BIT);
+    if (j < 0) return [s, ''];
+    return [s.slice(0, j), i < j ? '' : s.slice(i + SKY_BIT.length)];
+  }
   function gokyuzuHTML(C, ctx) {
-    if (C.y && yayinlandi(C.y, 'gokyuzu')) { window.SKCTX = ctx; return '<div class="skyc" id="skyc">' + skSkeleton() + '</div>'; }
+    if (C.y && yayinlandi(C.y, 'gokyuzu')) { window.SKCTX = ctx; return '<div class="skyc" id="skyc">' + skSkeleton() + '</div>' + SKY_BIT; }
     return '<div class="hero2"><div class="t">' + esc(ctx) + '</div></div>';
   }
   function heroEski(C, mine) {
@@ -324,7 +331,7 @@
     return '<div class="hr"><div class="ring' + (les ? '' : ' br') + '" data-lv="r"><svg viewBox="0 0 180 180" aria-hidden="true">' + TICKS + '<circle class="tr" cx="90" cy="90" r="78"/><circle class="pg' + (les && left <= 300 ? ' son' : '') + '" cx="90" cy="90" r="78" stroke-dasharray="' + Cc.toFixed(1) + '" stroke-dashoffset="' + (Cc * (1 - fr)).toFixed(1) + '"/></svg><div class="rc"><b class="d">' + kalan.slice(0, -1) + '<span class="sd">' + kalan.slice(-1) + '</span></b><span>kalan süre</span></div></div><div class="hs"><div class="ey' + (les ? '' : ' br') + '">' + esc(c[1]) + '</div><div class="cap">' + (les ? 'ders bitimine' : (c[0] === 'öğle' ? 'öğle arasının bitimine' : 'teneffüsün bitimine')) + ' kadar</div>' + (n ? '<div class="nx">Sonra ' + esc(n[1].toLowerCase()) + ', ' + n[2] + '</div>' : '<div class="nx">Günün son dersi</div>') + sinif + '</div></div>' + cetvel(C, mine);
   }
   // ---- Üst alan: panel düzeni. Ders/teneffüste geri sayım, ders dışında slayt; düğmeyle geçiş
-  var HI = 0, HX = true, HSON = 0, HLAST = 0, HFX = false, HO = null, SLAYT_MS = 10000, GERI_MS = 300000;
+  var HI = 0, HX = true, HSON = Date.now(), HLAST = Date.now(), HFX = false, HO = null, SLAYT_MS = 10000, GERI_MS = 300000;
   var IK_ONC = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>', IK_SON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>';
   var IK_DUR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg>', IK_OYN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" style="fill:currentColor"/></svg>';
   var IK_SAYAC = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="7.5"/><path d="M12 9v4l2.5 1.5M9.5 2.5h5"/></svg>', IK_SLAYT = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="2.5"/><path d="M8 21h8"/></svg>';
@@ -481,7 +488,7 @@
     var s = heroSlaytlar(C), n = s.length; if (HI >= n) HI = 0;
     var cur = s[HI], body = cur.h, fx = HFX; HFX = false;
     if (body && cur.id !== 'gokyuzu') body = body.replace('<span class="hcnt"></span>', '<span class="hcnt">' + (HI + 1) + ' / ' + n + '</span>');
-    if (cur.id === 'gokyuzu') { window.SKCTX = ''; body = '<div class="skyc" id="skyc">' + skSkeleton() + '</div>'; }
+    if (cur.id === 'gokyuzu') { window.SKCTX = ''; body = '<div class="skyc" id="skyc">' + skSkeleton() + '</div>' + SKY_BIT; }
     h = '<div class="hcar"><div class="sl' + (n === 1 ? ' one' : '') + (fx ? ' fx' : '') + '"' + (cur.dt ? ' data-dt="' + esc(cur.dt) + '"' : '') + '>' + body + '</div>';
     if (n > 1 || akt) {
       h += '<div class="hct">';
@@ -1205,7 +1212,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     CTX = C;
     if (TAB === 0 || (TAB === 1 && PS === 0)) {
       var tp = $('top'), hh = topHTML(C), k1 = hh.replace(/-?\d+\.\d+s/g, ''), k0 = (tp.dataset.h || '').replace(/-?\d+\.\d+s/g, '');
-      var skyAyni = !!$('skyc') && hh.indexOf('id="skyc"') >= 0 && k1.replace(/<div class="sk"[\s\S]*$/, '') === k0.replace(/<div class="sk"[\s\S]*$/, '');
+      var b1 = skyBol(k1), b0 = skyBol(k0), skyAyni = !!$('skyc') && hh.indexOf('id="skyc"') >= 0 && b1[0] === b0[0] && b1[1] === b0[1];
       if (!skyAyni && tp.dataset.h !== hh) {
         var kk = hh.replace(/\d+/g, '#');
         if (tp.dataset.kk === kk && tp.querySelector('[data-lv]')) {
@@ -1813,6 +1820,13 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
   }, 1000);
   setInterval(function () { if (!document.hidden && !kilit) tick(); }, 1000);
   setInterval(function () { if (!document.hidden && !kilit && Date.now() - sonYenileme > A.YENILE_DK * 60000) yenile(false); }, 60000);
+  // Uygulamaya yarım dakikadan uzun bir aradan sonra dönülünce karşılama yeniden ilk slayttan (gökyüzü) başlar.
+  var GIZLENDI = 0;
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) { GIZLENDI = Date.now(); return; }
+    if (GIZLENDI && Date.now() - GIZLENDI > 30000) { HI = 0; HSON = HLAST = Date.now(); HFX = false; }
+    GIZLENDI = 0;
+  });
   document.addEventListener('visibilitychange', function () { if (!document.hidden && !kilit) { render(); if (Date.now() - sonYenileme > 60000) yenile(false); } });
   window.addEventListener('online', function () { if (!kilit) yenile(false); });
   window.addEventListener('offline', function () { durum.ag = 'cevrimdisi'; if (!kilit) render(); });
