@@ -740,7 +740,7 @@
   }
   function derslerimHTML(C) {
     var l = dersGruplari(C.y); if (!l.length) return '';
-    return '<div class="sec">' + secH('Derslerim', l.length + ' ders-şube') + '<div class="dg">' + l.map(function (x) { return '<button type="button" class="dk" data-dt="dr:' + x.i + '"><b class="d">' + esc(x.sinif) + '</b><span>' + esc(x.tam) + '</span><em>haftada ' + x.slots.length + ' saat</em></button>'; }).join('') + '</div></div>';
+    return '<div class="sec">' + secH('Derslerim', l.length + ' ders-şube') + '<div class="dg">' + l.map(function (x) { return '<button type="button" class="dkart" data-dt="dr:' + x.i + '"><b class="d">' + esc(x.sinif) + '</b><span>' + esc(x.tam) + '</span><em>haftada ' + x.slots.length + ' saat</em></button>'; }).join('') + '</div></div>';
   }
   function programHTML(C) {
     var y = C.y, p = programVar(y);
