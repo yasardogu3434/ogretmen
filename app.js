@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.11.0'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.11.1'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -1599,7 +1599,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     var g = parseInt(my.sinif, 10); if (!(g >= 5 && g <= 8)) return null;
     if (KZ.idx) { for (var i = 0; i < KZ.idx.plan.length; i++) if (KZ.idx.plan[i].a === a && KZ.idx.plan[i].s === g) return KZ.idx.plan[i]; return null; }
     // Liste dosyası yüklenemediyse dosya adı doğrudan türetilir (liste olmadan da çalışsın)
-    return { a: a, s: g, f: KZ_DOSYA[a] || (a + g + '.json'), yedekAd: true };
+    return { a: a, s: g, f: (g === 6 && (a === 'ahlk' || a === 'afet')) ? a + '2.json' : (KZ_DOSYA[a] || (a + g + '.json')), yedekAd: true };
   }
   function kzHafta(P, ds) {
     var son = null;
@@ -1671,6 +1671,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
       if (!$('kzw') || $('kzw').getAttribute('data-ds') !== ds) return;
       var pl = kzPlan(my, (e.a === 'sos' && g === 8) ? 'ita' : e.a); // 8. sınıfta Sosyal Bilgiler dersinin adı İnkılap Tarihi ve Atatürkçülük
       if (!pl) { kzNot(ds, 'Bu ders ve sınıf için kazanım planı bulunmuyor.'); return; }
+      if (pl.not) { KZ_TANI.dosya = 'kazanim/' + pl.f + ' henüz yok (not)'; kzNot(ds, pl.not); return; }
       kzJson('kazanim/' + pl.f).then(function (P) {
         if (!$('kzw') || $('kzw').getAttribute('data-ds') !== ds) return;
         if (!P || (!Array.isArray(P.haftalar) && !Array.isArray(P.uniteler))) { KZ_TANI.dosya = 'kazanim/' + pl.f + ' yüklenemedi'; kzNot(ds, pl.yedekAd ? 'Kazanım dosyası yüklenemedi. İnternet bağlantını kontrol edip yeniden dene.' : 'Kazanımlar şu an yüklenemedi. İnternet bağlantını kontrol edip yeniden dene.', true); return; }

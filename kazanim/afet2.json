@@ -1,0 +1,136 @@
+{
+ "ders": "Afet Bilinci",
+ "anahtar": "afet",
+ "sinif": 2,
+ "kaynak": "MEB Afet Bilinci Dersi Öğretim Programı, II. düzey (haftada 2 ders saati)",
+ "tip": "unite",
+ "uniteler": [
+  {
+   "n": 1,
+   "u": "AFET VE AFET BİLİNCİ",
+   "saat": 8,
+   "m": [
+    {
+     "k": "AB.2.1.1",
+     "t": "Afet ve acil durumlarda ilk yardımın öncelikli amaçlarını sorgulayabilme",
+     "d": [
+      "a) Afet ve acil durumlarda ilk yardımın öncelikli amaçları hakkında merak ettiği konuları tanımlar.",
+      "b) Afet ve acil durumlarda ilk yardımın öncelikli amaçları hakkında sorular sorar.",
+      "c) Afet ve acil durumlarda ilk yardımın öncelikli amaçları hakkında bilgi toplar.",
+      "ç) Afet ve acil durumlarda ilk yardımın öncelikli amaçları hakkında toplanan bilgilerin doğruluğunu değerlendirir.",
+      "d) Afet ve acil durumlarda ilk yardımın öncelikli amaçları hakkından toplanan bilgiler üzerinden çıkarım yapar."
+     ]
+    },
+    {
+     "k": "AB.2.1.2",
+     "t": "Afet ve acil durum yönetimiyle ilgili ulusal ve uluslararası kuruluşların çalışmaları hakkında bilgi toplayabilme",
+     "d": [
+      "a) Afet ve acil durum yönetimiyle ilgili ulusal ve uluslararası kuruluşların çalışmaları hakkında bilgi toplamak için kullanacağı araçları belirler.",
+      "b) Afet ve acil durum yönetimiyle ilgili ulusal ve uluslararası kuruluşların çalışmaları hakkındaki bilgileri bulur.",
+      "c) Afet ve acil durum yönetimiyle ilgili ulusal ve uluslararası kuruluşların çalışmaları hakkındaki ulaşılan bilgileri doğrular.",
+      "ç) Afet ve acil durum yönetimiyle ilgili ulusal ve uluslararası kuruluşların çalışmaları hakkındaki ulaşılan bilgileri kaydeder."
+     ]
+    },
+    {
+     "k": "AB.2.1.3",
+     "t": "Afetlere karşı bilinçli olmanın afet ve acil durum yönetimindeki önemiyle ilgili fikrini eyleme dönüştürebilme",
+     "d": [
+      "a) Afetlere karşı bilinçli olmanın afet ve acil durum yönetimindeki önemiyle ilgili plan yapar.",
+      "b) Afetlere karşı bilinçli olmanın afet ve acil durum yönetimindeki önemiyle ilgili planı uygular.",
+      "c) Afetlere karşı bilinçli olmanın afet ve acil durum yönetimindeki önemiyle ilgili planı değerlendirir."
+     ]
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "u": "İNSAN KAYNAKLI AFETLER",
+   "saat": 16,
+   "m": [
+    {
+     "k": "AB.2.2.1",
+     "t": "İnsan kaynaklı afet türlerinin yaşanma riskinin bulunduğu yerler hakkında haritalardan çıkarım yapabilme",
+     "d": [
+      "Haritada yer alan insan kaynaklı afet türlerinin yaşanma riskinin bulunduğu yerler ile ilgili çıkarım yapar."
+     ]
+    },
+    {
+     "k": "AB.2.2.2",
+     "t": "İnsan kaynaklı afetlerin neden olduğu zararın boyutlarıyla ilgili kanıta dayalı ürün oluşturabilme ve paylaşabilme",
+     "d": [
+      "a) İnsan kaynaklı afetlerin neden olduğu zararın boyutlarıyla ilgili kanıta dayanarak çıkarım yapar.",
+      "b) İnsan kaynaklı afetlerin neden olduğu zararın boyutlarıyla ilgili kanıtlardan elde ettiği çıkarım üzerine kişisel görüşünü yansıtan bir ürün oluşturur.",
+      "c) İnsan kaynaklı afetlerin neden olduğu zararın boyutlarıyla ilgili kanıtlardan oluşan ürünleri paylaşır."
+     ]
+    },
+    {
+     "k": "AB.2.2.3",
+     "t": "İnsan kaynaklı afet türlerinin öncesinde, sırasında ve sonrasında alınması gereken önlemlerle ilgili fikrini eyleme dönüştürebilme",
+     "d": [
+      "a) İnsan kaynaklı afet türlerinin öncesi, sırası ve sonrasında alınması gereken önlemlerle ilgili plan yapar.",
+      "b) İnsan kaynaklı afet türlerinin öncesi, sırası ve sonrasında alınması gereken önlemlerle ilgili planı uygular.",
+      "c) İnsan kaynaklı afet türlerinin öncesi, sırası ve sonrasında alınması gereken önlemlerle ilgili planı değerlendirir."
+     ]
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "u": "DOĞA KAYNAKLI AFETLER",
+   "saat": 24,
+   "m": [
+    {
+     "k": "AB.2.3.1",
+     "t": "Doğa kaynaklı afet riskinin yüksek olduğu yerler hakkında haritalardan çıkarım yapabilme",
+     "d": [
+      "a) Haritada yer alan doğa kaynaklı afet türlerinin yaşanma riskinin bulunduğu yerler ile ilgili çıkarım yapar."
+     ]
+    },
+    {
+     "k": "AB.2.3.2",
+     "t": "Doğa kaynaklı afetlerin neden olduğu zararın boyutlarıyla ilgili kanıta dayalı ürün oluşturabilme ve paylaşabilme",
+     "d": [
+      "a) Doğa kaynaklı afetlerin neden olduğu zararın boyutlarıyla ilgili kanıta dayanarak çıkarım yapar.",
+      "b) Doğa kaynaklı afetlerin neden olduğu zararın boyutlarıyla ilgili kanıtlardan elde ettiği çıkarım üzerine kişisel görüşünü yansıtan bir ürün oluşturur.",
+      "c) Doğa kaynaklı afetlerin neden olduğu zararın boyutlarıyla ilgili oluşturduğu ürünü paylaşır."
+     ]
+    },
+    {
+     "k": "AB.2.3.3",
+     "t": "Doğa kaynaklı afet türlerinin öncesi, sırası ve sonrasında alınması gereken önlemlerle ilgili fikirleri eyleme dönüştürebilme",
+     "d": [
+      "a) Doğa kaynaklı afet türlerinin öncesi, sırası ve sonrasında alınması gereken önlemlerle ilgili plan yapar.",
+      "b) Doğa kaynaklı afet türlerinin öncesi, sırası ve sonrasında alınması gereken önlemlerle ilgili planı uygular.",
+      "c) Doğa kaynaklı afet türlerinin öncesi, sırası ve sonrasında alınması gereken önlemlerle ilgili planı değerlendirir."
+     ]
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "u": "KÜRESEL İKLİM DEĞİŞİKLİĞİ VE AFETLER",
+   "saat": 16,
+   "m": [
+    {
+     "k": "AB.2.4.1",
+     "t": "Küresel iklim değişikliği mücadelesinde ülkemizin rolünü yorumlayabilme",
+     "d": [
+      "a) Küresel iklim değişikliği mücadelesinde ülkemizin rolünü inceler.",
+      "b) Küresel iklim değişikliği mücadelesinde ülkemizin rolünü bağlamdan kopmadan dönüştürür.",
+      "c) Küresel iklim değişikliği mücadelesinde ülkemizin rolünü nesnel, doğru ve anlamı değiştirmeyecek şekilde yeniden ifade eder."
+     ]
+    },
+    {
+     "k": "AB.2.4.2",
+     "t": "Küresel iklim değişikliği mücadelesinde ulusal ve uluslararası kuruluşların faaliyetleri ile ilgili kanıta dayalı ürün oluşturabilme ve paylaşabilme",
+     "d": [
+      "a) Küresel iklim değişikliği mücadelesinde ulusal ve uluslararası kuruluşların faaliyetleri ile ilgili kanıta dayanarak çıkarım yapar.",
+      "b) Küresel iklim değişikliği mücadelesinde ulusal ve uluslararası kuruluşların faaliyetleri ile ilgili kanıtlardan elde ettiği çıkarım üzerine kişisel görüşünü yansıtan bir ürün oluşturur.",
+      "c) Küresel iklim değişikliği mücadelesinde ulusal ve uluslararası kuruluşların faaliyetleri ile ilgili oluşturduğu ürünü paylaşır."
+     ]
+    }
+   ]
+  }
+ ],
+ "okulTemelli": 8
+}

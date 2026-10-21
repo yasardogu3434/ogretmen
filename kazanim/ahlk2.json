@@ -1,0 +1,87 @@
+{
+ "ders": "Ahlak ve Vatandaşlık Eğitimi",
+ "anahtar": "ahlk",
+ "sinif": 2,
+ "kaynak": "MEB Ahlak ve Vatandaşlık Eğitimi Dersi Öğretim Programı, II. düzey (haftada 1 ders saati)",
+ "tip": "unite",
+ "uniteler": [
+  {
+   "n": 1,
+   "u": "AHLAKI DEĞERLER VE DAVRANIŞLAR",
+   "saat": 14,
+   "m": [
+    {
+     "k": "AVE.2.1.1",
+     "t": "Örnek şahsiyetler üzerinden güzel ahlak ile ilgili akıl yürütebilme",
+     "d": [
+      "a) Güzel ahlak sahibi olduğu bilinen örnek şahsiyetleri inceler.",
+      "b) İncelediği şahsiyetlerin davranışlarından yola çıkarak güzel ahlakın temel özelliklerini belirler.",
+      "c) Farklı şahsiyetlerde ortak olarak görülen ahlaki tutum ve davranışlardan hareketle güzel ahlaka ilişkin çıkarımlarda bulunur."
+     ]
+    },
+    {
+     "k": "AVE.2.1.3",
+     "t": "Güncel olayları ahlaki ölçütlere göre sorgulayabilme",
+     "d": [
+      "a) Sosyal, kültürel ve ekonomik içerikli güncel olayları tanımlar.",
+      "b) Tanımladığı olayların ahlaki ölçütlere uygunluğunu sorgulayan sorular oluşturur.",
+      "c) Tanımladığı olaylarla ilgili yazılı, görsel ve dijital kaynaklardan bilgi toplar.",
+      "ç) Topladığı bilgilerin doğruluğunu ve güvenilirliğini değerlendirir.",
+      "d) Elde ettiği bilgilerden yola çıkarak olaylarla ilgili ahlaki çıkarımlarda bulunur."
+     ]
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "u": "TOPLUMSAL YAŞAMDA AHLAK VE DEĞERLER",
+   "saat": 7,
+   "m": [
+    {
+     "k": "AVE.2.2.1",
+     "t": "Ahlaki ilke ve davranışların birey ve toplum açısından önemini sorgulayabilme",
+     "d": [
+      "a) Ahlaki ilke ve davranışların birey ve toplum açısından önemine yönelik merak ettiği konuları tanımlar.",
+      "b) Ahlaki ilke ve davranışların birey ve toplum açısından önemine yönelik sorular sorar.",
+      "c) Ahlaki ilke ve davranışların birey ve toplum açısından önemine ilişkin bilgi toplar.",
+      "ç) Ahlaki ilke ve davranışların birey ve toplum açısından önemine ilişkin topladığı bilgilerin doğruluğunu değerlendirir.",
+      "d) Ahlaki ilke ve davranışların birey ve toplum açısından önemine yönelik çıkarım yapar."
+     ]
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "u": "BİRLİKTE YAŞAMAK VE SORUMLULUKLARIMIZ",
+   "saat": 6,
+   "m": [
+    {
+     "k": "AVE.2.3.1",
+     "t": "Toplumsal yaşam için gerekli ihtiyaçları ve bunların karşılanmasına yönelik faaliyetleri özetleyebilme",
+     "d": [
+      "a) Ortak yaşamın ortaya çıkardığı temel gereksinimleri belirler.",
+      "b) Bu gereksinimlerin karşılanmasına katkıda bulunan devlet kurumları ile STK’leri (Sivil Toplum Kuruluşları) alanlarına göre sınıflandırır.",
+      "c) Ortak yaşamın sürdürülebilmesinde yardımlaşma ve dayanışmanın önemini örnekler üzerinden yorumlar."
+     ]
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "u": "VATANDAŞLIK BİLİNCİ VE TOPLUMSAL SORUMLULUK",
+   "saat": 7,
+   "m": [
+    {
+     "k": "AVE.2.4.2",
+     "t": "Vatandaşlıkla ilgili güncel konulara ilişkin kanıta dayalı ürün oluşturabilme",
+     "d": [
+      "a) Yazılı, görsel veya dijital kaynaklardan elde ettiği kanıtları inceleyerek vatandaşlıkla ilgili güncel bir konuya ilişkin çıkarımda bulunur.",
+      "b) Çıkarımları doğrultusunda kendi düşüncelerini yansıtan bir ürün oluşturur.",
+      "c) Oluşturduğu ürünü paylaşır."
+     ]
+    }
+   ]
+  }
+ ],
+ "okulTemelli": 2
+}
