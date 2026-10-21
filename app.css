@@ -652,3 +652,10 @@ a.dl small{font-weight:500;color:var(--mut);font-size:12.5px}
   @keyframes hInF{from{opacity:0}to{opacity:1}}
 }
 .hcar{overflow-x:clip}
+
+/* 0.10.5: iPhone düzeltmeleri. env() değerleri Android ve çentiksiz ekranlarda 0'dır, yani orada görünüm aynı kalır. */
+.top{padding-top:calc(14px + env(safe-area-inset-top, 0px))}
+.mini{padding-top:calc(10px + env(safe-area-inset-top, 0px))}
+.lock{padding-top:calc(54px + env(safe-area-inset-top, 0px))}
+.shd,.cov,.dtd,[data-n]{cursor:pointer}
+button,[data-dt],[data-n],[data-c],.shd,.cov,.dtd{touch-action:manipulation}
