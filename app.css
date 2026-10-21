@@ -659,3 +659,6 @@ a.dl small{font-weight:500;color:var(--mut);font-size:12.5px}
 .lock{padding-top:calc(54px + env(safe-area-inset-top, 0px))}
 .shd,.cov,.dtd,[data-n]{cursor:pointer}
 button,[data-dt],[data-n],[data-c],.shd,.cov,.dtd{touch-action:manipulation}
+
+/* 0.10.6: Tanılama içindeki "Sorun bildir" düğmesi (nötr görünüm; yıkıcı eylem gibi kırmızı değil) */
+.sbl{display:block;width:100%;margin-top:12px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--surf);color:var(--tx);font:inherit;font-weight:650;font-size:14.5px;cursor:pointer;text-align:center;touch-action:manipulation}.sbl:active{transform:scale(.985)}

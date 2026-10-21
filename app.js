@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.10.5'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.10.6'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -149,6 +149,12 @@
     return true;
   }
   function nobetsiz(y) { var n = nobetim(y); return !n.liste.length && !(n.gelecek && n.gelecek.liste && n.gelecek.liste.length); }
+  // Panel "dersi var" dediği hâlde program gelmemiş (hiç yayınlanmamış ya da boş): sessizce "Okulun bugünü"ne düşme, sakin bir not göster.
+  function programBekliyor(y) { var k = kisisel(y, 'kimlik'); return !!(k && k.dersli === true) && (!programVar(y) || dersiz(y)); }
+  function programBekNotu(C) {
+    if (!programBekliyor(C.y)) return '';
+    return '<div class="cvs bek" role="note" style="--cv:var(--gold);cursor:default"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 8h.01"/></svg></span><span class="tx"><small>Ders programın</small><b>Henüz yayınlanmamış olabilir</b></span></div>';
+  }
   function programVar(y) { var p = kisisel(y, 'program'); return (p && p.matris && typeof p.matris === 'object') ? p : null; }
   function hucreAl(y, wd, no) { var p = programVar(y); if (!p) return null; var g = p.matris[String(wd)]; return g ? hucre(g[String(no)]) : null; }
   var DERS_TAM = { mat: 'Matematik', tur: 'Türkçe', fen: 'Fen Bilimleri', ing: 'İngilizce', sos: 'Sosyal Bilgiler', ita: 'T.C. İnkılap Tarihi ve Atatürkçülük', dkab: 'Din Kültürü ve Ahlak Bilgisi', muz: 'Müzik', bes: 'Beden Eğitimi ve Spor', gs: 'Görsel Sanatlar' };
@@ -802,7 +808,7 @@
     if (eskiMi(onbellek())) return damga(C) + '<div class="empty"><b>Bilgiler eski olduğu için gizlendi</b>Son güncelleme ' + A.ESKI_SAAT + ' saatten önce. İnternete bağlanınca otomatik yenilenir.</div>';
     if (y.yayinDurumu !== 'acik') return damga(C) + '<div class="empty"><b>Yayın şu an kapalı</b>Okul yönetimi açtığında bilgiler burada görünecek.</div>';
     var p = [dersiz(y) ? sAkis(C, 0, 'Okulun bugünü') : sGunum(C), sNobetci(C), sDoldurmaToplu(C), sDuyuru(C), sYaklasan(C), sPanoOzet(C)].join('');
-    return doldurmaSerit(C) + damga(C) + (p || '<div class="empty"><b>Bugün paylaşılan bir şey yok</b>Yeni bir duyuru ya da bilgi paylaşıldığında bu sayfada görünür.</div>');
+    return programBekNotu(C) + doldurmaSerit(C) + damga(C) + (p || '<div class="empty"><b>Bugün paylaşılan bir şey yok</b>Yeni bir duyuru ya da bilgi paylaşıldığında bu sayfada görünür.</div>');
   }
   function yayinKapali(C) { return !C.y || eskiMi(onbellek()) || C.y.yayinDurumu !== 'acik'; }
 
@@ -915,7 +921,7 @@
   }
   function t1HTML(C) {
     if (yayinKapali(C)) return '<div class="empty"><b>Bilgiler şu an gösterilemiyor</b>Bugün sekmesinden durumu görebilirsin.</div>';
-    if (PS === 0 && dersiz(C.y)) return gorevSatir(C) + bugunHatirlat(C) + (C.gb.tip === 'ders' ? sAkis(C, 0, 'Okulun bugünü') : '<div class="empty"><b>' + (C.gb.tip === 'hs' ? 'Hafta sonu' : 'Bugün okul tatil') + '</b>İyi dinlenmeler.</div>');
+    if (PS === 0 && dersiz(C.y)) return programBekNotu(C) + gorevSatir(C) + bugunHatirlat(C) + (C.gb.tip === 'ders' ? sAkis(C, 0, 'Okulun bugünü') : '<div class="empty"><b>' + (C.gb.tip === 'hs' ? 'Hafta sonu' : 'Bugün okul tatil') + '</b>İyi dinlenmeler.</div>');
     if (PS === 0) {
       var h = '', bg = C.gb.ds, ben = C.COV;
       var ilk = null; Object.keys(ben).forEach(function (no) { if (!ilk) ilk = ben[no]; });
@@ -934,7 +940,7 @@
         var nx = sonrakiOkul(C), c1 = nx ? hucreAl(C.y, nx.gb.wd, 1) : null;
         h += '<div class="empty"><b>' + (C.gb.tip === 'hs' ? 'Hafta sonu' : 'Bugün okul tatil') + '</b>' + (nx ? esc(nx.etiket) + ' dersler ' + esc(nx.ilk) + '\'da başlıyor' + (c1 ? '; ilk dersin ' + esc(c1.sinif) + ' sınıfında.' : '.') : '') + '</div>';
       } else h += '<div class="empty"><b>Ders saatleri henüz yayınlanmadı</b>Okul yönetimi paylaştığında burada görünür.</div>';
-      return gsat + h + khtml;
+      return programBekNotu(C) + gsat + h + khtml;
     }
     if (PS === 1) return programHTML(C);
     if (PS === 2) return nobetSekmesi(C);
@@ -1692,16 +1698,25 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     TAB = 4; PR = 1; WK = 0; $('scr').scrollTop = 0; render();
   }
   // Sorun olduğunda öğretmenin okuyup bildirebileceği kısa durum özeti (kişisel veri içermez)
+  function sorunBildir() {
+    var y = Y(), ad = (y && y.kisi && y.kisi.ad) || '—', o = onbellek();
+    var satir = [['Öğretmen', ad], ['Uygulama kodu', APP_SURUM], ['Son güncelleme', o ? saatStr(o.t) : '—'], ['Çalışma biçimi', (window.navigator.standalone === true || (window.matchMedia && matchMedia('(display-mode: standalone)').matches)) ? 'ana ekran uygulaması' : 'tarayıcı'], ['Cihaz', (navigator.userAgent.match(/\(([^)]*)\)/) || [0, '—'])[1]], ['Program', programVar(y) ? (dersiz(y) ? 'boş' : 'var') : 'gelmedi']];
+    var metin = 'Yaşar Doğu Öğretmen · sorun bildirimi\n' + satir.map(function (x) { return x[0] + ': ' + x[1]; }).join('\n') + '\n\nSorun: ';
+    var m = $('sblm'); function bilgi(t) { if (m) m.textContent = t; }
+    if (navigator.share) { navigator.share({ text: metin }).then(function () {}, function () {}); return; }
+    try { navigator.clipboard.writeText(metin).then(function () { bilgi('Mesaj kopyalandı. İdareye gönderirken sorunu sonuna yaz.'); }, function () { bilgi('Kopyalanamadı.'); }); } catch (e) { bilgi('Kopyalanamadı.'); }
+  }
   function tanilama() {
     var sw = ('serviceWorker' in navigator) ? (navigator.serviceWorker.controller ? 'etkin' : 'yok') : 'desteklenmiyor';
     var st = (window.navigator.standalone === true || (window.matchMedia && matchMedia('(display-mode: standalone)').matches)) ? 'ana ekran uygulaması' : 'tarayıcı';
     var satir = [['Uygulama kodu', APP_SURUM + (APP_SURUM !== A.SURUM ? ' (ayar dosyası ' + A.SURUM + ': eşleşmiyor)' : '')], ['Kazanım listesi', KZ_TANI.idx || 'henüz denenmedi'], ['Kazanım dosyası', KZ_TANI.dosya || 'henüz denenmedi'], ['Son ders eşleme', KZ_TANI.son || 'henüz denenmedi'], ['Çevrimdışı hizmet', sw], ['Çalışma biçimi', st]];
-    return '<details class="kzo"><summary>Tanılama (sorun olursa göster)</summary>' + satir.map(function (x) { return '<div class="kv"><span>' + esc(x[0]) + '</span><b style="font-size:13px;font-weight:600;text-align:right">' + esc(x[1]) + '</b></div>'; }).join('') + '</details>';
+    return '<details class="kzo"><summary>Tanılama (sorun olursa göster)</summary>' + satir.map(function (x) { return '<div class="kv"><span>' + esc(x[0]) + '</span><b style="font-size:13px;font-weight:600;text-align:right">' + esc(x[1]) + '</b></div>'; }).join('') + '<button class="sbl" id="sbl" type="button">Sorun bildir (mesajı kopyala / paylaş)</button><div class="mut" id="sblm" style="font-size:12.5px;margin-top:6px"></div></details>';
   }
   function ayarTikla(ev) {
     var t = ev.target, b;
     if (ev.currentTarget === $('sh') && !t.closest('button, input, textarea, select, a, label') && $('sh').scrollTop < 8 && ev.clientY - $('sh').getBoundingClientRect().top < 64) { kapat(); return; }
     if ((b = t.closest('[data-acd]'))) { var ak = b.getAttribute('data-acd'); AYOP[ak] = !AYOP[ak]; var par = b.parentElement; par.classList.toggle('open', !!AYOP[ak]); b.setAttribute('aria-expanded', !!AYOP[ak]); return; }
+    if ((b = t.closest('#sbl'))) { sorunBildir(); return; }
     if ((b = t.closest('#o_th button'))) { if (b.dataset.v === 'oto') sil(K.tema); else yaz(K.tema, b.dataset.v); tercihUygula(); ayarAc(); return; }
     if ((b = t.closest('#o_ac button'))) { if (b.dataset.v) yaz(K.ac, b.dataset.v); else sil(K.ac); tercihUygula(); ayarAc(); return; }
     if ((b = t.closest('#o_gv button'))) { yaz(K.gun, b.dataset.v); ayarAc(); render(); return; }
