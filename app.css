@@ -662,3 +662,34 @@ button,[data-dt],[data-n],[data-c],.shd,.cov,.dtd{touch-action:manipulation}
 
 /* 0.10.6: Tanılama içindeki "Sorun bildir" düğmesi (nötr görünüm; yıkıcı eylem gibi kırmızı değil) */
 .sbl{display:block;width:100%;margin-top:12px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--surf);color:var(--tx);font:inherit;font-weight:650;font-size:14.5px;cursor:pointer;text-align:center;touch-action:manipulation}.sbl:active{transform:scale(.985)}
+
+/* ===== Okul programı (idare / rehberlik) ===== */
+.okw{padding:14px 0 28px}
+.okseg{display:flex;gap:6px;margin:0 20px 10px;overflow-x:auto;scrollbar-width:none}.okseg::-webkit-scrollbar{display:none}
+.okseg button{flex:1 0 auto;position:relative;border:1.5px solid var(--line);background:none;color:var(--tx);font:inherit;font-size:13.5px;font-weight:650;padding:9px 14px;border-radius:12px;cursor:pointer;white-space:nowrap}
+.okseg button.on{border-color:var(--gold);background:var(--goldsoft);color:var(--goldt)}
+.okgun button{padding:8px 0;min-width:0}.okgun button i{position:absolute;top:5px;right:6px;width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.okt{overflow:auto;-webkit-overflow-scrolling:touch;margin:0;padding:0 20px 4px;max-width:100vw}
+.okta{border-collapse:separate;border-spacing:0;font-size:11.5px;width:max-content;min-width:100%}
+.okta th,.okta td{border-bottom:1px solid var(--line);border-right:1px solid var(--line);padding:7px 6px;text-align:center;vertical-align:middle;min-width:76px;max-width:96px;background:var(--surf);color:var(--tx)}
+.okta thead th{position:sticky;top:0;z-index:2;font-weight:700;font-size:12.5px;background:var(--paper);color:var(--tx)}
+.okta thead th small,.okta th.st small{display:block;font-size:10px;font-weight:550;color:var(--mut)}
+.okta .st{position:sticky;left:0;z-index:3;min-width:58px;max-width:70px;background:var(--paper);font-weight:700;text-align:center}
+.okta thead .st{z-index:4}
+.okta .st button{border:0;background:none;color:var(--goldt);font:inherit;font-weight:750;font-size:13px;padding:2px 4px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.okta td b{display:block;font-weight:650;font-size:11.5px;line-height:1.2;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.okta td small{display:block;margin-top:2px;font-size:10px;color:var(--mut);line-height:1.2}
+.okta td.bos{color:var(--mut)}
+.okta td.dold{background:color-mix(in srgb,var(--teal) 16%,var(--surf))}.okta td.dold small{color:var(--teal)}
+.okta th.now,.okta td.now{background:var(--goldsoft);box-shadow:inset 0 0 0 1.5px var(--gold);color:var(--tx)}
+.okta thead th.now{background:var(--gold);color:#fff;box-shadow:none}.okta thead th.now small{color:rgba(255,255,255,.85)}
+.okta em{display:block;font-style:normal;font-size:9.5px;font-weight:750;letter-spacing:.3px;text-transform:uppercase;color:var(--goldt);margin-top:2px}
+.okta thead th.now em{color:#fff}
+.okta thead th.tod{color:var(--goldt)}
+.okh td{min-width:92px;max-width:none}
+.oknot{margin:10px 20px 0;font-size:12.5px;line-height:1.45;color:var(--mut)}
+.okgeri{margin:0 20px 6px;border:0;background:none;color:var(--goldt);font:inherit;font-size:14px;font-weight:650;padding:6px 0;cursor:pointer}
+.okbas{margin:0 20px 12px}.okbas b{display:block;font-size:22px;font-weight:600}.okbas span{font-size:13.5px;color:var(--mut)}
+.okl{padding:0 20px}.rw.okr{position:relative;padding-right:22px;cursor:pointer}
+.rw.okr::after{content:"";position:absolute;right:2px;top:50%;width:7px;height:7px;margin-top:-5px;border-right:2px solid var(--mut);border-top:2px solid var(--mut);transform:rotate(45deg);opacity:.5}
+.rw.okr .z{margin-right:6px}.okn{font-style:normal;font-size:12px;font-weight:700;color:var(--goldt);background:var(--goldsoft);border-radius:8px;padding:3px 8px}

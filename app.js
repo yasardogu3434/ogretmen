@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.10.6'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.11.0'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -600,10 +600,18 @@
     });
     return h + '</div></div>';
   }
+  // Haftalık yayında 'gunler' (tarih+liste) vardır: gün tarihe göre seçilir. Eski biçim (yalnız bugünün tarih/liste alanı) da çalışır.
+  function nobetListe(y, ds) {
+    var nb = ortak(y, 'nobetciler'); if (!nb) return [];
+    var l = null;
+    if (Array.isArray(nb.gunler)) { for (var i = 0; i < nb.gunler.length; i++) { var g = nb.gunler[i]; if (g && g.tarih === ds && Array.isArray(g.liste)) { l = g.liste; break; } } }
+    if (!l && nb.tarih === ds && Array.isArray(nb.liste)) l = nb.liste;
+    return (l || []).filter(function (k) { return k && typeof k.ad === 'string' && k.ad; });
+  }
   function sNobetci(C) {
-    var nb = ortak(C.y, 'nobetciler');
-    if (!nb || nb.tarih !== C.gb.ds || !Array.isArray(nb.liste) || !nb.liste.length || C.gb.tip !== 'ders') return '';
-    return '<div class="sec" data-k="nobet">' + secH('Bugün nöbetçi', nb.liste.length + ' kişi') + '<div class="rows">' + nb.liste.map(function (k, ki) {
+    var nbl = nobetListe(C.y, C.gb.ds);
+    if (!nbl.length || C.gb.tip !== 'ders') return '';
+    return '<div class="sec" data-k="nobet">' + secH('Bugün nöbetçi', nbl.length + ' kişi') + '<div class="rows">' + nbl.map(function (k, ki) {
       return '<div class="rw' + (C.ben && norm(k.ad) === C.ben ? ' me' : '') + '" data-dt="nb:' + ki + '"><div class="a"><b>' + esc(k.ad) + '</b></div><span class="z">' + esc(k.yer || '') + '</span></div>';
     }).join('') + '</div></div>';
   }
@@ -883,7 +891,141 @@
       }).join('') + '</div></div></div>';
     }).join('') + '</div>';
   }
-  function t4HTML(C) { return PR === 0 ? gorevSayfa(C) : ayarHTML(); }
+  // ================= OKUL PROGRAMI (yalnız idare / rehberlik: kişisel 'okulprogram' verisi varsa) =================
+  // Veri: {dersler:[ad], ogretmenler:[ad], siniflar:[{ad, p:[gün][saat] -> 0 | [dersIx, ogrIx|-1, ortakIx?]}]}. Gelmeyen öğretmen/sebep verisi hiç gelmez.
+  var OK = { kd: 0, g: -1, s: -1, o: -1 }, OKC = null, OKGUN = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum'], OKGUNT = ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma'];
+  function okulVeri(y) {
+    var d = kisisel(y, 'okulprogram');
+    return (d && Array.isArray(d.siniflar) && Array.isArray(d.dersler) && Array.isArray(d.ogretmenler) && d.siniflar.length) ? d : null;
+  }
+  function okHuc(d, sn, gi, hi) {
+    var c = sn && sn.p && sn.p[gi] && sn.p[gi][hi]; if (!Array.isArray(c)) return null;
+    var ders = d.dersler[c[0]]; if (ders == null) return null;
+    var o1 = c[1] >= 0 ? d.ogretmenler[c[1]] : null, o2 = (c.length > 2 && c[2] >= 0) ? d.ogretmenler[c[2]] : null;
+    return { ders: String(ders), ogr: o1 == null ? '' : String(o1), co: o2 == null ? '' : String(o2) };
+  }
+  function okSaatSay(d) {
+    var m = 0; d.siniflar.forEach(function (sn) { if (sn && Array.isArray(sn.p)) sn.p.forEach(function (g) { if (Array.isArray(g) && g.length > m) m = g.length; }); });
+    return Math.min(m, 12);
+  }
+  function okOgrDizin(d) {
+    if (OKC && OKC.d === d) return OKC;
+    var m = Object.create(null);
+    d.ogretmenler.forEach(function (n) { m[String(n)] = []; });
+    d.siniflar.forEach(function (sn) {
+      if (!sn) return;
+      for (var gi = 0; gi < 5; gi++) for (var hi = 0; hi < 12; hi++) {
+        var h = okHuc(d, sn, gi, hi); if (!h) continue;
+        [h.ogr, h.co].forEach(function (n) { if (n && m[n]) { (m[n][gi] = m[n][gi] || [])[hi] = { sinif: String(sn.ad), ders: h.ders }; } });
+      }
+    });
+    OKC = { d: d, m: m, adlar: Object.keys(m).sort(function (a, b) { return a.localeCompare(b, 'tr'); }) };
+    return OKC;
+  }
+  function okKisa(n) { var p = String(n || '').trim().split(/\s+/).filter(Boolean); return p.length < 2 ? (p[0] || '') : p[0].charAt(0) + '. ' + p[p.length - 1]; }
+  function okAnh(s) { return String(s || '').toLocaleUpperCase('tr-TR').replace(/[^A-Z0-9ÇĞİÖŞÜ]/g, ''); }
+  function okZaman(C) {
+    var gi = (C.gb.tip === 'ders' && C.gb.wd >= 1 && C.gb.wd <= 5) ? C.gb.wd - 1 : -1, hi = -1;
+    if (gi >= 0) C.gb.ders.forEach(function (r, i) { if (mdk(r[1]) * 60 <= C.T && C.T < mdk(r[2]) * 60) hi = i; });
+    return { gi: gi, hi: hi };
+  }
+  function okSaatler(C) { var r = ortak(C.y, 'ritim'), l = (C.gb.tip === 'ders' && C.gb.ders.length) ? C.gb.ders : (r ? dersListe(r.ders) : []); return l; }
+  function okGunSec(C) { if (OK.g >= 0 && OK.g < 5) return OK.g; var g = (C.d.getDay() + 6) % 7; return g < 5 ? g : 0; }
+  function okThead(C, n, z, gi, bos) {
+    var sa = okSaatler(C), h = '<tr><th class="st">' + (bos || '') + '</th>';
+    for (var i = 0; i < n; i++) {
+      var now = z.gi === gi && z.hi === i;
+      h += '<th class="' + (now ? 'now' : '') + '">' + (i + 1) + '<small>' + (sa[i] ? esc(sa[i][1]) : '') + '</small>' + (now ? '<em>şimdi</em>' : '') + '</th>';
+    }
+    return h + '</tr>';
+  }
+  function okSekme(etk, liste, secili) {
+    return '<div class="okseg">' + liste.map(function (x) { return '<button type="button" data-ok="' + etk + ':' + x[0] + '"' + (x[0] === secili ? ' class="on"' : '') + '>' + esc(x[1]) + '</button>'; }).join('') + '</div>';
+  }
+  function okGunSeg(C, g, z) {
+    return '<div class="okseg okgun">' + OKGUN.map(function (a, i) { return '<button type="button" data-ok="g:' + i + '"' + (i === g ? ' class="on"' : '') + '>' + a + (z.gi === i ? '<i></i>' : '') + '</button>'; }).join('') + '</div>';
+  }
+  function okGeri(ad, alt) { return '<button type="button" class="okgeri" data-ok="b"><span aria-hidden="true">‹</span> Listeye dön</button><div class="okbas"><b class="d">' + esc(ad) + '</b><span>' + esc(alt) + '</span></div>'; }
+  function okSubeler(C, d, z) {
+    var kds = []; d.siniflar.forEach(function (sn) { var k = parseInt(sn && sn.ad, 10) || 0; if (kds.indexOf(k) < 0) kds.push(k); }); kds.sort(function (a, b) { return a - b; });
+    if (kds.indexOf(OK.kd) < 0) OK.kd = kds[0];
+    var g = okGunSec(C), n = okSaatler(C).length || okSaatSay(d), dold = {}, bugun = (z.gi === g);
+    if (bugun) topluDoldurma(C.y, C.gb.ds).forEach(function (x) { dold[x.saat + '|' + okAnh(x.sinif)] = x; });
+    var h = '<div class="okw">' + okSekme('k', kds.map(function (k) { return [k, k ? k + '. sınıf' : 'Diğer']; }), OK.kd) + okGunSeg(C, g, z) + '<div class="okt"><table class="okta"><thead>' + okThead(C, okSaatSay(d) || n, z, g, 'Şube') + '</thead><tbody>';
+    var say = okSaatSay(d);
+    d.siniflar.forEach(function (sn, ix) {
+      if (!sn || (parseInt(sn.ad, 10) || 0) !== OK.kd) return;
+      h += '<tr><th class="st"><button type="button" data-ok="s:' + ix + '">' + esc(sn.ad) + '</button></th>';
+      for (var i = 0; i < say; i++) {
+        var c = okHuc(d, sn, g, i), now = z.gi === g && z.hi === i, dd = dold[(i + 1) + '|' + okAnh(sn.ad)];
+        if (dd) h += '<td class="dold' + (now ? ' now' : '') + '"><b>' + esc(okKisa(dd.giren)) + '</b><small>' + esc(dd.yerine ? dd.yerine + ' yerine' : 'Ders doldurma') + '</small></td>';
+        else if (c) h += '<td' + (now ? ' class="now"' : '') + '><b>' + esc(c.ders) + '</b><small>' + esc(okKisa(c.ogr)) + '</small></td>';
+        else h += '<td class="bos' + (now ? ' now' : '') + '">·</td>';
+      }
+      h += '</tr>';
+    });
+    return h + '</tbody></table></div>' + '<p class="oknot">' + (bugun && z.hi >= 0 ? 'Altın renkli sütun şu an süren derstir. ' : '') + 'Yeşil hücre: ders doldurma. Şube adına dokununca haftalık programı açılır.</p></div>';
+  }
+  function okSubeHaf(C, d, z) {
+    var sn = d.siniflar[OK.s], say = okSaatSay(d), sa = okSaatler(C);
+    var h = '<div class="okw">' + okGeri(String(sn.ad), 'Haftalık ders programı') + '<div class="okt"><table class="okta okh"><thead><tr><th class="st">Saat</th>' + OKGUN.map(function (a, i) { return '<th class="' + (z.gi === i ? 'tod' : '') + '">' + a + '</th>'; }).join('') + '</tr></thead><tbody>';
+    for (var i = 0; i < say; i++) {
+      h += '<tr><th class="st">' + (i + 1) + '<small>' + (sa[i] ? esc(sa[i][1]) : '') + '</small></th>';
+      for (var g = 0; g < 5; g++) {
+        var c = okHuc(d, sn, g, i), now = z.gi === g && z.hi === i;
+        h += c ? '<td' + (now ? ' class="now"' : '') + '><b>' + esc(c.ders) + '</b><small>' + esc(okKisa(c.ogr)) + (c.co ? ' · ' + esc(okKisa(c.co)) : '') + '</small>' + (now ? '<em>şimdi</em>' : '') + '</td>' : '<td class="bos' + (now ? ' now' : '') + '">·' + (now ? '<em>şimdi</em>' : '') + '</td>';
+      }
+      h += '</tr>';
+    }
+    return h + '</tbody></table></div></div>';
+  }
+  function okOgrListe(C, d, z) {
+    var X = okOgrDizin(d);
+    var h = '<div class="okw"><div class="rows okl">';
+    X.adlar.forEach(function (n, ix) {
+      var m = X.m[n], top = 0, kim = '';
+      m.forEach(function (g) { if (g) g.forEach(function (c) { if (c) top++; }); });
+      if (z.gi >= 0 && z.hi >= 0 && m[z.gi] && m[z.gi][z.hi]) kim = m[z.gi][z.hi].sinif;
+      h += '<div class="rw okr" data-ok="o:' + ix + '"><div class="a"><b>' + esc(n) + '</b><span class="s">' + top + ' ders/hafta</span></div><span class="z">' + (kim ? '<i class="okn">şimdi ' + esc(kim) + '</i>' : '') + '</span></div>';
+    });
+    return h + '</div></div>';
+  }
+  function okOgrHaf(C, d, z) {
+    var X = okOgrDizin(d), n = X.adlar[OK.o], m = X.m[n] || [], say = okSaatSay(d), sa = okSaatler(C), top = 0;
+    m.forEach(function (g) { if (g) g.forEach(function (c) { if (c) top++; }); });
+    var h = '<div class="okw">' + okGeri(n, top + ' ders/hafta') + '<div class="okt"><table class="okta okh"><thead><tr><th class="st">Saat</th>' + OKGUN.map(function (a, i) { return '<th class="' + (z.gi === i ? 'tod' : '') + '">' + a + '</th>'; }).join('') + '</tr></thead><tbody>';
+    for (var i = 0; i < say; i++) {
+      h += '<tr><th class="st">' + (i + 1) + '<small>' + (sa[i] ? esc(sa[i][1]) : '') + '</small></th>';
+      for (var g = 0; g < 5; g++) {
+        var c = m[g] && m[g][i], now = z.gi === g && z.hi === i;
+        h += c ? '<td' + (now ? ' class="now"' : '') + '><b>' + esc(c.sinif) + '</b><small>' + esc(c.ders) + '</small>' + (now ? '<em>şimdi</em>' : '') + '</td>' : '<td class="bos' + (now ? ' now' : '') + '">·' + (now ? '<em>şimdi</em>' : '') + '</td>';
+      }
+      h += '</tr>';
+    }
+    return h + '</tbody></table></div></div>';
+  }
+  function okulSayfa(C) {
+    var d = okulVeri(C.y);
+    if (!d) return '<div class="empty"><b>Okul programı yok</b>Okul yönetimi paylaştığında burada görünür.</div>';
+    var z = okZaman(C), ic;
+    if (PR === 2) ic = (OK.s >= 0 && d.siniflar[OK.s]) ? okSubeHaf(C, d, z) : okSubeler(C, d, z);
+    else ic = (OK.o >= 0 && okOgrDizin(d).adlar[OK.o] != null) ? okOgrHaf(C, d, z) : okOgrListe(C, d, z);
+    return '<div id="okl" data-k="' + z.gi + ':' + z.hi + ':' + C.gb.ds + '">' + ic + '</div>';
+  }
+  function okulTick(C) {
+    if (TAB !== 4 || (PR !== 2 && PR !== 3)) return;
+    var e = $('okl'); if (!e) return;
+    var z = okZaman(C); if (e.getAttribute('data-k') === z.gi + ':' + z.hi + ':' + C.gb.ds) return;
+    var w = document.querySelector('#okl .okt'), sl = w ? w.scrollLeft : 0;
+    render(); w = document.querySelector('#okl .okt'); if (w) w.scrollLeft = sl;
+  }
+  function okulTikla(b) {
+    var v = String(b.getAttribute('data-ok')).split(':'), k = v[0], n = +v[1];
+    if (k === 'k') OK.kd = n; else if (k === 'g') OK.g = n; else if (k === 's') { OK.s = n; $('scr').scrollTop = 0; } else if (k === 'o') { OK.o = n; $('scr').scrollTop = 0; } else if (k === 'b') { OK.s = -1; OK.o = -1; $('scr').scrollTop = 0; } else return;
+    render();
+  }
+
+  function t4HTML(C) { return PR === 0 ? gorevSayfa(C) : (PR === 2 || PR === 3) ? okulSayfa(C) : ayarHTML(); }
   function programHTML(C) {
     var y = C.y, p = programVar(y);
     if (!p) return '<div class="empty"><b>Programın henüz yayınlanmadı</b>Okul yönetimi ders programını paylaştığında burada görünür.</div>';
@@ -1008,7 +1150,9 @@
     }
     if (TAB === 4) {
       var ad4 = (y && y.kisi && y.kisi.ad) || '', kim4 = kisisel(y, 'kimlik'), gv4 = kurulListe(y, C.gb.ds).length > 0 && !yayinKapali(C);
-      if (!gv4) PR = 1;
+      var okO = !!okulVeri(y);
+      if ((PR === 2 || PR === 3) && !okO) PR = gv4 ? 0 : 1;
+      if (!gv4 && PR === 0) PR = 1;
       return logoBar(C, 'Profil') + '<div class="who"><div class="av">' + esc(ilkHarfler(ad4)) + '</div><div><b class="d" style="font-size:19px">' + esc(ad4) + '</b><span>' + esc((kim4 && kim4.brans) || '') + '</span></div></div>'
         + '<div class="ptabs" id="pf">' + [['Görevlerim', 0], ['Ayarlar', 1]].filter(function (x) { return x[1] === 1 || gv4; }).map(function (x) { return '<button type="button" data-p="' + x[1] + '"' + (PR === x[1] ? ' class="on"' : '') + '>' + x[0] + '</button>'; }).join('') + '</div>';
     }
@@ -1234,6 +1378,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     var C = baglam();
     if (C.gb.ds !== CTX.gb.ds && !zorla) { render(); return; }
     CTX = C;
+    okulTick(C);
     if (TAB === 0 || (TAB === 1 && PS === 0)) {
       var tp = $('top'), hh = topHTML(C), k1 = hh.replace(/-?\d+\.\d+s/g, ''), k0 = (tp.dataset.h || '').replace(/-?\d+\.\d+s/g, '');
       // Geçiş animasyonu sınıfları (fx/fxs/fxr) yalnız ilk çizimde bulunur; sonraki turda yok diye ekran yeniden çizilip animasyon yarıda kesilmesin.
@@ -1323,8 +1468,9 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     if (t.closest('#tb')) { temaDegis(); return; }
     if (t.closest('#ob')) { cekAc(); return; }
     if (t.closest('#cov')) { cekKapat(); return; }
-    if ((b = t.closest('[data-cg]'))) { var cg = b.getAttribute('data-cg').split(','); cekKapat(); TAB = +cg[0]; PS = TAB === 1 ? +cg[1] : 0; PR = TAB === 4 ? +cg[1] : 0; if (cg[2] === 'hesap') AYOP.hes = true; WK = 0; $('scr').scrollTop = 0; render(); return; }
-    if ((b = t.closest('#pf button'))) { PR = +b.dataset.p; render(); return; }
+    if ((b = t.closest('[data-cg]'))) { var cg = b.getAttribute('data-cg').split(','); cekKapat(); TAB = +cg[0]; PS = TAB === 1 ? +cg[1] : 0; PR = TAB === 4 ? +cg[1] : 0; OK.s = -1; OK.o = -1; if (cg[2] === 'hesap') AYOP.hes = true; WK = 0; $('scr').scrollTop = 0; render(); return; }
+    if ((b = t.closest('#pf button'))) { PR = +b.dataset.p; OK.s = -1; OK.o = -1; render(); return; }
+    if ((b = t.closest('[data-ok]'))) { okulTikla(b); return; }
     if ((b = t.closest('[data-gck]'))) { var gk = b.getAttribute('data-gck'); GAC[gk] = !GAC[gk]; var gp = b.parentElement; gp.classList.toggle('open', !!GAC[gk]); b.setAttribute('aria-expanded', !!GAC[gk]); return; }
     if (t.closest('#yn')) { yenile(true); return; }
     if ((b = t.closest('#pt button'))) { PS = +b.dataset.p; render(); return; }
@@ -1580,7 +1726,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     dtGoster(GUN[d.getDay()] + ', ' + gunAy(ds) + (bugun ? ' · bugün' : ''), h);
   }
   function dtNobetci(i) {
-    var C = CTX || baglam(), nb = ortak(C.y, 'nobetciler'); if (!nb || !Array.isArray(nb.liste) || !nb.liste[i]) return;
+    var C = CTX || baglam(), nb = { liste: nobetListe(C.y, C.gb.ds) }; if (!nb.liste[i]) return;
     var k = nb.liste[i];
     var h = '<div class="dbig d">' + esc(k.yer || '') + '</div><div class="dsub">' + esc(k.ad) + (C.ben && norm(k.ad) === C.ben ? ' · sen' : '') + '</div><div class="sec" style="margin-top:22px">' + secH('Bugün nöbetçi', nb.liste.length + ' kişi') + '<div class="rows">';
     nb.liste.forEach(function (x, j) { h += dtSatir('nb:' + j, '', x.ad, '', x.yer || '', (j === i ? 'sel' : '')); });
@@ -1656,9 +1802,11 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     };
     function it(ik, et, t, p, ok, ek) { if (ok === false) return ''; var on = (TAB === t && (t === 1 ? PS === p : t === 4 ? PR === p : true)) && !ek; return '<button type="button" data-cg="' + t + ',' + p + (ek ? ',' + ek : '') + '"' + (on ? ' class="on"' : '') + '><svg viewBox="0 0 24 24">' + IK[ik] + '</svg>' + et + '</button>'; }
     var gun = it('ana', 'Ana ekran', 0, 0) + it('bug', dz ? 'Okulun bugünü' : 'Bugünkü derslerim', 1, 0) + it('prg', 'Programım', 1, 1, !dz) + it('nob', 'Nöbetlerim', 1, 2, !ns) + it('tak', 'Takvim', 2, 0, gor) + it('pan', 'Pano', 3, 0, gor && pano);
+    var okOk = !!okulVeri(y);
     var kis = it('gor', 'Görevlerim', 4, 0, gv) + it('not', 'Notlarım', 1, 3);
+    var okl = okOk ? '<div class="cgr">OKUL</div>' + it('prg', 'Şube programları', 4, 2) + it('hes', 'Öğretmenler', 4, 3) : '';
     return '<div class="cpr"><div class="av">' + esc(ilkHarfler(ad)) + '</div><b>' + esc(ad || 'Öğretmen') + '</b><span>' + esc((kim && kim.brans) || (y && y.okul) || '') + '</span></div>'
-      + '<div class="clst"><div class="cgr">GÜNLÜK</div>' + gun + '<div class="cgr">KİŞİSEL</div>' + kis + '</div>'
+      + '<div class="clst"><div class="cgr">GÜNLÜK</div>' + gun + '<div class="cgr">KİŞİSEL</div>' + kis + okl + '</div>'
       + '<div class="cbt">' + it('ayr', 'Ayarlar', 4, 1) + it('hes', 'Hesap', 4, 1, true, 'hesap') + '</div>';
   }
   function cekAc() { var C = CTX || baglam(); $('cek').innerHTML = cekHTML(C); $('cek').classList.add('on'); $('cov').classList.add('on'); }
