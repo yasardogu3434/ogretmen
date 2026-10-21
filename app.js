@@ -3,8 +3,8 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.11.1'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
-  var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi' };
+  var APP_SURUM = '0.12.0'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
     kod: 'Kişisel kod hatalı. Tekrar dene.',
@@ -1059,7 +1059,10 @@
     return '<div class="stamp"><i></i>Yalnız bu telefonda saklanır, kimse görmez</div>' + (l.length ? '<div class="sec">' + secH('Notların', l.length + ' not') + '<div class="rows">' + l.map(function (n) {
       return '<div class="rw" data-n="' + esc(n.id) + '"><div class="a"><b>' + esc(n.t) + '</b><span class="s">' + esc(hucreAdi(C.y, n.k)) + (n.w ? ', her hafta' : '') + '</span></div><span class="z">' + (n.d ? esc(gunAyK(n.d)) + (n.tm ? ', ' + esc(n.tm) : '') : '') + '</span></div>';
     }).join('') + '</div></div>' : '<div class="empty"><b>Henüz notun yok</b>Ders programında bir derse dokunarak ya da aşağıdaki düğmeyle not ekleyebilirsin.</div>')
-      + '<button class="addn" id="addn" type="button">Yeni not ekle</button><button class="lk" id="bk" type="button" style="margin-top:14px">Notlarımı yedekle</button><div class="nerr" id="bkm"></div>';
+      + '<button class="addn" id="addn" type="button">Yeni not ekle</button>'
+      + (l.length ? '<button class="lk" id="nall" type="button" style="display:block;margin-top:14px">Tüm notlarımı telefondaki notlara gönder</button>' : '')
+      + '<button class="lk" id="bk" type="button" style="display:block;margin-top:10px">Notlarımı ve işaretlerimi yedekle</button><div class="nerr" id="bkm"></div>'
+      + '<div class="note warn"><b>Yedek almayı unutma</b>Notların ve “işlendi” işaretlerin bu telefonun hafızasında durur. Telefonu değiştirirsen, tarayıcı verilerini silersen ya da uygulamayı kaldırırsan kaybolur. Ara sıra yedek almanı öneririz.<button class="lk" id="vgit" type="button" style="display:block;margin:8px 0 0">Yedekten geri yükle ve ayrıntılar</button></div>';
   }
   function t1HTML(C) {
     if (yayinKapali(C)) return '<div class="empty"><b>Bilgiler şu an gösterilemiyor</b>Bugün sekmesinden durumu görebilirsin.</div>';
@@ -1486,14 +1489,11 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     if ((b = t.closest('#t1 [data-c]'))) { dtHucre(b.dataset.c); return; }
     if ((b = t.closest('#t1 [data-n]'))) { notAc(null, b.dataset.n); return; }
     if (t.closest('#addn')) { notAc(null, null, 1); return; }
-    if (t.closest('#bk')) { yedekle(); return; }
+    if (t.closest('#bk')) { yedekPaylas('bkm'); return; }
+    if (t.closest('#nall')) { tumNotlariGonder(); return; }
+    if (t.closest('#vgit')) { AYOP.ver = true; ayarAc(); return; }
     if (t.closest('#shd')) { kapat(); return; }
   });
-  function yedekle() {
-    var m = $('bkm'), txt = JSON.stringify(NT);
-    function tamam() { m.style.color = 'var(--teal)'; m.textContent = 'Yedek kopyalandı. Bir yere yapıştırıp sakla.'; }
-    try { navigator.clipboard.writeText(txt).then(tamam, function () { m.textContent = 'Kopyalanamadı.'; }); } catch (e) { m.textContent = 'Kopyalanamadı.'; }
-  }
   $('scr').addEventListener('scroll', kaymaDurumu, { passive: true });
   document.addEventListener('scroll', function (e) { var p = e.target; if (p && p.id === 'pano') { var i = Math.round(p.scrollLeft / (p.firstElementChild ? p.firstElementChild.offsetWidth : 1)); [].forEach.call(document.querySelectorAll('#seg i'), function (d, j) { d.classList.toggle('on', j === i); }); } }, true);
 
@@ -1840,7 +1840,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
       + '<h4>Ana ekranda göster</h4>' + TOG.map(function (x) { return '<div class="tg' + (GIZLE[x[0]] ? '' : ' on') + '" data-k="' + x[0] + '"><span>' + x[1] + '</span><i></i></div>'; }).join('');
     var hesap = '<div class="kv"><span>Öğretmen</span><b>' + esc((y && y.kisi && y.kisi.ad) || '—') + '</b></div><div class="kv"><span>Okul</span><b>' + esc((y && y.okul) || '—') + '</b></div><div class="kv"><span>Son güncelleme</span><b>' + (o ? esc(saatStr(o.t)) : '—') + '</b></div><div class="kv"><span>Sürüm</span><b>' + esc(A.SURUM) + '</b></div>'
       + '<button class="fin2" id="forget" type="button">Bu cihazdan çık</button>';
-    return '<div class="ayw">' + ayAc('gor', 'Görünüm', tema) + ayAc('ana', 'Ana ekran', ana) + ayAc('hes', 'Hesap', hesap) + ayAc('tan', 'Tanılama', tanilama()) + '</div>';
+    return '<div class="ayw">' + ayAc('gor', 'Görünüm', tema) + ayAc('ana', 'Ana ekran', ana) + ayAc('hes', 'Hesap', hesap) + ayAc('ver', 'Verilerim', verilerimHTML()) + ayAc('tan', 'Tanılama', tanilama()) + ayAc('hak', 'Hakkında', hakkindaHTML()) + '</div>';
   }
   function ayarAc() {
     if (TAB === 4 && PR === 1) { render(); return; }
@@ -1866,6 +1866,10 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     if (ev.currentTarget === $('sh') && !t.closest('button, input, textarea, select, a, label') && $('sh').scrollTop < 8 && ev.clientY - $('sh').getBoundingClientRect().top < 64) { kapat(); return; }
     if ((b = t.closest('[data-acd]'))) { var ak = b.getAttribute('data-acd'); AYOP[ak] = !AYOP[ak]; var par = b.parentElement; par.classList.toggle('open', !!AYOP[ak]); b.setAttribute('aria-expanded', !!AYOP[ak]); return; }
     if ((b = t.closest('#sbl'))) { sorunBildir(); return; }
+    if (t.closest('#klvac')) { klvAyardan(); return; }
+    if (t.closest('#vpay')) { yedekPaylas('vmsg'); return; }
+    if (t.closest('#vkop')) { yedekKopyala('vmsg'); return; }
+    if (t.closest('#vger')) { yedektenYukle(); return; }
     if ((b = t.closest('#o_th button'))) { if (b.dataset.v === 'oto') sil(K.tema); else yaz(K.tema, b.dataset.v); tercihUygula(); ayarAc(); return; }
     if ((b = t.closest('#o_ac button'))) { if (b.dataset.v) yaz(K.ac, b.dataset.v); else sil(K.ac); tercihUygula(); ayarAc(); return; }
     if ((b = t.closest('#o_gv button'))) { yaz(K.gun, b.dataset.v); ayarAc(); render(); return; }
@@ -1888,7 +1892,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     $('sh').classList.remove('on');
     $('ns').innerHTML = '<h3>' + (ex ? 'Notu düzenle' : 'Yeni not') + '</h3><div class="stamp" style="margin-top:0" id="nad"></div><textarea id="nt" placeholder="Notunu yaz" maxlength="400"></textarea><h4>Hatırlatma (isteğe bağlı)</h4><div class="dtr"><input type="date" id="nd"><input type="time" id="ntm"></div>'
       + (ed.k ? '<div class="tg' + (ed.w ? ' on' : '') + '" id="nw"><span>Her hafta bu derste</span><i></i></div>' : '')
-      + '<div class="nerr" id="nerr"></div><button class="fin" id="nsave" type="button">Kaydet</button><button class="fin3" id="ncal" type="button">Takvime ekle</button>' + (ex ? '<button class="fin2" id="ndel" type="button">Sil</button>' : '') + '<div class="stamp"><i></i>Yalnız bu telefonda saklanır</div>';
+      + '<div class="nerr" id="nerr"></div><button class="fin" id="nsave" type="button">Kaydet</button><button class="fin3" id="ncal" type="button">Takvime ekle</button><button class="fin3" id="nshare" type="button">Notlara gönder</button>' + (ex ? '<button class="fin2" id="ndel" type="button">Sil</button>' : '') + '<div class="stamp"><i></i>Yalnız bu telefonda saklanır</div>';
     $('nad').textContent = hucreAdi(C.y, ed.k); $('nt').value = ed.t; $('nd').value = ed.d || ''; $('ntm').value = ed.tm || '';
     var w = $('nw'); if (w) w.onclick = function () { w.classList.toggle('on'); };
     function oku2() { return { id: ex ? ed.id : Date.now(), k: ed.k, t: $('nt').value.trim(), d: $('nd').value, tm: $('ntm').value, w: !!(w && w.classList.contains('on')) }; }
@@ -1906,7 +1910,136 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
       var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' })); a.download = 'hatirlatma.ics'; document.body.appendChild(a); a.click(); a.remove();
       $('nerr').style.color = 'var(--teal)'; $('nerr').textContent = 'Takvim dosyası indi. Açınca telefonun takvimine eklenir.';
     };
+    $('nshare').onclick = function () {
+      var n = oku2(); if (!n.t) { $('nerr').textContent = 'Önce notunu yaz.'; return; }
+      $('nerr').style.color = 'var(--teal)'; metniGonder(notMetni(n, C), 'Not', 'nerr', 'Not kopyalandı. Telefonundaki not uygulamasına yapıştırabilirsin.');
+    };
     $('ns').classList.add('on'); $('shd').classList.add('on');
+  }
+
+  // ================= BAŞLARKEN, BİLGİLENDİRME, VERİLERİM =================
+  // Bilgilendirme metni değişirse BILGI_SURUM artırılır; öğretmen yeni metni bir kez daha onaylar.
+  var BILGI_SURUM = 'b1';
+  var BILGI_PILOT = 'Yaşar Doğu Öğretmen, öğretmenlerimizin günlük işlerini kolaylaştırmak ve eğitim-öğretim ortamının kalitesine katkı sağlamak amacıyla hazırlanmış bir pilot uygulamadır. Kusursuzluk iddiası taşımaz; sade ve öğretmen dostu bir yardımcı olmayı hedefler. Henüz eksikleri bulunmaktadır ve sizlerin geri bildirimleriyle gelişmeye devam edecektir. Hiçbir kâr amacı gütmez, ücretsizdir ve yalnızca okulumuzun öğretmenleri için hazırlanmıştır.';
+  var BILGI_PILOT2 = 'Karşılaştığınız sorunları ve önerilerinizi Ayarlar › Tanılama › Sorun bildir bölümünden iletebilirsiniz.';
+  var BILGI_MADDE = [
+    'Yalnızca okul yönetiminin yayımladığı bilgiler gösterilir: ad-soyad, ders programı, nöbet ve görevlendirmeler, duyurular. Bu bilgiler okulun kendi Google hesabında tutulur ve okul kodu ile kişisel kodunuzla açılır.',
+    'Kodlarınız sunucuda düz metin olarak değil, geri döndürülemeyen şifrelenmiş (karma) biçimde saklanır.',
+    'Notlarınız ve “işlendi” işaretleriniz yalnızca bu telefonda saklanır; okul yönetimi dahil kimseye gönderilmez.',
+    'Uygulamada reklam, takip ya da istatistik aracı bulunmaz. Bilgileriniz üçüncü kişilerle paylaşılmaz.',
+    'Yanlış kod denemelerini sınırlamak için telefonunuza ait rastgele bir numara kullanılır. Bu numara kimliğinizi göstermez ve sunucuda yalnızca kısa süre (yaklaşık 10 dakika) tutulur.',
+    'Bağlantı sırasında uygulamayı ve bilgileri sunan hizmetler (GitHub, Google) olağan teknik kayıtları (örneğin IP adresi) tutabilir.'
+  ];
+  function bilgiHTML() {
+    return '<div class="bl"><h2>Pilot uygulama</h2><p>' + esc(BILGI_PILOT) + '</p><p>' + esc(BILGI_PILOT2) + '</p><h2>Gizlilik ve verileriniz</h2><ul>' + BILGI_MADDE.map(function (m) { return '<li>' + esc(m) + '</li>'; }).join('') + '</ul></div>';
+  }
+  function okudumKaydi() { var o = okuJ(K.okudum, null); return (o && typeof o === 'object' && o.s) ? o : null; }
+  function hakkindaHTML() {
+    var o = okudumKaydi(), tr = o && o.t ? gunAy(String(o.t).slice(0, 10)) + ' ' + String(o.t).slice(0, 4) : '—';
+    return bilgiHTML() + '<div class="kv"><span>Okuduğunuz tarih</span><b>' + esc(tr) + '</b></div><div class="kv"><span>Sürüm</span><b>' + esc(A.SURUM) + '</b></div>'
+      + '<button class="fin3" id="klvac" type="button">Ana ekrana ekleme kılavuzunu aç</button>';
+  }
+
+  // Açılış kapısı: (1) Başlarken kılavuzu (yalnız ilk kurulumda, tarayıcı modunda, bir kez), (2) bilgilendirme ve “Okudum” (bir kez). Sonra uygulama başlar.
+  function kapiKapat() { var kp = $('kap'); kp.className = 'lock kap'; kp.textContent = ''; }
+  function kapiGec(devam) {
+    var adim = [], girisli = !!(oku(K.okul) && oku(K.kod)), klv = window.OGR_KLV;
+    if (klv && !girisli && !oku(K.basla) && !klv.anaEkran()) adim.push('klv');
+    var ok = okudumKaydi(); if (!ok || ok.s !== BILGI_SURUM) adim.push('bilgi');
+    if (!adim.length) return devam();
+    kilit = { adim: 'kapi', okul: '', deger: '', mesaj: '', mesgul: true }; // kapı açıkken arka plan çalışmaz, tuşlar yutulur
+    function sonraki() {
+      var a = adim.shift();
+      if (!a) { kapiKapat(); kilit = null; return devam(); }
+      if (a === 'klv') klvIlk(sonraki); else bilgiIlk(sonraki);
+    }
+    sonraki();
+  }
+  function klvIlk(sonraki) {
+    var kp = $('kap'); kp.className = 'lock kap on';
+    function git() { yaz(K.basla, '1'); sonraki(); }
+    OGR_KLV.ciz(kp, { logo: LOGO, birincil: 'Anladım, devam et', atla: 'Şimdilik atla', bitti: git, atlandi: git });
+    kp.scrollTop = 0;
+  }
+  function klvAyardan() {
+    var kp = $('kap'); kp.className = 'lock kap on';
+    OGR_KLV.ciz(kp, { logo: LOGO, birincil: 'Kapat', bitti: kapiKapat }); kp.scrollTop = 0;
+  }
+  function bilgiIlk(sonraki) {
+    var kp = $('kap'); kp.className = 'lock kap on';
+    kp.innerHTML = '<div class="kw"><img src="' + esc(LOGO) + '" alt=""><h1>Başlamadan önce</h1><p class="sub">Lütfen kısa bilgilendirmeyi okuyun.</p>' + bilgiHTML()
+      + '<button type="button" class="okr" id="okr" aria-pressed="false"><i></i><span>Bilgilendirmeyi okudum, anladım.</span></button><button type="button" class="bt2" id="okd" disabled>Devam</button></div>';
+    var r = $('okr'), d = $('okd');
+    r.onclick = function () { var on = r.classList.toggle('on'); r.setAttribute('aria-pressed', on ? 'true' : 'false'); d.disabled = !on; };
+    d.onclick = function () { if (d.disabled) return; yaz(K.okudum, JSON.stringify({ s: BILGI_SURUM, t: new Date().toISOString() })); sonraki(); };
+    kp.scrollTop = 0;
+  }
+
+  // ---- kalıcı depolama isteği (yalnız tarayıcıya “bu verileri silme” ricasıdır; uygulamanın çalışmasını etkilemez)
+  var KALICI = '';
+  function kalicilikIste(cb) {
+    function bit(d) { KALICI = d; if (typeof cb === 'function') cb(); var e = $('vkal'); if (e) e.textContent = kalicilikYazi(); }
+    try {
+      if (!(navigator.storage && navigator.storage.persist && navigator.storage.persisted)) return bit('desteklenmiyor');
+      navigator.storage.persisted().then(function (p) {
+        if (p) return bit('etkin');
+        return navigator.storage.persist().then(function (g) { bit(g ? 'etkin' : 'verilmedi'); });
+      }).then(function () {}, function () { bit('desteklenmiyor'); });
+    } catch (e) { bit('desteklenmiyor'); }
+  }
+  function kalicilikYazi() { return { etkin: 'Etkin', verilmedi: 'Tarayıcı vermedi', desteklenmiyor: 'Bu telefonda yok' }[KALICI] || 'Kontrol ediliyor…'; }
+
+  // ---- yedek / geri yükleme / gönderme
+  function mesajYaz(id, t, ok) { var m = $(id); if (!m) return; m.style.color = ok ? 'var(--teal)' : '#B3392C'; m.textContent = t; }
+  function kopyala(metin, msgId, tamamMetni) {
+    try { navigator.clipboard.writeText(metin).then(function () { mesajYaz(msgId, tamamMetni, 1); }, function () { mesajYaz(msgId, 'Kopyalanamadı.', 0); }); } catch (e) { mesajYaz(msgId, 'Kopyalanamadı.', 0); }
+  }
+  function metniGonder(metin, baslik, msgId, kopyaMetni) {
+    if (navigator.share) { navigator.share({ title: baslik, text: metin }).then(function () {}, function (e) { if (e && e.name === 'AbortError') return; kopyala(metin, msgId, kopyaMetni); }); return; }
+    kopyala(metin, msgId, kopyaMetni);
+  }
+  function notMetni(n, C) {
+    var s = n.t; if (n.k) s += '\n(' + hucreAdi(C.y, n.k) + ')'; if (n.d) s += '\n' + gunAy(n.d) + (n.tm ? ', ' + n.tm : ''); return s;
+  }
+  function tumNotlariGonder() {
+    var C = CTX || baglam(), l = NT.slice().sort(function (a, b) { return ((a.d || '9') + (a.tm || '')) > ((b.d || '9') + (b.tm || '')) ? 1 : -1; });
+    if (!l.length) return;
+    metniGonder('Notlarım\n\n' + l.map(function (n) { return '• ' + notMetni(n, C).replace(/\n/g, ' · '); }).join('\n'), 'Notlarım', 'bkm', 'Notların kopyalandı. Telefonundaki not uygulamasına yapıştırabilirsin.');
+  }
+  function yedekMetni() { return JSON.stringify({ uyg: 'ydo-ogretmen', v: 1, t: new Date().toISOString(), notlar: NT, islendi: okuJ(K.isl, {}) }); }
+  function yedekPaylas(msgId) {
+    metniGonder(yedekMetni(), 'Yaşar Doğu Öğretmen yedeği', msgId, 'Yedek kopyalandı. Bir yere yapıştırıp sakla (örneğin WhatsApp’ta kendine gönder).');
+  }
+  function yedekKopyala(msgId) { kopyala(yedekMetni(), msgId, 'Yedek kopyalandı. Bir yere yapıştırıp sakla (örneğin WhatsApp’ta kendine gönder).'); }
+  function yedektenYukle() {
+    var ta = $('vyap'), s = (ta && ta.value) || '', a = s.indexOf('{'), b = s.lastIndexOf('}'), o = null;
+    if (!s.trim()) return mesajYaz('vmsg', 'Önce yedeği kutuya yapıştır.', 0);
+    try { if (a < 0 || b <= a) throw 0; o = JSON.parse(s.slice(a, b + 1)); } catch (e) { return mesajYaz('vmsg', 'Yedek okunamadı. Yedeğin tamamını yapıştırdığından emin ol.', 0); }
+    if (!o || o.uyg !== 'ydo-ogretmen' || !Array.isArray(o.notlar)) return mesajYaz('vmsg', 'Bu metin bir yedek gibi görünmüyor.', 0);
+    var var0 = {}, eklenen = 0, vardi = 0;
+    NT.forEach(function (n) { var0[String(n.id)] = 1; });
+    o.notlar.slice(0, 1000).forEach(function (n) {
+      if (!n || typeof n !== 'object' || typeof n.t !== 'string' || !n.t.trim() || (typeof n.id !== 'number' && typeof n.id !== 'string')) return;
+      if (var0[String(n.id)]) { vardi++; return; }
+      NT.push({ id: n.id, k: (typeof n.k === 'string' && /^\d,\d{1,2}$/.test(n.k)) ? n.k : null, t: n.t.slice(0, 400), d: /^\d{4}-\d{2}-\d{2}$/.test(n.d || '') ? n.d : '', tm: /^\d{2}:\d{2}$/.test(n.tm || '') ? n.tm : '', w: !!n.w });
+      var0[String(n.id)] = 1; eklenen++;
+    });
+    var isl = okuJ(K.isl, {}), ie = 0;
+    if (o.islendi && typeof o.islendi === 'object' && !Array.isArray(o.islendi)) {
+      Object.keys(o.islendi).slice(0, 5000).forEach(function (k) { if (k.length <= 200 && o.islendi[k] && !isl[k]) { isl[k] = 1; ie++; } });
+    }
+    notKaydet(); yaz(K.isl, JSON.stringify(isl));
+    var ozet = eklenen + ' not ve ' + ie + ' işaret geri yüklendi' + (vardi ? ' (' + vardi + ' not zaten vardı)' : '') + '.';
+    ayarAc(); mesajYaz('vmsg', ozet, 1); if (ta) ta.value = '';
+  }
+  function verilerimHTML() {
+    var ni = Object.keys(okuJ(K.isl, {})).length;
+    setTimeout(function () { kalicilikIste(); }, 0);
+    return '<p class="mut" style="font-size:14px;line-height:1.5;margin:0 0 6px">Notların ve “işlendi” işaretlerin yalnızca bu telefonda saklanır. Telefonu değiştirirsen, tarayıcı verilerini temizlersen ya da uygulamayı kaldırırsan kaybolur.</p>'
+      + '<div class="kv"><span>Notlar</span><b>' + NT.length + '</b></div><div class="kv"><span>“İşlendi” işaretleri</span><b>' + ni + '</b></div><div class="kv"><span>Kalıcı depolama</span><b id="vkal">' + esc(kalicilikYazi()) + '</b></div>'
+      + '<p class="mut" style="font-size:13px;line-height:1.5;margin:8px 0 0">Kalıcı depolama etkinse tarayıcı bu verileri kendiliğinden silmez. Yine de ara sıra yedek almanı öneririz.</p>'
+      + '<button class="fin3" id="vpay" type="button">Yedeği gönder / paylaş</button><button class="fin3" id="vkop" type="button">Yedeği kopyala</button>'
+      + '<textarea class="vta" id="vyap" placeholder="Geri yüklemek için yedeği buraya yapıştır" rows="3"></textarea><button class="fin3" id="vger" type="button">Yedekten geri yükle</button><div class="nerr" id="vmsg" style="min-height:18px"></div>';
   }
 
   // ================= KİLİT EKRANI =================
@@ -1953,7 +2086,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
       }
       if (j.ok && (j.yayinDurumu === 'acik' || j.yayinDurumu === 'durduruldu')) {
         yaz(K.okul, kilit.okul); yaz(K.kod, deger); yaz(K.onb, JSON.stringify({ t: Date.now(), y: j })); sonYenileme = Date.now();
-        kilit = null; $('lock').className = 'lock'; $('lock').textContent = ''; TAB = 0; PS = 0; WK = 0; return render();
+        kilit = null; $('lock').className = 'lock'; $('lock').textContent = ''; TAB = 0; PS = 0; WK = 0; setTimeout(kalicilikIste, 1500); return render();
       }
       if (j.hata === 'giris') return kilitGoster('kod', kilit.okul, MESAJ.kod);
       return kilitGoster('kod', kilit.okul, MESAJ[j.hata] || MESAJ.sunucu);
@@ -2018,7 +2151,8 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
 
   // ================= BAŞLAT =================
   tercihUygula(); kzIndeks();
-  if (oku(K.okul) && oku(K.kod)) { acilisUygula(); render(); yenile(false); } else kilitGoster('okul');
+  function basla() { if (oku(K.okul) && oku(K.kod)) { acilisUygula(); render(); yenile(false); setTimeout(kalicilikIste, 4000); } else kilitGoster('okul'); }
+  kapiGec(basla);
   (function () { var s = document.getElementById('spl'); if (!s) return; var bekle = Math.max(0, 900 - (Date.now() - (window.__splT || Date.now()))); setTimeout(function () { s.classList.add('bit'); setTimeout(function () { if (s.parentNode) s.parentNode.removeChild(s); }, 700); }, bekle); })();
   // Ayar dosyası ile uygulama dosyası farklı sürümdeyse (önbellekte eski dosya kalmış): önbellek günde en çok bir kez temizlenip yeniden yüklenir.
   // Çevrimdışıyken dokunulmaz (çevrimdışı kopya korunur); temizlik başarısız olursa yeniden yükleme yapılmaz.

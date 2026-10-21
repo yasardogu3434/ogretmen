@@ -693,3 +693,20 @@ button,[data-dt],[data-n],[data-c],.shd,.cov,.dtd{touch-action:manipulation}
 .okl{padding:0 20px}.rw.okr{position:relative;padding-right:22px;cursor:pointer}
 .rw.okr::after{content:"";position:absolute;right:2px;top:50%;width:7px;height:7px;margin-top:-5px;border-right:2px solid var(--mut);border-top:2px solid var(--mut);transform:rotate(45deg);opacity:.5}
 .rw.okr .z{margin-right:6px}.okn{font-style:normal;font-size:12px;font-weight:700;color:var(--goldt);background:var(--goldsoft);border-radius:8px;padding:3px 8px}
+/* 0.12.0: açılış kapısı (Başlarken kılavuzu, bilgilendirme), Verilerim */
+.lock.kap{z-index:45;overflow-y:auto;overscroll-behavior:contain;padding:46px 24px 40px;-webkit-overflow-scrolling:touch}
+.lock.kap>*{flex:none}
+.lock.kap .kw{max-width:520px;margin:0 auto;width:100%}
+.bl h2{text-align:left;font-family:'Bricolage Grotesque';font-size:19px;font-weight:600;margin:22px 0 8px;letter-spacing:-.2px}
+.bl p{font-size:15px;line-height:1.55;margin:0 0 10px;text-align:left}
+.bl ul{margin:0;padding:0;list-style:none}
+.bl li{position:relative;padding:0 0 10px 18px;font-size:15px;line-height:1.5}
+.bl li:before{content:"";position:absolute;left:2px;top:9px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.acn .bl h2:first-child{margin-top:4px}.acn .bl p,.acn .bl li{color:var(--tx);opacity:.88}
+.okr{display:flex;gap:12px;align-items:center;margin-top:18px;padding:14px;border-radius:14px;border:1.5px solid rgba(100,120,160,.5);cursor:pointer;font:inherit;font-size:15.5px;line-height:1.35;background:none;color:inherit;text-align:left;width:100%}
+.okr i{flex:none;width:24px;height:24px;border-radius:7px;border:2px solid rgba(100,120,160,.75);display:grid;place-items:center}
+.okr.on{border-color:var(--gold)}.okr.on i{background:var(--gold);border-color:var(--gold)}
+.okr.on i:after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.bt2{display:block;width:100%;border:0;background:var(--gold);color:#fff;font:inherit;font-weight:700;font-size:16px;padding:14px;border-radius:14px;cursor:pointer;margin-top:14px}
+.bt2[disabled]{opacity:.38;cursor:default}
+.vta{width:100%;box-sizing:border-box;min-height:84px;border:1.5px solid var(--line);border-radius:12px;background:var(--paper);color:var(--tx);font:inherit;font-size:14px;padding:10px;margin-top:12px;resize:vertical}
