@@ -1424,7 +1424,7 @@
   }
   function nobetSekmesi(C) {
     var n = nobetim(C.y);
-    if (!n.liste.length && !n.gelecek) return '<div class="empty"><b>Bu dönem nöbetin görünmüyor</b>Nöbet yerin belirlendiğinde burada görünür.</div>';
+    if (!n.liste.length && !n.gelecek) return '<div class="empty"><b>Nöbet göreviniz bulunmamaktadır</b>Nöbet yeriniz belirlendiğinde burada görünür.</div>';
     var l = n.liste.slice().sort(function (a, b) { return a.gun - b.gun; });
     var h = '';
     if (l.length) {

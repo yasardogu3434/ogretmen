@@ -12,6 +12,9 @@
 @media(prefers-color-scheme:dark){:root:not([data-th=light]){--paper:#0B1429;--surf:#111C38;--tx:#E8EDF8;--mut:#8E9CBA;--line:#22305A;--goldsoft:#3A3014;--ink:#14264E}}
 :root[data-th=dark]{--paper:#0B1429;--surf:#111C38;--tx:#E8EDF8;--mut:#8E9CBA;--line:#22305A;--goldsoft:#3A3014;--ink:#14264E}
 :root[data-ac=mavi]{--gold:#3D8FE0;--goldsoft:#DCEBFB}:root[data-ac=yesil]{--gold:#2E9E73;--goldsoft:#D6F0E4}:root[data-ac=mor]{--gold:#7F62E0;--goldsoft:#E6DFFB}:root[data-ac=kirmizi]{--gold:#D8584A;--goldsoft:#FADEDA}
+/* Gece modu + vurgu rengi: açık pastel zemin yazıyı siliyordu (bugün kutusu, seçili kazanım). Koyu zemin değerleri */
+@media(prefers-color-scheme:dark){:root:not([data-th=light])[data-ac=mavi]{--goldsoft:#17324F}:root:not([data-th=light])[data-ac=yesil]{--goldsoft:#143A2D}:root:not([data-th=light])[data-ac=mor]{--goldsoft:#2B2552}:root:not([data-th=light])[data-ac=kirmizi]{--goldsoft:#432322}:root:not([data-th=light])[data-ac=mavi] .ey{color:#7DBBF5}:root:not([data-th=light])[data-ac=yesil] .ey{color:#55CFA2}:root:not([data-th=light])[data-ac=mor] .ey{color:#B5A3FF}:root:not([data-th=light])[data-ac=kirmizi] .ey{color:#F59A8E}}
+:root[data-th=dark][data-ac=mavi]{--goldsoft:#17324F}:root[data-th=dark][data-ac=yesil]{--goldsoft:#143A2D}:root[data-th=dark][data-ac=mor]{--goldsoft:#2B2552}:root[data-th=dark][data-ac=kirmizi]{--goldsoft:#432322}:root[data-th=dark][data-ac=mavi] .ey{color:#7DBBF5}:root[data-th=dark][data-ac=yesil] .ey{color:#55CFA2}:root[data-th=dark][data-ac=mor] .ey{color:#B5A3FF}:root[data-th=dark][data-ac=kirmizi] .ey{color:#F59A8E}
 *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
 .scr{height:100%;overflow-y:auto;padding-bottom:96px;scroll-behavior:smooth}
 .d{font-family:'Bricolage Grotesque','Hanken Grotesk',sans-serif}
