@@ -744,11 +744,6 @@ button,[data-dt],[data-n],[data-c],.shd,.cov,.dtd{touch-action:manipulation}
 .oara input:focus{border-color:var(--gold)}
 @supports(background:color-mix(in srgb,red 50%,blue)){.oara input:focus{box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 22%,transparent)}}
 .oara svg{position:absolute;left:13px;top:50%;margin-top:-10px;width:20px;height:20px;fill:none;stroke:var(--mut);stroke-width:2;stroke-linecap:round;pointer-events:none}
-.osres .rw{cursor:pointer}
-.oseg{font-size:12.5px;font-weight:700;color:var(--teal)}.oseg.yok{color:var(--mut);font-weight:600}
-.osrcb::before{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--gold);animation:osrp 2s ease-out infinite;pointer-events:none}
-@keyframes osrp{0%{opacity:.9;transform:scale(.9)}100%{opacity:0;transform:scale(1.35)}}
-@media(prefers-reduced-motion:reduce){.osrcb::before{animation:none;opacity:.7}}
 .obk{margin:0 20px 14px}
 .obkart{border-radius:22px;padding:16px;background:var(--surf);box-shadow:inset 0 0 0 1px var(--line)}
 @supports(background:color-mix(in srgb,red 50%,blue)){.obkart{background:linear-gradient(150deg,color-mix(in srgb,var(--teal) 16%,var(--surf)),var(--surf) 72%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--teal) 30%,var(--line))}.obkart.oyok{background:var(--surf);box-shadow:inset 0 0 0 1px var(--line)}}
@@ -760,7 +755,7 @@ button,[data-dt],[data-n],[data-c],.shd,.cov,.dtd{touch-action:manipulation}
 .obch button{border:1.5px solid var(--line);background:var(--surf);color:var(--tx);font:inherit;font-size:14px;font-weight:650;padding:7px 11px;border-radius:12px;cursor:pointer;text-align:left;line-height:1.2}
 .obch button small{display:block;font-size:11.5px;color:var(--mut);font-weight:500}
 .obnot{font-size:12px;color:var(--mut);margin:12px 0 0;line-height:1.45}
-.obkart.oyok{margin-top:12px}
+.obkart.oyok{margin-top:0}
 .obkart.oyok summary{cursor:pointer;font-weight:650;font-size:15px;min-height:36px;display:flex;align-items:center;gap:8px}
 .obkart.oyok summary .okn{margin-left:auto}
 .okta td[data-oc]{cursor:pointer}
@@ -777,5 +772,4 @@ button,[data-dt],[data-n],[data-c],.shd,.cov,.dtd{touch-action:manipulation}
 .oipu::before{content:"";position:absolute;left:30px;top:-7px;width:14px;height:14px;background:#fff;transform:rotate(45deg)}
 .oipu b{display:block;font-size:14.5px;margin-bottom:2px}
 .oipu button{position:relative;margin-top:8px;border:0;background:#13244A;color:#fff;font:inherit;font-weight:700;font-size:13px;padding:8px 14px;border-radius:10px;cursor:pointer}
-.r.osr{flex:none}.r.osr .dtx{white-space:nowrap;flex:none}
-.r.osr .ib{width:34px;height:34px}
+.obk:not(.obalt){margin:14px 20px 0}.obalt{margin:14px 20px 0}

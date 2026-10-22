@@ -4,7 +4,7 @@
   'use strict';
   var A = window.OGR_AYAR;
   var APP_SURUM = '0.13.0'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
-  var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu', ara: 'ogr_ara' };
+  var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
     kod: 'Kişisel kod hatalı. Tekrar dene.',
@@ -291,7 +291,7 @@
   function logoBar(C, alt) {
     var d = C.d, ad = (C.y && C.y.kisi && C.y.kisi.ad) || '', okul = (C.y && C.y.okul) || 'Yaşar Doğu Öğretmen', th = oku(K.tema) || 'oto', hf = egitimHaftasi(C);
     return '<div class="bar"><button class="who0" id="ob" type="button" aria-label="Menü ve profil"><span class="lg"><img src="' + LOGO + '" alt=""></span><span class="nm"><b>' + esc(ad || okul) + '</b><span>' + esc(ad ? okul : alt) + '</span></span><svg class="ochv" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>'
-      + '<div class="r' + (C.y && okulVeri(C.y) ? ' osr' : '') + '">' + (C.y && okulVeri(C.y) ? '<button class="ib' + (oku(K.ara) ? '' : ' osrcb') + '" id="srb" type="button" aria-label="Ara">' + IK_ARA + '</button>' : '') + '<div class="dtx"><b class="d">' + GKISA[d.getDay()] + '</b>' + d.getDate() + ' ' + AY[d.getMonth()] + (hf ? '<em class="hf">' + hf + '. hafta</em>' : '') + '</div>'
+      + '<div class="r"><div class="dtx"><b class="d">' + GKISA[d.getDay()] + '</b>' + d.getDate() + ' ' + AY[d.getMonth()] + (hf ? '<em class="hf">' + hf + '. hafta</em>' : '') + '</div>'
       + '<button class="ib" id="tb" type="button" aria-label="Tema: ' + TEMA_AD[th] + ' (değiştirmek için dokun)"><svg viewBox="0 0 24 24">' + TEMA_IK[th] + '</svg></button></div></div>';
   }
   function cetvel(C, mine) {
@@ -981,14 +981,14 @@
   }
   function okOgrListe(C, d, z) {
     var X = okOgrDizin(d);
-    var h = '<div class="okw">' + okBos(C, d, z, X) + okAraKutu('Öğretmen adı ara') + '<div class="rows okl">';
+    var B = okBos(C, d, z, X), h = '<div class="okw">' + okAraKutu('Öğretmen adı ara') + '<div class="rows okl">';
     X.adlar.forEach(function (n, ix) {
       var m = X.m[n], top = 0, kim = '';
       m.forEach(function (g) { if (g) g.forEach(function (c) { if (c) top++; }); });
       if (z.gi >= 0 && z.hi >= 0 && m[z.gi] && m[z.gi][z.hi]) kim = m[z.gi][z.hi].sinif;
       h += '<div class="rw okr" data-q="' + esc(okAra(n)) + '" data-ok="o:' + ix + '"><div class="a"><b>' + esc(n) + '</b><span class="s">' + top + ' ders/hafta</span></div><span class="z">' + (kim ? '<i class="okn">şimdi ' + esc(kim) + '</i>' : '') + '</span></div>';
     });
-    return h + '</div></div>';
+    return h + '</div>' + B.alt + B.ust + '</div>';
   }
   function okOgrHaf(C, d, z) {
     var X = okOgrDizin(d), n = X.adlar[OK.o], m = X.m[n] || [], say = okSaatSay(d), sa = okSaatler(C), top = 0;
@@ -1049,37 +1049,41 @@
     return (l[0] < hi && hi < l[l.length - 1]) ? 'okulda' : 'belirsiz';
   }
   function okBugunSay(m, gi) { var k = 0; if (m && m[gi]) m[gi].forEach(function (c) { if (c) k++; }); return k; }
+  // İki parça döner: alt = "Şu anda dersi boş olanlar" (listenin altında), ust = "Bugün dersi olmayanlar" (kapalı kart, en altta)
   function okBos(C, d, z, X) {
-    if (z.gi < 0 || C.gb.tip !== 'ders') return '';
+    var bos = { ust: '', alt: '' };
+    if (z.gi < 0 || C.gb.tip !== 'ders') return bos;
     var sa = okSaatler(C), n = sa.length || okSaatSay(d), base = z.hi, i;
     if (base < 0) { for (i = 0; i < sa.length; i++) { if (mdk(sa[i][1]) * 60 > C.T) { base = i; break; } } }
-    if (base < 0) return '';
+    var nbl = {}; nobetListe(C.y, C.gb.ds).forEach(function (k) { nbl[norm(k.ad)] = 1; });
+    var dolT = {}; topluDoldurma(C.y, C.gb.ds).forEach(function (x) { dolT[norm(x.giren)] = 1; });
+    var yok = [];
+    X.adlar.forEach(function (nm, ix) { if (okBugunSay(X.m[nm], z.gi) === 0) yok.push({ n: nm, ix: ix, et: nbl[norm(nm)] ? 'nöbetçi' : (dolT[norm(nm)] ? 'doldurmada' : '') }); });
+    yok.sort(function (a, b) { return a.n.localeCompare(b.n, 'tr'); });
+    bos.ust = '<div class="obk"><details class="obkart oyok"><summary>Bugün dersi olmayanlar <span class="okn">' + yok.length + '</span></summary><p class="obnot">Okulda olmadıkları varsayılır; ders doldurma adayı sayılmazlar.</p>'
+      + (yok.length ? '<div class="obch">' + yok.map(function (x) { return '<button type="button" data-ok="o:' + x.ix + '">' + esc(okKisa(x.n)) + (x.et ? '<small>' + x.et + '</small>' : '') + '</button>'; }).join('') + '</div>' : '') + '</details></div>';
+    if (base < 0) return bos;
     var secenek = []; for (i = 0; i < 3 && base + i < n; i++) secenek.push(i);
     var off = Math.min(OK.bh || 0, secenek.length - 1), hi = base + off;
-    var nbl = {}; nobetListe(C.y, C.gb.ds).forEach(function (k) { nbl[norm(k.ad)] = 1; });
     var dol = {}; topluDoldurma(C.y, C.gb.ds).forEach(function (x) { if (+x.saat === hi + 1) dol[norm(x.giren)] = 1; });
-    var okulda = [], yok = [], bel = 0, dolL = [];
+    var okulda = [], bel = 0, dolL = [];
     X.adlar.forEach(function (nm, ix) {
       var m = X.m[nm], dr = okDurum(m, z.gi, hi);
       if (dr === 'derste') return;
       if (dol[norm(nm)]) { dolL.push(okKisa(nm)); return; }
-      if (dr === 'yok') yok.push({ n: nm, ix: ix });
-      else if (dr === 'okulda') okulda.push({ n: nm, ix: ix, s: okBugunSay(m, z.gi), nb: !!nbl[norm(nm)] });
-      else bel++;
+      if (dr === 'okulda') okulda.push({ n: nm, ix: ix, s: okBugunSay(m, z.gi), nb: !!nbl[norm(nm)] });
+      else if (dr !== 'yok') bel++;
     });
     okulda.sort(function (a, b) { return a.s - b.s || a.n.localeCompare(b.n, 'tr'); });
-    yok.sort(function (a, b) { return a.n.localeCompare(b.n, 'tr'); });
     var et = (hi + 1) + '. ders' + (off === 0 ? (z.hi >= 0 ? ' (şimdi)' : ' (sıradaki)') : '');
-    var h = '<div class="obk"><div class="obkart"><h3 class="d"><i></i>Okulda, dersi olmayanlar</h3><div class="alt">' + esc(et) + (sa[hi] ? ' · ' + esc(sa[hi][1]) + '–' + esc(sa[hi][2]) : '') + ' · bugün dersi var, iki dersinin arasında</div>';
+    var h = '<div class="obk obalt"><div class="obkart"><h3 class="d"><i></i>Şu anda dersi boş olanlar</h3><div class="alt">' + esc(et) + (sa[hi] ? ' · ' + esc(sa[hi][1]) + '–' + esc(sa[hi][2]) : '') + ' · bugün dersi var, iki dersinin arasında</div>';
     if (secenek.length > 1) h += okSekme('h', secenek.map(function (k) { return [k, (base + k + 1) + '. ders']; }), off);
     h += okulda.length ? '<div class="obch">' + okulda.map(function (x) { return '<button type="button" data-ok="o:' + x.ix + '">' + esc(okKisa(x.n)) + '<small>bugün ' + x.s + ' ders' + (x.nb ? ' · nöbetçi' : '') + '</small></button>'; }).join('') + '</div>'
       : '<p class="obnot">Bu saatte iki dersinin arasında olduğu bilinen öğretmen yok.</p>';
     if (dolL.length) h += '<p class="obnot">Bu saatte ders doldurmada: ' + esc(dolL.join(', ')) + ' (boş sayılmadı).</p>';
     if (bel) h += '<p class="obnot"><b>' + bel + ' öğretmen</b> için okulda olup olmadığı bilinmiyor: dersleri henüz başlamamış ya da bitmiş olabilir. Burada gösterilmedi.</p>';
-    h += '<p class="obnot">Yalnız ders programına göre hesaplanır. Gelmeyen öğretmen bilgisi uygulamaya gönderilmediği için izinli ya da raporlu biri de burada görünebilir.</p></div>';
-    h += '<details class="obkart oyok"><summary>Bugün dersi olmayanlar <span class="okn">' + yok.length + '</span></summary><p class="obnot">Okulda olmadıkları varsayılır; ders doldurma adayı sayılmazlar.</p>'
-      + (yok.length ? '<div class="obch">' + yok.map(function (x) { return '<button type="button" data-ok="o:' + x.ix + '">' + esc(okKisa(x.n)) + '</button>'; }).join('') + '</div>' : '') + '</details></div>';
-    return h;
+    bos.alt = h + '<p class="obnot">Yalnız ders programına göre hesaplanır. Gelmeyen öğretmen bilgisi uygulamaya gönderilmediği için izinli ya da raporlu biri de burada görünebilir.</p></div></div>';
+    return bos;
   }
   function okSimdiyeGit() {
     var w = document.querySelector('#okl .okt'), th = document.querySelector('#okl thead th.now'); if (!w || !th) return;
@@ -1122,39 +1126,7 @@
     else { TAB = 4; PR = 3; OK.o = ix; OK.s = -1; }
     WK = 0; $('scr').scrollTop = 0; render();
   }
-  // ---- Genel arama (yalnız okul programı yetkisi olanlar)
-  function araAc() {
-    var C = CTX || baglam(); if (!okulVeri(C.y)) return;
-    yaz(K.ara, '1'); var sb = $('srb'); if (sb) sb.classList.remove('osrcb');
-    ayrintiRenk('ak:0');
-    dtGoster('Ara', okAraKutu('Öğretmen, şube ya da ders ara', 'arin', '') + '<div class="osres" id="osres"></div>');
-    araYaz('');
-    setTimeout(function () { var i = $('arin'); if (i) { try { i.focus(); } catch (e) {} } }, 350);
-  }
-  function araYaz(q) {
-    var C = CTX || baglam(), d = okulVeri(C.y), box = $('osres'); if (!d || !box) return;
-    var s = okAra(q); if (!s) { box.innerHTML = '<p class="oknot" style="margin:6px 0">Öğretmen adı, şube (7-A) ya da ders yazın.</p>'; return; }
-    var X = okOgrDizin(d), z = okZaman(C), sb = [], og = [];
-    d.siniflar.forEach(function (sn, ix) { if (sn && okAra(sn.ad).indexOf(s) >= 0) sb.push(ix); });
-    X.adlar.forEach(function (nm, ix) {
-      var m = X.m[nm], ders = '', ok = okAra(nm).indexOf(s) >= 0;
-      if (!ok) { for (var g = 0; g < 5 && !ders; g++) if (m[g]) m[g].forEach(function (c) { if (c && !ders && okAra(c.ders).indexOf(s) >= 0) ders = c.ders; }); }
-      if (ok || ders) og.push({ n: nm, ix: ix, ders: ders });
-    });
-    var h = '', say = sb.length + og.length;
-    if (sb.length) h += secH('Şubeler', sb.length > 8 ? sb.length + ' şube' : '') + '<div class="rows">' + sb.slice(0, 8).map(function (ix) {
-      var sn = d.siniflar[ix], c = z.gi >= 0 && z.hi >= 0 ? okHuc(d, sn, z.gi, z.hi) : null;
-      return '<div class="rw" data-go="s:' + ix + '"><div class="a"><b>' + esc(sn.ad) + '</b><span class="s">Şube' + (c ? ' · şimdi ' + esc(c.ders) + ', ' + esc(okKisa(c.ogr)) : '') + '</span></div></div>';
-    }).join('') + '</div>';
-    if (og.length) h += secH('Öğretmenler', og.length > 12 ? og.length + ' öğretmen' : '') + '<div class="rows">' + og.slice(0, 12).map(function (x) {
-      var m = X.m[x.n], dr = (z.gi >= 0 && z.hi >= 0) ? okDurum(m, z.gi, z.hi) : '', sag = '', top = 0;
-      m.forEach(function (gg) { if (gg) gg.forEach(function (cc) { if (cc) top++; }); });
-      if (dr === 'derste') sag = '<i class="okn">şimdi ' + esc(m[z.gi][z.hi].sinif) + '</i>'; else if (dr === 'okulda') sag = '<span class="oseg">arada</span>'; else if (dr === 'yok') sag = '<span class="oseg yok">bugün yok</span>';
-      return '<div class="rw okr" data-go="o:' + x.ix + '"><div class="a"><b>' + esc(x.n) + '</b><span class="s">' + (x.ders ? esc(x.ders) + ' · ' : '') + top + ' ders/hafta</span></div><span class="z">' + sag + '</span></div>';
-    }).join('') + '</div>';
-    box.innerHTML = say ? h : '<p class="oknot" style="margin:6px 0">Eşleşen kayıt yok.</p>';
-  }
-  document.addEventListener('input', function (e) { var t = e.target; if (!t || !t.id) return; if (t.id === 'oks') { OK.q = t.value; okFiltre(); } else if (t.id === 'arin') araYaz(t.value); });
+  document.addEventListener('input', function (e) { var t = e.target; if (t && t.id === 'oks') { OK.q = t.value; okFiltre(); } });
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'Enter' && e.key !== ' ') return;
     var t = e.target; if (!t || !t.getAttribute || !t.hasAttribute('data-oc')) return;
@@ -1759,7 +1731,6 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     if (t.closest('#cov')) { cekKapat(); return; }
     if ((b = t.closest('[data-cg]'))) { var cg = b.getAttribute('data-cg').split(','); cekKapat(); TAB = +cg[0]; PS = TAB === 1 ? +cg[1] : 0; PR = TAB === 4 ? +cg[1] : 0; OK.s = -1; OK.o = -1; OK.q = ''; OK.bh = 0; if (cg[2] === 'hesap') AYOP.hes = true; WK = 0; $('scr').scrollTop = 0; render(); return; }
     if ((b = t.closest('#pf button'))) { PR = +b.dataset.p; OK.s = -1; OK.o = -1; OK.q = ''; OK.bh = 0; render(); return; }
-    if (t.closest('#srb')) { araAc(); return; }
     if ((b = t.closest('[data-oc]'))) { okHucreAc(b.getAttribute('data-oc')); return; }
     if ((b = t.closest('[data-go]'))) { okGit(b.getAttribute('data-go')); return; }
     if (t.closest('[data-ogit]')) { okSimdiyeGit(); return; }
