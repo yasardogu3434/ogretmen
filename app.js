@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.14.0'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.14.1'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -697,7 +697,7 @@
     les.forEach(function (x) {
       var s0 = mdk(x.r[2]) * 60, e0 = mdk(x.r[3]) * 60, a0 = (s0 - A0) / span * 360 + 1.4, a1 = (e0 - A0) / span * 360 - 1.4, m = pt((a0 + a1) / 2, R);
       if (planli && !x.m) sv += '<path class="abos" d="' + arc(a0, a1) + '"/>';
-      sv += '<path class="ar gx' + (x.m ? ' my' : (planli ? ' bos' : '')) + (x.cv ? ' cv' : '') + '" d="' + arc(a0, a1) + '" data-s="' + s0 + '" data-e="' + e0 + '" data-g0="' + a0.toFixed(2) + '" data-g1="' + a1.toFixed(2) + '" data-no="' + x.no + '" data-t="' + esc(x.r[2] + ' – ' + x.r[3]) + '" data-c="' + gunSinif(x, planli) + '" data-dt="ak:' + esc(x.ds) + ':' + x.ri + '"/><text class="dno' + (x.m ? ' my' : '') + (x.cv ? ' cv' : '') + '" x="' + m[0].toFixed(1) + '" y="' + (m[1] + 4).toFixed(1) + '">' + x.no + '</text>';
+      sv += '<path class="ar gx' + (x.m ? ' my' : (planli ? ' bos' : '')) + (x.cv ? ' cv' : '') + '" d="' + arc(a0, a1) + '" data-s="' + s0 + '" data-e="' + e0 + '" data-g0="' + a0.toFixed(2) + '" data-g1="' + a1.toFixed(2) + '" data-no="' + x.no + '" data-t="' + esc(x.r[2] + ' – ' + x.r[3]) + '" data-c="' + gunSinif(x, planli) + '" data-dt="ak:' + esc(x.ds) + ':' + x.ri + '"/><text class="dno' + (x.m ? ' my' : (planli && !x.cv ? ' bos' : '')) + (x.cv ? ' cv' : '') + '" x="' + m[0].toFixed(1) + '" y="' + (m[1] + 4).toFixed(1) + '">' + x.no + '</text>';
     });
     sv += '<path class="apg" d="" style="display:none"/>';
     sv += '<g class="nd" data-a0="' + A0 + '" data-z0="' + Z0 + '" style="display:none"><line x1="120" y1="12" x2="120" y2="32"/><circle cx="120" cy="22" r="5"/></g></svg>';
@@ -1681,6 +1681,24 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
   // ================= ÇİZİM =================
   var CTX = null, seenTimer = null;
   function gorunurMu(C) { return !yayinKapali(C); }
+  // ---- 0.14.1: Ayarlar'dayken geri tuşu uygulamadan çıkarmaz, geldiğin ekrana döner (yalnız Ayarlar)
+  var AYG = { da: false, onc: { t: 0, ps: 0, pr: 0 }, son: { t: 0, ps: 0, pr: 0 } };
+  function aygGecis() {
+    var ayDa = (TAB === 4 && PR === 1);
+    if (ayDa && !AYG.da) {
+      AYG.da = true; AYG.onc = { t: AYG.son.t, ps: AYG.son.ps, pr: AYG.son.pr };
+      try { history.pushState({ ay: 1 }, ''); } catch (e) {}
+    } else if (!ayDa && AYG.da) {
+      AYG.da = false;
+      try { if (history.state && history.state.ay) history.back(); } catch (e2) {}
+    }
+    if (!ayDa) AYG.son = { t: TAB, ps: PS, pr: PR };
+  }
+  window.addEventListener('popstate', function () {
+    if (DT.acik || !AYG.da) return;
+    AYG.da = false; TAB = AYG.onc.t; PS = AYG.onc.ps; PR = AYG.onc.pr; WK = 0;
+    var sc = $('scr'); if (sc) sc.scrollTop = 0; render();
+  });
   function render() {
     if (kilit) return;
     var C = baglam(); CTX = C;
@@ -1688,6 +1706,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     nvw.style.display = gor ? '' : 'none';
     nvp.style.display = (gor && (haberListe(C.y).length || baglantiListe(C.y).length || duyuruListe(C.y).length || belirliListe(C.y).length)) ? '' : 'none';
     if ((TAB === 2 && nvw.style.display === 'none') || (TAB === 3 && nvp.style.display === 'none')) TAB = 0;
+    aygGecis();
     [].forEach.call(document.querySelectorAll('nav button'), function (b) { b.classList.toggle('on', +b.getAttribute('data-t') === TAB); });
     var top = $('top'), hh = topHTML(C); top.innerHTML = hh; top.dataset.h = hh; top.dataset.kk = hh.replace(/\d+/g, '#');
     ['t0', 't1', 't2', 't3', 't4'].forEach(function (id, i) { $(id).hidden = i !== TAB; });
@@ -1862,6 +1881,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     if ((b = t.closest('[data-kzi]')) && KZ.cur) { var c = KZ.cur, q = +b.getAttribute('data-kzi'), h = c.P.uniteler ? { m: kzFlat(c.P) } : kzHafta(c.P, c.ds); if (h && h.m[q]) { var isl = okuJ(K.isl, {}), kk = c.P.uniteler ? kzAnkU(c.P, c.my, h.m[q]) : kzAnk(c.P, c.my, h, q); if (isl[kk]) delete isl[kk]; else isl[kk] = 1; yaz(K.isl, JSON.stringify(isl)); kzCiz(); } return; }
     if (t.closest('[data-gvay]')) { gvAyarAc(); return; }
     if (t.closest('[data-tut]')) { tutAc(); return; }
+    if (t.closest('[data-gvtm]')) { TAB = 0; PS = 0; PR = 0; WK = 0; $('scr').scrollTop = 0; render(); setTimeout(function () { var e = document.querySelector('[data-k=akis]'); if (e && e.scrollIntoView) e.scrollIntoView(true); }, 60); return; }
     if (t.closest('#tb')) { temaDegis(); return; }
     if (t.closest('#ob')) { cekAc(); return; }
     if (t.closest('#cov')) { cekKapat(); return; }
@@ -2262,7 +2282,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     var tema = '<h4>Gece / gündüz</h4><div class="thseg" id="o_th">' + TEMA_SEG.map(function (x) { return '<button type="button" data-v="' + x[0] + '"' + (th === x[0] ? ' class="on"' : '') + '><svg viewBox="0 0 24 24">' + TEMA_IK[x[0]] + '</svg>' + x[1] + '</button>'; }).join('') + '</div>'
       + '<h4>Vurgu rengi</h4><div class="sw2" id="o_ac">' + renkler.map(function (r) { return '<button type="button" aria-label="' + esc(r[0] || 'altın') + '" data-v="' + r[0] + '"' + (ac === r[0] ? ' class="on"' : '') + ' style="background:' + r[1] + '"></button>'; }).join('') + '</div>'
       + '<h4>Yazı boyutu</h4><div class="opts fsz" id="o_fs">' + [['0.92', 'Küçük', 14], ['1', 'Normal', 17], ['1.12', 'Büyük', 21]].map(function (x) { return '<button type="button" data-v="' + x[0] + '"' + (fs === x[0] ? ' class="on"' : '') + '><span style="font-size:' + x[2] + 'px">Aa</span><small>' + x[1] + '</small></button>'; }).join('') + '</div>'
-      + '<h4>Ana ekranda günün dersleri</h4>' + gvSecim();
+      + '<h4>Ana ekranda günün dersleri</h4>' + gvSecim() + '<button type="button" class="gvtm" data-gvtm="1">Tamam</button>';
     var ana = '<h4>Açılış sayfası</h4>' + secenek('o_ap', oku(K.acilis) || '0', [['0', 'Ana ekran'], ['1', 'Programım'], ['1p', 'Program'], ['1n', 'Nöbet'], ['2', 'Takvim'], ['3', 'Pano'], ['son', 'Son baktığım']])
       + '<h4>Ana ekranda göster</h4>' + TOG.map(function (x) { return '<div class="tg' + (GIZLE[x[0]] ? '' : ' on') + '" data-k="' + x[0] + '"><span>' + x[1] + '</span><i></i></div>'; }).join('');
     var hesap = '<div class="kv"><span>Öğretmen</span><b>' + esc((y && y.kisi && y.kisi.ad) || '—') + '</b></div><div class="kv"><span>Okul</span><b>' + esc((y && y.okul) || '—') + '</b></div><div class="kv"><span>Son güncelleme</span><b>' + (o ? esc(saatStr(o.t)) : '—') + '</b></div><div class="kv"><span>Sürüm</span><b>' + esc(A.SURUM) + '</b></div>'

@@ -871,3 +871,8 @@ button,[data-dt],[data-n],[data-c],.shd,.cov,.dtd{touch-action:manipulation}
 /* 0.14.0 Tutanak bildirimi */
 #tutm{position:fixed;left:16px;right:16px;bottom:24px;bottom:calc(24px + env(safe-area-inset-bottom));z-index:60;max-width:420px;margin:0 auto;padding:12px 14px;border-radius:12px;background:#2B2B2B;color:#fff;font-size:14px;line-height:1.35;text-align:center;opacity:0;visibility:hidden;-webkit-transition:opacity .2s;transition:opacity .2s;pointer-events:none}
 #tutm.on{opacity:1;visibility:visible}
+
+/* 0.14.1 */
+.kart,:root[data-th=dark] .kart{-webkit-backdrop-filter:none;backdrop-filter:none}
+.dial .dno.bos{fill:var(--mut);stroke:var(--surf);stroke-width:3px;paint-order:stroke}
+.gvtm{display:block;width:100%;margin:12px 0 4px;padding:13px 16px;border:0;border-radius:14px;background:var(--ink);color:#fff;font:inherit;font-size:15px;font-weight:700;cursor:pointer}
