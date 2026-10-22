@@ -716,3 +716,66 @@ button,[data-dt],[data-n],[data-c],.shd,.cov,.dtd{touch-action:manipulation}
 @keyframes oknp{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--teal) 60%,transparent)}70%,100%{box-shadow:0 0 0 7px transparent}}
 @supports not (background:color-mix(in srgb,red 50%,blue)){.rw.okr .okn{background:#DCEFEA}@keyframes oknp{0%{box-shadow:0 0 0 0 rgba(47,133,121,.55)}70%,100%{box-shadow:0 0 0 7px rgba(47,133,121,0)}}}
 @media(prefers-reduced-motion:reduce){.rw.okr .okn::before{animation:none}}
+
+/* ===== 0.13.0 Okunurluk: 11,5 px altındaki yazılar yükseltildi =====
+   Satır yükseklikleri eski değerlerinde sabitlendi: kutular büyümez, hiçbir şey kaymaz.
+   Bu blok kaldırılırsa 0.12.1 görünümüne dönülür. */
+.dtx .hf{font-size:11.5px;line-height:13.125px}
+.rule s,.rule em:after,.gt .k,.gt.cv .tg2,.tl2 .im b,.cgr,.cr.me .sn::after{font-size:11.5px;line-height:14px}
+.skyc .sk-s,.skyc .sk-d,.skyc .sk-inf,.skyc .sk-tag{font-size:11.5px}
+.tt>.cv small,.tt>.nw2 small{font-size:11px}
+.okta td b{font-size:12px}
+.okta td small,.okta thead th small,.okta th.st small{font-size:11px}
+.okta em{font-size:10.5px}
+
+/* ===== 0.13.0 Çekmece: zemin tek düz yüzey (arkadaki sayfa renklerinin bantlar hâlinde görünmesi giderildi) =====
+   Eski: %80 saydam + bulanıklık; arkadaki lacivert üst bölüm ile açık sayfa gri/beyaz bantlar olarak yansıyordu.
+   Yeni: aynı açık ton, opak; gölge, kenar ve köşe yuvarlaklığı aynı. Bu blok kaldırılırsa eski görünüme dönülür. */
+.cek{background:#EFF3FA;-webkit-backdrop-filter:none;backdrop-filter:none}
+.cek button.on{background:#fff;box-shadow:0 1px 3px rgba(19,36,74,.12)}
+@media(prefers-color-scheme:dark){:root:not([data-th=light]) .cek{background:#14213F}:root:not([data-th=light]) .cek button.on{background:rgba(255,255,255,.14);box-shadow:none}}
+:root[data-th=dark] .cek{background:#14213F}
+:root[data-th=dark] .cek button.on{background:rgba(255,255,255,.14);box-shadow:none}
+/* 0.13.0 Ek: arama, boş öğretmen kartı, hücre ayrıntısı, resim paylaşımı, menü ipucu (yalnız yeni sınıflar; kaldırılırsa eski görünüm aynen kalır) */
+.who0 .ochv{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;opacity:.8;margin-left:2px}
+.oara{position:relative;margin:2px 20px 12px}
+.db .oara{margin:0 0 12px}
+.oara input{display:block;width:100%;box-sizing:border-box;border:1.5px solid var(--line);border-radius:14px;background:var(--surf);color:var(--tx);font:inherit;font-size:16px;padding:12px 14px 12px 42px;outline:none;-webkit-appearance:none;appearance:none}
+.oara input:focus{border-color:var(--gold)}
+@supports(background:color-mix(in srgb,red 50%,blue)){.oara input:focus{box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 22%,transparent)}}
+.oara svg{position:absolute;left:13px;top:50%;margin-top:-10px;width:20px;height:20px;fill:none;stroke:var(--mut);stroke-width:2;stroke-linecap:round;pointer-events:none}
+.osres .rw{cursor:pointer}
+.oseg{font-size:12.5px;font-weight:700;color:var(--teal)}.oseg.yok{color:var(--mut);font-weight:600}
+.osrcb::before{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--gold);animation:osrp 2s ease-out infinite;pointer-events:none}
+@keyframes osrp{0%{opacity:.9;transform:scale(.9)}100%{opacity:0;transform:scale(1.35)}}
+@media(prefers-reduced-motion:reduce){.osrcb::before{animation:none;opacity:.7}}
+.obk{margin:0 20px 14px}
+.obkart{border-radius:22px;padding:16px;background:var(--surf);box-shadow:inset 0 0 0 1px var(--line)}
+@supports(background:color-mix(in srgb,red 50%,blue)){.obkart{background:linear-gradient(150deg,color-mix(in srgb,var(--teal) 16%,var(--surf)),var(--surf) 72%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--teal) 30%,var(--line))}.obkart.oyok{background:var(--surf);box-shadow:inset 0 0 0 1px var(--line)}}
+.obkart h3{font-size:18px;font-weight:600;margin:0;display:flex;align-items:center;gap:9px}
+.obkart h3 i{width:9px;height:9px;border-radius:50%;background:var(--teal);flex:none}
+.obkart .alt{font-size:13px;color:var(--mut);margin-top:4px;line-height:1.4}
+.obkart .okseg{margin:12px 0 0}
+.obch{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.obch button{border:1.5px solid var(--line);background:var(--surf);color:var(--tx);font:inherit;font-size:14px;font-weight:650;padding:7px 11px;border-radius:12px;cursor:pointer;text-align:left;line-height:1.2}
+.obch button small{display:block;font-size:11.5px;color:var(--mut);font-weight:500}
+.obnot{font-size:12px;color:var(--mut);margin:12px 0 0;line-height:1.45}
+.obkart.oyok{margin-top:12px}
+.obkart.oyok summary{cursor:pointer;font-weight:650;font-size:15px;min-height:36px;display:flex;align-items:center;gap:8px}
+.obkart.oyok summary .okn{margin-left:auto}
+.okta td[data-oc]{cursor:pointer}
+.okta td[data-oc]:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+.okgit{display:block;margin:8px 20px 0;border:1.5px solid var(--line);background:var(--surf);color:var(--tx);font:inherit;font-weight:650;font-size:13.5px;padding:9px 14px;border-radius:12px;cursor:pointer}
+.okpay{margin:12px 20px 0}.paysat{display:flex;gap:8px;margin-top:12px}.paysat .paybtn{flex:1}
+.paybtn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;box-sizing:border-box;border:1.5px solid var(--line);background:var(--surf);color:var(--tx);font:inherit;font-weight:650;font-size:14px;padding:11px 12px;border-radius:14px;cursor:pointer}
+.paybtn svg{width:19px;height:19px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.payimg{display:block;width:100%;height:auto;margin-top:12px;border-radius:12px;background:#fff;box-shadow:0 0 0 1px var(--line)}
+.paybt{display:flex;gap:8px;margin-top:14px}
+.payb{flex:1;border:1.5px solid var(--line);background:var(--surf);color:var(--tx);font:inherit;font-weight:650;font-size:15px;padding:13px;border-radius:14px;cursor:pointer}
+.payb.pri{background:var(--ink);color:#fff;border-color:var(--ink)}
+.oipu{position:absolute;z-index:50;width:250px;max-width:calc(100% - 28px);box-sizing:border-box;border-radius:16px;padding:12px 14px;background:#fff;color:#13244A;box-shadow:0 14px 34px -10px rgba(8,16,34,.55);font-size:13.5px;line-height:1.4}
+.oipu::before{content:"";position:absolute;left:30px;top:-7px;width:14px;height:14px;background:#fff;transform:rotate(45deg)}
+.oipu b{display:block;font-size:14.5px;margin-bottom:2px}
+.oipu button{position:relative;margin-top:8px;border:0;background:#13244A;color:#fff;font:inherit;font-weight:700;font-size:13px;padding:8px 14px;border-radius:10px;cursor:pointer}
+.r.osr{flex:none}.r.osr .dtx{white-space:nowrap;flex:none}
+.r.osr .ib{width:34px;height:34px}
