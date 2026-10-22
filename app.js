@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.12.0'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.12.1'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -1968,8 +1968,8 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
   function bilgiIlk(sonraki) {
     var kp = $('kap'); kp.className = 'lock kap on';
     kp.innerHTML = '<div class="kw"><img src="' + esc(LOGO) + '" alt=""><h1>Başlamadan önce</h1><p class="sub">Lütfen kısa bilgilendirmeyi okuyun.</p>' + bilgiHTML()
-      + '<button type="button" class="okr" id="okr" aria-pressed="false"><i></i><span>Bilgilendirmeyi okudum, anladım.</span></button><button type="button" class="bt2" id="okd" disabled>Devam</button></div>';
-    var r = $('okr'), d = $('okd');
+      + '<button type="button" class="okuk" id="okuk" aria-pressed="false"><i></i><span>Bilgilendirmeyi okudum, anladım.</span></button><button type="button" class="bt2" id="okd" disabled>Devam</button></div>';
+    var r = $('okuk'), d = $('okd');
     r.onclick = function () { var on = r.classList.toggle('on'); r.setAttribute('aria-pressed', on ? 'true' : 'false'); d.disabled = !on; };
     d.onclick = function () { if (d.disabled) return; yaz(K.okudum, JSON.stringify({ s: BILGI_SURUM, t: new Date().toISOString() })); sonraki(); };
     kp.scrollTop = 0;

@@ -703,10 +703,16 @@ button,[data-dt],[data-n],[data-c],.shd,.cov,.dtd{touch-action:manipulation}
 .bl li{position:relative;padding:0 0 10px 18px;font-size:15px;line-height:1.5}
 .bl li:before{content:"";position:absolute;left:2px;top:9px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
 .acn .bl h2:first-child{margin-top:4px}.acn .bl p,.acn .bl li{color:var(--tx);opacity:.88}
-.okr{display:flex;gap:12px;align-items:center;margin-top:18px;padding:14px;border-radius:14px;border:1.5px solid rgba(100,120,160,.5);cursor:pointer;font:inherit;font-size:15.5px;line-height:1.35;background:none;color:inherit;text-align:left;width:100%}
-.okr i{flex:none;width:24px;height:24px;border-radius:7px;border:2px solid rgba(100,120,160,.75);display:grid;place-items:center}
-.okr.on{border-color:var(--gold)}.okr.on i{background:var(--gold);border-color:var(--gold)}
-.okr.on i:after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.okuk{display:flex;gap:12px;align-items:center;margin-top:18px;padding:14px;border-radius:14px;border:1.5px solid rgba(100,120,160,.5);cursor:pointer;font:inherit;font-size:15.5px;line-height:1.35;background:none;color:inherit;text-align:left;width:100%}
+.okuk i{flex:none;width:24px;height:24px;border-radius:7px;border:2px solid rgba(100,120,160,.75);display:grid;place-items:center}
+.okuk.on{border-color:var(--gold)}.okuk.on i{background:var(--gold);border-color:var(--gold)}
+.okuk.on i:after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
 .bt2{display:block;width:100%;border:0;background:var(--gold);color:#fff;font:inherit;font-weight:700;font-size:16px;padding:14px;border-radius:14px;cursor:pointer;margin-top:14px}
 .bt2[disabled]{opacity:.38;cursor:default}
 .vta{width:100%;box-sizing:border-box;min-height:84px;border:1.5px solid var(--line);border-radius:12px;background:var(--paper);color:var(--tx);font:inherit;font-size:14px;padding:10px;margin-top:12px;resize:vertical}
+/* 0.12.1: Öğretmenler listesi "şimdi" rozeti: yeşil, yazı sığar; sol noktası ders sürerken nabız gibi atar */
+.rw.okr .okn{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;color:var(--teal);background:color-mix(in srgb,var(--teal) 16%,var(--surf))}
+.rw.okr .okn::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--teal);animation:oknp 1.8s ease-out infinite}
+@keyframes oknp{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--teal) 60%,transparent)}70%,100%{box-shadow:0 0 0 7px transparent}}
+@supports not (background:color-mix(in srgb,red 50%,blue)){.rw.okr .okn{background:#DCEFEA}@keyframes oknp{0%{box-shadow:0 0 0 0 rgba(47,133,121,.55)}70%,100%{box-shadow:0 0 0 7px rgba(47,133,121,0)}}}
+@media(prefers-reduced-motion:reduce){.rw.okr .okn::before{animation:none}}
