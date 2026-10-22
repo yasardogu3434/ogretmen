@@ -876,3 +876,9 @@ button,[data-dt],[data-n],[data-c],.shd,.cov,.dtd{touch-action:manipulation}
 .kart,:root[data-th=dark] .kart{-webkit-backdrop-filter:none;backdrop-filter:none}
 .dial .dno.bos{fill:var(--mut);stroke:var(--surf);stroke-width:3px;paint-order:stroke}
 .gvtm{display:block;width:100%;margin:12px 0 4px;padding:13px 16px;border:0;border-radius:14px;background:var(--ink);color:#fff;font:inherit;font-size:15px;font-weight:700;cursor:pointer}
+
+/* ===== 0.14.2: Günüm kartı tam saydam cam (tüm görünümler) — tek katman, arka plan doğrudan görünür ===== */
+#t0>.sec[data-k=akis]{background:none}
+#t0>.sec[data-k=akis]>.kart{background:none;-webkit-backdrop-filter:none;backdrop-filter:none;border:1.5px solid rgba(255,255,255,.95);box-shadow:0 0 0 1px rgba(90,80,170,.22),0 1px 0 rgba(255,255,255,.95) inset,0 22px 26px -22px rgba(255,255,255,.7) inset,0 14px 30px -12px rgba(60,50,140,.42)}
+:root[data-th=dark] #t0>.sec[data-k=akis]>.kart{border:1px solid rgba(255,255,255,.22);box-shadow:0 1px 0 rgba(255,255,255,.16) inset,0 10px 26px -16px rgba(0,0,0,.6)}
+@media(prefers-color-scheme:dark){:root:not([data-th=light]) #t0>.sec[data-k=akis]>.kart{border:1px solid rgba(255,255,255,.22);box-shadow:0 1px 0 rgba(255,255,255,.16) inset,0 10px 26px -16px rgba(0,0,0,.6)}}
