@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.14.2'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.14.3'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -1504,8 +1504,8 @@
     var ev = haftaKayitlari(C, mon);
     if (ev.length) h += '<div class="sec">' + secH(['Geçen', 'Bu', 'Gelecek'][WK + 1] + ' haftanın kayıtları', ev.length + ' kayıt') + '<div class="rows">' + ev.map(function (e) { return '<div class="rw" data-dt="gun:' + e[0] + '"><span class="z" style="min-width:46px;flex:none;white-space:nowrap;color:var(--tx);font-weight:650">' + esc(e[1]) + '</span><div class="a"><b>' + esc(e[2]) + '</b><span class="s">' + esc(e[3]) + '</span></div></div>'; }).join('') + '</div></div>';
     if (nobetSatir) h += '<div class="sec">' + secH('Nöbetin') + '<div class="rows">' + nobetSatir + '</div></div>';
-    if (sonraki && sonraki === a && n.gelecek && WK >= 1) h += '<div class="sec"><div class="rot"><p>Yeni nöbet düzenin, ' + esc(gunAy(a)) + ' tarihinden itibaren</p><p style="margin-top:10px;font-weight:500">Yönetim onayladı.</p></div></div>';
-    else if (sonraki && WK === 0 && iso(gunEkle(mon, 7)) === sonraki && n.gelecek) h += '<div class="sec"><div class="rot"><p>Gelecek hafta nöbet düzenin değişiyor</p><button class="lk" type="button" data-go="1">Gelecek haftaya bak</button></div></div>';
+    if (sonraki && sonraki === a && n.gelecek && WK >= 1) h += '<div class="sec"><div class="rot"><p>Yeni nöbet düzenin, ' + esc(gunAy(a)) + ' tarihinden itibaren</p><p style="margin-top:10px;font-weight:500">Yönetim onayladı.</p><button class="lk" type="button" data-dt="nbd">Önceki ve yeni yerlerini gör</button></div></div>';
+    else if (sonraki && WK === 0 && iso(gunEkle(mon, 7)) === sonraki && n.gelecek) h += '<div class="sec"><div class="rot"><p>Gelecek hafta nöbet düzenin değişiyor</p><button class="lk" type="button" data-hafta="1">Gelecek haftaya bak</button></div></div>';
     return h || '<div class="empty"><b>Bu hafta paylaşılan kayıt yok</b>Etkinlik, duyuru ya da nöbet değişikliği paylaşıldığında burada görünür.</div>';
   }
 
@@ -1888,7 +1888,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     if ((b = t.closest('[data-cg]'))) { var cg = b.getAttribute('data-cg').split(','); cekKapat(); TAB = +cg[0]; PS = TAB === 1 ? +cg[1] : 0; PR = TAB === 4 ? +cg[1] : 0; OK.s = -1; OK.o = -1; OK.q = ''; OK.bh = 0; if (cg[2] === 'hesap') AYOP.hes = true; WK = 0; $('scr').scrollTop = 0; render(); return; }
     if ((b = t.closest('#pf button'))) { PR = +b.dataset.p; OK.s = -1; OK.o = -1; OK.q = ''; OK.bh = 0; render(); return; }
     if ((b = t.closest('[data-oc]'))) { okHucreAc(b.getAttribute('data-oc')); return; }
-    if ((b = t.closest('[data-go]'))) { okGit(b.getAttribute('data-go')); return; }
+    if ((b = t.closest('[data-go^="s:"],[data-go^="o:"]'))) { okGit(b.getAttribute('data-go')); return; }
     if (t.closest('[data-ogit]')) { okSimdiyeGit(); return; }
     if ((b = t.closest('[data-pay]'))) { payHazirla(b.getAttribute('data-pay')); return; }
     if (t.closest('#paygo')) { payGonder(); return; }
@@ -1906,7 +1906,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     if ((b = t.closest('#wt button'))) { WK = +b.dataset.w; render(); return; }
     if ((b = t.closest('#ch button'))) { CAT = b.textContent; render(); return; }
     if ((b = t.closest('[data-go-tab]'))) { TAB = +b.dataset.goTab; $('scr').scrollTop = 0; render(); return; }
-    if ((b = t.closest('[data-go]'))) { WK = +b.dataset.go; render(); return; }
+    if ((b = t.closest('[data-hafta]'))) { WK = +b.dataset.hafta; $('scr').scrollTop = 0; render(); return; }
     if ((b = t.closest('#t1 [data-c]'))) { dtHucre(b.dataset.c); return; }
     if ((b = t.closest('#t1 [data-n]'))) { notAc(null, b.dataset.n); return; }
     if (t.closest('#addn')) { notAc(null, null, 1); return; }
