@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.14.4'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.14.5'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -1667,18 +1667,18 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
       + '</div>';
   }
   function skApply(root, v){
-    const q=(s)=>root.querySelector(s); const set=(s,t)=>{ const n=q(s); if(n && n.textContent!==t) n.textContent=t; };
+    const q=(s)=>root.querySelector(s); const set=(s,t)=>{ const n=q(s); if(n && n.textContent!==t) n.textContent=t; }; const sa=(n,k,v)=>{ v=String(v); if(n.getAttribute(k)!==v) n.setAttribute(k,v); };
     const sk=q('.sk'); if(!sk) return;
     sk.classList.toggle('sk-ink', !!v.ink);
     q('.sk-bg').style.background='radial-gradient(ellipse 52% 120% at '+v.sunX.toFixed(1)+'% '+Math.min(130,v.sunY).toFixed(1)+'%, '+v.glow+(v.e>-4?'dd':'66')+' 0%, transparent 70%), linear-gradient(180deg,'+v.top+' 0%,'+v.hor+' 100%)';
     q('.sk-stars').style.opacity=v.starOp.toFixed(2);
     q('.sk-clouds').style.opacity=(v.e>-6?0.5:0.18); q('.sk-clouds').style.setProperty('--cc', v.e>0?'#fff':'#9fb0d8');
-    q('.sk-arc').setAttribute('d', v.arc);
-    const hz=q('.sk-hz'); hz.setAttribute('x1',(v.ax0-2).toFixed(1)); hz.setAttribute('x2',(v.ax1+2).toFixed(1));
+    sa(q('.sk-arc'),'d', v.arc);
+    const hz=q('.sk-hz'); sa(hz,'x1',(v.ax0-2).toFixed(1)); sa(hz,'x2',(v.ax1+2).toFixed(1));
     const sun=q('.sk-sun'); sun.style.display=v.sunOn?'block':'none'; sun.style.left=v.sunX.toFixed(2)+'%'; sun.style.top=v.sunY.toFixed(2)+'%';
     sun.style.setProperty('--gl', v.glow); sun.style.setProperty('--g1', skRgba(v.glow,.28)); sun.style.setProperty('--g2', skRgba(v.glow,.17)); sun.style.setProperty('--core', v.e>6?'#fff2b8':'#ffd27a');
     const mo=q('.sk-moon'); mo.style.opacity=v.moonOp.toFixed(2); mo.style.display=v.moonOp>0.01?'block':'none'; mo.style.left=v.moonX.toFixed(2)+'%'; mo.style.top=v.moonY.toFixed(2)+'%';
-    q('.sk-mp').setAttribute('d', skMoonPath(v.moon));
+    sa(q('.sk-mp'),'d', skMoonPath(v.moon));
     set('.sk-tag', v.tag); set('.sk-g', v.g); set('.sk-s', v.sub); set('.sk-t', v.time); set('.sk-d', v.date);
     const inf=v.info.split('|'); set('.sk-inf .i1 em', inf[0]); set('.sk-inf .i2 em', inf[1]); set('.sk-inf .i3', 'Gün '+inf[2]);
   }
@@ -1774,6 +1774,9 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
         e.setAttribute('data-r', r[i]); e.style.setProperty('--sc', BR[r[i]]);
         if (i > 0) e.style.setProperty('--scp', BR[r[i - 1]]); else e.style.removeProperty('--scp');
         if (i < l.length - 1) e.style.setProperty('--scn', BR[r[i + 1]]); else e.style.removeProperty('--scn');
+        // 0.14.5: bandın üst ucu, üstündeki bölge cam kart (zeminsiz) ya da ilk bölge ise; alt ucu son bölge ise sayfa zeminine iner (sert yatay çizgi olmasın)
+        if (i === 0 || l[i - 1].getAttribute('data-k') === 'akis') e.style.setProperty('--g0', 'var(--paper)'); else e.style.removeProperty('--g0');
+        if (i === l.length - 1) e.style.setProperty('--g1', 'var(--paper)'); else e.style.removeProperty('--g1');
       });
     });
   }
@@ -1791,6 +1794,23 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     var s = $('scr'); if (!s) return;
     $('mini').classList.toggle('on', TAB === 0 && !!document.querySelector('#top .hr') && s.scrollTop > 230);
   }
+  // 0.14.5: her saniye yeniden çizilen parçalarda yalnız değişen öznitelik/metin yazılır (düğümler yeniden kurulmaz; titreme olmaz).
+  function morf(o, n) {
+    var i;
+    if (o.nodeType !== n.nodeType || o.nodeName !== n.nodeName) { o.parentNode.replaceChild(n.cloneNode(true), o); return; }
+    if (o.nodeType === 3 || o.nodeType === 8) { if (o.nodeValue !== n.nodeValue) o.nodeValue = n.nodeValue; return; }
+    if (o.nodeType !== 1) return;
+    var oa = o.attributes, na = n.attributes;
+    for (i = oa.length - 1; i >= 0; i--) if (!n.hasAttribute(oa[i].name)) o.removeAttribute(oa[i].name);
+    for (i = 0; i < na.length; i++) if (o.getAttribute(na[i].name) !== na[i].value) o.setAttribute(na[i].name, na[i].value);
+    morfIc(o, n);
+  }
+  function morfIc(o, n) {
+    var oc = o.childNodes, nc = n.childNodes, i;
+    if (oc.length !== nc.length) { o.innerHTML = n.innerHTML; return; }
+    for (i = 0; i < oc.length; i++) morf(oc[i], nc[i]);
+  }
+  function yT(e, t) { if (e && e.textContent !== t) e.textContent = t; }
   function tick(zorla) {
     if (kilit || document.hidden || !CTX) return;
     var C = baglam();
@@ -1807,15 +1827,15 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
         var kk = hh.replace(/\d+/g, '#');
         if (tp.dataset.kk === kk && tp.querySelector('[data-lv]')) {
           var tmp = document.createElement('div'); tmp.innerHTML = hh;
-          [].forEach.call(tmp.querySelectorAll('[data-lv]'), function (nd) { var o = tp.querySelector('[data-lv="' + nd.getAttribute('data-lv') + '"]'); if (o && o.innerHTML !== nd.innerHTML) o.innerHTML = nd.innerHTML; });
+          [].forEach.call(tmp.querySelectorAll('[data-lv]'), function (nd) { var o = tp.querySelector('[data-lv="' + nd.getAttribute('data-lv') + '"]'); if (o && o.innerHTML !== nd.innerHTML) morfIc(o, nd); });
         } else { tp.innerHTML = hh; tp.dataset.kk = kk; }
         tp.dataset.h = hh;
       }
     }
     var skc = $('skyc'); if (skc && typeof skApply === 'function') skApply(skc, skCompute(simdi(), true));
     var g = guncel(C), c = g[0];
-    $('mb').textContent = c ? f2(Math.floor((mdk(c[3]) * 60 - C.T) / 60)) + ':' + f2((mdk(c[3]) * 60 - C.T) % 60) : '';
-    $('ms').textContent = c ? c[1] : '';
+    yT($('mb'), c ? f2(Math.floor((mdk(c[3]) * 60 - C.T) / 60)) + ':' + f2((mdk(c[3]) * 60 - C.T) % 60) : '');
+    yT($('ms'), c ? c[1] : '');
     [].forEach.call(document.querySelectorAll('.flow'), function (el) {
       var rows = [].slice.call(el.querySelectorAll('.fr')), yy = null;
       rows.forEach(function (r) { var s = +r.dataset.s, e = +r.dataset.e; r.classList.toggle('past', C.T >= e); r.classList.toggle('now', C.T >= s && C.T < e); if (C.T >= s && C.T < e) r.setAttribute('data-k', 'kalan ' + sureTxt(e - C.T)); else r.removeAttribute('data-k'); if (C.T >= s && C.T < e) yy = r.offsetTop + (C.T - s) / (e - s) * r.offsetHeight; });
@@ -1828,7 +1848,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
       rows.forEach(function (r) {
         var s0 = +r.dataset.s, e0 = +r.dataset.e, now = C.T >= s0 && C.T < e0, kk = r.querySelector('.k');
         r.classList.toggle('past', C.T >= e0); r.classList.toggle('now', now);
-        if (kk) kk.textContent = now ? 'kalan ' + sureTxt(e0 - C.T) : '';
+        if (kk) yT(kk, now ? 'kalan ' + sureTxt(e0 - C.T) : '');
         if (now && yy == null) yy = r.offsetTop + (C.T - s0) / (e0 - s0) * r.offsetHeight;
         if (C.T >= e0) prev = r; else if (C.T < s0 && !next) next = r;
       });
@@ -1838,13 +1858,13 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
         else { var pb = prev.offsetTop + prev.offsetHeight, f = (C.T - (+prev.dataset.e)) / Math.max(1, (+next.dataset.s) - (+prev.dataset.e)); yy = pb + f * Math.max(0, next.offsetTop - pb); }
       }
       im.style.top = yy.toFixed(1) + 'px'; rl.style.height = yy.toFixed(1) + 'px';
-      var lb = im.querySelector('b'); if (lb) lb.textContent = f2(Math.floor(C.T / 3600)) + ':' + f2(Math.floor(C.T % 3600 / 60));
+      var lb = im.querySelector('b'); if (lb) yT(lb, f2(Math.floor(C.T / 3600)) + ':' + f2(Math.floor(C.T % 3600 / 60)));
     });
     [].forEach.call(document.querySelectorAll('[data-bg="1"] .gk, [data-bg="1"] .gx'), function (k) {
       var s0 = +k.dataset.s, e0 = +k.dataset.e, now = C.T >= s0 && C.T < e0;
       k.classList.toggle('past', C.T >= e0); k.classList.toggle('now', now);
       if (k.classList.contains('ar')) return;
-      var kk = k.querySelector('.k'); if (kk) kk.textContent = now ? 'kalan ' + sureTxt(e0 - C.T) : (C.T >= e0 ? 'bitti' : ''); var u = k.querySelector('.pb u'); if (u) u.style.width = now ? ((C.T - s0) / (e0 - s0) * 100).toFixed(1) + '%' : '0';
+      var kk = k.querySelector('.k'); if (kk) yT(kk, now ? 'kalan ' + sureTxt(e0 - C.T) : (C.T >= e0 ? 'bitti' : '')); var u = k.querySelector('.pb u'); if (u) u.style.width = now ? ((C.T - s0) / (e0 - s0) * 100).toFixed(1) + '%' : '0';
     });
     var ak = document.querySelector('.gakis[data-bg="1"]');
     if (ak) {

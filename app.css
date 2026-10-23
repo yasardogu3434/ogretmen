@@ -494,7 +494,7 @@ a.dl small{font-weight:500;color:var(--mut);font-size:12.5px}
 :root{--c-gunum:#3D8FE0;--c-yarin:#7F62E0;--c-yaklasan:#E8A33A;--c-neler:#2E9E73;--c-nobet:#D8527A;--c-pano:#2BA3B8;--c-not:#8FA23A;--tint:13%}
 @media(prefers-color-scheme:dark){:root:not([data-th=light]){--tint:20%}}
 :root[data-th=dark]{--tint:20%}
-#t0>.sec[data-r],#t1>.sec[data-r],#t2>.sec[data-r],#t3>.sec[data-r]{padding-top:26px;padding-bottom:26px;margin-top:0;margin-bottom:0;background:linear-gradient(180deg,color-mix(in srgb,color-mix(in srgb,var(--sc),var(--scp,var(--sc))) var(--tint),var(--paper)) 0,color-mix(in srgb,var(--sc) var(--tint),var(--paper)) 44px,color-mix(in srgb,var(--sc) var(--tint),var(--paper)) calc(100% - 44px),color-mix(in srgb,color-mix(in srgb,var(--sc),var(--scn,var(--sc))) var(--tint),var(--paper)) 100%)}
+#t0>.sec[data-r],#t1>.sec[data-r],#t2>.sec[data-r],#t3>.sec[data-r]{padding-top:26px;padding-bottom:26px;margin-top:0;margin-bottom:0;background:linear-gradient(180deg,var(--g0,color-mix(in srgb,color-mix(in srgb,var(--sc),var(--scp,var(--sc))) var(--tint),var(--paper))) 0,color-mix(in srgb,var(--sc) var(--tint),var(--paper)) 44px,color-mix(in srgb,var(--sc) var(--tint),var(--paper)) calc(100% - 44px),var(--g1,color-mix(in srgb,color-mix(in srgb,var(--sc),var(--scn,var(--sc))) var(--tint),var(--paper))) 100%)}
 #t0>.sec[data-r]:first-of-type,#t0>.stamp+.sec[data-r]{margin-top:0}
 #dt[data-r]{background:linear-gradient(180deg,color-mix(in srgb,var(--sc) var(--tint),var(--paper)),color-mix(in srgb,var(--sc) calc(var(--tint) / 2),var(--paper)) 60%,var(--paper))}
 #t0>.sec[data-r],#t1>.sec[data-r],#t2>.sec[data-r],#t3>.sec[data-r]{--mut:#586478}
@@ -890,3 +890,6 @@ button,[data-dt],[data-n],[data-c],.shd,.cov,.dtd{touch-action:manipulation}
 .skyc .sk-s{top:90px}
 @media(max-width:379px){.skyc .sk-t{font-size:38px}.skyc .sk-g{font-size:20px}.skyc .sk-d{font-size:9.5px;letter-spacing:.8px}.skyc .sk-clk{right:30px}.skyc .sk-s{right:30px}}
 @media(max-width:339px){.skyc .sk-t{font-size:32px}.skyc .sk-g{font-size:17px}.skyc .sk-clk{right:26px;top:24px}.skyc .sk-s{top:86px;right:26px}}
+
+/* 0.14.5: bölge bantları arasındaki sert yatay çizgiler — leke (::before) kenarlarda solar; Günüm sonrası ve son bölge fona yumuşak iner */
+#t0>.sec[data-r]::before,#t1>.sec[data-r]::before,#t2>.sec[data-r]::before,#t3>.sec[data-r]::before{-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 44px,#000 calc(100% - 44px),transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 44px,#000 calc(100% - 44px),transparent 100%)}
