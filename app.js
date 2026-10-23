@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.14.6'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.14.7'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -1431,7 +1431,7 @@
   }
   function nobetSekmesi(C) {
     var n = nobetim(C.y);
-    if (!n.liste.length && !n.gelecek) return '<div class="empty"><b>Nöbet göreviniz bulunmamaktadır</b>Nöbet yeriniz belirlendiğinde burada görünür.</div>';
+    if (!n.liste.length && !(n.gelecek && n.gelecek.liste.length)) return '<div class="empty"><b>Nöbet göreviniz bulunmamaktadır</b>' + (n.gelecek ? esc(gunAy(n.gelecek.bas)) + ' tarihinden itibaren geçerli yeni düzende de nöbet yeriniz yok.' : 'Nöbet yeriniz belirlendiğinde burada görünür.') + '</div>';
     var l = n.liste.slice().sort(function (a, b) { return a.gun - b.gun; });
     var h = '';
     if (l.length) {
@@ -1511,8 +1511,8 @@
     var ev = haftaKayitlari(C, mon);
     if (ev.length) h += '<div class="sec">' + secH(['Geçen', 'Bu', 'Gelecek'][WK + 1] + ' haftanın kayıtları', ev.length + ' kayıt') + '<div class="rows">' + ev.map(function (e) { return '<div class="rw" data-dt="gun:' + e[0] + '"><span class="z" style="min-width:46px;flex:none;white-space:nowrap;color:var(--tx);font-weight:650">' + esc(e[1]) + '</span><div class="a"><b>' + esc(e[2]) + '</b><span class="s">' + esc(e[3]) + '</span></div></div>'; }).join('') + '</div></div>';
     if (nobetSatir) h += '<div class="sec">' + secH('Nöbetin') + '<div class="rows">' + nobetSatir + '</div></div>';
-    if (sonraki && sonraki === a && n.gelecek && WK >= 1) h += '<div class="sec"><div class="rot"><p>Yeni nöbet düzenin, ' + esc(gunAy(a)) + ' tarihinden itibaren</p><p style="margin-top:10px;font-weight:500">Yönetim onayladı.</p><button class="lk" type="button" data-dt="nbd">Önceki ve yeni yerlerini gör</button></div></div>';
-    else if (sonraki && WK === 0 && iso(gunEkle(mon, 7)) === sonraki && n.gelecek) h += '<div class="sec"><div class="rot"><p>Gelecek hafta nöbet düzenin değişiyor</p><button class="lk" type="button" data-hafta="1">Gelecek haftaya bak</button></div></div>';
+    if (sonraki && sonraki === a && n.gelecek && (n.liste.length || n.gelecek.liste.length) && WK >= 1) h += '<div class="sec"><div class="rot"><p>Yeni nöbet düzenin, ' + esc(gunAy(a)) + ' tarihinden itibaren</p><p style="margin-top:10px;font-weight:500">Yönetim onayladı.</p><button class="lk" type="button" data-dt="nbd">Önceki ve yeni yerlerini gör</button></div></div>';
+    else if (sonraki && WK === 0 && iso(gunEkle(mon, 7)) === sonraki && n.gelecek && (n.liste.length || n.gelecek.liste.length)) h += '<div class="sec"><div class="rot"><p>Gelecek hafta nöbet düzenin değişiyor</p><button class="lk" type="button" data-hafta="1">Gelecek haftaya bak</button></div></div>';
     return h || '<div class="empty"><b>Bu hafta paylaşılan kayıt yok</b>Etkinlik, duyuru ya da nöbet değişikliği paylaşıldığında burada görünür.</div>';
   }
 
