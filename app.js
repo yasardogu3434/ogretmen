@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.14.3'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.14.4'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -49,6 +49,13 @@
   function aralik(a, b) { if (!a) return ''; if (!b || b === a) return gunAy(a); if (a.slice(5, 7) === b.slice(5, 7)) return (+a.slice(8)) + '–' + (+b.slice(8)) + ' ' + AY[+a.slice(5, 7) - 1]; return gunAy(a) + ' – ' + gunAy(b); }
   function saatStr(t) { var d = new Date(t); return f2(d.getHours()) + ':' + f2(d.getMinutes()); }
   function ilkAd(ad) { return String(ad || '').trim().split(/\s+/)[0] || ''; }
+  // Saatten sonra gelen "-de/-da/-te/-ta" eki, saatin SON okunan sayısına göre seçilir: 08:40'ta, 09:30'da, 10:20'de, 12:00'de.
+  function saatEk(hm) {
+    var m = /^(\d{1,2})[:.](\d{2})$/.exec(String(hm || '')); if (!m) return '\'da';
+    var n = +m[2] ? +m[2] : +m[1], k = (n >= 10 && n % 10 === 0) ? n : n % 10;
+    var E = { 0: 'da', 1: 'de', 2: 'de', 3: 'te', 4: 'te', 5: 'te', 6: 'da', 7: 'de', 8: 'de', 9: 'da', 10: 'da', 20: 'de', 30: 'da', 40: 'ta', 50: 'de' };
+    return '\'' + (E[k] || 'da');
+  }
   function norm(s) { return String(s || '').trim().toLocaleLowerCase('tr-TR').replace(/\s+/g, ' '); }
   function simdi() { return new Date(); }
   function saniye() { var d = simdi(); return d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds(); }
@@ -324,17 +331,17 @@
     var gb = C.gb;
     if (!C.y || gb.tip === 'yok') return gokyuzuHTML(C, 'Ders saatleri henüz yayınlanmadı');
     var nx = sonrakiOkul(C);
-    if (gb.tip === 'hs') return gokyuzuHTML(C, nx ? 'Okullar ' + (nx.etiket === 'Yarın' ? 'yarın' : nx.etiket) + ' ' + nx.ilk + '\'da açılıyor' : 'Hafta sonu');
-    if (gb.tip === 'tatil') return gokyuzuHTML(C, 'Bugün okul tatil' + (gb.ad ? ': ' + gb.ad : '') + (nx ? '. Dersler ' + nx.etiket.toLowerCase() + ' ' + nx.ilk + '\'da başlıyor' : ''));
+    if (gb.tip === 'hs') return gokyuzuHTML(C, nx ? 'Okullar ' + nx.etiket.toLocaleLowerCase('tr-TR') + ' ' + nx.ilk + saatEk(nx.ilk) + ' açılıyor' : 'Hafta sonu');
+    if (gb.tip === 'tatil') return gokyuzuHTML(C, 'Bugün okul tatil' + (gb.ad ? ': ' + gb.ad : '') + (nx ? '. Dersler ' + nx.etiket.toLocaleLowerCase('tr-TR') + ' ' + nx.ilk + saatEk(nx.ilk) + ' başlıyor' : ''));
     var g = guncel(C), c = g[0], n = g[1];
     if (!c) {
-      if (C.T < C.A0) { var dk = C.A0 - C.T; return gokyuzuHTML(C, 'İlk ders ' + gb.ders[0][1] + '\'da, ' + sureTxt(dk) + ' sonra'); }
-      return gokyuzuHTML(C, 'Gün tamamlandı.' + (nx ? ' ' + nx.etiket + ' ilk ders ' + nx.ilk + '\'da' : ''));
+      if (C.T < C.A0) { var dk = C.A0 - C.T; return gokyuzuHTML(C, 'İlk ders ' + gb.ders[0][1] + saatEk(gb.ders[0][1]) + ', ' + sureTxt(dk) + ' sonra'); }
+      return gokyuzuHTML(C, 'Gün tamamlandı.' + (nx ? ' ' + nx.etiket + ' ilk ders ' + nx.ilk + saatEk(nx.ilk) : ''));
     }
     var e = mdk(c[3]) * 60, s0 = mdk(c[2]) * 60, left = e - C.T, les = c[0] === 'ders', fr = Math.min(1, Math.max(0, left / (e - s0))), Cc = 2 * Math.PI * 78;
     var kalan = f2(Math.floor(left / 60)) + ':' + f2(left % 60);
     var sinif = les && mine && C.MY[dersNo(c)] ? '<div class="nx" style="margin-top:4px">Sınıfın: ' + esc(C.MY[dersNo(c)].sinif) + '</div>' : '';
-    return '<div class="hr"><div class="ring' + (les ? '' : ' br') + '" data-lv="r"><svg viewBox="0 0 180 180" aria-hidden="true">' + TICKS + '<circle class="tr" cx="90" cy="90" r="78"/><circle class="pg' + (les && left <= 300 ? ' son' : '') + '" cx="90" cy="90" r="78" stroke-dasharray="' + Cc.toFixed(1) + '" stroke-dashoffset="' + (Cc * (1 - fr)).toFixed(1) + '"/></svg><div class="rc"><b class="d">' + kalan.slice(0, -1) + '<span class="sd">' + kalan.slice(-1) + '</span></b><span>kalan süre</span></div></div><div class="hs"><div class="ey' + (les ? '' : ' br') + '">' + esc(c[1]) + '</div><div class="cap">' + (les ? 'ders bitimine' : (c[0] === 'öğle' ? 'öğle arasının bitimine' : 'teneffüsün bitimine')) + ' kadar</div>' + (n ? '<div class="nx">Sonra ' + esc(n[1].toLowerCase()) + ', ' + n[2] + '</div>' : '<div class="nx">Günün son dersi</div>') + sinif + '</div></div>' + cetvel(C, mine);
+    return '<div class="hr"><div class="ring' + (les ? '' : ' br') + '" data-lv="r"><svg viewBox="0 0 180 180" aria-hidden="true">' + TICKS + '<circle class="tr" cx="90" cy="90" r="78"/><circle class="pg' + (les && left <= 300 ? ' son' : '') + '" cx="90" cy="90" r="78" stroke-dasharray="' + Cc.toFixed(1) + '" stroke-dashoffset="' + (Cc * (1 - fr)).toFixed(1) + '"/></svg><div class="rc"><b class="d">' + kalan.slice(0, -1) + '<span class="sd">' + kalan.slice(-1) + '</span></b><span>kalan süre</span></div></div><div class="hs"><div class="ey' + (les ? '' : ' br') + '">' + esc(c[1]) + '</div><div class="cap">' + (les ? 'ders bitimine' : (c[0] === 'öğle' ? 'öğle arasının bitimine' : 'teneffüsün bitimine')) + ' kadar</div>' + (n ? '<div class="nx">Sonra ' + esc(n[1].toLocaleLowerCase('tr-TR')) + ', ' + n[2] + '</div>' : '<div class="nx">Günün son dersi</div>') + sinif + '</div></div>' + cetvel(C, mine);
   }
   // ---- Üst alan: panel düzeni. Ders/teneffüste geri sayım, ders dışında slayt; düğmeyle geçiş
   var HI = 0, HX = true, HSON = Date.now(), HLAST = Date.now(), HFX = false, HYON = 0, HO = null, SLAYT_MS = 10000, GERI_MS = 300000;
@@ -378,10 +385,10 @@
     var gb = C.gb, y = C.y;
     if (!y || gb.tip === 'yok') return oneKart({ k: 'Ders saatleri', t: 'Henüz yayınlanmadı', s: 'Okul yönetimi paylaştığında burada görünür.' });
     var nx = sonrakiOkul(C), ey, cap;
-    if (gb.tip === 'ders' && C.T < C.A0) { ey = 'Ders başlamadan'; cap = 'İlk ders ' + gb.ders[0][1] + '\'da'; }
+    if (gb.tip === 'ders' && C.T < C.A0) { ey = 'Ders başlamadan'; cap = 'İlk ders ' + gb.ders[0][1] + saatEk(gb.ders[0][1]); }
     else {
       ey = gb.tip === 'hs' ? 'Hafta sonu' : (gb.tip === 'tatil' ? 'Bugün okul tatil' : 'Gün tamamlandı');
-      cap = nx ? (nx.etiket === 'Yarın' ? 'Yarın' : nx.etiket) + ' ilk ders ' + nx.ilk + '\'da' : '';
+      cap = nx ? (nx.etiket === 'Yarın' ? 'Yarın' : nx.etiket) + ' ilk ders ' + nx.ilk + saatEk(nx.ilk) : '';
     }
     var sayi = 0, planli = !!programVar(y), alt = '';
     if (nx) { nx.gb.ders.forEach(function (x, i) { if (!mine || !planli || hucreAl(y, nx.gb.wd, i + 1)) sayi++; }); alt = (nx.etiket === 'Yarın' ? 'Yarın' : nx.etiket) + ', ' + sayi + (mine && planli ? ' dersin var' : ' ders var'); }
@@ -422,13 +429,13 @@
     var y = C.y, out = [], bg = C.gb.ds; if (!y || C.gb.tip === 'yok') return out;
     var planli = !!programVar(y), bitti = C.gb.tip === 'ders' && C.T >= C.Z0, ol = null;
     function olaylarAl() { return ol || (ol = olaylar(y)); }
-    // 0) Hafta sonu: tek bir 'İyi Tatiller' mesajı
-    if (C.gb.tip === 'hs') out.push({ k: 'Hafta sonu', t: 'İyi Tatiller', s: '', dt: '' });
+    // 0) Hafta sonu: tek bir 'İyi tatiller' mesajı
+    if (C.gb.tip === 'hs') out.push({ k: 'Hafta sonu', t: 'İyi tatiller', s: '', dt: '' });
     // 1) Bugün sende
     if (planli && C.gb.tip === 'ders' && C.gb.ders.length && !bitti) {
       var n = 0, ilk = 0, i;
       for (i = 1; i <= C.gb.ders.length; i++) if (hucreAl(y, C.gb.wd, i)) { n++; if (!ilk) ilk = i; }
-      if (n) { var ih = hucreAl(y, C.gb.wd, ilk); out.push({ k: 'Bugün sende', t: 'Bugün ' + n + ' dersin var', s: 'İlk dersin ' + C.gb.ders[ilk - 1][1] + '\'da' + (ih ? ', ' + ih.sinif : ''), dt: 'gun:' + bg }); }
+      if (n) { var ih = hucreAl(y, C.gb.wd, ilk); out.push({ k: 'Bugün sende', t: 'Bugün ' + n + ' dersin var', s: 'İlk dersin ' + C.gb.ders[ilk - 1][1] + saatEk(C.gb.ders[ilk - 1][1]) + (ih ? ', ' + ih.sinif : ''), dt: 'gun:' + bg }); }
     }
     // 1b) Ders doldurma: yalnız bugün kendi doldurması varsa ve bitmediyse
     var bdl = benimDoldurma(C);
@@ -544,7 +551,7 @@
         var pr = []; if (g1.gecici) pr.push('Geçici ders saatleri uygulanacak.'); var yer = nobetYer(y, g1.wd, iso(yr)); if (yer) pr.push('Nöbetin: ' + yer + '.');
         s = pr.join(' ');
       } else if (g1.tip === 'tatil') { t = GUN[yr.getDay()] + ' günü okul tatil.'; s = g1.ad; }
-      else if (g1.tip === 'hs') { var nx = sonrakiOkul(C); t = nx ? 'Okullar ' + nx.etiket + ' açılıyor.' : 'Yarın hafta sonu.'; s = nx ? 'İlk ders ' + nx.ilk + '.' : ''; }
+      else if (g1.tip === 'hs') { var nx = sonrakiOkul(C); t = nx ? 'Okullar ' + nx.etiket.toLocaleLowerCase('tr-TR') + ' açılıyor.' : 'Yarın hafta sonu.'; s = nx ? 'İlk ders ' + nx.ilk + '.' : ''; }
       if (t) out.push({ k: 'Yarına bakış', t: t, s: s, c: 'var(--teal)', dt: 'gun:' + iso(yr) });
     }
     var bgun = ortak(y, 'slayt:belirliGun');
@@ -1470,7 +1477,7 @@
       if (C.gb.tip === 'ders') { if (C.T >= C.Z0) h += '<div class="gbit"><b>Bugünkü derslerin bitti</b>Aşağıda bugünkü programını görebilirsin.</div>'; h += sAkis(C, 1); }
       else if (C.gb.tip === 'hs' || C.gb.tip === 'tatil') {
         var nx = sonrakiOkul(C), c1 = nx ? hucreAl(C.y, nx.gb.wd, 1) : null;
-        h += '<div class="empty"><b>' + (C.gb.tip === 'hs' ? 'Hafta sonu' : 'Bugün okul tatil') + '</b>' + (nx ? esc(nx.etiket) + ' dersler ' + esc(nx.ilk) + '\'da başlıyor' + (c1 ? '; ilk dersin ' + esc(c1.sinif) + ' sınıfında.' : '.') : '') + '</div>';
+        h += '<div class="empty"><b>' + (C.gb.tip === 'hs' ? 'Hafta sonu' : 'Bugün okul tatil') + '</b>' + (nx ? esc(nx.etiket) + ' dersler ' + esc(nx.ilk) + saatEk(nx.ilk) + ' başlıyor' + (c1 ? '; ilk dersin ' + esc(c1.sinif) + ' sınıfında.' : '.') : '') + '</div>';
       } else h += '<div class="empty"><b>Ders saatleri henüz yayınlanmadı</b>Okul yönetimi paylaştığında burada görünür.</div>';
       return programBekNotu(C) + gsat + h + khtml;
     }

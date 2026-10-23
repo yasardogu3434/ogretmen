@@ -885,3 +885,8 @@ button,[data-dt],[data-n],[data-c],.shd,.cov,.dtd{touch-action:manipulation}
 #t0>.sec[data-k=akis]>.kart{background:none;-webkit-backdrop-filter:none;backdrop-filter:none;border:1.5px solid rgba(255,255,255,.95);box-shadow:0 0 0 1px rgba(90,80,170,.22),0 1px 0 rgba(255,255,255,.95) inset,0 22px 26px -22px rgba(255,255,255,.7) inset,0 14px 30px -12px rgba(60,50,140,.42)}
 :root[data-th=dark] #t0>.sec[data-k=akis]>.kart{border:1px solid rgba(255,255,255,.22);box-shadow:0 1px 0 rgba(255,255,255,.16) inset,0 10px 26px -16px rgba(0,0,0,.6)}
 @media(prefers-color-scheme:dark){:root:not([data-th=light]) #t0>.sec[data-k=akis]>.kart{border:1px solid rgba(255,255,255,.22);box-shadow:0 1px 0 rgba(255,255,255,.16) inset,0 10px 26px -16px rgba(0,0,0,.6)}}
+
+/* Dar telefonlarda gökyüzü kartı: selamlama, saat ve alt yazı üst üste binmesin (0.14.3) */
+.skyc .sk-s{top:90px}
+@media(max-width:379px){.skyc .sk-t{font-size:38px}.skyc .sk-g{font-size:20px}.skyc .sk-d{font-size:9.5px;letter-spacing:.8px}.skyc .sk-clk{right:30px}.skyc .sk-s{right:30px}}
+@media(max-width:339px){.skyc .sk-t{font-size:32px}.skyc .sk-g{font-size:17px}.skyc .sk-clk{right:26px;top:24px}.skyc .sk-s{top:86px;right:26px}}
