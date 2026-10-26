@@ -614,7 +614,7 @@ a.dl small{font-weight:500;color:var(--mut);font-size:12.5px}
 @media(prefers-color-scheme:dark){:root:not([data-th=light]) .cek button.on{background:rgba(255,255,255,.14)}}
 :root[data-th=dark] .cek button.on{background:rgba(255,255,255,.14)}
 .cek svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
-.cbt{padding:6px 8px 0;border-top:1px solid rgba(19,36,74,.14)}
+.cbt{padding:6px 8px 0;border-top:1px solid rgba(19,36,74,.14)}.clst .cbt{margin-top:12px;padding:8px 0 4px}
 /* Programım: Görevlerim bağlantı satırı + bitti bildirimi */
 .gsat{display:flex;align-items:center;gap:10px;width:calc(100% - 40px);margin:14px 20px 0;border:1.5px solid var(--line);background:var(--surf);color:var(--tx);font:inherit;padding:13px 14px;border-radius:14px;cursor:pointer;text-align:left}
 .gsat b{font-size:15px;font-weight:650;flex:1}.gsat span{font-size:13px;color:var(--mut)}.gsat i{font-style:normal;color:var(--gold);font-weight:700}

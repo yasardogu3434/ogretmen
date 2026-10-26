@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.15.2'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.15.3'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu', kd: 'ogr_kd' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -291,7 +291,7 @@
   };
   var TEMA_AD = { oto: 'Otomatik', acik: 'Açık', koyu: 'Koyu', siyah: 'Siyah' };
   function temaDegis() {
-    var t = oku(K.tema) || 'oto', n = t === 'oto' ? 'acik' : (t === 'acik' ? 'koyu' : 'oto');
+    var t = oku(K.tema) || 'oto', n = t === 'oto' ? 'acik' : (t === 'acik' ? 'koyu' : (t === 'koyu' ? 'siyah' : 'oto'));
     if (n === 'oto') sil(K.tema); else yaz(K.tema, n);
     tercihUygula();
     var b = $('tb'); if (b) { b.innerHTML = '<svg viewBox="0 0 24 24">' + TEMA_IK[n] + '</svg>'; b.setAttribute('aria-label', 'Tema: ' + TEMA_AD[n] + ' (değiştirmek için dokun)'); }
@@ -957,6 +957,65 @@
     h += '</div>';
     return h;
   }
+
+  // ---- Geçmiş: tarihi geçen sınav/etkinlik/tatil kayıtları (yeniden eskiye); panelin 'gecmis' yayını + eldeki kayıtlar
+  function gecmisListe(y, bg) {
+    var m = {}, out = [], g = ortak(y, 'gecmis');
+    function ekle(o) { var key = [o.k, o.ad, o.bas, o.bit, o.alt].join('|'); if (m[key]) return; m[key] = 1; out.push(o); }
+    olaylar(y).forEach(function (o) { if (o.bit < bg && KAT[o.k] && o.k !== 'nobet') ekle({ k: o.k, ad: o.ad, bas: o.bas, bit: o.bit, alt: o.alt || '' }); });
+    if (g && Array.isArray(g.liste)) g.liste.forEach(function (x) {
+      if (!x || !x.ad || !KAT[x.k] || x.k === 'nobet' || !ISODT.test(x.bas || '')) return;
+      var bt = (ISODT.test(x.bit || '') && x.bit >= x.bas) ? x.bit : x.bas; if (bt >= bg) return;
+      ekle({ k: x.k, ad: String(x.ad), bas: x.bas, bit: bt, alt: x.h ? 'Sınav haftası · ' + aralik(x.bas, bt) : String(x.alt || '') });
+    });
+    out.sort(function (a, b) { return a.bas < b.bas ? 1 : a.bas > b.bas ? -1 : (a.ad < b.ad ? -1 : 1); });
+    return out;
+  }
+  function gecmisSuz(C) {
+    var kf = KFM[KF] || ''; if (kf === 'nobet') kf = '';
+    return gecmisListe(C.y, C.gb.ds).filter(function (o) { return !kf || o.k === kf; });
+  }
+  function gecmisHTML(C) {
+    var kf = KFM[KF] || ''; if (kf === 'nobet') kf = '';
+    var l = gecmisSuz(C), top = gecmisListe(C.y, C.gb.ds).length;
+    var h = '<div class="chips kf" id="kf">' + ['Tümü', 'Sınav', 'Etkinlik', 'Tatil', 'Özel gün'].map(function (c) { return '<button type="button"' + ((KF === c || (!kf && c === 'Tümü')) ? ' class="on"' : '') + '>' + (KFM[c] ? katIk(KFM[c]) : '') + c + '</button>'; }).join('') + '</div>';
+    if (!l.length) return h + '<div class="empty ei-takvim"><b>' + (top ? 'Bu türde geçmiş kayıt yok' : 'Geçmiş kayıt yok') + '</b>Tarihi geçen sınav, etkinlik ve tatiller burada, yeniden eskiye doğru toplanır.</div>';
+    var gr = [], son = '';
+    l.forEach(function (o) { var ay = o.bas.slice(0, 7); if (ay !== son) { son = ay; gr.push({ ay: ay, l: [] }); } gr[gr.length - 1].l.push(o); });
+    h += '<div class="sec">' + secH('Geçmiş kayıtlar', l.length + ' kayıt') + '<div class="okpay">' + pdfBtn('gect', 'Tüm geçmişi PDF olarak al') + '</div>' + (kf ? '<div class="okpay" style="margin-top:8px">' + pdfBtn('gec', KAT[kf][0] + ' kayıtlarını PDF olarak al') + '</div>' : '') + '</div>';
+    gr.forEach(function (g) {
+      h += '<div class="sec">' + secH(AY[+g.ay.slice(5, 7) - 1] + ' ' + g.ay.slice(0, 4), g.l.length + ' kayıt') + '<div class="rows">' + g.l.map(function (o) {
+        return '<div class="rw ev" style="--c:' + KAT[o.k][1] + '">' + dzTarih(o.bas, o.bit) + '<div class="a"><b>' + esc(o.ad) + '</b><span class="s">' + esc(KAT[o.k][0] + (o.alt ? ' · ' + o.alt : '')) + '</span></div></div>';
+      }).join('') + '</div></div>';
+    });
+    return h;
+  }
+  function gecmisPdf(suzulu) {
+    var C = CTX || baglam(), l = suzulu ? gecmisSuz(C) : gecmisListe(C.y, C.gb.ds); if (!l.length) return;
+    var SAT = 13, say = Math.ceil(l.length / SAT), kf = KFM[KF] || '', ek = (suzulu && kf && kf !== 'nobet') ? ' · ' + KAT[kf][0] : '';
+    var bloblar = [], k = 0, ilk = null, okul = (C.y && C.y.okul) || '';
+    function sayfa() {
+      if (k >= say) {
+        pdfKurCok(bloblar, 1754 * 2, 1240 * 2, function (pb) {
+          if (!pb) return;
+          var dosya = 'gecmis-' + (ek ? okAra(KAT[kf][0]) : 'tum-kayitlar') + '-' + C.gb.ds + '.pdf';
+          if (PAY.url) { try { URL.revokeObjectURL(PAY.url); } catch (e) {} }
+          if (PAY.thumb) { try { URL.revokeObjectURL(PAY.thumb); } catch (e) {} }
+          PAY.blob = pb; PAY.dosya = dosya; PAY.baslik = 'Geçmiş kayıtlar'; PAY.url = URL.createObjectURL(pb); PAY.thumb = URL.createObjectURL(ilk); PAY.file = null;
+          try { PAY.file = new File([pb], dosya, { type: 'application/pdf' }); } catch (e) {}
+          var can2 = false; try { can2 = !!(PAY.file && navigator.canShare && navigator.canShare({ files: [PAY.file] })); } catch (e) {}
+          ayrintiRenk('ak:0');
+          dtGoster('PDF önizleme', '<img class="payimg" src="' + PAY.thumb + '" alt="Geçmiş kayıtlar PDF önizlemesi"><div class="paybt">' + (can2 ? '<button type="button" class="payb pri" id="paygo">Paylaş</button>' : '') + '<button type="button" class="payb' + (can2 ? '' : ' pri') + '" id="paysave">' + (can2 ? 'PDF kaydet' : 'PDF indir') + '</button></div><p class="oknot" style="margin:10px 0 0">A4 yatay, ' + say + ' sayfa, yazdırmaya hazır.</p>');
+        });
+        return;
+      }
+      var parca = l.slice(k * SAT, (k + 1) * SAT);
+      var o = { baslik: 'Geçmiş kayıtlar' + ek, alt: l.length + ' kayıt · yeniden eskiye · sayfa ' + (k + 1) + '/' + say, sut: ['Tarih', 'Tür', 'Kayıt'], w: [1.1, 0.8, 3], solHiza: true, W: 1754, H: 1240, S: 2, jpeg: true, rh: 64, okul: okul, tarih: payTarih(C), not: 'Tarihi geçen sınav, etkinlik ve tatil kayıtları.',
+        sat: parca.map(function (r) { return [aralik(r.bas, r.bit), KAT[r.k][0], [r.ad, r.alt || '']]; }) };
+      payCiz(o, function (blob) { if (!blob) return; bloblar.push(blob); if (!ilk) ilk = blob; k++; sayfa(); });
+    }
+    sayfa();
+  }
   function dtOlay(i) {
     var o = olaylar(Y())[i]; if (!o) return;
     var h = '<div class="chp"><span style="background:' + KAT[o.k][1] + '38;background:color-mix(in srgb,' + KAT[o.k][1] + ' 22%,transparent)">' + esc(KAT[o.k][0]) + '</span></div><div class="dbig d" style="font-size:26px;line-height:1.15">' + esc(o.ad) + '</div><div class="dsub">' + esc(aralik(o.bas, o.bit)) + (o.bas === o.bit ? ' · ' + GUN[tarihCoz(o.bas).getDay()] : '') + '</div>';
@@ -1363,30 +1422,41 @@
     return nb.gunler.filter(function (g) { return g && typeof g.tarih === 'string' && g.tarih >= a && g.tarih <= b && Array.isArray(g.liste) && g.liste.some(function (k) { return k && typeof k.ad === 'string' && k.ad; }); }).sort(function (p, q) { return p.tarih < q.tarih ? -1 : 1; });
   }
   // ---- 0.15.0: PDF — yazdırmaya hazır A4 yatay; tablo görüntüsü JPEG olarak tek sayfalık PDF'e konur (ek kütüphane yok, ağ yok)
-  function pdfKur(blob, gen, yuk, cb) {
-    var fr = new FileReader();
-    fr.onerror = function () { cb(null); };
-    fr.onload = function () {
+  function pdfKurCok(bloblar, gen, yuk, cb) {
+    var imgs = [], k = 0;
+    function oku() {
+      if (k >= bloblar.length) { kur(); return; }
+      var fr = new FileReader();
+      fr.onerror = function () { cb(null); };
+      fr.onload = function () { imgs.push(new Uint8Array(fr.result)); k++; oku(); };
+      fr.readAsArrayBuffer(bloblar[k]);
+    }
+    function kur() {
       try {
-        var jpg = new Uint8Array(fr.result), parcalar = [], toplam = 0, ofs = [];
-        var ekle = function (x) { if (typeof x === 'string') { var u = new Uint8Array(x.length); for (var i = 0; i < x.length; i++) u[i] = x.charCodeAt(i) & 255; x = u; } parcalar.push(x); toplam += x.length; };
-        var p10 = function (n) { return ('0000000000' + n).slice(-10); };
+        var n = imgs.length, parcalar = [], toplam = 0, ofs = [], i;
+        var ekle = function (x) { if (typeof x === 'string') { var u = new Uint8Array(x.length); for (var q = 0; q < x.length; q++) u[q] = x.charCodeAt(q) & 255; x = u; } parcalar.push(x); toplam += x.length; };
+        var p10 = function (v) { return ('0000000000' + v).slice(-10); };
         ekle('%PDF-1.4\n%\u00e2\u00e3\u00cf\u00d3\n');
         ofs[1] = toplam; ekle('1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n');
-        ofs[2] = toplam; ekle('2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n');
-        ofs[3] = toplam; ekle('3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 842 595] /Resources << /XObject << /Im0 4 0 R >> /ProcSet [/PDF /ImageC] >> /Contents 5 0 R >>\nendobj\n');
-        ofs[4] = toplam; ekle('4 0 obj\n<< /Type /XObject /Subtype /Image /Width ' + gen + ' /Height ' + yuk + ' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ' + jpg.length + ' >>\nstream\n'); ekle(jpg); ekle('\nendstream\nendobj\n');
-        var ic = 'q 842 0 0 595 0 0 cm /Im0 Do Q';
-        ofs[5] = toplam; ekle('5 0 obj\n<< /Length ' + ic.length + ' >>\nstream\n' + ic + '\nendstream\nendobj\n');
-        var xr = toplam;
-        ekle('xref\n0 6\n0000000000 65535 f \n' + [1, 2, 3, 4, 5].map(function (i) { return p10(ofs[i]) + ' 00000 n \n'; }).join('') + 'trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n' + xr + '\n%%EOF\n');
+        var kids = []; for (i = 0; i < n; i++) kids.push((3 + 3 * i) + ' 0 R');
+        ofs[2] = toplam; ekle('2 0 obj\n<< /Type /Pages /Kids [' + kids.join(' ') + '] /Count ' + n + ' >>\nendobj\n');
+        for (i = 0; i < n; i++) {
+          var pg = 3 + 3 * i, im = pg + 1, ct = pg + 2, jpg = imgs[i], ic = 'q 842 0 0 595 0 0 cm /Im0 Do Q';
+          ofs[pg] = toplam; ekle(pg + ' 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 842 595] /Resources << /XObject << /Im0 ' + im + ' 0 R >> /ProcSet [/PDF /ImageC] >> /Contents ' + ct + ' 0 R >>\nendobj\n');
+          ofs[im] = toplam; ekle(im + ' 0 obj\n<< /Type /XObject /Subtype /Image /Width ' + gen + ' /Height ' + yuk + ' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ' + jpg.length + ' >>\nstream\n'); ekle(jpg); ekle('\nendstream\nendobj\n');
+          ofs[ct] = toplam; ekle(ct + ' 0 obj\n<< /Length ' + ic.length + ' >>\nstream\n' + ic + '\nendstream\nendobj\n');
+        }
+        var xr = toplam, say = 3 + 3 * n, lst = ''; for (i = 1; i < say; i++) lst += p10(ofs[i]) + ' 00000 n \n';
+        ekle('xref\n0 ' + say + '\n0000000000 65535 f \n' + lst + 'trailer\n<< /Size ' + say + ' /Root 1 0 R >>\nstartxref\n' + xr + '\n%%EOF\n');
         cb(new Blob(parcalar, { type: 'application/pdf' }));
       } catch (e) { cb(null); }
-    };
-    fr.readAsArrayBuffer(blob);
+    }
+    oku();
   }
+  function pdfKur(blob, gen, yuk, cb) { pdfKurCok([blob], gen, yuk, cb); }
   function pdfBtn(tip, etiket) { return '<button type="button" class="paybtn" data-pay="' + tip + 'pdf"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 16.5h6"/></svg>' + esc(etiket || 'PDF olarak al') + '</button>'; }
   function payHazirla(tip) {
+    if (tip === 'gecpdf' || tip === 'gectpdf') { gecmisPdf(tip === 'gecpdf'); return; }
     var pdf = /pdf$/.test(tip); if (pdf) tip = tip.slice(0, -3);
     var C = CTX || baglam(), o = null, dosya = 'program.png', y = C.y, okul = (y && y.okul) || '';
     var so = /^so(sube|ogr)$/.test(tip); if (so) tip = tip.slice(2);
@@ -1726,6 +1796,7 @@
   function t2HTML(C) {
     if (yayinKapali(C)) return '<div class="empty"><b>Bilgiler şu an gösterilemiyor</b>Bugün sekmesinden durumu görebilirsin.</div>';
     if (CV === 1) return ayHTML(C);
+    if (CV === 2) return gecmisHTML(C);
     var mon = gunEkle(pazartesi(C.d), WK * 7), a = iso(mon), y = C.y, n = nobetim(y), h = '';
     var rot = ortak(y, 'rotasyon'), sonraki = rot && rot.hafta && rot.hafta.sonraki;
     var nobetSatir = '';
@@ -1782,11 +1853,12 @@
       var cats = ['Tümü']; haberListe(y).forEach(function (h) { var k = h.kat || 'Bilgi'; if (cats.indexOf(k) < 0) cats.push(k); });
       return logoBar(C, 'Öğretmen ekranı') + '<div class="tz d">Pano</div><div class="tzs">Duyurular, belirli günler, haberler ve bağlantılar</div>' + (cats.length > 2 ? '<div class="chips" id="ch">' + cats.map(function (c) { return '<button type="button"' + (CAT === c ? ' class="on"' : '') + '>' + esc(c) + '</button>'; }).join('') + '</div>' : '');
     }
-    var cvh = '<div class="tabs" id="cv">' + [['0', 'Hafta'], ['1', 'Ay']].map(function (x) { return '<button type="button" data-cv="' + x[0] + '"' + (CV === +x[0] ? ' class="on"' : '') + '>' + x[1] + '</button>'; }).join('') + '</div>';
+    var cvh = '<div class="tabs" id="cv">' + [['0', 'Hafta'], ['1', 'Ay'], ['2', 'Geçmiş']].map(function (x) { return '<button type="button" data-cv="' + x[0] + '"' + (CV === +x[0] ? ' class="on"' : '') + '>' + x[1] + '</button>'; }).join('') + '</div>';
     if (CV === 1) {
       var mb = new Date(C.d.getFullYear(), C.d.getMonth() + MO, 1);
       return logoBar(C, 'Öğretmen ekranı') + '<div class="tz d">Takvim</div>' + cvh + '<div class="mn"><button type="button" data-mo="-1" aria-label="Önceki ay">' + IK_ONC + '</button><div class="mm"><b class="d">' + AY[mb.getMonth()] + ' ' + mb.getFullYear() + '</b>' + (MO ? '<button type="button" class="bg" data-mo="0">Bugün</button>' : '') + '</div><button type="button" data-mo="1" aria-label="Sonraki ay">' + IK_SON + '</button></div>';
     }
+    if (CV === 2) return logoBar(C, 'Öğretmen ekranı') + '<div class="tz d">Takvim</div>' + cvh;
     var mon = gunEkle(pazartesi(C.d), WK * 7), gunler = []; for (var i = 0; i < 5; i++) gunler.push(gunEkle(mon, i));
     var gl = gunler.map(function (d) { var g = y ? gunBilgi(y, d) : { tip: 'ders' }; return { d: d, h: g.tip === 'tatil', on: iso(d) === C.gb.ds }; });
     return logoBar(C, 'Öğretmen ekranı') + '<div class="tz d">Takvim</div>' + cvh + '<div class="tabs" id="wt" style="margin-top:14px">' + [['-1', 'Geçen hafta'], ['0', 'Bu hafta'], ['1', 'Gelecek hafta']].map(function (x) { return '<button type="button" data-w="' + x[0] + '"' + (WK === +x[0] ? ' class="on"' : '') + '>' + x[1] + '</button>'; }).join('') + '</div><div class="wk">' + gl.map(function (g) { return '<div data-dt="gun:' + iso(g.d) + '" class="' + (g.on ? 'on ' : '') + (g.h ? 'h' : '') + '">' + GKISA[g.d.getDay()] + '<b>' + g.d.getDate() + '</b></div>'; }).join('') + '</div>';
@@ -2487,8 +2559,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     var tutBtn = '<button type="button" data-tut="1"><svg viewBox="0 0 24 24">' + IK.tut + '</svg>Tutanak</button>';
     var okl = '<div class="cgr">OKUL</div>' + (okOk ? it('prg', 'Şube programları', 4, 2) + it('hes', 'Öğretmenler', 4, 3) : '') + it('sub', 'Şube öğretmenleri', 4, 4, !!subeVeri(y)) + tutBtn;
     return '<div class="cpr"><div class="av">' + esc(ilkHarfler(ad)) + '</div><b>' + esc(ad || 'Öğretmen') + '</b><span>' + esc((kim && kim.brans) || (y && y.okul) || '') + '</span></div>'
-      + '<div class="clst"><div class="cgr">GÜNLÜK</div>' + gun + '<div class="cgr">KİŞİSEL</div>' + kis + okl + '</div>'
-      + '<div class="cbt">' + it('ayr', 'Ayarlar', 4, 1) + it('hes', 'Hesap', 4, 1, true, 'hesap') + '</div>';
+      + '<div class="clst"><div class="cgr">GÜNLÜK</div>' + gun + '<div class="cgr">KİŞİSEL</div>' + kis + okl + '<div class="cbt">' + it('ayr', 'Ayarlar', 4, 1) + it('hes', 'Hesap', 4, 1, true, 'hesap') + '</div></div>';
   }
   // ---- Tutanak: öğretmenin kendi kodlu bağlantısını ayrı sayfada açar (kod panelden yayımlanır; yoksa açılmaz) ----
   function tutBildir(m) {
