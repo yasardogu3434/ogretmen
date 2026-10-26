@@ -1,6 +1,6 @@
 // Önce ağ, olmazsa önbellek: internet varken her zaman en yeni arayüz gelir; yokken son görülen açılır.
 // Okuma ucuna (başka adres) hiç dokunmaz, onun önbelleği uygulama içinde 12 saat kuralıyla yönetilir.
-var AD = 'ogretmen-kabuk-v15g';
+var AD = 'ogretmen-kabuk-v15h';
 var DOSYALAR = ['./', 'index.html', 'app.css', 'app.js', 'erisim.js', 'acilis.js', 'config.js', 'kilavuz.js', 'kilavuz.html', 'manifest.webmanifest', 'kazanim/index.json', 'ikon/logo.png', 'ikon/ikon-192.png',
   'fonts/bricolage-latin.woff2', 'fonts/bricolage-latin-ext.woff2', 'fonts/hanken-latin.woff2', 'fonts/hanken-latin-ext.woff2'];
 self.addEventListener('install', function (e) {

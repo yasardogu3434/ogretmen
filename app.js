@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.15.6'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.15.7'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu', kd: 'ogr_kd' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -1984,7 +1984,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     else if(E<=277) name='Son dördün'; else name='Küçülen hilal';
     return {E:E, k:k, waxing:E<180, name:name, pct:Math.round(k*100)};
   }
-  const SK_KEYS=[[-18,'#050a1c','#0b1534','#1c2a5e'],[-10,'#0e1a40','#2a3470','#6a4f8c'],[-4,'#22306a','#8a4f86','#f08a5d'],[0,'#3a4a8c','#d4707a','#ffb35c'],[6,'#4a78c0','#e9a86c','#ffd27a'],[18,'#2f6fba','#7fb2e5','#ffe6a8'],[90,'#2a68b4','#86bbea','#fff0c0']];
+  const SK_KEYS=[[-18,'#050a1c','#0b1534','#1c2a5e'],[-10,'#0e1a40','#1a3560','#3a7384'],[-5,'#1c3068','#46709a','#8cc0c4'],[-1,'#2d4088','#8a84b6','#e9bd98'],[2,'#3a5aa6','#a9a6cc','#f3d0a0'],[7,'#4472b8','#b9c0da','#f6e0a8'],[18,'#2f6fba','#7fb2e5','#ffe6a8'],[90,'#2a68b4','#86bbea','#fff0c0']];
   function skHex(c){ return [1,3,5].map(i=>parseInt(c.slice(i,i+2),16)); }
   function skMix(a,b,t){ const A=skHex(a),B=skHex(b); return '#'+A.map((v,i)=>Math.round(v+(B[i]-v)*t).toString(16).padStart(2,'0')).join(''); }
   function skRgba(c,a){ const v=skHex(c); return 'rgba('+v[0]+','+v[1]+','+v[2]+','+a+')'; }
