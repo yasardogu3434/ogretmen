@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var SEG = '.sg button,.ptabs button,.okseg button,.opts button,.thseg button,.chips button,.tabs button,.gvp button,.kf button';
-  var TIK = '[data-dt],[data-go-tab],[data-ok],[data-n],[data-c],[data-go],[data-hafta]';
+  var TIK = '[data-dt],[data-go-tab],[data-ok],[data-n],[data-c],[data-go],[data-hafta],[data-kdtg]';
   var bekle = 0;
   function her(sel, fn) { var l = document.querySelectorAll(sel); for (var i = 0; i < l.length; i++) fn(l[i]); }
   function gecir() {

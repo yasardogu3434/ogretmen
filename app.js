@@ -3,8 +3,8 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.14.7'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
-  var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu' };
+  var APP_SURUM = '0.15.0'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu', kd: 'ogr_kd' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
     kod: 'Kişisel kod hatalı. Tekrar dene.',
@@ -87,7 +87,8 @@
   var R = document.documentElement;
   function tercihUygula() {
     var t = oku(K.tema);
-    if (t === 'acik') R.setAttribute('data-th', 'light'); else if (t === 'koyu') R.setAttribute('data-th', 'dark'); else R.removeAttribute('data-th');
+    if (t === 'acik') R.setAttribute('data-th', 'light'); else if (t === 'koyu' || t === 'siyah') R.setAttribute('data-th', 'dark'); else R.removeAttribute('data-th');
+    if (t === 'siyah') R.setAttribute('data-bk', '1'); else R.removeAttribute('data-bk');
     var ac = oku(K.ac); if (ac) R.setAttribute('data-ac', ac); else R.removeAttribute('data-ac');
     var fs = parseFloat(oku(K.fs) || '1'); if (!(fs >= 0.8 && fs <= 1.3)) fs = 1;
     var s = $('scr'); if (s) s.style.zoom = fs;
@@ -113,7 +114,7 @@
     return out;
   }
   function kapsar(t, ds) { return t && t.bas && t.bas <= ds && ds <= (t.bit || t.bas); }
-  // tip: ders | hs (hafta sonu) | tatil | yok (ritim yayınlanmamış)
+  // tip: ders | hs (hafta sonu) | tatil | yok (ritim yayımlanmamış)
   function gunBilgi(y, d) {
     var ds = iso(d), wd = d.getDay() || 7, o = { ds: ds, wd: wd, tip: 'ders', ad: '', ders: [], yarim: false, gecici: '' };
     var r = ortak(y, 'ritim'), ders = r ? dersListe(r.ders) : [];
@@ -156,11 +157,11 @@
     return true;
   }
   function nobetsiz(y) { var n = nobetim(y); return !n.liste.length && !(n.gelecek && n.gelecek.liste && n.gelecek.liste.length); }
-  // Panel "dersi var" dediği hâlde program gelmemiş (hiç yayınlanmamış ya da boş): sessizce "Okulun bugünü"ne düşme, sakin bir not göster.
+  // Panel "dersi var" dediği hâlde program gelmemiş (hiç yayımlanmamış ya da boş): sessizce "Okulun bugünü"ne düşme, sakin bir not göster.
   function programBekliyor(y) { var k = kisisel(y, 'kimlik'); return !!(k && k.dersli === true) && (!programVar(y) || dersiz(y)); }
   function programBekNotu(C) {
     if (!programBekliyor(C.y)) return '';
-    return '<div class="cvs bek" role="note" style="--cv:var(--gold);cursor:default"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 8h.01"/></svg></span><span class="tx"><small>Ders programın</small><b>Henüz yayınlanmamış olabilir</b></span></div>';
+    return '<div class="cvs bek" role="note" style="--cv:var(--gold);cursor:default"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 8h.01"/></svg></span><span class="tx"><small>Ders programın</small><b>Henüz yayımlanmamış olabilir</b></span></div>';
   }
   function programVar(y) { var p = kisisel(y, 'program'); return (p && p.matris && typeof p.matris === 'object') ? p : null; }
   function hucreAl(y, wd, no) { var p = programVar(y); if (!p) return null; var g = p.matris[String(wd)]; return g ? hucre(g[String(no)]) : null; }
@@ -285,9 +286,10 @@
   var TEMA_IK = {
     oto: '<path d="M12 3a9 9 0 1 0 0 18z"/><circle cx="12" cy="12" r="9"/>',
     acik: '<circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6L7 7M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4"/>',
-    koyu: '<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>'
+    koyu: '<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>',
+    siyah: '<circle cx="12" cy="12" r="8.5" style="fill:currentColor"/>'
   };
-  var TEMA_AD = { oto: 'Otomatik', acik: 'Açık', koyu: 'Koyu' };
+  var TEMA_AD = { oto: 'Otomatik', acik: 'Açık', koyu: 'Koyu', siyah: 'Siyah' };
   function temaDegis() {
     var t = oku(K.tema) || 'oto', n = t === 'oto' ? 'acik' : (t === 'acik' ? 'koyu' : 'oto');
     if (n === 'oto') sil(K.tema); else yaz(K.tema, n);
@@ -329,7 +331,7 @@
   }
   function heroEski(C, mine) {
     var gb = C.gb;
-    if (!C.y || gb.tip === 'yok') return gokyuzuHTML(C, 'Ders saatleri henüz yayınlanmadı');
+    if (!C.y || gb.tip === 'yok') return gokyuzuHTML(C, 'Ders saatleri henüz yayımlanmadı');
     var nx = sonrakiOkul(C);
     if (gb.tip === 'hs') return gokyuzuHTML(C, nx ? 'Okullar ' + nx.etiket.toLocaleLowerCase('tr-TR') + ' ' + nx.ilk + saatEk(nx.ilk) + ' açılıyor' : 'Hafta sonu');
     if (gb.tip === 'tatil') return gokyuzuHTML(C, 'Bugün okul tatil' + (gb.ad ? ': ' + gb.ad : '') + (nx ? '. Dersler ' + nx.etiket.toLocaleLowerCase('tr-TR') + ' ' + nx.ilk + saatEk(nx.ilk) + ' başlıyor' : ''));
@@ -383,7 +385,7 @@
   }
   function durumKarti(C, mine) {
     var gb = C.gb, y = C.y;
-    if (!y || gb.tip === 'yok') return oneKart({ k: 'Ders saatleri', t: 'Henüz yayınlanmadı', s: 'Okul yönetimi paylaştığında burada görünür.' });
+    if (!y || gb.tip === 'yok') return oneKart({ k: 'Ders saatleri', t: 'Henüz yayımlanmadı', s: 'Okul yönetimi paylaştığında burada görünür.' });
     var nx = sonrakiOkul(C), ey, cap;
     if (gb.tip === 'ders' && C.T < C.A0) { ey = 'Ders başlamadan'; cap = 'İlk ders ' + gb.ders[0][1] + saatEk(gb.ders[0][1]); }
     else {
@@ -481,8 +483,26 @@
     if (eo) for (var q = 0; q < eo.liste.length; q++) { var eh = eo.liste[q]; if (eh && ISODT.test(eh.bas || '') && ISODT.test(eh.bit || '') && eh.bas <= bg && bg <= eh.bit && +eh.n > 0) { out.push({ k: 'Eğitim haftası', t: eh.n + '. eğitim-öğretim haftası', s: aralik(eh.bas, eh.bit), dt: '' }); break; } }
     return out;
   }
+  // ---- 0.15.0: milli bayram günlerinde ilk slayt dalgalanan Türk bayrağı (hareketi azalt açıksa durağan kalır)
+  var BAYRAM = { '10-29': ['Cumhuriyet Bayramı', 'Cumhuriyetimizin {y}. yılı kutlu olsun', 1923], '04-23': ['Ulusal Egemenlik ve Çocuk Bayramı', '23 Nisan kutlu olsun'], '05-19': ['Atatürk’ü Anma, Gençlik ve Spor Bayramı', '19 Mayıs kutlu olsun'], '08-30': ['Zafer Bayramı', 'Zafer Bayramımız kutlu olsun'], '07-15': ['Demokrasi ve Milli Birlik Günü', 'Şehitlerimizi saygıyla anıyoruz'], '05-01': ['Emek ve Dayanışma Günü', '1 Mayıs kutlu olsun'] };
+  function bayramBugun(d) {
+    var k = f2(d.getMonth() + 1) + '-' + f2(d.getDate()), b = BAYRAM[k];
+    if (b) return { ad: b[0], t: b[1].replace('{y}', b[2] ? (d.getFullYear() - b[2]) : '') };
+    if (k === '10-28' && d.getHours() >= 13) return { ad: 'Cumhuriyet Bayramı arifesi', t: 'Yarın Cumhuriyet Bayramı' };
+    return null;
+  }
+  var BAYRAK_SEKIL = '<rect x="0" y="-30" width="90" height="60" fill="#E30A17"/><circle cx="30" cy="0" r="15" fill="#fff"/><circle cx="33.75" cy="0" r="12" fill="#E30A17"/><path d="M41.75 0l13.568-4.408-8.386 11.541V-7.133l8.386 11.541z" fill="#fff"/>';
+  function bayrakHTML(b) {
+    var s = '<svg class="bflag" viewBox="0 -30 90 60" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">', n = 18, w = 90 / n, i;
+    for (i = 0; i < n; i++) {
+      var x = (i * w).toFixed(3), ww = (w + 0.15).toFixed(3);
+      s += '<svg x="' + x + '" y="-30" width="' + ww + '" height="60" viewBox="' + x + ' -30 ' + ww + ' 60"><g class="bw" style="animation-delay:' + (-(i * 0.2)).toFixed(2) + 's">' + BAYRAK_SEKIL + '<rect class="bsh" x="0" y="-30" width="90" height="60" fill="#000" style="animation-delay:' + (-(i * 0.2) - 0.65).toFixed(2) + 's"/></g></svg>';
+    }
+    return '<div class="bay" role="img" aria-label="Dalgalanan Türk bayrağı. ' + esc(b.t) + '">' + s + '</svg><div class="bsc"></div><div class="btx"><small>' + esc(b.ad) + '</small><b>' + esc(b.t) + '</b></div></div>';
+  }
   function heroSlaytlar(C) {
-    var y = C.y, s = [], akt = dersAnimi(C);
+    var y = C.y, s = [], akt = dersAnimi(C), bay = bayramBugun(C.d);
+    if (bay) s.push({ id: 'bayrak', h: bayrakHTML(bay) });
     if (yayinlandi(y, 'gokyuzu')) s.push({ id: 'gokyuzu' });
     if (!akt) s.push({ id: 'durum', h: durumKarti(C, 0) });
     if (!GIZLE.pano) yeniSlaytlar(C).forEach(function (p, i) { s.push({ id: 'y' + i, h: oneKart(p, true), dt: p.dt || undefined }); });
@@ -635,7 +655,7 @@
     var rows = l.map(function (x) {
       var r = C.gb.ders[x.saat - 1]; if (!r) return '';
       var sen = C.ben && norm(x.giren) === C.ben;
-      return '<div class="cr' + (sen ? ' me' : '') + '" data-s="' + mdk(r[1]) * 60 + '" data-e="' + mdk(r[2]) * 60 + '"' + (sen ? ' data-dt="dn:' + ds + ':' + x.saat + '"' : '') + '><div class="sa"><b>' + x.saat + '. ders</b><small>' + esc(r[1]) + '</small></div><div class="sn">' + esc(x.sinif || '·') + '</div><div class="nm"><small class="g">' + esc(x.yerine ? x.yerine + ' yerine' : 'Gelmeyen öğretmen yerine') + '</small><span class="d2">' + esc(x.giren) + '</span><small class="k"></small></div></div>';
+      return '<div class="cr' + (sen ? ' me' : '') + '" data-s="' + mdk(r[1]) * 60 + '" data-e="' + mdk(r[2]) * 60 + '"' + (sen ? ' data-dt="dn:' + ds + ':' + x.saat + '"' : '') + '><div class="sa"><b>' + x.saat + '. ders</b><small>' + esc(r[1]) + '</small></div><div class="sn"' + kdA(x.sinif) + '>' + esc(x.sinif || '·') + '</div><div class="nm"><small class="g">' + esc(x.yerine ? x.yerine + ' yerine' : 'Gelmeyen öğretmen yerine') + '</small><span class="d2">' + esc(x.giren) + '</span><small class="k"></small></div></div>';
     }).join('');
     if (!rows) return '';
     return '<div class="sec" data-k="dolt">' + secH('Bugün ders doldurma', l.length + ' ders') + '<div class="cvhd"><i></i>Gelmeyen öğretmenlerin yerine giren nöbetçiler</div><div class="tl2"><div class="rl"><i></i></div><div class="im"><b></b></div>' + rows + '</div></div>';
@@ -746,7 +766,7 @@
       h += '<span style="left:100%">' + esc(les[n - 1].r[3]) + '</span></div>' + gzKart(les, bugun, etiket);
     } else if (st === 'f') {
       h += '<div class="gzl" data-gz="hat"></div><div class="gzh"><div class="gzh-l"><i></i></div><div class="gzh-s">';
-      les.forEach(function (x) { h += '<button type="button" class="gzx gzh-st' + gzMod(x, planli) + '"' + gzOz(x, planli, ds) + '><span class="o">' + x.no + '</span><span class="c">' + esc(gzSn(x, planli)) + '</span><span class="t">' + esc(x.r[2]) + '</span></button>'; });
+      les.forEach(function (x) { h += '<button type="button" class="gzx gzh-st' + gzMod(x, planli) + '"' + gzOz(x, planli, ds) + '><span class="o">' + x.no + '</span><span class="c"' + (x.m ? kdA(x.m.sinif) : '') + '>' + esc(gzSn(x, planli)) + '</span><span class="t">' + esc(x.r[2]) + '</span></button>'; });
       h += '</div>' + (bugun ? '<i class="gzh-tr" style="display:none"></i>' : '') + '</div>';
     } else if (st === 'g') {
       var a0m = Math.floor(A0 / 3600) * 60, z0m = Math.ceil(Z0 / 3600) * 60, ppm = 1.25;
@@ -756,7 +776,7 @@
       for (var j = 1; j < n; j++) { var g2 = mdk(les[j].r[2]) - mdk(les[j - 1].r[3]); if (g2 >= 30) h += '<div class="gzc-g" style="top:' + ((mdk(les[j - 1].r[3]) - a0m) * ppm) + 'px;height:' + (g2 * ppm) + 'px">uzun ara · ' + g2 + ' dk</div>'; }
       les.forEach(function (x) {
         var s0 = mdk(x.r[2]), e0 = mdk(x.r[3]);
-        h += '<button type="button" class="gzx gzc-b' + gzMod(x, planli) + '"' + gzOz(x, planli, ds) + ' style="top:' + ((s0 - a0m) * ppm + 1) + 'px;height:' + ((e0 - s0) * ppm - 2) + 'px"><u></u><span><b>' + x.no + '. ders</b><small>' + esc(x.r[2] + '–' + x.r[3]) + (x.cv ? ' · doldurma' : '') + '</small></span><em>' + esc(gzSn(x, planli)) + '</em></button>';
+        h += '<button type="button" class="gzx gzc-b' + gzMod(x, planli) + '"' + gzOz(x, planli, ds) + ' style="top:' + ((s0 - a0m) * ppm + 1) + 'px;height:' + ((e0 - s0) * ppm - 2) + 'px"><u></u><span><b>' + x.no + '. ders</b><small>' + esc(x.r[2] + '–' + x.r[3]) + (x.cv ? ' · doldurma' : '') + '</small></span><em' + (x.m ? kdA(x.m.sinif) : '') + '>' + esc(gzSn(x, planli)) + '</em></button>';
       });
       if (bugun) h += '<div class="gzc-n" style="display:none"><b></b></div>';
       h += '</div>';
@@ -845,15 +865,15 @@
       var hv = '<div class="gakis" id="gs" data-bg="' + (bugun ? 1 : 0) + '"><div class="grl"></div>';
       les.forEach(function (x, i) {
         if (i) hv += '<div class="gp" data-s="' + mdk(les[i - 1].r[3]) * 60 + '" data-e="' + mdk(x.r[2]) * 60 + '"></div>';
-        hv += '<button type="button" class="gx gv' + (x.m ? ' my' : (planli ? ' bos' : '')) + (x.cv ? ' cv' : '') + '" data-s="' + mdk(x.r[2]) * 60 + '" data-e="' + mdk(x.r[3]) * 60 + '" data-dt="ak:' + ds + ':' + x.ri + '"><span class="tm"><b>' + esc(x.r[2]) + '</b><small>' + esc(x.r[3]) + '</small></span><span class="a"><b>' + x.no + '. ders</b>' + (x.cv ? '<span class="tg2">doldurma</span>' : '') + '<span class="k"></span></span><span class="c">' + gunSinif(x, planli) + '</span><i class="pb"><u></u></i></button>';
+        hv += '<button type="button" class="gx gv' + (x.m ? ' my' : (planli ? ' bos' : '')) + (x.cv ? ' cv' : '') + '" data-s="' + mdk(x.r[2]) * 60 + '" data-e="' + mdk(x.r[3]) * 60 + '" data-dt="ak:' + ds + ':' + x.ri + '"><span class="tm"><b>' + esc(x.r[2]) + '</b><small>' + esc(x.r[3]) + '</small></span><span class="a"><b>' + x.no + '. ders</b>' + (x.cv ? '<span class="tg2">doldurma</span>' : '') + '<span class="k"></span></span><span class="c"' + (x.m ? kdA(x.m.sinif) : '') + '>' + gunSinif(x, planli) + '</span><i class="pb"><u></u></i></button>';
       });
       return hv + '<div class="gnd" aria-hidden="true"><i></i></div></div>';
     }
     if (st === 'b') return '<div class="glist" id="gs" data-bg="' + (bugun ? 1 : 0) + '">' + les.map(function (x) {
-      return '<button type="button" class="gx gr' + (x.m ? ' my' : (planli ? ' bos' : '')) + (x.cv ? ' cv' : '') + '" data-s="' + mdk(x.r[2]) * 60 + '" data-e="' + mdk(x.r[3]) * 60 + '" data-dt="ak:' + ds + ':' + x.ri + '"><span class="tm">' + esc(x.r[2]) + '</span><span class="a"><b>' + x.no + '. ders</b>' + (x.cv ? '<span class="tg2">doldurma</span>' : '') + '<span class="k"></span></span><span class="c">' + gunSinif(x, planli) + '</span><i class="pb"><u></u></i></button>';
+      return '<button type="button" class="gx gr' + (x.m ? ' my' : (planli ? ' bos' : '')) + (x.cv ? ' cv' : '') + '" data-s="' + mdk(x.r[2]) * 60 + '" data-e="' + mdk(x.r[3]) * 60 + '" data-dt="ak:' + ds + ':' + x.ri + '"><span class="tm">' + esc(x.r[2]) + '</span><span class="a"><b>' + x.no + '. ders</b>' + (x.cv ? '<span class="tg2">doldurma</span>' : '') + '<span class="k"></span></span><span class="c"' + (x.m ? kdA(x.m.sinif) : '') + '>' + gunSinif(x, planli) + '</span><i class="pb"><u></u></i></button>';
     }).join('') + '</div>';
     return '<div class="ggrid" id="gs" data-bg="' + (bugun ? 1 : 0) + '">' + les.map(function (x) {
-      return '<button type="button" class="gx gt' + (x.m ? ' my' : (planli ? ' bos' : '')) + (x.cv ? ' cv' : '') + '" data-s="' + mdk(x.r[2]) * 60 + '" data-e="' + mdk(x.r[3]) * 60 + '" data-dt="ak:' + ds + ':' + x.ri + '"><span class="n">' + x.no + '. ders</span><b class="d">' + esc(x.r[2]) + '</b><span class="c">' + gunSinif(x, planli) + '</span>' + (x.cv ? '<span class="tg2">doldurma</span>' : '') + '<span class="k"></span><i class="pb"><u></u></i></button>';
+      return '<button type="button" class="gx gt' + (x.m ? ' my' : (planli ? ' bos' : '')) + (x.cv ? ' cv' : '') + '" data-s="' + mdk(x.r[2]) * 60 + '" data-e="' + mdk(x.r[3]) * 60 + '" data-dt="ak:' + ds + ':' + x.ri + '"><span class="n">' + x.no + '. ders</span><b class="d">' + esc(x.r[2]) + '</b><span class="c"' + (x.m ? kdA(x.m.sinif) : '') + '>' + gunSinif(x, planli) + '</span>' + (x.cv ? '<span class="tg2">doldurma</span>' : '') + '<span class="k"></span><i class="pb"><u></u></i></button>';
     }).join('') + '</div>';
   }
   function sGunum(C) {
@@ -866,7 +886,7 @@
     var shf = olaylar(C.y).filter(function (o) { return o.hafta && o.bas <= ds && ds <= o.bit; })[0];
     if (G.gb.gecici || G.gb.yarim || shf) h += '<div class="chp" style="margin:12px 0 0">' + (shf ? '<span style="background:#7F62E038;background:color-mix(in srgb,#7F62E0 22%,transparent)">' + esc(shf.ad) + '</span>' : '') + (G.gb.yarim ? '<span>Yarım gün' + (G.gb.ad ? ', ' + esc(G.gb.ad) : '') + '</span>' : '') + (G.gb.gecici ? '<span>' + esc(G.gb.gecici) + '</span>' : '') + '</div>';
     h += gunGovde(les, C, bugun, ds, planli);
-    h += '<button type="button" class="gvh" data-gvay aria-label="Görünümü değiştirmek için dokunun"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/></svg>Görünümü değiştirmek için dokunun</button>';
+    h += '<button type="button" class="gvh" data-gvay aria-label="Görünümü değiştirmek için dokun"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/></svg>Görünümü değiştirmek için dokun</button>';
     // özet kutuları
     var simdiki = null; if (bugun) les.forEach(function (x) { if (!simdiki && C.T < mdk(x.r[3]) * 60) simdiki = x; });
     var ilk = les[0], t1;
@@ -954,7 +974,7 @@
     if (eskiMi(onbellek())) return damga(C) + '<div class="empty"><b>Bilgiler eski olduğu için gizlendi</b>Son güncelleme ' + A.ESKI_SAAT + ' saatten önce. İnternete bağlanınca otomatik yenilenir.</div>';
     if (y.yayinDurumu !== 'acik') return damga(C) + '<div class="empty"><b>Yayın şu an kapalı</b>Okul yönetimi açtığında bilgiler burada görünecek.</div>';
     var p = [dersiz(y) ? sAkis(C, 0, 'Okulun bugünü') : sGunum(C), sNobetci(C), sDoldurmaToplu(C), sDuyuru(C), sYaklasan(C), sPanoOzet(C)].join('');
-    return programBekNotu(C) + doldurmaSerit(C) + damga(C) + (p || '<div class="empty"><b>Bugün paylaşılan bir şey yok</b>Yeni bir duyuru ya da bilgi paylaşıldığında bu sayfada görünür.</div>');
+    return programBekNotu(C) + doldurmaSerit(C) + damga(C) + (p || '<div class="empty ei-zarf"><b>Bugün paylaşılan bir şey yok</b>Yeni bir duyuru ya da bilgi paylaşıldığında bu sayfada görünür.</div>');
   }
   function yayinKapali(C) { return !C.y || eskiMi(onbellek()) || C.y.yayinDurumu !== 'acik'; }
 
@@ -989,14 +1009,14 @@
         else cl = ' em';
         if (iso(d) === C.gb.ds && C.gb.tip === 'ders') { var g = guncel(C); if (g[2] >= 0 && g[0][0] === 'ders' && dersNo(g[0]) === k + 1 && (c || cv)) cl += ' nowc'; }
         var kk = i + ',' + k;
-        h += '<div class="' + (cl.trim() + (iso(d) === C.gb.ds ? ' td' : '') + (NT.some(function (n) { return n.k === kk; }) ? ' hn' : '')).trim() + '"' + ((c || cv) ? ' data-c="' + kk + '"' : '') + '>' + v + sm + '</div>';
+        h += '<div class="' + (cl.trim() + (iso(d) === C.gb.ds ? ' td' : '') + (NT.some(function (n) { return n.k === kk; }) ? ' hn' : '')).trim() + '"' + ((c || cv) ? ' data-c="' + kk + '"' + kdA(cv ? cv.sinif : c.sinif) : '') + '>' + v + sm + '</div>';
       });
     });
     return h + '</div>';
   }
   function derslerimHTML(C) {
     var l = dersGruplari(C.y); if (!l.length) return '';
-    return '<div class="sec">' + secH('Derslerim', l.length + ' ders-şube') + '<div class="dg">' + l.map(function (x) { return '<button type="button" class="dkart" data-dt="dr:' + x.i + '"><b class="d">' + esc(x.sinif) + '</b><span>' + esc(x.tam) + '</span><em>haftada ' + x.slots.length + ' saat</em></button>'; }).join('') + '</div></div>';
+    return '<div class="sec">' + secH('Derslerim', l.length + ' ders-şube') + '<div class="dg">' + l.map(function (x) { return '<button type="button" class="dkart" data-dt="dr:' + x.i + '"><b class="d"' + kdA(x.sinif) + '>' + esc(x.sinif) + '</b><span>' + esc(x.tam) + '</span><em>haftada ' + x.slots.length + ' saat</em></button>'; }).join('') + '</div></div>';
   }
   function gorevHTML(C) {
       var kl = kurulListe(C.y, C.gb.ds), khtml = '';
@@ -1020,7 +1040,7 @@
   }
   function gorevSayfa(C) {
     var kl = kurulListe(C.y, C.gb.ds);
-    if (!kl.length) return '<div class="empty"><b>Görevlendirmen görünmüyor</b>Okul yönetimi paylaştığında burada görünür.</div>';
+    if (!kl.length) return '<div class="empty ei-gorev"><b>Görevlendirmen görünmüyor</b>Okul yönetimi paylaştığında burada görünür.</div>';
     return '<div class="gwrap">' + GKAT.map(function (g) {
       var gl = kl.filter(function (k) { return k.kat === g[0]; }); if (!gl.length) return '';
       return '<div class="gck' + (GAC[g[0]] ? ' open' : '') + '" style="--c:' + GRENK[g[0]] + '"><button type="button" class="gch" data-gck="' + g[0] + '" aria-expanded="' + (GAC[g[0]] ? 'true' : 'false') + '"><i></i><b>' + esc(g[1]) + '</b><em>' + gl.length + '</em><span class="chv">›</span></button><div class="gin"><div class="rows">' + gl.map(function (k) {
@@ -1144,11 +1164,11 @@
   }
   function okulSayfa(C) {
     var d = okulVeri(C.y);
-    if (!d) return '<div class="empty"><b>Okul programı yok</b>Okul yönetimi paylaştığında burada görünür.</div>';
+    if (!d) return '<div class="empty ei-saat"><b>Okul programı yok</b>Okul yönetimi paylaştığında burada görünür.</div>';
     var z = okZaman(C), ic;
     if (PR === 2) ic = (OK.s >= 0 && d.siniflar[OK.s]) ? okSubeHaf(C, d, z) : okSubeler(C, d, z);
     else ic = (OK.o >= 0 && okOgrDizin(d).adlar[OK.o] != null) ? okOgrHaf(C, d, z) : okOgrListe(C, d, z);
-    var pb = (PR === 2 && OK.s >= 0 && d.siniflar[OK.s]) ? '<div class="okpay">' + payBtn('sube') + '</div>' : ((PR === 3 && OK.o >= 0 && okOgrDizin(d).adlar[OK.o] != null) ? '<div class="okpay">' + payBtn('ogr') + '</div>' : '');
+    var pb = (PR === 2 && OK.s >= 0 && d.siniflar[OK.s]) ? '<div class="okpay">' + payBtn('sube') + '</div><div class="okpay" style="margin-top:8px">' + pdfBtn('sube', 'Haftalık programı PDF olarak al') + '</div>' : ((PR === 3 && OK.o >= 0 && okOgrDizin(d).adlar[OK.o] != null) ? '<div class="okpay">' + payBtn('ogr') + '</div><div class="okpay" style="margin-top:8px">' + pdfBtn('ogr', 'Haftalık programı PDF olarak al') + '</div>' : '');
     return '<div id="okl" data-k="' + z.gi + ':' + z.hi + ':' + C.gb.ds + '">' + ic + pb + '</div>';
   }
   function okulTick(C) {
@@ -1272,7 +1292,7 @@
   });
 
   // ---- Resim olarak paylaş: tablo telefonda çizilir (sunucuya hiçbir şey gitmez); yalnız program/nöbet bilgisi içerir
-  var PAY = { blob: null, url: '', dosya: '', file: null, baslik: '' };
+  var PAY = { blob: null, url: '', dosya: '', file: null, baslik: '', thumb: '' };
   var PAY_FN = '"Bricolage Grotesque","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif';
   function payMetin(x, t, w, px, ag) {
     t = String(t); var s = px; x.font = ag + ' ' + s + 'px ' + PAY_FN;
@@ -1282,10 +1302,10 @@
   }
   // o: {okul, baslik, alt, sut:[başlık], w:[ağırlık], sat:[[hücre | [ana, alt]]], vurgu:sütunNo, not}
   function payCiz(o, bit) {
-    var W = 1080, M = 36, tw = W - 2 * M, ust = 196, hh = 60, rh = o.rh || 96, n = o.sat.length, nsut = o.sut.length;
+    var W = o.W || 1080, S = o.S || 1, M = 36, tw = W - 2 * M, ust = 196, hh = 60, rh = o.rh || 96, n = o.sat.length, nsut = o.sut.length;
     var ws = o.w || o.sut.map(function () { return 1; }), tp = 0, i, j; ws.forEach(function (a) { tp += a; });
-    var H = ust + hh + n * rh + (o.not ? 56 : 0) + 78;
-    var cv = document.createElement('canvas'); cv.width = W; cv.height = H; var x = cv.getContext('2d');
+    var H = o.H || (ust + hh + n * rh + (o.not ? 56 : 0) + 78);
+    var cv = document.createElement('canvas'); cv.width = W * S; cv.height = H * S; var x = cv.getContext('2d'); if (S !== 1) x.scale(S, S);
     function bitti(img) {
       x.fillStyle = '#FFFFFF'; x.fillRect(0, 0, W, H);
       x.fillStyle = '#13244A'; x.fillRect(0, 0, W, 150);
@@ -1322,8 +1342,9 @@
       if (o.not) { x.fillStyle = '#5A6985'; x.fillText(payMetin(x, o.not, W - 2 * M, 22, '500'), M, fy + 40); fy += 56; }
       x.fillStyle = '#5A6985'; x.fillText(payMetin(x, 'Yaşar Doğu Öğretmen', 500, 22, '600'), M, fy + 52);
       x.textAlign = 'right'; x.fillText(o.tarih || '', W - M, fy + 52); x.textAlign = 'left';
-      if (cv.toBlob) cv.toBlob(function (b) { bit(b); }, 'image/png');
-      else { try { var u = cv.toDataURL('image/png').split(',')[1], bin = atob(u), a = new Uint8Array(bin.length); for (var k = 0; k < bin.length; k++) a[k] = bin.charCodeAt(k); bit(new Blob([a], { type: 'image/png' })); } catch (e) { bit(null); } }
+      var mt = o.jpeg ? 'image/jpeg' : 'image/png';
+      if (cv.toBlob) cv.toBlob(function (b) { bit(b); }, mt, o.jpeg ? 0.92 : undefined);
+      else { try { var u = cv.toDataURL(mt).split(',')[1], bin = atob(u), a = new Uint8Array(bin.length); for (var k = 0; k < bin.length; k++) a[k] = bin.charCodeAt(k); bit(new Blob([a], { type: mt })); } catch (e) { bit(null); } }
     }
     var im = new Image(), son = false;
     function bir(g) { if (son) return; son = true; bitti(g); }
@@ -1341,7 +1362,32 @@
     var mon = pazartesi(C.d), a = iso(mon), b = iso(gunEkle(mon, 6));
     return nb.gunler.filter(function (g) { return g && typeof g.tarih === 'string' && g.tarih >= a && g.tarih <= b && Array.isArray(g.liste) && g.liste.some(function (k) { return k && typeof k.ad === 'string' && k.ad; }); }).sort(function (p, q) { return p.tarih < q.tarih ? -1 : 1; });
   }
+  // ---- 0.15.0: PDF — yazdırmaya hazır A4 yatay; tablo görüntüsü JPEG olarak tek sayfalık PDF'e konur (ek kütüphane yok, ağ yok)
+  function pdfKur(blob, gen, yuk, cb) {
+    var fr = new FileReader();
+    fr.onerror = function () { cb(null); };
+    fr.onload = function () {
+      try {
+        var jpg = new Uint8Array(fr.result), parcalar = [], toplam = 0, ofs = [];
+        var ekle = function (x) { if (typeof x === 'string') { var u = new Uint8Array(x.length); for (var i = 0; i < x.length; i++) u[i] = x.charCodeAt(i) & 255; x = u; } parcalar.push(x); toplam += x.length; };
+        var p10 = function (n) { return ('0000000000' + n).slice(-10); };
+        ekle('%PDF-1.4\n%\u00e2\u00e3\u00cf\u00d3\n');
+        ofs[1] = toplam; ekle('1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n');
+        ofs[2] = toplam; ekle('2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n');
+        ofs[3] = toplam; ekle('3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 842 595] /Resources << /XObject << /Im0 4 0 R >> /ProcSet [/PDF /ImageC] >> /Contents 5 0 R >>\nendobj\n');
+        ofs[4] = toplam; ekle('4 0 obj\n<< /Type /XObject /Subtype /Image /Width ' + gen + ' /Height ' + yuk + ' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ' + jpg.length + ' >>\nstream\n'); ekle(jpg); ekle('\nendstream\nendobj\n');
+        var ic = 'q 842 0 0 595 0 0 cm /Im0 Do Q';
+        ofs[5] = toplam; ekle('5 0 obj\n<< /Length ' + ic.length + ' >>\nstream\n' + ic + '\nendstream\nendobj\n');
+        var xr = toplam;
+        ekle('xref\n0 6\n0000000000 65535 f \n' + [1, 2, 3, 4, 5].map(function (i) { return p10(ofs[i]) + ' 00000 n \n'; }).join('') + 'trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n' + xr + '\n%%EOF\n');
+        cb(new Blob(parcalar, { type: 'application/pdf' }));
+      } catch (e) { cb(null); }
+    };
+    fr.readAsArrayBuffer(blob);
+  }
+  function pdfBtn(tip, etiket) { return '<button type="button" class="paybtn" data-pay="' + tip + 'pdf"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 16.5h6"/></svg>' + esc(etiket || 'PDF olarak al') + '</button>'; }
   function payHazirla(tip) {
+    var pdf = /pdf$/.test(tip); if (pdf) tip = tip.slice(0, -3);
     var C = CTX || baglam(), o = null, dosya = 'program.png', y = C.y, okul = (y && y.okul) || '';
     if (tip === 'sube' || tip === 'ogr') {
       var d = okulVeri(y); if (!d) return; var say = okSaatSay(d) || okSaatler(C).length;
@@ -1374,8 +1420,22 @@
     } else return;
     o.okul = okul; o.tarih = payTarih(C); o.not = 'Yalnız ders ve nöbet bilgisi içerir.';
     var bt = o.baslik;
+    if (pdf) { o.W = 1754; o.H = 1240; o.S = 2; o.jpeg = true; o.rh = Math.max(60, Math.min(150, Math.floor((1240 - 196 - 60 - 56 - 78) / Math.max(1, o.sat.length)))); dosya = dosya.replace(/\.png$/, '.pdf'); }
     payCiz(o, function (blob) {
       if (!blob) { return; }
+      if (pdf) {
+        pdfKur(blob, o.W * o.S, o.H * o.S, function (pb) {
+          if (!pb) return;
+          if (PAY.url) { try { URL.revokeObjectURL(PAY.url); } catch (e) {} }
+          if (PAY.thumb) { try { URL.revokeObjectURL(PAY.thumb); } catch (e) {} }
+          PAY.blob = pb; PAY.dosya = dosya; PAY.baslik = bt; PAY.url = URL.createObjectURL(pb); PAY.thumb = URL.createObjectURL(blob); PAY.file = null;
+          try { PAY.file = new File([pb], dosya, { type: 'application/pdf' }); } catch (e) {}
+          var can2 = false; try { can2 = !!(PAY.file && navigator.canShare && navigator.canShare({ files: [PAY.file] })); } catch (e) {}
+          ayrintiRenk('ak:0');
+          dtGoster('PDF önizleme', '<img class="payimg" src="' + PAY.thumb + '" alt="' + esc(bt) + ' PDF önizlemesi"><div class="paybt">' + (can2 ? '<button type="button" class="payb pri" id="paygo">Paylaş</button>' : '') + '<button type="button" class="payb' + (can2 ? '' : ' pri') + '" id="paysave">' + (can2 ? 'PDF kaydet' : 'PDF indir') + '</button></div><p class="oknot" style="margin:10px 0 0">A4 yatay, yazdırmaya hazır.</p>');
+        });
+        return;
+      }
       if (PAY.url) { try { URL.revokeObjectURL(PAY.url); } catch (e) {} }
       PAY.blob = blob; PAY.dosya = dosya; PAY.baslik = bt; PAY.url = URL.createObjectURL(blob); PAY.file = null;
       try { PAY.file = new File([blob], dosya, { type: 'image/png' }); } catch (e) {}
@@ -1392,6 +1452,133 @@
     if (!PAY.url) return;
     var a = document.createElement('a'); a.href = PAY.url; a.download = PAY.dosya; a.style.display = 'none'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
   }
+
+  // ================= 0.15.0: KADEME NOKTASI, HIZLI İŞLEMLER (UZUN BASMA), ŞUBE ÖĞRETMENLERİ =================
+  // Şubenin yanında kademe (5/6/7/8) rengi: yalnız küçük bir nokta; hiçbir ölçü/yerleşim değişmez. Ayarlar › Görünüm'den kapatılır.
+  function kdAyar() { return oku(K.kd) !== '0'; }
+  function kdA(sinif) { if (!kdAyar()) return ''; var m = /^\s*([5-8])/.exec(String(sinif == null ? '' : sinif)); return m ? ' data-kd="' + m[1] + '"' : ''; }
+
+  // ---- Şube öğretmenleri: 'okulprogram' (idare/rehberlik) ya da öğretmene özel, yalnız kendi şubelerini içeren 'subeprogram' verisi varsa çalışır; yoksa hiçbir şey görünmez.
+  function subeVeri(y) {
+    var d = okulVeri(y) || kisisel(y, 'subeprogram');
+    return (d && Array.isArray(d.siniflar) && Array.isArray(d.dersler) && Array.isArray(d.ogretmenler) && d.siniflar.length) ? d : null;
+  }
+  function subeBul(d, ad) { var a = okAnh(ad); if (!a) return -1; for (var i = 0; i < d.siniflar.length; i++) if (d.siniflar[i] && okAnh(d.siniflar[i].ad) === a) return i; return -1; }
+  function subeOgrler(d, si) {
+    var sn = d.siniflar[si], m = Object.create(null), sira = [], g, h;
+    for (g = 0; g < 5; g++) for (h = 0; h < 12; h++) {
+      var c = okHuc(d, sn, g, h); if (!c) continue;
+      [c.ogr, c.co].forEach(function (n) { if (!n) return; if (!m[n]) { m[n] = { ad: n, dersler: [], say: 0 }; sira.push(n); } m[n].say++; if (m[n].dersler.indexOf(c.ders) < 0) m[n].dersler.push(c.ders); });
+    }
+    return sira.map(function (n) { return m[n]; }).sort(function (a, b) { return String(a.dersler[0]).localeCompare(String(b.dersler[0]), 'tr') || a.ad.localeCompare(b.ad, 'tr'); });
+  }
+  function subeOgrBolumu(C, sinif) {
+    var d = subeVeri(C.y); if (!d) return ''; var si = subeBul(d, sinif); if (si < 0) return '';
+    var l = subeOgrler(d, si).filter(function (x) { return norm(x.ad) !== C.ben; }); if (!l.length) return '';
+    var sa = encodeURIComponent(String(d.siniflar[si].ad));
+    return '<h4 class="kzt" style="margin-top:18px">Şube öğretmenleri</h4><div class="rows">' + l.map(function (x) { return dtSatir('so:' + sa + ':' + encodeURIComponent(x.ad), '', x.ad, x.dersler.join(', ') + ' · haftada ' + x.say + ' saat', ''); }).join('') + '</div>';
+  }
+  function dtSubeOgr(ad, ogr) {
+    var C = CTX || baglam(), d = subeVeri(C.y); if (!d) return; var si = subeBul(d, ad); if (si < 0) return;
+    var sn = d.siniflar[si], say = okSaatSay(d), sa = okSaatler(C), z = okZaman(C), top = 0, i, g;
+    for (g = 0; g < 5; g++) for (i = 0; i < 12; i++) { var c0 = okHuc(d, sn, g, i); if (c0 && (c0.ogr === ogr || c0.co === ogr)) top++; }
+    var h = '<div class="okw"><div class="okbas"><b class="d">' + esc(ogr) + '</b><span>' + esc(sn.ad) + ' şubesinde haftada ' + top + ' ders</span></div><div class="okt"><table class="okta okh"><thead><tr><th class="st">Saat</th>' + OKGUN.map(function (a, k) { return '<th class="' + (z.gi === k ? 'tod' : '') + '">' + a + '</th>'; }).join('') + '</tr></thead><tbody>';
+    for (i = 0; i < say; i++) {
+      h += '<tr><th class="st">' + (i + 1) + '<small>' + (sa[i] ? esc(sa[i][1]) : '') + '</small></th>';
+      for (g = 0; g < 5; g++) {
+        var c = okHuc(d, sn, g, i), mine = c && (c.ogr === ogr || c.co === ogr), now = z.gi === g && z.hi === i;
+        h += mine ? '<td' + (now ? ' class="now"' : '') + '><b>' + esc(c.ders) + '</b>' + (now ? '<em>şimdi</em>' : '') + '</td>' : '<td class="bos' + (now ? ' now' : '') + '">·' + (now ? '<em>şimdi</em>' : '') + '</td>';
+      }
+      h += '</tr>';
+    }
+    dtGoster(ogr, h + '</tbody></table></div><p class="oknot">Yalnız ' + esc(sn.ad) + ' şubesindeki dersleri gösterilir.</p></div>');
+  }
+
+  // ---- Hızlı işlemler: ders kartına uzun basınca (ya da bağlam menüsü tuşuyla) açılır; aynı işlemler ders ayrıntısında da vardır
+  var LP = { t: null, x: 0, y: 0, atesli: false, sup: 0, son: 0 };
+  var LP_SEC = '[data-dt^="ak:"], #t1 .tt > [data-c]';
+  function lpHedef(el) {
+    var b = el.closest(LP_SEC), C = CTX || baglam(); if (!b) return null;
+    if (b.hasAttribute('data-dt')) {
+      var p = b.getAttribute('data-dt').split(':'), G = gunBaglam(tarihCoz(p[1])), r = G.sc[+p[2]]; if (!r || r[0] !== 'ders') return null;
+      return { ds: p[1], no: dersNo(r), ri: +p[2] };
+    }
+    if (b.hasAttribute('data-c')) {
+      var a = b.getAttribute('data-c').split(','), g = haftaGunleri(C.d)[+a[0]]; if (!g) return null;
+      var G2 = gunBaglam(g), no = +a[1] + 1, ix = -1; G2.sc.forEach(function (r2, i) { if (r2[0] === 'ders' && dersNo(r2) === no) ix = i; });
+      return ix >= 0 ? { ds: iso(g), no: no, ri: ix } : null;
+    }
+    return null;
+  }
+  function kzHepsi(my, ds) {
+    return new Promise(function (res) {
+      var e = kzEsle(my), g = parseInt(my && my.sinif, 10);
+      if (!e || !e.a || !(g >= 5 && g <= 8)) { res({ hata: 'Bu ders için kazanım planı bulunamadı.' }); return; }
+      kzIndeks().then(function () {
+        var pl = kzPlan(my, (e.a === 'sos' && g === 8) ? 'ita' : e.a);
+        if (!pl || pl.not) { res({ hata: 'Bu ders ve sınıf için kazanım planı bulunmuyor.' }); return; }
+        return kzJson('kazanim/' + pl.f).then(function (P) {
+          if (!P || !Array.isArray(P.haftalar)) { res({ hata: (P && P.uniteler) ? 'Bu dersin kazanımları haftalara bölünmemiş. “Kazanımları aç” ile tek tek işaretleyebilirsin.' : 'Kazanım dosyası yüklenemedi. İnternet bağlantını kontrol et.' }); return; }
+          var h = kzHafta(P, ds); if (!h || !h.m.length) { res({ hata: 'Bu hafta için planda kazanım yok.' }); return; }
+          var isl = okuJ(K.isl, {}), yeni = [], tum = [];
+          h.m.forEach(function (m, i) { var k = kzAnk(P, my, h, i); tum.push(k); if (!isl[k]) { isl[k] = 1; yeni.push(k); } });
+          yaz(K.isl, JSON.stringify(isl)); res({ n: h.m.length, yeni: yeni, tum: tum });
+        });
+      }, function () { res({ hata: 'Kazanım listesi açılamadı.' }); });
+    });
+  }
+  function lpAc(h) {
+    var G = gunBaglam(tarihCoz(h.ds)), r = G.sc[h.ri]; if (!r) return;
+    var my = G.MY[h.no], cv = G.COV[h.no]; if (!my && !cv) return;
+    var sn = (my && my.sinif) || (cv && cv.sinif) || '', d = tarihCoz(h.ds), kz = !!(my && kzEsle(my));
+    var kk = (G.gb.wd - 1) + ',' + (h.no - 1);
+    $('sh').classList.remove('on');
+    $('ns').innerHTML = '<h3>' + esc((sn ? sn + ' · ' : '') + h.no + '. ders') + '</h3><div class="stamp" style="margin-top:0">' + esc(GUN[d.getDay()] + ', ' + gunAy(h.ds) + ' · ' + r[2] + '–' + r[3]) + '</div>'
+      + (kz ? '<button class="fin" id="lpis" type="button">Bu haftanın kazanımlarını işlendi yap</button>' : '')
+      + '<button class="fin3" id="lpnt" type="button">Not ekle</button>' + (kz ? '<button class="fin3" id="lpkz" type="button">Kazanımları aç</button>' : '') + '<div class="nerr" id="lpm" role="status" aria-live="polite"></div>';
+    $('lpnt').onclick = function () { notAc(kk, null); };
+    if (kz) {
+      $('lpkz').onclick = function () { kapat(); dtAc('dn:' + h.ds + ':' + h.no); setTimeout(function () { var e = $('kzw'); if (e && e.scrollIntoView) e.scrollIntoView(true); }, 350); };
+      $('lpis').onclick = function () {
+        var m = $('lpm'); m.style.color = 'var(--mut)'; m.textContent = 'Kazanımlar işaretleniyor…';
+        kzHepsi(my, h.ds).then(function (s) {
+          m = $('lpm'); if (!m) return;
+          if (s.hata) { m.style.color = '#B3392C'; m.textContent = s.hata; return; }
+          m.style.color = 'var(--teal)';
+          m.innerHTML = '<span>' + (s.yeni.length ? s.yeni.length + ' kazanım işlendi olarak işaretlendi.' : 'Bu haftanın ' + s.n + ' kazanımı zaten işlenmişti.') + '</span> <button type="button" class="lk" id="lpgeri" style="margin-left:6px">' + (s.yeni.length ? 'Geri al' : 'İşaretleri kaldır') + '</button>';
+          $('lpgeri').onclick = function () {
+            var isl = okuJ(K.isl, {}); (s.yeni.length ? s.yeni : s.tum).forEach(function (k) { delete isl[k]; }); yaz(K.isl, JSON.stringify(isl));
+            m = $('lpm'); if (m) { m.style.color = 'var(--mut)'; m.textContent = 'İşaretler geri alındı.'; }
+          };
+        });
+      };
+    }
+    $('ns').classList.add('on'); $('shd').classList.add('on');
+  }
+  (function () {
+    function uygun(e) { var el = e.target && e.target.closest ? e.target.closest(LP_SEC) : null; return (el && !el.closest('#dt') && !el.closest('#ns') && !el.closest('#cek') && !el.closest('#sh')) ? el : null; }
+    function birak() { clearTimeout(LP.t); LP.t = null; if (LP.atesli) { LP.sup = Date.now(); LP.atesli = false; } }
+    document.addEventListener('pointerdown', function (e) {
+      if (kilit || (e.pointerType === 'mouse' && e.button !== 0)) return;
+      var el = uygun(e); if (!el) return;
+      LP.x = e.clientX; LP.y = e.clientY; clearTimeout(LP.t);
+      LP.t = setTimeout(function () {
+        LP.t = null; var h = lpHedef(el); if (!h) return;
+        LP.atesli = true; LP.son = Date.now(); try { if (navigator.vibrate) navigator.vibrate(12); } catch (x) {}
+        lpAc(h);
+      }, 520);
+    }, true);
+    document.addEventListener('pointerup', birak, true);
+    document.addEventListener('pointercancel', function () { clearTimeout(LP.t); LP.t = null; LP.atesli = false; }, true);
+    document.addEventListener('pointermove', function (e) { if (LP.t && (Math.abs(e.clientX - LP.x) > 10 || Math.abs(e.clientY - LP.y) > 10)) { clearTimeout(LP.t); LP.t = null; } }, true);
+    document.addEventListener('scroll', function () { clearTimeout(LP.t); LP.t = null; }, true);
+    document.addEventListener('contextmenu', function (e) {
+      var el = uygun(e); if (!el) return; e.preventDefault();
+      if (Date.now() - LP.son < 1500) return;
+      var h = lpHedef(el); if (h) { LP.son = Date.now(); lpAc(h); }
+    }, true);
+    document.addEventListener('click', function (e) { if (LP.sup && Date.now() - LP.sup < 600) { LP.sup = 0; e.stopPropagation(); e.preventDefault(); } }, true);
+  })();
 
   // ---- Menü ipucu: ilk açılışta bir kez
   function ipucuKonum() {
@@ -1422,16 +1609,16 @@
   function t4HTML(C) { return PR === 0 ? gorevSayfa(C) : (PR === 2 || PR === 3) ? okulSayfa(C) : ayarHTML(); }
   function programHTML(C) {
     var y = C.y, p = programVar(y);
-    if (!p) return '<div class="empty"><b>Programın henüz yayınlanmadı</b>Okul yönetimi ders programını paylaştığında burada görünür.</div>';
+    if (!p) return '<div class="empty ei-takvim"><b>Programın henüz yayımlanmadı</b>Okul yönetimi ders programını paylaştığında burada görünür.</div>';
     var toplam = 0, siniflar = {};
     for (var wd = 1; wd <= 5; wd++) { var g = p.matris[String(wd)] || {}; Object.keys(g).forEach(function (no) { var h = hucre(g[no]); if (h) { toplam++; siniflar[h.sinif] = 1; } }); }
     return '<div class="stamp"><i></i>Güncel program' + (p.yururluk && /^\d{4}-\d{2}-\d{2}$/.test(p.yururluk) ? ', ' + gunAy(p.yururluk) + ' tarihli' : '') + '</div>' + ttHTML(C)
       + derslerimHTML(C) + '<div class="lgd"><span><i style="background:var(--ink)"></i>Şu an</span><span><i style="border:1px solid var(--teal)"></i>Ders doldurma</span></div>'
-      + '<div class="stat"><div><b>' + toplam + '</b><span>haftalık ders</span></div><div><b>' + Object.keys(siniflar).length + '</b><span>farklı sınıf</span></div></div>' + (toplam ? '<div class="okpay">' + payBtn('prog', 'Programı resim olarak paylaş') + '</div>' : '');
+      + '<div class="stat"><div><b>' + toplam + '</b><span>haftalık ders</span></div><div><b>' + Object.keys(siniflar).length + '</b><span>farklı sınıf</span></div></div>' + (toplam ? '<div class="okpay">' + payBtn('prog', 'Programı resim olarak paylaş') + '</div><div class="okpay" style="margin-top:8px">' + pdfBtn('prog', 'Programı PDF olarak al') + '</div>' : '');
   }
   function nobetSekmesi(C) {
     var n = nobetim(C.y);
-    if (!n.liste.length && !(n.gelecek && n.gelecek.liste.length)) return '<div class="empty"><b>Nöbet göreviniz bulunmamaktadır</b>' + (n.gelecek ? esc(gunAy(n.gelecek.bas)) + ' tarihinden itibaren geçerli yeni düzende de nöbet yeriniz yok.' : 'Nöbet yeriniz belirlendiğinde burada görünür.') + '</div>';
+    if (!n.liste.length && !(n.gelecek && n.gelecek.liste.length)) return '<div class="empty ei-cay"><b>Nöbet görevin yok</b>' + (n.gelecek ? esc(gunAy(n.gelecek.bas)) + ' tarihinden itibaren geçerli yeni düzende de nöbet yerin yok.' : 'Nöbet yerin belirlendiğinde burada görünür.') + '</div>';
     var l = n.liste.slice().sort(function (a, b) { return a.gun - b.gun; });
     var h = '';
     if (l.length) {
@@ -1452,7 +1639,7 @@
     var l = NT.slice().sort(function (a, b) { return ((a.d || '9') + (a.tm || '')) > ((b.d || '9') + (b.tm || '')) ? 1 : -1; });
     return '<div class="stamp"><i></i>Yalnız bu telefonda saklanır, kimse görmez</div>' + (l.length ? '<div class="sec">' + secH('Notların', l.length + ' not') + '<div class="rows">' + l.map(function (n) {
       return '<div class="rw" data-n="' + esc(n.id) + '"><div class="a"><b>' + esc(n.t) + '</b><span class="s">' + esc(hucreAdi(C.y, n.k)) + (n.w ? ', her hafta' : '') + '</span></div><span class="z">' + (n.d ? esc(gunAyK(n.d)) + (n.tm ? ', ' + esc(n.tm) : '') : '') + '</span></div>';
-    }).join('') + '</div></div>' : '<div class="empty"><b>Henüz notun yok</b>Ders programında bir derse dokunarak ya da aşağıdaki düğmeyle not ekleyebilirsin.</div>')
+    }).join('') + '</div></div>' : '<div class="empty ei-not"><b>Henüz notun yok</b>Ders programında bir derse dokunarak ya da aşağıdaki düğmeyle not ekleyebilirsin.</div>')
       + '<button class="addn" id="addn" type="button">Yeni not ekle</button>'
       + (l.length ? '<button class="lk" id="nall" type="button" style="display:block;margin-top:14px">Tüm notlarımı telefondaki notlara gönder</button>' : '')
       + '<button class="lk" id="bk" type="button" style="display:block;margin-top:10px">Notlarımı ve işaretlerimi yedekle</button><div class="nerr" id="bkm"></div>'
@@ -1460,7 +1647,7 @@
   }
   function t1HTML(C) {
     if (yayinKapali(C)) return '<div class="empty"><b>Bilgiler şu an gösterilemiyor</b>Bugün sekmesinden durumu görebilirsin.</div>';
-    if (PS === 0 && dersiz(C.y)) return programBekNotu(C) + gorevSatir(C) + bugunHatirlat(C) + (C.gb.tip === 'ders' ? sAkis(C, 0, 'Okulun bugünü') : '<div class="empty"><b>' + (C.gb.tip === 'hs' ? 'Hafta sonu' : 'Bugün okul tatil') + '</b>İyi dinlenmeler.</div>');
+    if (PS === 0 && dersiz(C.y)) return programBekNotu(C) + gorevSatir(C) + bugunHatirlat(C) + (C.gb.tip === 'ders' ? sAkis(C, 0, 'Okulun bugünü') : '<div class="empty ei-gunes"><b>' + (C.gb.tip === 'hs' ? 'Hafta sonu' : 'Bugün okul tatil') + '</b>İyi dinlenmeler.</div>');
     if (PS === 0) {
       var h = '', bg = C.gb.ds, ben = C.COV;
       var ilk = null; Object.keys(ben).forEach(function (no) { if (!ilk) ilk = ben[no]; });
@@ -1477,8 +1664,8 @@
       if (C.gb.tip === 'ders') { if (C.T >= C.Z0) h += '<div class="gbit"><b>Bugünkü derslerin bitti</b>Aşağıda bugünkü programını görebilirsin.</div>'; h += sAkis(C, 1); }
       else if (C.gb.tip === 'hs' || C.gb.tip === 'tatil') {
         var nx = sonrakiOkul(C), c1 = nx ? hucreAl(C.y, nx.gb.wd, 1) : null;
-        h += '<div class="empty"><b>' + (C.gb.tip === 'hs' ? 'Hafta sonu' : 'Bugün okul tatil') + '</b>' + (nx ? esc(nx.etiket) + ' dersler ' + esc(nx.ilk) + saatEk(nx.ilk) + ' başlıyor' + (c1 ? '; ilk dersin ' + esc(c1.sinif) + ' sınıfında.' : '.') : '') + '</div>';
-      } else h += '<div class="empty"><b>Ders saatleri henüz yayınlanmadı</b>Okul yönetimi paylaştığında burada görünür.</div>';
+        h += '<div class="empty ei-gunes"><b>' + (C.gb.tip === 'hs' ? 'Hafta sonu' : 'Bugün okul tatil') + '</b>' + (nx ? esc(nx.etiket) + ' dersler ' + esc(nx.ilk) + saatEk(nx.ilk) + ' başlıyor' + (c1 ? '; ilk dersin ' + esc(c1.sinif) + ' sınıfında.' : '.') : '') + '</div>';
+      } else h += '<div class="empty ei-saat"><b>Ders saatleri henüz yayımlanmadı</b>Okul yönetimi paylaştığında burada görünür.</div>';
       return programBekNotu(C) + gsat + h + khtml;
     }
     if (PS === 1) return programHTML(C);
@@ -1513,7 +1700,7 @@
     if (nobetSatir) h += '<div class="sec">' + secH('Nöbetin') + '<div class="rows">' + nobetSatir + '</div></div>';
     if (sonraki && sonraki === a && n.gelecek && (n.liste.length || n.gelecek.liste.length) && WK >= 1) h += '<div class="sec"><div class="rot"><p>Yeni nöbet düzenin, ' + esc(gunAy(a)) + ' tarihinden itibaren</p><p style="margin-top:10px;font-weight:500">Yönetim onayladı.</p><button class="lk" type="button" data-dt="nbd">Önceki ve yeni yerlerini gör</button></div></div>';
     else if (sonraki && WK === 0 && iso(gunEkle(mon, 7)) === sonraki && n.gelecek && (n.liste.length || n.gelecek.liste.length)) h += '<div class="sec"><div class="rot"><p>Gelecek hafta nöbet düzenin değişiyor</p><button class="lk" type="button" data-hafta="1">Gelecek haftaya bak</button></div></div>';
-    return h || '<div class="empty"><b>Bu hafta paylaşılan kayıt yok</b>Etkinlik, duyuru ya da nöbet değişikliği paylaşıldığında burada görünür.</div>';
+    return h || '<div class="empty ei-takvim"><b>Bu hafta paylaşılan kayıt yok</b>Etkinlik, duyuru ya da nöbet değişikliği paylaşıldığında burada görünür.</div>';
   }
 
   // ---- Pano sekmesi
@@ -1529,7 +1716,7 @@
       return o + '<p class="' + ((n.kat || '') === 'Eğitim' ? 'e' : '') + '">' + esc(n.kat || 'Bilgi') + '</p><div>' + esc(n.baslik) + (yeniMi(haberAnahtar(n)) ? '<i class="dot"></i>' : '') + '</div>' + (n.metin ? '<span class="s">' + esc(n.metin) + '</span>' : '') + '<footer><span>' + (n.bitis ? 'Son gün ' + esc(gunAyK(n.bitis)) : '') + '</span>' + (g ? '<em>' + esc(g.alan) + '</em>' + EXT : '') + '</footer>' + (g ? '</a>' : '</div>');
     }).join('') + '</div></div>';
     if (bag.length) h += '<div class="sec">' + secH('Sık kullanılan bağlantılar') + '<div class="lg2">' + bag.map(function (b) { return '<a href="' + esc(b.g.href) + '" target="_blank" rel="noopener noreferrer"><b>' + esc(b.ad) + '</b><span>' + esc(b.g.alan) + '</span></a>'; }).join('') + '</div></div>';
-    return h || '<div class="empty"><b>Pano boş</b>Okul yönetimi duyuru, haber ya da bağlantı eklediğinde burada görünür.</div>';
+    return h || '<div class="empty ei-pano"><b>Pano boş</b>Okul yönetimi duyuru, haber ya da bağlantı eklediğinde burada görünür.</div>';
   }
 
   // ---- Üst alan
@@ -1782,7 +1969,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
   }
   function ayrintiRenk(kod) {
     var p = String(kod).split(':'), t = p[0], r = 'pano';
-    if (t === 'ak' || t === 'dn') r = 'gunum';
+    if (t === 'ak' || t === 'dn' || t === 'so') r = 'gunum';
     else if (t === 'gun') r = p[1] === iso(simdi()) ? 'gunum' : 'yarin';
     else if (t === 'nb' || t === 'nbd') r = 'nobet';
     else if (t === 'du') r = 'neler';
@@ -2003,6 +2190,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     if (t === 'dr') return dtDers(+p[1]);
     if (t === 'dl') return dtDersListe(p[1]);
     if (t === 'kv') return dtKurul(+p[1]);
+    if (t === 'so') return dtSubeOgr(decodeURIComponent(p[1]), decodeURIComponent(p[2]));
   }
   function dtHucre(kk) {
     var C = CTX || baglam(), a = String(kk).split(','), g = haftaGunleri(C.d)[+a[0]]; if (!g) return;
@@ -2148,6 +2336,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     h += dtSatir('gun:' + ds, '', 'Günün tamamı', '', '');
     h += '</div>';
     if (my || cv) h += '<button class="lk" type="button" data-nt="' + (G.gb.wd - 1) + ',' + (no - 1) + '" style="margin-top:16px">Bu derse not ekle</button>';
+    if (my) h += subeOgrBolumu(G.y ? { y: G.y, ben: norm(G.y.kisi && G.y.kisi.ad) } : {}, my.sinif);
     if (my && kzEsle(my)) h += '<div class="kzw" id="kzw" data-ds="' + ds + '"><div class="kzn">Kazanımlar yükleniyor…</div></div>';
     dtGoster(les ? r[1] : r[1], h);
     if (my && kzEsle(my)) kzDoldur(my, ds);
@@ -2157,7 +2346,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     var h = '';
     if (gb.tip === 'hs') h += '<div class="empty" style="margin-top:6px"><b>Hafta sonu</b>Ders yok.</div>';
     else if (gb.tip === 'tatil') h += '<div class="empty" style="margin-top:6px"><b>Okul tatil</b>' + esc(gb.ad || '') + '</div>';
-    else if (gb.tip === 'yok') h += '<div class="empty" style="margin-top:6px"><b>Ders saatleri henüz yayınlanmadı</b></div>';
+    else if (gb.tip === 'yok') h += '<div class="empty" style="margin-top:6px"><b>Ders saatleri henüz yayımlanmadı</b></div>';
     else {
       var ch = []; if (gb.yarim) ch.push('Yarım gün' + (gb.ad ? ', ' + gb.ad : '')); if (gb.gecici) ch.push(gb.gecici);
       if (ch.length) h += '<div class="chp">' + ch.map(function (c) { return '<span>' + esc(c) + '</span>'; }).join('') + '</div>';
@@ -2205,6 +2394,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     });
     h += '</div>';
     var my = { sinif: g.sinif, ders: g.ders };
+    h += subeOgrBolumu(C, g.sinif);
     if (kzEsle(my)) h += '<div class="kzw" id="kzw" data-ds="' + ilk + '"><div class="kzn">Kazanımlar yükleniyor…</div></div>';
     dtGoster('Ders', h);
     if (kzEsle(my)) kzDoldur(my, ilk);
@@ -2260,7 +2450,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
       + '<div class="clst"><div class="cgr">GÜNLÜK</div>' + gun + '<div class="cgr">KİŞİSEL</div>' + kis + okl + '</div>'
       + '<div class="cbt">' + it('ayr', 'Ayarlar', 4, 1) + it('hes', 'Hesap', 4, 1, true, 'hesap') + '</div>';
   }
-  // ---- Tutanak: öğretmenin kendi kodlu bağlantısını ayrı sayfada açar (kod panelden yayınlanır; yoksa açılmaz) ----
+  // ---- Tutanak: öğretmenin kendi kodlu bağlantısını ayrı sayfada açar (kod panelden yayımlanır; yoksa açılmaz) ----
   function tutBildir(m) {
     var e = $('tutm');
     if (!e) { e = document.createElement('div'); e.id = 'tutm'; e.setAttribute('role', 'status'); e.setAttribute('aria-live', 'polite'); document.body.appendChild(e); }
@@ -2278,11 +2468,11 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
   function tutAc() {
     cekKapat();
     var u = tutLink((CTX || baglam()).y);
-    if (!u) { tutBildir('Tutanak kodunuz henüz tanımlı değil. Okul yönetimine başvurun.'); return; }
+    if (!u) { tutBildir('Tutanak kodun henüz tanımlı değil. Okul yönetimine başvur.'); return; }
     if (typeof navigator !== 'undefined' && navigator.onLine === false) { tutBildir('Tutanak sayfası için internet bağlantısı gerekir.'); return; }
     var w = null;
     try { w = window.open(u, '_blank'); } catch (e) {}
-    if (w) { try { w.opener = null; } catch (e2) {} } else { tutBildir('Sayfa açılamadı. Açılır pencere engelini kontrol edin.'); }
+    if (w) { try { w.opener = null; } catch (e2) {} } else { tutBildir('Sayfa açılamadı. Açılır pencere engelini kontrol et.'); }
   }
   function cekAc() { ipucuKapat(); var C = CTX || baglam(); $('cek').innerHTML = cekHTML(C); $('cek').classList.add('on'); $('cov').classList.add('on'); }
   function cekKapat() { $('cek').classList.remove('on'); $('cov').classList.remove('on'); }
@@ -2301,7 +2491,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     var v = gvDeger();
     return '<div class="gvp" id="o_gv">' + GVO.map(function (x) { return '<button type="button" data-v="' + x[0] + '"' + (v === x[0] ? ' class="on"' : '') + '>' + x[2] + '<b>' + x[1] + '</b></button>'; }).join('') + '</div>';
   }
-  var TEMA_SEG = [['acik', 'Gündüz'], ['koyu', 'Gece'], ['oto', 'Otomatik']];
+  var TEMA_SEG = [['acik', 'Gündüz'], ['koyu', 'Gece'], ['siyah', 'Siyah'], ['oto', 'Otomatik']];
   function ayAc(key, baslik, ic) { var o = !!AYOP[key]; return '<div class="acd' + (o ? ' open' : '') + '"><button type="button" class="ach" data-acd="' + key + '" aria-expanded="' + o + '"><b>' + baslik + '</b><span class="chv">›</span></button><div class="acn">' + ic + '</div></div>'; }
   function ayarHTML() {
     var y = Y(), o = onbellek(), th = oku(K.tema) || 'oto', ac = oku(K.ac) || '', fs = oku(K.fs) || '1';
@@ -2309,6 +2499,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     var tema = '<h4>Gece / gündüz</h4><div class="thseg" id="o_th">' + TEMA_SEG.map(function (x) { return '<button type="button" data-v="' + x[0] + '"' + (th === x[0] ? ' class="on"' : '') + '><svg viewBox="0 0 24 24">' + TEMA_IK[x[0]] + '</svg>' + x[1] + '</button>'; }).join('') + '</div>'
       + '<h4>Vurgu rengi</h4><div class="sw2" id="o_ac">' + renkler.map(function (r) { return '<button type="button" aria-label="' + esc(r[0] || 'altın') + '" data-v="' + r[0] + '"' + (ac === r[0] ? ' class="on"' : '') + ' style="background:' + r[1] + '"></button>'; }).join('') + '</div>'
       + '<h4>Yazı boyutu</h4><div class="opts fsz" id="o_fs">' + [['0.92', 'Küçük', 14], ['1', 'Normal', 17], ['1.12', 'Büyük', 21]].map(function (x) { return '<button type="button" data-v="' + x[0] + '"' + (fs === x[0] ? ' class="on"' : '') + '><span style="font-size:' + x[2] + 'px">Aa</span><small>' + x[1] + '</small></button>'; }).join('') + '</div>'
+      + '<h4>Şube renkleri</h4><div class="tg' + (kdAyar() ? ' on' : '') + '" data-kdtg="1" aria-pressed="' + (kdAyar() ? 'true' : 'false') + '"><span>Şubenin yanında kademe noktası</span><i></i></div><div class="kdlg"><span data-kd="5">5. sınıf</span><span data-kd="6">6. sınıf</span><span data-kd="7">7. sınıf</span><span data-kd="8">8. sınıf</span></div>'
       + '<h4>Ana ekranda günün dersleri</h4>' + gvSecim() + '<button type="button" class="gvtm" data-gvtm="1">Tamam</button>';
     var ana = '<h4>Açılış sayfası</h4>' + secenek('o_ap', oku(K.acilis) || '0', [['0', 'Ana ekran'], ['1', 'Programım'], ['1p', 'Program'], ['1n', 'Nöbet'], ['2', 'Takvim'], ['3', 'Pano'], ['son', 'Son baktığım']])
       + '<h4>Ana ekranda göster</h4>' + TOG.map(function (x) { return '<div class="tg' + (GIZLE[x[0]] ? '' : ' on') + '" data-k="' + x[0] + '"><span>' + x[1] + '</span><i></i></div>'; }).join('');
@@ -2349,6 +2540,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     if ((b = t.closest('#o_gv button'))) { yaz(K.gun, b.dataset.v); ayarAc(); render(); return; }
     if ((b = t.closest('#o_ap button'))) { yaz(K.acilis, b.dataset.v); ayarAc(); return; }
     if ((b = t.closest('#o_fs button'))) { yaz(K.fs, b.dataset.v); tercihUygula(); ayarAc(); setTimeout(tick, 50); return; }
+    if ((b = t.closest('[data-kdtg]'))) { if (kdAyar()) yaz(K.kd, '0'); else sil(K.kd); ayarAc(); render(); return; }
     if ((b = t.closest('.tg'))) { var k = b.dataset.k; GIZLE[k] = !GIZLE[k]; yaz(K.gizle, JSON.stringify(GIZLE)); b.classList.toggle('on', !GIZLE[k]); uygulaGizle(); return; }
     if (t.closest('#fin')) { kapat(); return; }
     if ((b = t.closest('#forget'))) {
@@ -2394,23 +2586,23 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
   // ================= BAŞLARKEN, BİLGİLENDİRME, VERİLERİM =================
   // Bilgilendirme metni değişirse BILGI_SURUM artırılır; öğretmen yeni metni bir kez daha onaylar.
   var BILGI_SURUM = 'b1';
-  var BILGI_PILOT = 'Yaşar Doğu Öğretmen, öğretmenlerimizin günlük işlerini kolaylaştırmak ve eğitim-öğretim ortamının kalitesine katkı sağlamak amacıyla hazırlanmış bir pilot uygulamadır. Kusursuzluk iddiası taşımaz; sade ve öğretmen dostu bir yardımcı olmayı hedefler. Henüz eksikleri bulunmaktadır ve sizlerin geri bildirimleriyle gelişmeye devam edecektir. Hiçbir kâr amacı gütmez, ücretsizdir ve yalnızca okulumuzun öğretmenleri için hazırlanmıştır.';
-  var BILGI_PILOT2 = 'Karşılaştığınız sorunları ve önerilerinizi Ayarlar › Tanılama › Sorun bildir bölümünden iletebilirsiniz.';
+  var BILGI_PILOT = 'Yaşar Doğu Öğretmen, öğretmenlerimizin günlük işlerini kolaylaştırmak ve eğitim-öğretim ortamının kalitesine katkı sağlamak amacıyla hazırlanmış bir pilot uygulamadır. Kusursuzluk iddiası taşımaz; sade ve öğretmen dostu bir yardımcı olmayı hedefler. Henüz eksikleri var ve senin geri bildirimlerinle gelişmeye devam edecek. Hiçbir kâr amacı gütmez, ücretsizdir ve yalnızca okulumuzun öğretmenleri için hazırlanmıştır.';
+  var BILGI_PILOT2 = 'Karşılaştığın sorunları ve önerilerini Ayarlar › Tanılama › Sorun bildir bölümünden iletebilirsin.';
   var BILGI_MADDE = [
-    'Yalnızca okul yönetiminin yayımladığı bilgiler gösterilir: ad-soyad, ders programı, nöbet ve görevlendirmeler, duyurular. Bu bilgiler okulun kendi Google hesabında tutulur ve okul kodu ile kişisel kodunuzla açılır.',
-    'Kodlarınız sunucuda düz metin olarak değil, geri döndürülemeyen şifrelenmiş (karma) biçimde saklanır.',
-    'Notlarınız ve “işlendi” işaretleriniz yalnızca bu telefonda saklanır; okul yönetimi dahil kimseye gönderilmez.',
-    'Uygulamada reklam, takip ya da istatistik aracı bulunmaz. Bilgileriniz üçüncü kişilerle paylaşılmaz.',
-    'Yanlış kod denemelerini sınırlamak için telefonunuza ait rastgele bir numara kullanılır. Bu numara kimliğinizi göstermez ve sunucuda yalnızca kısa süre (yaklaşık 10 dakika) tutulur.',
+    'Yalnızca okul yönetiminin yayımladığı bilgiler gösterilir: ad-soyad, ders programı, nöbet ve görevlendirmeler, duyurular. Bu bilgiler okulun kendi Google hesabında tutulur ve okul kodu ile kişisel kodunla açılır.',
+    'Kodların sunucuda düz metin olarak değil, geri döndürülemeyen şifrelenmiş (karma) biçimde saklanır.',
+    'Notların ve “işlendi” işaretlerin yalnızca bu telefonda saklanır; okul yönetimi dahil kimseye gönderilmez.',
+    'Uygulamada reklam, takip ya da istatistik aracı bulunmaz. Bilgilerin üçüncü kişilerle paylaşılmaz.',
+    'Yanlış kod denemelerini sınırlamak için telefonuna ait rastgele bir numara kullanılır. Bu numara kimliğini göstermez ve sunucuda yalnızca kısa süre (yaklaşık 10 dakika) tutulur.',
     'Bağlantı sırasında uygulamayı ve bilgileri sunan hizmetler (GitHub, Google) olağan teknik kayıtları (örneğin IP adresi) tutabilir.'
   ];
   function bilgiHTML() {
-    return '<div class="bl"><h2>Pilot uygulama</h2><p>' + esc(BILGI_PILOT) + '</p><p>' + esc(BILGI_PILOT2) + '</p><h2>Gizlilik ve verileriniz</h2><ul>' + BILGI_MADDE.map(function (m) { return '<li>' + esc(m) + '</li>'; }).join('') + '</ul></div>';
+    return '<div class="bl"><h2>Pilot uygulama</h2><p>' + esc(BILGI_PILOT) + '</p><p>' + esc(BILGI_PILOT2) + '</p><h2>Gizlilik ve verilerin</h2><ul>' + BILGI_MADDE.map(function (m) { return '<li>' + esc(m) + '</li>'; }).join('') + '</ul></div>';
   }
   function okudumKaydi() { var o = okuJ(K.okudum, null); return (o && typeof o === 'object' && o.s) ? o : null; }
   function hakkindaHTML() {
     var o = okudumKaydi(), tr = o && o.t ? gunAy(String(o.t).slice(0, 10)) + ' ' + String(o.t).slice(0, 4) : '—';
-    return bilgiHTML() + '<div class="kv"><span>Okuduğunuz tarih</span><b>' + esc(tr) + '</b></div><div class="kv"><span>Sürüm</span><b>' + esc(A.SURUM) + '</b></div>'
+    return bilgiHTML() + '<div class="kv"><span>Okuduğun tarih</span><b>' + esc(tr) + '</b></div><div class="kv"><span>Sürüm</span><b>' + esc(A.SURUM) + '</b></div>'
       + '<button class="fin3" id="klvac" type="button">Ana ekrana ekleme kılavuzunu aç</button>';
   }
 
@@ -2441,7 +2633,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
   }
   function bilgiIlk(sonraki) {
     var kp = $('kap'); kp.className = 'lock kap on';
-    kp.innerHTML = '<div class="kw"><img src="' + esc(LOGO) + '" alt=""><h1>Başlamadan önce</h1><p class="sub">Lütfen kısa bilgilendirmeyi okuyun.</p>' + bilgiHTML()
+    kp.innerHTML = '<div class="kw"><img src="' + esc(LOGO) + '" alt=""><h1>Başlamadan önce</h1><p class="sub">Kısa bilgilendirmeyi lütfen oku.</p>' + bilgiHTML()
       + '<button type="button" class="okuk" id="okuk" aria-pressed="false"><i></i><span>Bilgilendirmeyi okudum, anladım.</span></button><button type="button" class="bt2" id="okd" disabled>Devam</button></div>';
     var r = $('okuk'), d = $('okd');
     r.onclick = function () { var on = r.classList.toggle('on'); r.setAttribute('aria-pressed', on ? 'true' : 'false'); d.disabled = !on; };

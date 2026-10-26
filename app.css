@@ -900,3 +900,43 @@ button,[data-dt],[data-n],[data-c],.shd,.cov,.dtd{touch-action:manipulation}
 :is(#t0,#t1,#t2,#t3)>.sec[data-r]>.kart{background:none;-webkit-backdrop-filter:none;backdrop-filter:none;border:1.5px solid rgba(255,255,255,.95);box-shadow:0 0 0 1px rgba(90,80,170,.22),0 1px 0 rgba(255,255,255,.95) inset,0 22px 26px -22px rgba(255,255,255,.7) inset,0 14px 30px -12px rgba(60,50,140,.42)}
 :root[data-th=dark] :is(#t0,#t1,#t2,#t3)>.sec[data-r]>.kart{border:1px solid rgba(255,255,255,.22);box-shadow:0 1px 0 rgba(255,255,255,.16) inset,0 10px 26px -16px rgba(0,0,0,.6)}
 @media(prefers-color-scheme:dark){:root:not([data-th=light]) :is(#t0,#t1,#t2,#t3)>.sec[data-r]>.kart{border:1px solid rgba(255,255,255,.22);box-shadow:0 1px 0 rgba(255,255,255,.16) inset,0 10px 26px -16px rgba(0,0,0,.6)}}
+
+/* ===== 0.15.0 ===== */
+/* Siyah tema (AMOLED): Gece'den ayrı seçenek; yalnız değişkenleri koyulaştırır */
+:root[data-th=dark][data-bk]{--paper:#000;--surf:#0A0B10;--line:#1B2133;--ink:#101C3A;--tx:#EAEEF8;--mut:#97A2BA;--goldsoft:#2E2711}
+:root[data-th=dark][data-bk] .cek{background:#07090F}
+:root[data-th=dark][data-bk] .lock{background:radial-gradient(120% 70% at 50% 6%,#10192E 0,#070B16 55%,#000 100%)}
+/* Kademe noktası */
+:root{--kd5:#1F9C8A;--kd6:#3F78E0;--kd7:#9B52D6;--kd8:#E07420}
+@media(prefers-color-scheme:dark){:root:not([data-th=light]){--kd5:#4FD1BC;--kd6:#7FA8FF;--kd7:#C79BFF;--kd8:#FFA45C}}
+:root[data-th=dark]{--kd5:#4FD1BC;--kd6:#7FA8FF;--kd7:#C79BFF;--kd8:#FFA45C}
+[data-kd="5"]{--kdc:var(--kd5)}[data-kd="6"]{--kdc:var(--kd6)}[data-kd="7"]{--kdc:var(--kd7)}[data-kd="8"]{--kdc:var(--kd8)}
+[data-kd]::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;vertical-align:.08em;background:var(--kdc);flex:none}
+.tt>div[data-kd]::before{position:absolute;top:5px;left:5px;margin:0;width:6px;height:6px}
+.kdlg{display:flex;flex-wrap:wrap;gap:6px 16px;margin:6px 0 4px;font-size:13px;color:var(--mut)}
+/* Uzun basma: iOS büyütme/seçme çıkıntısını kapat */
+.gx,.gzx,.tl[data-dt^="ak:"],#t1 .tt>div[data-c]{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+/* Bayrak slaytı */
+.bay{position:relative;height:196px;border-radius:22px;overflow:hidden;background:#13244A;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+.bay .bflag{position:absolute;left:0;top:0;width:100%;height:100%;display:block}
+.bay .bsc{position:absolute;left:0;right:0;bottom:0;height:96px;background:linear-gradient(to top,rgba(8,12,24,.78),rgba(8,12,24,0))}
+.bay .btx{position:absolute;left:18px;right:18px;bottom:14px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.5)}
+.bay .btx small{display:block;font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;opacity:.95;line-height:1.3}
+.bay .btx b{display:block;font-family:'Bricolage Grotesque','Hanken Grotesk',sans-serif;font-size:20px;line-height:1.2;font-weight:600;margin-top:4px}
+.bw{animation:bwave 2.6s ease-in-out infinite}
+.bsh{opacity:0;animation:bshade 2.6s ease-in-out infinite}
+@keyframes bwave{0%,100%{transform:translateY(-1.5px)}50%{transform:translateY(1.5px)}}
+@keyframes bshade{0%,100%{opacity:0}50%{opacity:.26}}
+@media (prefers-reduced-motion:reduce){.bw,.bsh{animation:none}}
+/* Boş durum çizimleri (tek renk çizgi; renk vurgudan gelir) */
+@supports ((-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E")) or (mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"))){
+.empty[class*=" ei-"]::before{content:"";display:block;width:84px;height:63px;margin:0 0 14px;background:var(--gold);opacity:.92;-webkit-mask:var(--ei) left center/contain no-repeat;mask:var(--ei) left center/contain no-repeat}
+.empty.ei-cay{--ei:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 72' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M34 24H62C60 28 57 31 57 36C57 41 60 46 61 52H35C36 46 39 41 39 36C39 31 36 28 34 24Z'/%3E%3Cpath d='M38.5 35H57.5'/%3E%3Cpath d='M24 57C24 60 31 61 48 61S72 60 72 57Z'/%3E%3Cpath d='M42 8C38 12 46 14 42 19M54 8C50 12 58 14 54 19'/%3E%3C/svg%3E")}
+.empty.ei-not{--ei:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 72' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M30 12H62A4 4 0 0 1 66 16V56A4 4 0 0 1 62 60H30A4 4 0 0 1 26 56V16A4 4 0 0 1 30 12Z'/%3E%3Cpath d='M34 26H58M34 34H58M34 42H48'/%3E%3Cpath d='M70 20L78 28L56 50L46 52L48 42Z'/%3E%3Cpath d='M66 24L74 32'/%3E%3C/svg%3E")}
+.empty.ei-pano{--ei:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 72' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='18' y='14' width='60' height='42' rx='4'/%3E%3Crect x='26' y='23' width='18' height='14' rx='2'/%3E%3Crect x='50' y='23' width='20' height='9' rx='2'/%3E%3Cpath d='M30 46H66M50 37H66'/%3E%3Cpath d='M35 23V20M60 23V20'/%3E%3Cpath d='M28 66H68'/%3E%3C/svg%3E")}
+.empty.ei-takvim{--ei:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 72' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='22' y='16' width='52' height='42' rx='5'/%3E%3Cpath d='M22 29H74M34 10V21M62 10V21'/%3E%3Cpath d='M34 40h.01M48 40h.01M62 40h.01M34 49h.01M48 49h.01' stroke-width='4.5'/%3E%3C/svg%3E")}
+.empty.ei-zarf{--ei:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 72' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='20' y='18' width='56' height='38' rx='5'/%3E%3Cpath d='M20 24L48 42L76 24'/%3E%3C/svg%3E")}
+.empty.ei-gorev{--ei:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 72' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='26' y='14' width='44' height='48' rx='5'/%3E%3Crect x='38' y='8' width='20' height='10' rx='3'/%3E%3Cpath d='M34 32H62M34 42H62M34 52H50'/%3E%3C/svg%3E")}
+.empty.ei-saat{--ei:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 72' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='48' cy='36' r='23'/%3E%3Cpath d='M48 22V36L58 42'/%3E%3C/svg%3E")}
+.empty.ei-gunes{--ei:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 72' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='48' cy='34' r='10'/%3E%3Cpath d='M48 12v5M48 51v5M26 34h5M65 34h5M32 18l3.5 3.5M64 18l-3.5 3.5M32 50l3.5-3.5M64 50l-3.5-3.5'/%3E%3Cpath d='M22 64H74'/%3E%3C/svg%3E")}
+}
