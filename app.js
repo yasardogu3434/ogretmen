@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.15.4'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.15.6'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu', kd: 'ogr_kd' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -346,6 +346,7 @@
     return '<div class="hr"><div class="ring' + (les ? '' : ' br') + '" data-lv="r"><svg viewBox="0 0 180 180" aria-hidden="true">' + TICKS + '<circle class="tr" cx="90" cy="90" r="78"/><circle class="pg' + (les && left <= 300 ? ' son' : '') + '" cx="90" cy="90" r="78" stroke-dasharray="' + Cc.toFixed(1) + '" stroke-dashoffset="' + (Cc * (1 - fr)).toFixed(1) + '"/></svg><div class="rc"><b class="d">' + kalan.slice(0, -1) + '<span class="sd">' + kalan.slice(-1) + '</span></b><span>kalan süre</span></div></div><div class="hs"><div class="ey' + (les ? '' : ' br') + '">' + esc(c[1]) + '</div><div class="cap">' + (les ? 'ders bitimine' : (c[0] === 'öğle' ? 'öğle arasının bitimine' : 'teneffüsün bitimine')) + ' kadar</div>' + (n ? '<div class="nx">Sonra ' + esc(n[1].toLocaleLowerCase('tr-TR')) + ', ' + n[2] + '</div>' : '<div class="nx">Günün son dersi</div>') + sinif + '</div></div>' + cetvel(C, mine);
   }
   // ---- Üst alan: panel düzeni. Ders/teneffüste geri sayım, ders dışında slayt; düğmeyle geçiş
+  var SNO = 0, SNK = -1; // sınav slaytı: slayt her gösterildiğinde sıradaki 3 sınava geçmek için sayaç
   var HI = 0, HX = true, HSON = Date.now(), HLAST = Date.now(), HFX = false, HYON = 0, HO = null, SLAYT_MS = 10000, GERI_MS = 300000;
   var IK_ONC = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>', IK_SON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>';
   var IK_DUR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg>', IK_OYN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" style="fill:currentColor"/></svg>';
@@ -381,7 +382,7 @@
     'Ders saatleri': '<circle cx="12" cy="13" r="7.5"/><path d="M12 9v4l2.5 1.5M9.5 2.5h5"/>'
   };
   function oneKart(p, git) {
-    return '<div class="hsl" style="--c:' + (ONE_RENK[p.k] || 'var(--gold)') + '"><div class="hrow"><span class="hic"><svg viewBox="0 0 24 24" aria-hidden="true">' + (IKN[p.k] || IKN['Okuldan']) + '</svg></span><span class="ey2">' + esc(p.k) + '</span>' + (git ? '<span class="hcnt"></span>' : '') + '</div><div class="d ttl">' + esc(p.t) + '</div>' + (p.s ? '<div class="cap">' + esc(p.s) + '</div>' : '') + (git ? '<span class="go" aria-hidden="true">' + IK_SON + '</span>' : '') + '</div>';
+    return '<div class="hsl" style="--c:' + (ONE_RENK[p.k] || 'var(--gold)') + '"><div class="hrow"><span class="hic"><svg viewBox="0 0 24 24" aria-hidden="true">' + (IKN[p.k] || IKN['Okuldan']) + '</svg></span><span class="ey2">' + esc(p.k) + '</span>' + (git ? '<span class="hcnt"></span>' : '') + '</div><div class="d ttl">' + esc(p.t) + '</div>' + (p.satirlar ? '<div class="snl">' + p.satirlar.map(function (r) { return '<div class="snr"><b>' + esc(r[0]) + '</b><span>' + esc(r[1]) + '</span></div>'; }).join('') + '</div>' : '') + (p.s ? '<div class="cap">' + esc(p.s) + '</div>' : '') + (p.s2 ? '<div class="cap c2">' + esc(p.s2) + '</div>' : '') + (p.bar != null ? '<div class="hbar"><i style="width:' + p.bar + '%"></i></div>' : '') + (git ? '<span class="go" aria-hidden="true">' + IK_SON + '</span>' : '') + '</div>';
   }
   function durumKarti(C, mine) {
     var gb = C.gb, y = C.y;
@@ -432,7 +433,7 @@
     var planli = !!programVar(y), bitti = C.gb.tip === 'ders' && C.T >= C.Z0, ol = null;
     function olaylarAl() { return ol || (ol = olaylar(y)); }
     // 0) Hafta sonu: tek bir 'İyi tatiller' mesajı
-    if (C.gb.tip === 'hs') out.push({ k: 'Hafta sonu', t: 'İyi tatiller', s: '', dt: '' });
+    if (C.gb.tip === 'hs') out.push({ k: 'Hafta sonu', t: 'İyi tatiller', s: '', dt: 'hs' });
     // 1) Bugün sende
     if (planli && C.gb.tip === 'ders' && C.gb.ders.length && !bitti) {
       var n = 0, ilk = 0, i;
@@ -457,11 +458,16 @@
       var yer = nobetYer(y, gj.wd, iso(dj));
       if (yer) { out.push({ k: 'Nöbetin', t: (j === 0 ? 'Bugün' : (j === 1 ? 'Yarın' : GUN[dj.getDay()])) + ' nöbetin var', s: yer, dt: 'nbd' }); break; }
     }
-    // 3) Yaklaşan sınav (14 gün içinde)
-    var son14 = iso(gunEkle(C.d, 14)), sn = olaylarAl().filter(function (o) { return o.k === 'sinav' && o.bit >= bg && o.bas <= son14; })[0];
-    if (sn) {
-      var kl = gunFark(bg, sn.bas), kt = sn.bas <= bg ? 'Şu an' : (kl === 1 ? 'Yarın' : kl + ' gün sonra');
-      out.push({ k: 'Yaklaşan sınav', t: sn.ad, s: sn.hafta ? kt + ' · ' + aralik(sn.bas, sn.bit) : kt + ' · ' + gunAy(sn.bas) + (sn.alt ? ' · ' + sn.alt : ''), dt: olayKodu(sn) });
+    // 3) Yaklaşan sınavlar: herhangi bir sınava 7 gün kala görünür; günü/saati geçen görünmez. Tek sınavsa eski görünüm; çoksa her gösterimde sıradaki 3 sınav.
+    var sl7 = sinavGorunen(C, olaylarAl()), n7 = sl7.length;
+    if (n7 === 1) {
+      var sx = sl7[0];
+      out.push({ k: 'Yaklaşan sınav', sid: 'sinav', t: sx.ad, s: sx.hafta ? sinavKt(C, sx) + ' · ' + aralik(sx.bas, sx.bit) : sinavKt(C, sx) + ' · ' + gunAy(sx.bas) + (sinavAlt(sx, 0) ? ' · ' + sinavAlt(sx, 0) : ''), dt: olayKodu(sx) });
+    } else if (n7 > 1) {
+      var b0 = n7 > 3 ? (((SNO > 0 ? SNO - 1 : 0) * 3) % n7) : 0, pi = [], pen = [];
+      for (var ii = 0; ii < Math.min(3, n7); ii++) pi.push((b0 + ii) % n7);
+      pi.sort(function (u, v) { return u - v; }); pi.forEach(function (k) { pen.push(sl7[k]); }); // gösterilen üçlü de tarih sırasında kalır
+      out.push({ k: 'Yaklaşan sınav', sid: 'sinav', t: n7 + ' sınav yaklaşıyor', satirlar: pen.map(function (o) { return [sinavKt(C, o), o.hafta ? o.ad + ' · ' + aralik(o.bas, o.bit) : o.ad + (sinavAlt(o, 1) ? ' · ' + sinavAlt(o, 1) : '')]; }), s: n7 > 3 ? 'Tümü için dokun' : '', dt: 'sv' });
     }
     // 4) Sonraki tatil: takvim günü olarak kalan gün + tarihler (hafta sonu tatil sayılmaz, listeden yalnız gerçek tatiller seçilir)
     var th = ortak(y, 'tatil');
@@ -469,7 +475,7 @@
       var tl = th.liste.filter(function (h) { return h && ISODT.test(h.bas || '') && !h.yarim && h.bas > bg; }).sort(function (p, q) { return p.bas < q.bas ? -1 : 1; })[0];
       if (tl) {
         var N = gunFark(bg, tl.bas), tad = String(tl.ad || 'Tatil'), te = olaylarAl().filter(function (o) { return o.k === 'tatil' && o.bas === tl.bas; })[0];
-        out.push({ k: 'Sonraki tatil', t: tad + ' · ' + (N <= 1 ? 'yarın' : N + ' gün kaldı'), s: aralik(tl.bas, tl.bit || tl.bas), dt: te ? olayKodu(te) : '' });
+        out.push({ k: 'Sonraki tatil', t: tad + ' · ' + (N <= 1 ? 'yarın' : N + ' gün kaldı'), s: aralik(tl.bas, tl.bit || tl.bas), dt: 'st:' + tl.bas });
       }
     }
     // 4b) Derslerin: her ders için şubeleri (dokununca liste)
@@ -480,7 +486,7 @@
     var kz = kzSlayt(C); if (kz) out.push(kz);
     // 6) Eğitim-öğretim haftası
     var eo = ortak(y, 'egitimhaftasi'); if (!eo || !Array.isArray(eo.liste)) eo = (KZ.idx && Array.isArray(KZ.idx.hafta)) ? { liste: KZ.idx.hafta } : null;
-    if (eo) for (var q = 0; q < eo.liste.length; q++) { var eh = eo.liste[q]; if (eh && ISODT.test(eh.bas || '') && ISODT.test(eh.bit || '') && eh.bas <= bg && bg <= eh.bit && +eh.n > 0) { out.push({ k: 'Eğitim haftası', t: eh.n + '. eğitim-öğretim haftası', s: aralik(eh.bas, eh.bit), dt: '' }); break; } }
+    if (eo) for (var q = 0; q < eo.liste.length; q++) { var eh = eo.liste[q]; if (eh && ISODT.test(eh.bas || '') && ISODT.test(eh.bit || '') && eh.bas <= bg && bg <= eh.bit && +eh.n > 0) { var eyb = eyBilgi(C); out.push({ k: 'Eğitim haftası', t: eh.n + '. eğitim-öğretim haftası', s: aralik(eh.bas, eh.bit), s2: eyb ? 'Yılın %' + eyb.pct + '’i geride · ' + eyb.kalan + ' okul günü kaldı' : '', bar: eyb ? eyb.pct : null, dt: 'eh' }); break; } }
     return out;
   }
   // ---- 0.15.0: milli bayram günlerinde ilk slayt dalgalanan Türk bayrağı (hareketi azalt açıksa durağan kalır)
@@ -505,7 +511,7 @@
     if (bay) s.push({ id: 'bayrak', h: bayrakHTML(bay) });
     if (yayinlandi(y, 'gokyuzu')) s.push({ id: 'gokyuzu' });
     if (!akt) s.push({ id: 'durum', h: durumKarti(C, 0) });
-    if (!GIZLE.pano) yeniSlaytlar(C).forEach(function (p, i) { s.push({ id: 'y' + i, h: oneKart(p, true), dt: p.dt || undefined }); });
+    if (!GIZLE.pano) yeniSlaytlar(C).forEach(function (p, i) { s.push({ id: p.sid || 'y' + i, h: oneKart(p, true), dt: p.dt || undefined }); });
     duyuruListe(y).slice(0, 8).forEach(function (d, i) { s.push({ id: 'd' + i, h: duyuruKart(d, C), dt: 'du:' + i }); });
     if (!GIZLE.pano) oneCikanlar(C).forEach(function (p, i) { s.push({ id: 'o' + i, h: oneKart(p, true), dt: p.dt }); });
     if (!s.length) s.push({ id: 'durum', h: durumKarti(C, 0) });
@@ -519,7 +525,10 @@
       return h + '</div>';
     }
     var s = heroSlaytlar(C), n = s.length; if (HI >= n) HI = 0;
-    var cur = s[HI], body = cur.h, fx = HFX; HFX = false;
+    var cur = s[HI];
+    if (cur && cur.id === 'sinav' && SNK !== HSON) { SNK = HSON; SNO++; s = heroSlaytlar(C); n = s.length; if (HI >= n) HI = 0; cur = s[HI]; }
+    var body = cur.h, fx = HFX; HFX = false;
+    if (body && !cur.dt && cur.id !== 'gokyuzu') body = body.replace(/<span class="go" aria-hidden="true"><svg[\s\S]*?<\/svg><\/span>/, '');
     if (body && cur.id !== 'gokyuzu') body = body.replace('<span class="hcnt"></span>', '<span class="hcnt">' + (HI + 1) + ' / ' + n + '</span>');
     if (cur.id === 'gokyuzu') { window.SKCTX = ''; body = '<div class="skyc" id="skyc">' + skSkeleton() + '</div>' + SKY_BIT; }
     h = '<div class="hcar"><div class="sl' + (n === 1 ? ' one' : '') + (fx ? ' fx' + (HYON > 0 ? ' fxs' : (HYON < 0 ? ' fxr' : '')) : '') + '"' + (cur.dt ? ' data-dt="' + esc(cur.dt) + '"' : '') + '>' + body + '</div>';
@@ -694,6 +703,83 @@
     return out;
   }
   function olayKodu(o) { return o.dt || ('ol:' + o.i); }
+  // ---- 0.15.5: yaklaşan sınav yardımcıları (7 gün; günü ya da saati geçen sınav görünmez)
+  function sinavGorunen(C, liste) {
+    var bg = C.gb.ds, son = iso(gunEkle(C.d, 7));
+    function anh(o) { return o.bas + '|' + ((o.x && saatOk(o.x.saat)) ? o.x.saat : '99:99') + '|' + o.ad; }
+    return liste.filter(function (o) {
+      if (o.k !== 'sinav' || o.bit < bg || o.bas > son) return false;
+      if (o.bas === bg && o.bit === bg && o.x && saatOk(o.x.saat) && C.T >= mdk(o.x.saat) * 60) return false;
+      return true;
+    }).sort(function (a, b) { var x = anh(a), z = anh(b); return x < z ? -1 : (x > z ? 1 : 0); });
+  }
+  function sinavKt(C, o) {
+    var bg = C.gb.ds;
+    if (o.bas <= bg) return o.hafta ? 'Şu an' : 'Bugün' + (o.x && saatOk(o.x.saat) ? ' ' + o.x.saat : '');
+    var kl = gunFark(bg, o.bas); return kl === 1 ? 'Yarın' : kl + ' gün sonra';
+  }
+  function sinavAlt(o, saatsiz) {
+    if (o.x) return [(!saatsiz && saatOk(o.x.saat)) ? o.x.saat : '', o.x.sinif || '', o.x.ders || ''].filter(Boolean).join(' · ');
+    return o.alt || '';
+  }
+  function dtSinavlar() {
+    var C = CTX || baglam(), l = sinavGorunen(C, olaylar(C.y)), h = '<div class="dsub" style="margin-top:0">Önümüzdeki 7 gün</div><div class="rows">';
+    if (!l.length) h += '<div class="empty"><b>Yaklaşan sınav yok</b></div>';
+    l.forEach(function (o) { h += dtSatir(olayKodu(o), sinavKt(C, o), o.ad, o.hafta ? aralik(o.bas, o.bit) : gunAy(o.bas) + (sinavAlt(o, 1) ? ' · ' + sinavAlt(o, 1) : ''), ''); });
+    dtGoster('Yaklaşan sınavlar', h + '</div>');
+  }
+  // ---- 0.15.5: eğitim yılı bilgileri (MEB hafta listesinden; panelin yolculuk slaytıyla aynı hesap)
+  var EYM = { ds: '', v: null };
+  function eyBilgi(C) {
+    if (EYM.ds === C.gb.ds && EYM.y === C.y) return EYM.v;
+    var v = null, o = ortak(C.y, 'egitimhaftasi');
+    if (!o || !Array.isArray(o.liste)) o = (KZ.idx && Array.isArray(KZ.idx.hafta)) ? { liste: KZ.idx.hafta } : null;
+    var w = o ? o.liste.filter(function (h) { return h && ISODT.test(h.bas || '') && ISODT.test(h.bit || '') && +h.n > 0; }).sort(function (a, b) { return a.bas < b.bas ? -1 : 1; }) : [];
+    // Panelin yayınladığı eğitim yılı tarihleri öncelikli; yayın yoksa MEB hafta listesinden (4+ hafta) türetilir.
+    var pb = ortak(C.y, 'egitimyili'), pv = pb && ISODT.test(pb.bas || '') && ISODT.test(pb.d1bit || '') && ISODT.test(pb.d2bas || '') && ISODT.test(pb.bit || '') && pb.bas < pb.d1bit && pb.d1bit < pb.d2bas && pb.d2bas < pb.bit;
+    if (pv || w.length > 4) {
+      var ds = C.gb.ds, i, wn = 0, bas, bit, t1, t2;
+      if (pv) { bas = pb.bas; bit = pb.bit; t1 = pb.d1bit; t2 = pb.d2bas; }
+      else {
+        bas = w[0].bas; bit = w[w.length - 1].bit; var gi = -1, gm = 0;
+        for (i = 0; i < w.length - 1; i++) { var g = gunFark(w[i].bit, w[i + 1].bas); if (g >= gm) { gm = g; gi = i; } }
+        t1 = gi >= 0 ? w[gi].bit : ''; t2 = gi >= 0 ? w[gi + 1].bas : '';
+      }
+      var tot = Math.max(1, gunFark(bas, bit)), got = Math.min(tot, Math.max(0, gunFark(bas, ds)));
+      for (i = 0; i < w.length; i++) if (w[i].bas <= ds) wn = +w[i].n;
+      if (!w.length) wn = ds < bas ? 0 : Math.floor(got / 7) + 1;
+      var kalan = 0, d, y = C.y; for (i = 0; i < 400; i++) { d = gunEkle(C.d, i); if (iso(d) > bit) break; try { if (gunBilgi(y, d).tip === 'ders') kalan++; } catch (e) {} }
+      var dn = '1. dönem', dp = 100;
+      if (t1) {
+        if (ds <= t1) dp = Math.round(Math.min(1, gunFark(bas, ds) / Math.max(1, gunFark(bas, t1))) * 100);
+        else if (ds >= t2) { dn = '2. dönem'; dp = Math.round(Math.min(1, gunFark(t2, ds) / Math.max(1, gunFark(t2, bit))) * 100); }
+      } else dp = Math.round(got / tot * 100);
+      v = { pct: Math.round(got / tot * 100), hafta: wn, toplam: w.length, kalan: kalan, bas: bas, bit: bit, t1: t1, t2: t2, donem: dn, dpct: dp };
+    }
+    EYM = { ds: C.gb.ds, y: C.y, v: v }; return v;
+  }
+  function dtEgitimYili() {
+    var C = CTX || baglam(), e = eyBilgi(C); if (!e) return;
+    var h = '<div class="dbig d">%' + e.pct + '</div><div class="dsub">Eğitim yılının %' + e.pct + '’i geride kaldı</div><div class="ebar"><i style="width:' + e.pct + '%"></i></div><div class="kvs">'
+      + kvH('Eğitim-öğretim haftası', e.hafta ? e.hafta + '. hafta' + (e.toplam ? ' / ' + e.toplam : '') : '—') + kvH('Kalan okul günü', String(e.kalan)) + kvH(e.donem + ' ilerlemesi', e.dpct >= 100 ? '%100 · tamamlandı' : '%' + e.dpct)
+      + kvH(e.t1 && C.gb.ds <= e.t1 ? '1. dönem sonu (karne)' : 'Eğitim yılı sonu (karne)', gunAy(e.t1 && C.gb.ds <= e.t1 ? e.t1 : e.bit)) + kvH('Yıl başı – yıl sonu', aralik(e.bas, e.bit)) + '</div>';
+    dtGoster('Eğitim yılı', h);
+  }
+  function okulaDonus(y, d0) { for (var i = 0; i < 60; i++) { var d = gunEkle(d0, i); try { if (gunBilgi(y, d).tip === 'ders') return d; } catch (e) {} } return null; }
+  function dtTatil(bas) {
+    var C = CTX || baglam(), th = ortak(C.y, 'tatil'), t = th && Array.isArray(th.liste) ? th.liste.filter(function (x) { return x && x.bas === bas; })[0] : null; if (!t) return;
+    var bit = t.bit || t.bas, N = gunFark(C.gb.ds, bas), sure = gunFark(bas, bit) + 1, d = okulaDonus(C.y, gunEkle(tarihCoz(bit), 1));
+    var h = '<div class="dbig d" style="font-size:26px;line-height:1.15">' + esc(String(t.ad || 'Tatil')) + '</div><div class="dsub">' + esc(aralik(bas, bit)) + '</div><div class="kvs">'
+      + kvH('Kalan gün', N <= 1 ? 'Yarın' : N + ' gün') + kvH('Tatil süresi', sure + ' gün') + (d ? kvH('Okulun açılışı', GUN[d.getDay()] + ', ' + gunAy(iso(d))) : '') + '</div>';
+    dtGoster('Sonraki tatil', h);
+  }
+  function dtHaftaSonu() {
+    var C = CTX || baglam(), d = okulaDonus(C.y, C.d); if (!d) return;
+    var G = gunBilgi(C.y, d), ilk = G.ders && G.ders[0] ? G.ders[0][1] : '', l = sinavGorunen(C, olaylar(C.y));
+    var h = '<div class="dbig d" style="font-size:26px;line-height:1.15">' + GUN[d.getDay()] + ', ' + gunAy(iso(d)) + '</div><div class="dsub">' + (ilk ? 'İlk ders ' + esc(ilk) + saatEk(ilk) : 'Okul açılıyor') + '</div>';
+    if (l.length) { h += '<div class="rows" style="margin-top:20px">'; l.forEach(function (o) { h += dtSatir(olayKodu(o), sinavKt(C, o), o.ad, o.hafta ? aralik(o.bas, o.bit) : gunAy(o.bas) + (sinavAlt(o, 1) ? ' · ' + sinavAlt(o, 1) : ''), ''); }); h += '</div>'; }
+    dtGoster('Gelecek hafta', h);
+  }
   function katIk(k) { return '<i class="kd" style="background:' + KAT[k][1] + '"></i>'; }
   function tarihEtiket(ds) { var d = tarihCoz(ds); return '<span class="dn">' + d.getDate() + '</span><span class="dm">' + AYK[d.getMonth()] + '</span>'; }
 
@@ -2083,7 +2169,9 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     else if (t === 'gun') r = p[1] === iso(simdi()) ? 'gunum' : 'yarin';
     else if (t === 'nb' || t === 'nbd') r = 'nobet';
     else if (t === 'du') r = 'neler';
-    else if (t === 'ol' || t === 'bg') r = 'yaklasan';
+    else if (t === 'ol' || t === 'bg' || t === 'sv' || t === 'st') r = 'yaklasan';
+    else if (t === 'eh') r = 'neler';
+    else if (t === 'hs') r = 'yarin';
     var d = $('dt'); d.setAttribute('data-r', r); d.style.setProperty('--sc', BR[r]);
   }
   function uygulaGizle() { [].forEach.call(document.querySelectorAll('#t0 [data-k]'), function (e) { e.style.display = GIZLE[e.dataset.k] ? 'none' : ''; }); bolgeRenk(); }
@@ -2309,6 +2397,10 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     if (t === 'hb') return dtHaber(+p[1]);
     if (t === 'bg') return dtBelirli();
     if (t === 'ol') return dtOlay(+p[1]);
+    if (t === 'sv') return dtSinavlar();
+    if (t === 'eh') return dtEgitimYili();
+    if (t === 'st') return dtTatil(p[1]);
+    if (t === 'hs') return dtHaftaSonu();
     if (t === 'dr') return dtDers(+p[1]);
     if (t === 'dl') return dtDersListe(p[1]);
     if (t === 'kv') return dtKurul(+p[1]);

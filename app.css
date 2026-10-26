@@ -952,3 +952,14 @@ button,[data-dt],[data-n],[data-c],.shd,.cov,.dtd{touch-action:manipulation}
 .okta.okfit em{font-size:8.5px;letter-spacing:0}
 /* 0.15.4 sayaç cetveli: saat etiketi kart içinde kalır (--sh değerini app.js cetvelHizala verir) */
 .rule em:after{-webkit-transform:translateX(calc(-50% + var(--sh,0px)));transform:translateX(calc(-50% + var(--sh,0px)))}
+/* 0.15.5 yaklaşan sınav slaytı satırları, ilerleme çubuğu, eğitim yılı ayrıntısı */
+.hsl .snl{margin-top:10px;padding-right:34px}
+.hsl .snr{display:flex;gap:10px;font-size:14.5px;line-height:1.6;white-space:nowrap;overflow:hidden}
+.hsl .snr b{flex:none;min-width:92px;font-weight:700;color:var(--c,var(--gold))}
+.hsl .snr span{overflow:hidden;text-overflow:ellipsis;color:#fff;opacity:.92}
+.hsl .cap.c2{margin-top:4px}
+.hsl .hbar{height:6px;border-radius:4px;background:rgba(255,255,255,.14);margin:12px 34px 0 0;overflow:hidden}
+.hsl .hbar i{display:block;height:100%;border-radius:4px;background:var(--c,var(--gold))}
+.ebar{height:8px;border-radius:5px;background:var(--line);margin:14px 0 6px;overflow:hidden}
+.ebar i{display:block;height:100%;border-radius:5px;background:var(--sc,var(--gold))}
+
