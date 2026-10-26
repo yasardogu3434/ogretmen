@@ -950,3 +950,5 @@ button,[data-dt],[data-n],[data-c],.shd,.cov,.dtd{touch-action:manipulation}
 .okta.okfit thead th{font-size:11.5px}
 .okta.okfit th.st small{font-size:9px}
 .okta.okfit em{font-size:8.5px;letter-spacing:0}
+/* 0.15.4 sayaç cetveli: saat etiketi kart içinde kalır (--sh değerini app.js cetvelHizala verir) */
+.rule em:after{-webkit-transform:translateX(calc(-50% + var(--sh,0px)));transform:translateX(calc(-50% + var(--sh,0px)))}

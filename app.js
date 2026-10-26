@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.15.3'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.15.4'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu', kd: 'ogr_kd' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -2188,7 +2188,18 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
       if (pg) { if (cur) { var g0 = +cur.dataset.g0, g1 = +cur.dataset.g1, fr = (C.T - (+cur.dataset.s)) / ((+cur.dataset.e) - (+cur.dataset.s)); pg.setAttribute('d', kdArc(g0, g0 + (g1 - g0) * Math.max(0, Math.min(1, fr)))); pg.style.display = ''; } else pg.style.display = 'none'; }
     }
     [].forEach.call(document.querySelectorAll('.gzr[data-bg="1"]'), function (rt) { gzGuncelle(rt, C); });
+    cetvelHizala();
     kaymaDurumu();
+  }
+  // Sayaç kartı cetvelinin saat etiketi imleçle birlikte kayar; başta/sonda kartın dışına taşmasın diye cetvel genişliği içinde tutulur.
+  function cetvelHizala() {
+    [].forEach.call(document.querySelectorAll('.rule em'), function (em) {
+      var r = em.parentNode, W = r ? r.clientWidth : 0; if (!W) return;
+      var cs = window.getComputedStyle(em, '::after'), w = parseFloat(cs.width) || 0, x = em.offsetLeft, sh = 0;
+      if (cs.boxSizing !== 'border-box') w += (parseFloat(cs.paddingLeft) || 0) + (parseFloat(cs.paddingRight) || 0);
+      if (x - w / 2 < 0) sh = w / 2 - x; else if (x + w / 2 > W) sh = W - x - w / 2;
+      em.style.setProperty('--sh', sh.toFixed(1) + 'px');
+    });
   }
 
   // ================= TIKLAMALAR (tek yerden) =================
