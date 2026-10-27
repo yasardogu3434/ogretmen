@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.15.9'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.16.0'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu', kd: 'ogr_kd' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -798,26 +798,38 @@
   };
   function tile(ic, e, v, a, kod, c) { return '<button type="button" class="tl" style="--c:' + c + '"' + (kod ? ' data-dt="' + esc(kod) + '"' : '') + '><span class="ti"><svg viewBox="0 0 24 24" aria-hidden="true">' + IKT[ic] + '</svg></span><span class="te">' + esc(e) + '</span><b class="d">' + esc(v) + '</b><span class="ta">' + esc(a) + '</span></button>'; }
 
+  // 0.16.0: kadran = gerçek saat yüzü. Tüm gün 360°; ders ve teneffüsler süreleriyle orantılı; akrep merkezden gerçek zamanla döner.
+  var KD = { C: 150, R: 100, W: 32 };
+  function kdPt(a, r) { var t = (a - 90) * Math.PI / 180; return [KD.C + r * Math.cos(t), KD.C + r * Math.sin(t)]; }
+  function kdF(p) { return p[0].toFixed(2) + ' ' + p[1].toFixed(2); }
+  // halka dilimi; köşeleri yumuşatmak için aynı renkte round-join çizgi ile birlikte kullanılır (CSS)
+  function kdSek(a0, a1, rI, rO) {
+    var big = (a1 - a0) > 180 ? 1 : 0;
+    return 'M' + kdF(kdPt(a0, rO)) + 'A' + rO + ' ' + rO + ' 0 ' + big + ' 1 ' + kdF(kdPt(a1, rO)) + 'L' + kdF(kdPt(a1, rI)) + 'A' + rI + ' ' + rI + ' 0 ' + big + ' 0 ' + kdF(kdPt(a0, rI)) + 'Z';
+  }
   function gunSinif(x, planli) { return x.m ? esc(x.m.sinif) : (planli ? 'Boş' : ''); }
-  // 0.14.0: kadran yardımcıları (geometri aynı, tick'te de kullanılır)
-  function kdPt(a, r) { var t = (a - 90) * Math.PI / 180; return [120 + r * Math.cos(t), 120 + r * Math.sin(t)]; }
-  function kdArc(a0, a1) { var p0 = kdPt(a0, 88), p1 = kdPt(a1, 88); return 'M' + p0[0].toFixed(2) + ' ' + p0[1].toFixed(2) + 'A88 88 0 ' + ((a1 - a0) > 180 ? 1 : 0) + ' 1 ' + p1[0].toFixed(2) + ' ' + p1[1].toFixed(2); }
   function gunKadran(les, bugun, planli) {
-    var A0 = mdk(les[0].r[2]) * 60, Z0 = mdk(les[les.length - 1].r[3]) * 60, span = Z0 - A0, R = 88;
-    var pt = kdPt, arc = kdArc;
-    var sv = '<svg viewBox="0 0 240 240" aria-hidden="false"><circle cx="120" cy="120" r="' + R + '" class="dtr"/>';
-    for (var i = 0; i < 60; i++) { var q0 = pt(i * 6, 106), q1 = pt(i * 6, i % 5 ? 109 : 112); sv += '<line class="dtk" x1="' + q0[0].toFixed(1) + '" y1="' + q0[1].toFixed(1) + '" x2="' + q1[0].toFixed(1) + '" y2="' + q1[1].toFixed(1) + '"/>'; }
-    les.forEach(function (x) {
-      var s0 = mdk(x.r[2]) * 60, e0 = mdk(x.r[3]) * 60, a0 = (s0 - A0) / span * 360 + 1.4, a1 = (e0 - A0) / span * 360 - 1.4, m = pt((a0 + a1) / 2, R);
-      if (planli && !x.m) sv += '<path class="abos" d="' + arc(a0, a1) + '"/>';
-      sv += '<path class="ar gx' + (x.m ? ' my' : (planli ? ' bos' : '')) + (x.cv ? ' cv' : '') + '" d="' + arc(a0, a1) + '" data-s="' + s0 + '" data-e="' + e0 + '" data-g0="' + a0.toFixed(2) + '" data-g1="' + a1.toFixed(2) + '" data-no="' + x.no + '" data-t="' + esc(x.r[2] + ' – ' + x.r[3]) + '" data-c="' + gunSinif(x, planli) + '" data-dt="ak:' + esc(x.ds) + ':' + x.ri + '"/><text class="dno' + (x.m ? ' my' : (planli && !x.cv ? ' bos' : '')) + (x.cv ? ' cv' : '') + '" x="' + m[0].toFixed(1) + '" y="' + (m[1] + 4).toFixed(1) + '">' + x.no + '</text>';
+    var A0 = mdk(les[0].r[2]) * 60, Z0 = mdk(les[les.length - 1].r[3]) * 60, span = Z0 - A0, rI = KD.R - KD.W / 2 + 2, rO = KD.R + KD.W / 2 - 2, INS = 0.5, i;
+    var sv = '<svg viewBox="0 0 300 300" role="group" aria-label="Ders kadranı"><defs><pattern id="kdh" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" class="kdhl"/></pattern><radialGradient id="kdg1" cx="38%" cy="30%" r="80%"><stop offset="0" class="g1a"/><stop offset=".6" class="g1b"/><stop offset="1" class="g1c"/></radialGradient><linearGradient id="kdg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" class="g2a"/><stop offset=".45" class="g2b"/><stop offset="1" class="g2c"/></linearGradient><linearGradient id="kdg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="g3a"/><stop offset="1" class="g3b"/></linearGradient><radialGradient id="kdg4" cx="50%" cy="50%" r="50%"><stop offset=".86" stop-color="#000" stop-opacity="0"/><stop offset="1" class="g4"/></radialGradient></defs>';
+    sv += '<circle cx="150" cy="150" r="149" class="kdcam"/><circle cx="150" cy="150" r="149" fill="url(#kdg4)"/><ellipse cx="116" cy="58" rx="86" ry="46" transform="rotate(-24 116 58)" class="kdsp"/><circle cx="150" cy="150" r="148.4" class="kdbz"/><circle cx="150" cy="150" r="' + KD.R + '" class="kdtr"/>';
+    for (var tt = Math.ceil(A0 / 600) * 600; tt < Z0; tt += 600) {
+      var ta = (tt - A0) / span * 360, hr = tt % 3600 === 0, q0 = kdPt(ta, 142), q1 = kdPt(ta, hr ? 148 : 145);
+      sv += '<line class="kdtk' + (hr ? ' h' : '') + '" x1="' + q0[0].toFixed(1) + '" y1="' + q0[1].toFixed(1) + '" x2="' + q1[0].toFixed(1) + '" y2="' + q1[1].toFixed(1) + '"/>';
+    }
+    var s0q = kdPt(0, 141), s1q = kdPt(0, 148); sv += '<line class="kdtk s" x1="' + s0q[0].toFixed(1) + '" y1="' + s0q[1].toFixed(1) + '" x2="' + s1q[0].toFixed(1) + '" y2="' + s1q[1].toFixed(1) + '"/>';
+    les.forEach(function (x, i) {
+      var s0 = mdk(x.r[2]) * 60, e0 = mdk(x.r[3]) * 60, a0 = (s0 - A0) / span * 360 + INS, a1 = (e0 - A0) / span * 360 - INS, mid = (a0 + a1) / 2, p = kdPt(mid, KD.R), rot = (mid > 90 && mid < 270) ? mid + 180 : mid;
+      var hal = x.m ? ' my' : (planli && !x.cv ? ' bos' : ''), cvc = x.cv ? ' cv' : '', lab = x.m ? esc(x.m.sinif) : (planli ? (x.cv ? '' : 'Boş') : String(x.no)), pb = kdPt(mid, 133);
+      sv += '<path class="ar gx' + hal + cvc + '" d="' + kdSek(a0, a1, rI, rO) + '" data-i="' + i + '" data-s="' + s0 + '" data-e="' + e0 + '" data-g0="' + a0.toFixed(2) + '" data-g1="' + a1.toFixed(2) + '" data-no="' + x.no + '" data-t="' + esc(x.r[2] + ' – ' + x.r[3]) + '" data-c="' + gunSinif(x, planli) + '" data-dt="ak:' + esc(x.ds) + ':' + x.ri + '"/>';
+      sv += '<text class="dno' + hal + cvc + '" data-i="' + i + '" transform="translate(' + p[0].toFixed(1) + ' ' + p[1].toFixed(1) + ') rotate(' + rot.toFixed(1) + ')" y="4.6">' + lab + '</text>';
+      if (planli) sv += '<g class="kdb" data-i="' + i + '"><circle cx="' + pb[0].toFixed(1) + '" cy="' + pb[1].toFixed(1) + '" r="8"/><text x="' + pb[0].toFixed(1) + '" y="' + (pb[1] + 3.8).toFixed(1) + '">' + x.no + '</text></g>';
     });
     sv += '<path class="apg" d="" style="display:none"/>';
-    sv += '<g class="nd" data-a0="' + A0 + '" data-z0="' + Z0 + '" style="display:none"><line x1="120" y1="12" x2="120" y2="32"/><circle cx="120" cy="22" r="5"/></g></svg>';
+    sv += '<g class="nd" data-a0="' + A0 + '" data-z0="' + Z0 + '" transform="translate(150 150)" style="display:none"><path class="el" d="M0 22L-3.6 0L0 -114L3.6 0Z"/><circle class="hb" r="8"/><circle class="hb2" r="3.2"/></g></svg>';
     var ilk = les[0], son = les[les.length - 1], hasCv = false, hasBos = false;
-    les.forEach(function (x) { if (x.cv) hasCv = true; if (planli && !x.m) hasBos = true; });
+    les.forEach(function (x) { if (x.cv) hasCv = true; if (planli && !x.m && !x.cv) hasBos = true; });
     var lej = '<div class="kdl">' + (planli ? '<span><i class="a"></i>Dersim</span>' : '<span><i class="b"></i>Ders</span>') + (hasCv ? '<span><i class="e"></i>Doldurma</span>' : '') + (hasBos ? '<span><i class="d"></i>Boş saat</span>' : '') + '<span><i class="t"></i>Teneffüs</span>' + (bugun ? '<span><i class="c"></i>Şimdi</span>' : '') + '</div>';
-    return '<div class="dial" id="gs" data-bg="' + (bugun ? 1 : 0) + '">' + sv + '<div class="dc"><span class="dk">' + (bugun ? '' : 'Ders programı') + '</span><b class="dn d">' + (bugun ? '' : les.length + ' ders') + '</b><span class="dd">' + (bugun ? '' : esc(ilk.r[2] + ' – ' + son.r[3])) + '</span></div></div>' + lej;
+    return '<div class="dial kdy" id="gs" data-bg="' + (bugun ? 1 : 0) + '">' + sv + '<div class="dc"><span class="dk">' + (bugun ? '' : 'Ders programı') + '</span><b class="dn d">' + (bugun ? '' : les.length + ' ders') + '</b><span class="dd">' + (bugun ? '' : esc(ilk.r[2] + ' – ' + son.r[3])) + '</span></div></div>' + lej;
   }
   // ---- 0.14.0 Günüm: yeni gösterimler (Şerit, Hat, Gün takvimi, Odak)
   var GV_GECERLI = ['a', 'b', 'v', 'd', 'e', 'f', 'g', 'h'];
@@ -851,9 +863,13 @@
       for (var i = 1; i < n; i++) { var g = mdk(les[i].r[2]) - mdk(les[i - 1].r[3]); if (g >= 30) h += '<span style="left:' + yz((mdk(les[i].r[2]) + mdk(les[i - 1].r[3])) / 2 * 60) + '%">uzun ara · ' + g + ' dk</span>'; }
       h += '<span style="left:100%">' + esc(les[n - 1].r[3]) + '</span></div>' + gzKart(les, bugun, etiket);
     } else if (st === 'f') {
-      h += '<div class="gzl" data-gz="hat"></div><div class="gzh"><div class="gzh-l"><i></i></div><div class="gzh-s">';
-      les.forEach(function (x) { h += '<button type="button" class="gzx gzh-st' + gzMod(x, planli) + '"' + gzOz(x, planli, ds) + '><span class="o">' + x.no + '</span><span class="c"' + (x.m ? kdA(x.m.sinif) : '') + '>' + esc(gzSn(x, planli)) + '</span><span class="t">' + esc(x.r[2]) + '</span></button>'; });
-      h += '</div>' + (bugun ? '<i class="gzh-tr" style="display:none"></i>' : '') + '</div>';
+      h += '<div class="gzl" data-gz="hat"></div><div class="gzh" data-n="' + n + '" style="--n:' + n + '"><div class="gzh-l"><i></i></div><div class="gzh-s">';
+      les.forEach(function (x) {
+        var lab = (x.m || planli) ? String(gzSn(x, planli)) : String(x.no);
+        h += '<button type="button" class="gzx gzh-st' + gzMod(x, planli) + '"' + gzOz(x, planli, ds) + '><span class="n">' + ((x.m || planli) ? x.no : '') + '</span><span class="o' + (lab.length > 3 ? ' l4' : '') + '">' + esc(lab) + '</span><span class="t">' + esc(x.r[2]) + '</span></button>';
+      });
+      h += '</div>';
+      h += (bugun ? '<i class="gzh-tr" style="display:none"></i>' : '') + '</div>';
     } else if (st === 'g') {
       var a0m = Math.floor(A0 / 3600) * 60, z0m = Math.ceil(Z0 / 3600) * 60, ppm = 1.25;
       h = h.replace('data-a0="' + A0 + '"', 'data-a0="' + a0m + '" data-pp="' + ppm + '"');
@@ -873,6 +889,12 @@
       h += '<div class="gzo-s"><div data-gz="sp"><span>Önceki</span><b></b></div><div data-gz="sn"><span>Sonraki</span><b></b></div></div>';
     }
     return h + '</div>';
+  }
+  // Hat: istasyon dairesi, hücre genişliğine göre 26–38 px (dar ekranda küçülür, şube adı sığsın diye)
+  function hatBoyut(el) {
+    var s = el.querySelector('.gzh-s'), n = +el.getAttribute('data-n') || 1, cell = s ? s.offsetWidth / n : 0; if (!cell) return;
+    var sd = Math.max(27, Math.min(38, Math.floor(cell - 10)));
+    if (el.getAttribute('data-sd') !== String(sd)) { el.setAttribute('data-sd', sd); el.style.setProperty('--sd', sd + 'px'); }
   }
   function gzGuncelle(rt, C) {
     var xs = [].slice.call(rt.querySelectorAll('.gzx')), cur = null, nxt = null, prv = null, ci = -1, ni = -1, pi = -1, T = C.T;
@@ -911,8 +933,17 @@
     // Hat
     var tr = rt.querySelector('.gzh-tr'), hl = rt.querySelector('.gzh-l i');
     if (tr && hl) {
-      var pos = faz === 'd' ? ci : (faz === 'o' ? 0 : (faz === 'b' ? n - 1 : pi + (T - +prv.dataset.e) / Math.max(1, +nxt.dataset.s - +prv.dataset.e))), fr = n > 1 ? pos / (n - 1) : 0;
-      tr.style.display = ''; tr.style.left = 'calc(19px + (100% - 38px) * ' + fr.toFixed(4) + ')'; hl.style.width = (fr * 100).toFixed(2) + '%';
+      var gh = rt.querySelector('.gzh'), hs = rt.querySelector('.gzh-s'), cw = hs && n ? hs.offsetWidth / n : 0, sdv = gh ? (parseFloat(gh.getAttribute('data-sd')) || 32) : 32, dw = cw > 0 ? Math.min(0.42, (sdv / 2 + 2) / cw) : 0;
+      var pos = faz === 'd' ? ci : (faz === 'o' ? -dw : (faz === 'b' ? n - 1 + dw : pi + dw + (T - +prv.dataset.e) / Math.max(1, +nxt.dataset.s - +prv.dataset.e) * (1 - 2 * dw))), fr = n > 1 ? pos / (n - 1) : 0;
+      tr.style.display = faz === 'd' ? 'none' : ''; tr.style.left = 'calc(100% / ' + n + ' * ' + (pos + 0.5).toFixed(4) + ')'; hl.style.width = (Math.max(0, Math.min(1, fr)) * 100).toFixed(2) + '%';
+      [].forEach.call(rt.querySelectorAll('.gzh-st'), function (k) {
+        var s1 = +k.dataset.s, e1 = +k.dataset.e, tt = k.querySelector('.t'); if (!tt) return;
+        if (!tt.hasAttribute('data-t0')) tt.setAttribute('data-t0', tt.textContent);
+        var tx = tt.getAttribute('data-t0'), pc = 0;
+        if (T >= e1) tx = Math.round((e1 - s1) / 60) + ' dk'; else if (T >= s1) { tx = sureTxt(e1 - T); pc = (T - s1) / (e1 - s1) * 100; }
+        if (tt.textContent !== tx) tt.textContent = tx;
+        k.style.setProperty('--p', pc.toFixed(1));
+      });
     }
     var hat = rt.querySelector('[data-gz="hat"]');
     if (hat) {
@@ -2262,18 +2293,19 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
       }
       if (yv != null && nde) { nde.style.display = 'block'; nde.style.top = yv.toFixed(1) + 'px'; }
     }
+    [].forEach.call(document.querySelectorAll('.gzh'), hatBoyut);
     var dl = document.querySelector('.dial[data-bg="1"]');
     if (dl) {
       var nd = dl.querySelector('.nd'), a0 = +nd.dataset.a0, z0 = +nd.dataset.z0, ang = Math.max(0, Math.min(1, (C.T - a0) / (z0 - a0))) * 360;
-      nd.style.display = ''; nd.setAttribute('transform', 'rotate(' + ang.toFixed(2) + ' 120 120)');
+      nd.style.display = ''; nd.setAttribute('transform', 'translate(150 150) rotate(' + ang.toFixed(2) + ')');
       var cur = null, nxt = null;
-      [].forEach.call(dl.querySelectorAll('.ar'), function (a) { var s0 = +a.dataset.s, e0 = +a.dataset.e; a.classList.toggle('past', C.T >= e0); a.classList.toggle('now', C.T >= s0 && C.T < e0); if (C.T >= s0 && C.T < e0) cur = a; else if (C.T < s0 && !nxt) nxt = a; });
+      [].forEach.call(dl.querySelectorAll('.ar'), function (a) { var s0 = +a.dataset.s, e0 = +a.dataset.e; a.classList.toggle('past', C.T >= e0); a.classList.toggle('now', C.T >= s0 && C.T < e0); [].forEach.call(dl.querySelectorAll('[data-i="' + a.getAttribute('data-i') + '"]:not(.ar)'), function (t) { t.classList.toggle('pt', C.T >= e0); t.classList.toggle('nw', C.T >= s0 && C.T < e0); }); if (C.T >= s0 && C.T < e0) cur = a; else if (C.T < s0 && !nxt) nxt = a; });
       var dk = dl.querySelector('.dk'), dn = dl.querySelector('.dn'), dd = dl.querySelector('.dd');
       if (cur) { dk.textContent = 'Şu an'; dn.textContent = cur.dataset.no + '. ders'; dd.textContent = (cur.dataset.c ? cur.dataset.c + ' · ' : '') + 'kalan ' + sureTxt(+cur.dataset.e - C.T); }
       else if (nxt) { var onc = C.T < a0; dk.textContent = onc ? 'Ders başlamadan' : 'Teneffüs'; dn.textContent = sureTxt(+nxt.dataset.s - C.T); dd.textContent = (onc ? '1. ders ' : 'Sıradaki ' + nxt.dataset.no + '. ders · ') + (onc ? nxt.dataset.t.slice(0, 5) : nxt.dataset.t.slice(0, 5)) + (nxt.dataset.c ? ' · ' + nxt.dataset.c : ''); }
       else { dk.textContent = 'Bugün'; dn.textContent = 'Bitti'; dd.textContent = ''; }
       var pg = dl.querySelector('.apg');
-      if (pg) { if (cur) { var g0 = +cur.dataset.g0, g1 = +cur.dataset.g1, fr = (C.T - (+cur.dataset.s)) / ((+cur.dataset.e) - (+cur.dataset.s)); pg.setAttribute('d', kdArc(g0, g0 + (g1 - g0) * Math.max(0, Math.min(1, fr)))); pg.style.display = ''; } else pg.style.display = 'none'; }
+      if (pg) { if (cur) { var g0 = +cur.dataset.g0, g1 = +cur.dataset.g1, fr = (C.T - (+cur.dataset.s)) / ((+cur.dataset.e) - (+cur.dataset.s)); pg.setAttribute('d', kdSek(g0, g0 + (g1 - g0) * Math.max(0, Math.min(1, fr)), KD.R + KD.W / 2 + 2, KD.R + KD.W / 2 + 6)); pg.style.display = ''; } else pg.style.display = 'none'; }
     }
     [].forEach.call(document.querySelectorAll('.gzr[data-bg="1"]'), function (rt) { gzGuncelle(rt, C); });
     cetvelHizala();

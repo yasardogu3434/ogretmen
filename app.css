@@ -819,21 +819,6 @@ button,[data-dt],[data-n],[data-c],.shd,.cov,.dtd{touch-action:manipulation}
 .gzr[data-fz=b] .gzf .pr,.gzr[data-fz=o] .gzf .pr,.gzr[data-fz=s] .gzf .pr,.gzr[data-fz=t] .gzf .sx,.gzr[data-fz=o] .gzf .sx,.gzr[data-fz=b] .gzf .sx,.gzr[data-fz=s] .gzf .sx{display:none}
 .gzl{display:flex;align-items:center;gap:9px;margin-bottom:4px;font-size:13.5px}.gzl i{width:9px;height:9px;border-radius:50%;background:var(--gold);flex:none}.gzl.tn i{background:var(--k-my)}.gzl.fn i{background:var(--teal)}.gzl b{font-weight:700}.gzl span{color:var(--mut);margin-left:auto;text-align:right}
 .gzr[data-fz=s] .gzl{display:none}
-.gzh{position:relative;margin-top:18px;padding:0 4px}
-.gzh-l{position:absolute;left:23px;right:23px;top:17px;height:4px;border-radius:3px;background:var(--line)}
-.gzh-l i{display:block;height:100%;width:0;border-radius:3px;background:var(--gold)}
-.gzh-s{position:relative;display:flex;justify-content:space-between}
-.gzh-st{width:38px;padding:0;background:none;display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center}
-.gzh-st .o{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:700;background:var(--k-oth);color:var(--k-otht);box-shadow:0 0 0 4px var(--surf);position:relative}
-.gzh-st.my .o{background:var(--k-my);color:var(--k-myt)}.gzh-st.cv .o{background:var(--cv);color:#fff}
-.gzh-st.bos .o{background:var(--surf);color:var(--mut);box-shadow:inset 0 0 0 1.5px var(--k-ten),0 0 0 4px var(--surf)}
-.gzh-st.past .o{opacity:.5}
-.gzh-st.past .o::after{content:"";position:absolute;right:-3px;top:-3px;width:14px;height:14px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 2px var(--surf)}
-.gzh-st.past .o::before{content:"";position:absolute;right:1px;top:0;width:3px;height:6px;border:solid #fff;border-width:0 1.8px 1.8px 0;-webkit-transform:rotate(40deg);transform:rotate(40deg);z-index:2}
-.gzh-st.now .o{width:38px;height:38px;margin:-4px 0 -4px;background:var(--gold);color:#2B2008;font-size:15px;box-shadow:0 0 0 4px var(--surf),0 0 0 6px var(--gold)}
-.gzh-st .c{font-size:11.5px;font-weight:700;line-height:1.1;color:var(--tx)}.gzh-st .t{font-size:10.5px;color:var(--mut);line-height:1}
-.gzh-st.bos .c{color:var(--mut);font-weight:600}
-.gzh-tr{position:absolute;top:13px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px var(--gold);z-index:3;pointer-events:none}
 .gzc{position:relative;margin-top:10px;padding-left:46px}
 .gzc-h{position:absolute;left:0;right:0;height:0;border-top:1px solid var(--line)}
 .gzc-h span{position:absolute;left:0;top:-8px;width:40px;font-size:11.5px;color:var(--mut)}
@@ -964,3 +949,85 @@ button,[data-dt],[data-n],[data-c],.shd,.cov,.dtd{touch-action:manipulation}
 /* 0.15.7 — slayt kartları tam saydam cam (büyük renk geçişi kaldırıldı: telefonda yatay renk çizgisi üretiyordu) */
 .hsl{background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22),inset 0 1px 0 rgba(255,255,255,.36),0 8px 24px rgba(0,0,0,.20);-webkit-backdrop-filter:blur(18px) saturate(1.35);backdrop-filter:blur(18px) saturate(1.35)}
 .hsl::before,.hsl::after{display:none}
+
+/* ---- 0.16.0 Kadran: saat yüzü ---- */
+.dial.kdy{width:min(100%,300px);height:auto;margin:6px auto 0;position:relative}
+.dial.kdy svg{width:100%;height:auto;display:block}
+.kdy .kdcam{fill:url(#kdg1)}
+.kdy .kdbz{fill:none;stroke:url(#kdg2);stroke-width:1.6}
+.kdy .kdsp{fill:url(#kdg3);opacity:1}
+.kdy .g1a{stop-color:#fff;stop-opacity:.46}.kdy .g1b{stop-color:#fff;stop-opacity:.20}.kdy .g1c{stop-color:#fff;stop-opacity:.07}
+.kdy .g2a{stop-color:#fff;stop-opacity:.95}.kdy .g2b{stop-color:#fff;stop-opacity:.25}.kdy .g2c{stop-color:#fff;stop-opacity:.6}
+.kdy .g3a{stop-color:#fff;stop-opacity:.42}.kdy .g3b{stop-color:#fff;stop-opacity:0}
+.kdy .g4{stop-color:#0A1A3C;stop-opacity:.10}
+:root[data-th=dark] .kdy .g1a{stop-opacity:.05}:root[data-th=dark] .kdy .g1b{stop-opacity:.012}:root[data-th=dark] .kdy .g1c{stop-opacity:0}
+:root[data-th=dark] .kdy .g2a{stop-opacity:.55}:root[data-th=dark] .kdy .g2c{stop-opacity:.28}:root[data-th=dark] .kdy .g3a{stop-opacity:.05}:root[data-th=dark] .kdy .g4{stop-color:#000;stop-opacity:.10}
+@media(prefers-color-scheme:dark){:root:not([data-th=light]) .kdy .g1a{stop-opacity:.05}:root:not([data-th=light]) .kdy .g1b{stop-opacity:.012}:root:not([data-th=light]) .kdy .g1c{stop-opacity:0}:root:not([data-th=light]) .kdy .g2a{stop-opacity:.55}:root:not([data-th=light]) .kdy .g2c{stop-opacity:.28}:root:not([data-th=light]) .kdy .g3a{stop-opacity:.05}:root:not([data-th=light]) .kdy .g4{stop-color:#000;stop-opacity:.10}}
+.kdy .kdtr{fill:none;stroke:var(--line);stroke-width:32;opacity:.5}
+.kdy .kdtk{stroke:var(--mut);stroke-width:1.2;opacity:.5;stroke-linecap:round}.kdy .kdtk.h{stroke-width:1.8;opacity:.85}.kdy .kdtk.s{stroke:var(--tx);stroke-width:2.2;opacity:.9}
+.kdy .ar{stroke-width:4;stroke-linejoin:round;fill:var(--k-oth);stroke:var(--k-oth);cursor:pointer;transition:opacity .3s}
+.kdy .ar.my{fill:var(--k-my);stroke:var(--k-my)}.kdy .ar.cv{fill:var(--cv);stroke:var(--cv)}
+.kdy .ar.bos{fill:url(#kdh);stroke:var(--teal);stroke-width:1.6;stroke-dasharray:4 3;stroke-linejoin:miter}
+.kdy .ar.past{opacity:.5}.dial.kdy .ar.now{opacity:1}.dial.kdy .ar:not(.my):not(.cv):not(.bos){fill:var(--k-oth);stroke:var(--k-oth)}.dial.kdy .ar.my{fill:var(--k-my);stroke:var(--k-my)}.dial.kdy .ar.cv{fill:var(--cv);stroke:var(--cv)}.dial.kdy .ar.bos{fill:url(#kdh);stroke:var(--teal)}
+.kdy .kdhl{stroke:color-mix(in srgb,var(--teal) 70%,transparent);stroke-width:2.2}
+.kdy .dno{font:700 13px 'Baloo 2',sans-serif;fill:var(--k-otht);text-anchor:middle;pointer-events:none;stroke:none}
+.kdy .dno.my{fill:var(--k-myt)}.kdy .dno.cv{fill:#fff}
+.kdy .dno.bos{fill:var(--teal);font-size:11.5px;stroke:var(--surf);stroke-width:3.4px;paint-order:stroke;stroke-linejoin:round}
+.kdy .dno.pt{opacity:.8}
+.kdy .apg{fill:var(--gold);stroke:var(--gold);stroke-width:3;stroke-linejoin:round;pointer-events:none}
+.kdy .kdb circle{fill:var(--surf);stroke:var(--line);stroke-width:1.2}.kdy .kdb text{font:700 10.5px 'Baloo 2',sans-serif;fill:var(--mut);text-anchor:middle}
+.kdy .kdb.nw circle{fill:var(--gold);stroke:var(--gold)}.kdy .kdb.nw text{fill:#13244A}.kdy .kdb.pt{opacity:.5}
+.kdy .nd{filter:drop-shadow(0 1.5px 2px rgba(0,0,0,.35))}
+.kdy .nd .el{fill:var(--gold);stroke:none}
+.kdy .nd .hb{fill:var(--k-my);stroke:var(--gold);stroke-width:3}.kdy .nd .hb2{fill:var(--gold)}
+.dial.kdy .dc{position:static;inset:auto;margin:4px 0 0;display:flex;flex-direction:column;align-items:center;gap:1px;text-align:center}
+.dial.kdy .dn{font-size:23px}.dial.kdy .dd{font-size:13px;max-width:100%}
+.kdy ~ .kdl i.d{background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--teal) 75%,transparent) 0 1.6px,transparent 1.6px 4px);border:1.4px dashed var(--teal);width:16px;height:10px;box-sizing:border-box}
+.kdy ~ .kdl i.t{background:color-mix(in srgb,var(--mut) 28%,transparent);border:0;height:6px;border-radius:3px}.kdy ~ .kdl i.c{background:var(--gold)}
+.dial.kdy .dk:empty,.dial.kdy .dd:empty{display:none}
+
+/* ---- 0.16.0 Hat: şube adı istasyonun içinde, ders no üstte; istasyonda geçen süre halka + süre yazısı ---- */
+.gzh{--sd:32px;--nr:13px;position:relative;margin-top:12px}
+.gzh-l{position:absolute;left:calc(50% / var(--n));right:calc(50% / var(--n));top:calc(var(--nr) + 8px + var(--sd) / 2 - 3px);height:6px;border-radius:3px;background:var(--line)}
+.gzh-l i{display:block;height:100%;width:0;border-radius:3px;background:var(--gold);box-shadow:0 0 8px color-mix(in srgb,var(--gold) 55%,transparent)}
+.gzh-s{position:relative;display:flex}
+.gzh-st{flex:1 1 0;min-width:0;padding:0;background:none;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+.gzh-st .n{height:var(--nr);line-height:var(--nr);font-size:11.5px;font-weight:700;color:var(--mut)}
+.gzh-st .o{width:var(--sd);height:var(--sd);border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;letter-spacing:-.2px;background:var(--k-oth);color:var(--k-otht);box-shadow:0 0 0 4px var(--surf);position:relative;white-space:nowrap}
+.gzh-st .o.l4{font-size:10px;letter-spacing:-.3px}
+.gzh-st.my .o{background:var(--k-my);color:var(--k-myt)}.gzh-st.cv .o{background:var(--cv);color:#fff}
+.gzh-st.bos .o{background:var(--surf);color:var(--mut);font-weight:600;font-size:11px;box-shadow:inset 0 0 0 1.5px var(--k-ten),0 0 0 4px var(--surf)}
+.gzh-st.past .o{background:color-mix(in srgb,var(--k-oth) 55%,var(--surf))}.gzh-st.past.my .o{background:color-mix(in srgb,var(--k-my) 55%,var(--surf))}.gzh-st.past.cv .o{background:color-mix(in srgb,var(--cv) 55%,var(--surf))}.gzh-st.past.bos .o{background:var(--surf);opacity:.6}
+.gzh-st.past .o::after{content:"";position:absolute;right:-3px;top:-3px;width:14px;height:14px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 2px var(--surf)}
+.gzh-st.past .o::before{content:"";position:absolute;right:1px;top:0;width:3px;height:6px;border:solid #fff;border-width:0 1.8px 1.8px 0;-webkit-transform:rotate(40deg);transform:rotate(40deg);z-index:2}
+.gzh-st.now .o{background:var(--gold);color:#2B2008;box-shadow:0 0 0 3px var(--surf)}
+.gzh-st.now .o::before{content:"";position:absolute;inset:-5px;border-radius:50%;background:conic-gradient(var(--gold) calc(var(--p,0) * 1%),color-mix(in srgb,var(--gold) 22%,transparent) 0);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 calc(100% - 3.5px));mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 calc(100% - 3.5px));z-index:0}
+.gzh-st.now .n{color:var(--goldt)}
+.gzh-st .t{font-size:11px;font-weight:600;line-height:1.1;min-height:12px;white-space:nowrap;color:var(--mut)}
+.gzh-st.past .t{color:var(--teal);font-weight:700}
+.gzh-st.now .t{color:var(--goldt);font-weight:700}
+.gzh-tr{position:absolute;top:calc(var(--nr) + 8px + var(--sd) / 2 - 6px);width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px var(--gold);z-index:3;pointer-events:none}
+
+/* ===== 0.16.0 Hat: tam saydam cam (dolgu yok; yalnız kenar ışığı, parıltı ve cam boncuklar) ===== */
+.gzr.gzf{margin-top:14px;padding:14px 14px 12px;border-radius:20px;background:none;border:1.5px solid rgba(255,255,255,.95);box-shadow:0 0 0 1px rgba(90,80,170,.20),0 1px 0 rgba(255,255,255,.95) inset,0 16px 20px -20px rgba(255,255,255,.7) inset,0 10px 24px -14px rgba(60,50,140,.35)}
+:root[data-th=dark] .gzr.gzf{border:1px solid rgba(255,255,255,.26);box-shadow:0 1px 0 rgba(255,255,255,.22) inset,0 10px 24px -14px rgba(0,0,0,.55)}
+@media(prefers-color-scheme:dark){:root:not([data-th=light]) .gzr.gzf{border:1px solid rgba(255,255,255,.26);box-shadow:0 1px 0 rgba(255,255,255,.22) inset,0 10px 24px -14px rgba(0,0,0,.55)}}
+.gzr.gzf[data-fz=d]{background:none}
+.gzr.gzf .gzh-l{background:rgba(255,255,255,.35);box-shadow:inset 0 1px 1px rgba(60,50,140,.25),0 1px 0 rgba(255,255,255,.7)}
+:root[data-th=dark] .gzr.gzf .gzh-l{background:rgba(255,255,255,.16);box-shadow:inset 0 1px 1px rgba(0,0,0,.4),0 1px 0 rgba(255,255,255,.10)}
+@media(prefers-color-scheme:dark){:root:not([data-th=light]) .gzr.gzf .gzh-l{background:rgba(255,255,255,.16);box-shadow:inset 0 1px 1px rgba(0,0,0,.4),0 1px 0 rgba(255,255,255,.10)}}
+.gzr.gzf .gzh-st .o{background:radial-gradient(120% 90% at 30% 15%,rgba(255,255,255,.38),transparent 55%),color-mix(in srgb,var(--k-oth) 72%,transparent);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.65),inset 0 -4px 6px -2px rgba(0,0,0,.16),0 4px 9px -4px rgba(40,30,110,.35)}
+.gzr.gzf .gzh-st.my .o{background:radial-gradient(120% 90% at 30% 15%,rgba(255,255,255,.38),transparent 55%),color-mix(in srgb,var(--k-my) 72%,transparent)}
+.gzr.gzf .gzh-st.cv .o{background:radial-gradient(120% 90% at 30% 15%,rgba(255,255,255,.38),transparent 55%),color-mix(in srgb,var(--cv) 72%,transparent)}
+.gzr.gzf .gzh-st.past .o{background:radial-gradient(120% 90% at 30% 15%,rgba(255,255,255,.30),transparent 55%),color-mix(in srgb,var(--k-oth) 45%,transparent)}
+.gzr.gzf .gzh-st.past.my .o{background:radial-gradient(120% 90% at 30% 15%,rgba(255,255,255,.30),transparent 55%),color-mix(in srgb,var(--k-my) 45%,transparent)}
+.gzr.gzf .gzh-st.past.cv .o{background:radial-gradient(120% 90% at 30% 15%,rgba(255,255,255,.30),transparent 55%),color-mix(in srgb,var(--cv) 45%,transparent)}
+.gzr.gzf .gzh-st.bos .o{background:radial-gradient(120% 90% at 30% 15%,rgba(255,255,255,.30),transparent 55%);opacity:1;box-shadow:inset 0 0 0 1.5px var(--k-ten),inset 0 1px 0 rgba(255,255,255,.5)}
+.gzr.gzf .gzh-st.past .o::after{box-shadow:0 0 0 1.5px rgba(255,255,255,.9)}
+.gzr.gzf .gzh-st.now .o{background:radial-gradient(120% 90% at 30% 15%,rgba(255,255,255,.5),transparent 55%),color-mix(in srgb,var(--gold) 85%,transparent);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.75),0 0 14px color-mix(in srgb,var(--gold) 60%,transparent)}
+:root[data-th=dark] .gzr.gzf .gzh-st .o{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35),inset 0 -4px 6px -2px rgba(0,0,0,.3),0 4px 9px -4px rgba(0,0,0,.6)}
+@media(prefers-color-scheme:dark){:root:not([data-th=light]) .gzr.gzf .gzh-st .o{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35),inset 0 -4px 6px -2px rgba(0,0,0,.3),0 4px 9px -4px rgba(0,0,0,.6)}}
+:root[data-th=dark] .gzr.gzf .gzh-st.now .o{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.6),0 0 14px color-mix(in srgb,var(--gold) 60%,transparent)}
+:root[data-th=dark] .gzr.gzf .gzh-st.bos .o{box-shadow:inset 0 0 0 1.5px var(--k-ten),inset 0 1px 0 rgba(255,255,255,.25)}
+/* çizgi boncukların arkasında kesilir (metin çizgiyle çakışmasın); aralarda görünür */
+.gzr.gzf .gzh-l{-webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(50% - var(--sd) / 2 + 3px),transparent calc(50% - var(--sd) / 2 + 3px),transparent calc(50% + var(--sd) / 2 - 3px),#000 calc(50% + var(--sd) / 2 - 3px));mask-image:linear-gradient(90deg,#000 0,#000 calc(50% - var(--sd) / 2 + 3px),transparent calc(50% - var(--sd) / 2 + 3px),transparent calc(50% + var(--sd) / 2 - 3px),#000 calc(50% + var(--sd) / 2 - 3px));-webkit-mask-size:calc(100% / (var(--n) - 1)) 100%;mask-size:calc(100% / (var(--n) - 1)) 100%;-webkit-mask-repeat:repeat-x;mask-repeat:repeat-x;-webkit-mask-position:calc(100% / (var(--n) - 1) / -2) 0;mask-position:calc(100% / (var(--n) - 1) / -2) 0}
