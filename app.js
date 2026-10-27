@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.15.7'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.15.8'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu', kd: 'ogr_kd' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -121,10 +121,10 @@
     if (!ders.length) { o.tip = 'yok'; return o; }
     var cal = (r.gunTipi && Array.isArray(r.gunTipi.calisma)) ? r.gunTipi.calisma : [1, 2, 3, 4, 5];
     if (cal.indexOf(wd) < 0) { o.tip = 'hs'; return o; }
-    var th = ortak(y, 'tatil'), yarim = false;
+    var th = ortak(y, 'tatil'), yarim = false, yd = 0;
     if (th && Array.isArray(th.liste)) th.liste.forEach(function (h) {
       if (!h || !kapsar(h, ds)) return;
-      if (!h.yarim) { o.tip = 'tatil'; o.ad = String(h.ad || 'Tatil'); } else if (o.tip !== 'tatil') { yarim = true; o.ad = String(h.ad || ''); }
+      if (!h.yarim) { o.tip = 'tatil'; o.ad = String(h.ad || 'Tatil'); } else if (o.tip !== 'tatil') { if (!yarim && Math.floor(+h.ders) >= 1) yd = Math.floor(+h.ders); yarim = true; o.ad = String(h.ad || ''); }
     });
     if (o.tip === 'tatil') return o;
     var gc = ortak(y, 'gecici');
@@ -132,7 +132,7 @@
       var g = gc.liste[i], gd = g ? dersListe(g.ders) : [];
       if (g && Array.isArray(g.tarihler) && gd.length === ders.length && g.tarihler.some(function (t) { return kapsar(t, ds); })) { ders = gd; o.gecici = String(g.ad || 'Geçici düzen'); break; }
     }
-    if (yarim) { var lim = (r.gunTipi && +r.gunTipi.yarimGunDers) || 3; ders = ders.slice(0, Math.min(ders.length, lim)); o.yarim = true; }
+    if (yarim) { var lim = yd || (r.gunTipi && Math.floor(+r.gunTipi.yarimGunDers) >= 1 && Math.floor(+r.gunTipi.yarimGunDers)) || 3; ders = ders.slice(0, Math.min(ders.length, lim)); o.yarim = true; }
     o.ders = ders; return o;
   }
   function akisKur(ders) {
