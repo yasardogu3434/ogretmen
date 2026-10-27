@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.15.8'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.15.9'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu', kd: 'ogr_kd' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -1438,7 +1438,7 @@
 
   // ---- Resim olarak paylaş: tablo telefonda çizilir (sunucuya hiçbir şey gitmez); yalnız program/nöbet bilgisi içerir
   var PAY = { blob: null, url: '', dosya: '', file: null, baslik: '', thumb: '' };
-  var PAY_FN = '"Bricolage Grotesque","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif';
+  var PAY_FN = '"Baloo 2","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif';
   function payMetin(x, t, w, px, ag) {
     t = String(t); var s = px; x.font = ag + ' ' + s + 'px ' + PAY_FN;
     while (x.measureText(t).width > w && s > 13) { s--; x.font = ag + ' ' + s + 'px ' + PAY_FN; }

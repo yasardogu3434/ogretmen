@@ -19,7 +19,7 @@
     + '@media(prefers-color-scheme:dark){:root:not([data-th=light]) .klv{--f:#fff;--f2:rgba(255,255,255,.74);--fs:rgba(255,255,255,.12);--fl:rgba(255,255,255,.3);--inv:#13244A}}'
     + ':root[data-th=dark] .klv{--f:#fff;--f2:rgba(255,255,255,.74);--fs:rgba(255,255,255,.12);--fl:rgba(255,255,255,.3);--inv:#13244A}'
     + '.klv img.kl{width:62px;height:62px;border-radius:16px;background:#fff;padding:8px;object-fit:contain;display:block;box-shadow:0 2px 8px rgba(19,36,74,.18)}'
-    + '.klv h1{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:28px;font-weight:600;margin:22px 0 0;letter-spacing:-.5px;line-height:1.12;color:var(--f);text-align:left}'
+    + '.klv h1{font-family:"Baloo 2",system-ui,sans-serif;font-size:28px;font-weight:600;margin:22px 0 0;letter-spacing:-.5px;line-height:1.12;color:var(--f);text-align:left}'
     + '.klv .alt{color:var(--f2);font-size:15px;line-height:1.5;margin:10px 0 0;text-align:left}'
     + '.klv .sk{display:flex;gap:8px;margin-top:20px}'
     + '.klv .sk button{flex:1;border:1.5px solid var(--fl);background:none;color:var(--f);font:inherit;font-size:15px;font-weight:650;padding:11px 0;border-radius:99px;cursor:pointer}'
