@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.16.0'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.16.2'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu', kd: 'ogr_kd' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -808,9 +808,21 @@
     return 'M' + kdF(kdPt(a0, rO)) + 'A' + rO + ' ' + rO + ' 0 ' + big + ' 1 ' + kdF(kdPt(a1, rO)) + 'L' + kdF(kdPt(a1, rI)) + 'A' + rI + ' ' + rI + ' 0 ' + big + ' 0 ' + kdF(kdPt(a0, rI)) + 'Z';
   }
   function gunSinif(x, planli) { return x.m ? esc(x.m.sinif) : (planli ? 'Boş' : ''); }
+
+  // 0.16.2 kadran merkezi: saat dokusu (ışınlar, halkalar, altın saat noktaları), 12 konumunda "durum penceresi", altta dijital saat
+  function kdMerkez(bugun, nles) {
+    var h = '<g class="mkz" aria-hidden="true">', i, a, q0, q1, big;
+    for (i = 0; i < 120; i++) { a = i * 3; big = i % 10 === 0; q0 = kdPt(a, big ? 46 : 60); q1 = kdPt(a, 76); h += '<line class="mkl' + (big ? ' b' : '') + '" x1="' + q0[0].toFixed(1) + '" y1="' + q0[1].toFixed(1) + '" x2="' + q1[0].toFixed(1) + '" y2="' + q1[1].toFixed(1) + '"/>'; }
+    for (i = 22; i <= 58; i += 6) h += '<circle class="mkr' + (i % 12 === 4 ? ' b' : '') + '" cx="150" cy="150" r="' + i + '"/>';
+    for (i = 0; i < 12; i++) { q0 = kdPt(i * 30, 80); h += '<circle class="mkn" cx="' + q0[0].toFixed(1) + '" cy="' + q0[1].toFixed(1) + '" r="1.7"/>'; }
+    h += '<circle cx="150" cy="150" r="82" fill="url(#mkg)"/><circle cx="150" cy="150" r="82" fill="url(#mkg2)"/><circle class="mkh" cx="150" cy="150" r="17"/>';
+    h += '<g class="mkw ' + (bugun ? 'b' : 'x') + '"><rect class="mkpr" x="104" y="95.5" width="92" height="37" rx="13.5"/><rect class="mkpi" x="106.5" y="98" width="87" height="32" rx="11"/><text class="mkv mkl2" x="150" y="119.6" text-anchor="middle">' + (bugun ? '' : '––:––') + '</text><path class="mkck" d="M-8.5 .5L-2.5 6.5L9 -6" transform="translate(150 113.6)"/><rect class="mkbg" x="118" y="125.4" width="64" height="1.8" rx=".9"/><rect class="mkbp" x="118" y="125.4" width="0" height="1.8" rx=".9"/></g>';
+    if (bugun) h += '<g class="mkp"><rect class="mkpr" x="116" y="184" width="68" height="28" rx="14"/><rect class="mkpi" x="118.5" y="186.5" width="63" height="23" rx="11.5"/><text class="mkd mkt" x="150" y="203.6" text-anchor="middle"></text></g>';
+    return h + '</g>';
+  }
   function gunKadran(les, bugun, planli) {
     var A0 = mdk(les[0].r[2]) * 60, Z0 = mdk(les[les.length - 1].r[3]) * 60, span = Z0 - A0, rI = KD.R - KD.W / 2 + 2, rO = KD.R + KD.W / 2 - 2, INS = 0.5, i;
-    var sv = '<svg viewBox="0 0 300 300" role="group" aria-label="Ders kadranı"><defs><pattern id="kdh" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" class="kdhl"/></pattern><radialGradient id="kdg1" cx="38%" cy="30%" r="80%"><stop offset="0" class="g1a"/><stop offset=".6" class="g1b"/><stop offset="1" class="g1c"/></radialGradient><linearGradient id="kdg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" class="g2a"/><stop offset=".45" class="g2b"/><stop offset="1" class="g2c"/></linearGradient><linearGradient id="kdg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="g3a"/><stop offset="1" class="g3b"/></linearGradient><radialGradient id="kdg4" cx="50%" cy="50%" r="50%"><stop offset=".86" stop-color="#000" stop-opacity="0"/><stop offset="1" class="g4"/></radialGradient></defs>';
+    var sv = '<svg viewBox="0 0 300 300" role="group" aria-label="Ders kadranı"><defs><radialGradient id="mkg" cx="34%" cy="26%" r="95%"><stop offset="0" class="mka"/><stop offset=".5" class="mkb"/><stop offset="1" class="mkc0"/></radialGradient><radialGradient id="mkg2" cx="72%" cy="82%" r="60%"><stop offset="0" class="mkd0"/><stop offset="1" class="mkc0"/></radialGradient><pattern id="kdh" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" class="kdhl"/></pattern><radialGradient id="kdg1" cx="38%" cy="30%" r="80%"><stop offset="0" class="g1a"/><stop offset=".6" class="g1b"/><stop offset="1" class="g1c"/></radialGradient><linearGradient id="kdg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" class="g2a"/><stop offset=".45" class="g2b"/><stop offset="1" class="g2c"/></linearGradient><linearGradient id="kdg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="g3a"/><stop offset="1" class="g3b"/></linearGradient><radialGradient id="kdg4" cx="50%" cy="50%" r="50%"><stop offset=".86" stop-color="#000" stop-opacity="0"/><stop offset="1" class="g4"/></radialGradient></defs>';
     sv += '<circle cx="150" cy="150" r="149" class="kdcam"/><circle cx="150" cy="150" r="149" fill="url(#kdg4)"/><ellipse cx="116" cy="58" rx="86" ry="46" transform="rotate(-24 116 58)" class="kdsp"/><circle cx="150" cy="150" r="148.4" class="kdbz"/><circle cx="150" cy="150" r="' + KD.R + '" class="kdtr"/>';
     for (var tt = Math.ceil(A0 / 600) * 600; tt < Z0; tt += 600) {
       var ta = (tt - A0) / span * 360, hr = tt % 3600 === 0, q0 = kdPt(ta, 142), q1 = kdPt(ta, hr ? 148 : 145);
@@ -819,11 +831,13 @@
     var s0q = kdPt(0, 141), s1q = kdPt(0, 148); sv += '<line class="kdtk s" x1="' + s0q[0].toFixed(1) + '" y1="' + s0q[1].toFixed(1) + '" x2="' + s1q[0].toFixed(1) + '" y2="' + s1q[1].toFixed(1) + '"/>';
     les.forEach(function (x, i) {
       var s0 = mdk(x.r[2]) * 60, e0 = mdk(x.r[3]) * 60, a0 = (s0 - A0) / span * 360 + INS, a1 = (e0 - A0) / span * 360 - INS, mid = (a0 + a1) / 2, p = kdPt(mid, KD.R), rot = (mid > 90 && mid < 270) ? mid + 180 : mid;
-      var hal = x.m ? ' my' : (planli && !x.cv ? ' bos' : ''), cvc = x.cv ? ' cv' : '', lab = x.m ? esc(x.m.sinif) : (planli ? (x.cv ? '' : 'Boş') : String(x.no)), pb = kdPt(mid, 133);
+      var hal = x.m ? ' my' : (planli && !x.cv ? ' bos' : ''), cvc = x.cv ? ' cv' : '', lab = x.m ? esc(x.m.sinif) : (planli ? (x.cv ? '' : 'Boş') : String(x.no)), pb = kdPt(mid, 130.5);
       sv += '<path class="ar gx' + hal + cvc + '" d="' + kdSek(a0, a1, rI, rO) + '" data-i="' + i + '" data-s="' + s0 + '" data-e="' + e0 + '" data-g0="' + a0.toFixed(2) + '" data-g1="' + a1.toFixed(2) + '" data-no="' + x.no + '" data-t="' + esc(x.r[2] + ' – ' + x.r[3]) + '" data-c="' + gunSinif(x, planli) + '" data-dt="ak:' + esc(x.ds) + ':' + x.ri + '"/>';
+      if (lab === 'Boş') sv += '<rect class="dnb" data-i="' + i + '" x="-15" y="-8.6" width="30" height="17" rx="8.5" transform="translate(' + p[0].toFixed(1) + ' ' + p[1].toFixed(1) + ') rotate(' + rot.toFixed(1) + ')"/>';
       sv += '<text class="dno' + hal + cvc + '" data-i="' + i + '" transform="translate(' + p[0].toFixed(1) + ' ' + p[1].toFixed(1) + ') rotate(' + rot.toFixed(1) + ')" y="4.6">' + lab + '</text>';
-      if (planli) sv += '<g class="kdb" data-i="' + i + '"><circle cx="' + pb[0].toFixed(1) + '" cy="' + pb[1].toFixed(1) + '" r="8"/><text x="' + pb[0].toFixed(1) + '" y="' + (pb[1] + 3.8).toFixed(1) + '">' + x.no + '</text></g>';
+      if (planli) sv += '<g class="kdb" data-i="' + i + '"><circle cx="' + pb[0].toFixed(1) + '" cy="' + pb[1].toFixed(1) + '" r="10.5"/><text x="' + pb[0].toFixed(1) + '" y="' + (pb[1] + 4.7).toFixed(1) + '">' + x.no + '</text></g>';
     });
+    sv += kdMerkez(bugun, les.length);
     sv += '<path class="apg" d="" style="display:none"/>';
     sv += '<g class="nd" data-a0="' + A0 + '" data-z0="' + Z0 + '" transform="translate(150 150)" style="display:none"><path class="el" d="M0 22L-3.6 0L0 -114L3.6 0Z"/><circle class="hb" r="8"/><circle class="hb2" r="3.2"/></g></svg>';
     var ilk = les[0], son = les[les.length - 1], hasCv = false, hasBos = false;
@@ -993,6 +1007,142 @@
       return '<button type="button" class="gx gt' + (x.m ? ' my' : (planli ? ' bos' : '')) + (x.cv ? ' cv' : '') + '" data-s="' + mdk(x.r[2]) * 60 + '" data-e="' + mdk(x.r[3]) * 60 + '" data-dt="ak:' + ds + ':' + x.ri + '"><span class="n">' + x.no + '. ders</span><b class="d">' + esc(x.r[2]) + '</b><span class="c"' + (x.m ? kdA(x.m.sinif) : '') + '>' + gunSinif(x, planli) + '</span>' + (x.cv ? '<span class="tg2">doldurma</span>' : '') + '<span class="k"></span><i class="pb"><u></u></i></button>';
     }).join('') + '</div>';
   }
+
+  // ---- 0.16.1 Günüm alt alanı: sıradaki dersin + Nöbet / Kalan / Hafta çipleri (görünüm ve Bugün/Yarın seçiminden bağımsız, kişiye özel)
+  function nxBenim(G) {
+    var l = [];
+    G.sc.forEach(function (r, ri) { if (r[0] !== 'ders') return; var no = dersNo(r), m = G.MY[no] || G.COV[no]; if (m) l.push({ r: r, ri: ri, no: no, m: m, cv: !!G.COV[no] }); });
+    return l;
+  }
+  function nxHaftaSay(y) {
+    var p = programVar(y), say = [0, 0, 0, 0, 0], sn = [{}, {}, {}, {}, {}];
+    if (!p) return { say: say, sn: sn };
+    for (var wd = 1; wd <= 5; wd++) { var g = p.matris[String(wd)] || {}; Object.keys(g).forEach(function (no) { var h = hucre(g[no]); if (h) { say[wd - 1]++; sn[wd - 1][h.sinif] = 1; } }); }
+    return { say: say, sn: sn };
+  }
+  function nxBilgi(C) {
+    var y = C.y, T = C.T, b = { ser: null, nobet: null, kalan: null, hafta: null, sinir: 0 }, i;
+    var G0 = C.gb.tip === 'ders' ? gunBaglam(C.d) : null, ol0 = G0 ? nxBenim(G0) : [], k = null, sonraki = null;
+    ol0.forEach(function (x) { if (!k && T < mdk(x.r[3]) * 60) k = x; });
+    if (k) {
+      var s0 = mdk(k.r[2]) * 60, e0 = mdk(k.r[3]) * 60, simdi = T >= s0;
+      b.ser = { tur: simdi ? 'simdi' : 'sirada', ds: G0.gb.ds, ri: k.ri, no: k.no, sinif: k.m.sinif, s: s0, e: e0, bas: k.r[2], bit: k.r[3], etiket: '' };
+      b.sinir = simdi ? e0 : s0;
+    } else {
+      for (i = 1; i <= 14 && !b.ser; i++) {
+        var d = gunEkle(C.d, i), gb = gunBilgi(y, d);
+        if (gb.tip !== 'ders' || !gb.ders.length) continue;
+        var G = gunBaglam(d), ol = nxBenim(G);
+        if (ol.length) b.ser = { tur: 'yarin', ds: gb.ds, ri: ol[0].ri, no: ol[0].no, sinif: ol[0].m.sinif, s: 0, e: 0, bas: ol[0].r[2], bit: ol[0].r[3], etiket: i === 1 ? 'Yarın' : GUN[d.getDay()] };
+      }
+      b.sinir = 86400;
+    }
+    // Nöbet
+    var yer = C.gb.tip === 'ders' ? nobetYer(y, C.gb.wd, C.gb.ds) : '';
+    if (yer) b.nobet = { var_: true, yer: yer, alt: 'bugün' };
+    else {
+      var sn = null;
+      for (i = 1; i <= 7 && !sn; i++) { var d2 = gunEkle(C.d, i), g2 = gunBilgi(y, d2); if (g2.tip !== 'ders') continue; var y2 = nobetYer(y, g2.wd, g2.ds); if (y2) sn = { gun: i === 1 ? 'Yarın' : GUN[d2.getDay()], yer: y2 }; }
+      b.nobet = { var_: false, yer: 'Yok', alt: sn ? 'Sonra: ' + sn.gun + ' · ' + sn.yer : 'nöbet görevin yok' };
+    }
+    // Kalan
+    if (G0) { var kal = 0; ol0.forEach(function (x) { if (T < mdk(x.r[3]) * 60) kal++; }); b.kalan = { kal: kal, top: ol0.length, ds: C.gb.ds }; }
+    else b.kalan = { kal: 0, top: 0, ds: iso(C.d), yok: true };
+    // Hafta
+    var hs = nxHaftaSay(y), wi = C.gb.tip === 'ders' ? (C.gb.wd || 0) - 1 : ((C.d.getDay() || 7) - 1);
+    var mx = 0, mi = -1; hs.say.forEach(function (n, j) { if (n > mx) { mx = n; mi = j; } });
+    b.hafta = { say: hs.say, bug: wi, mx: mx, mi: mi };
+    b.anahtar = [b.ser ? b.ser.tur + b.ser.ds + b.ser.ri : '-', b.kalan.kal, b.kalan.top, b.nobet.yer, b.nobet.alt, b.hafta.say.join('')].join('|');
+    return b;
+  }
+  var NXG = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum'], NXGI = ['P', 'S', 'Ç', 'P', 'C'], NXGT = ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma'];
+  function nxHtml(b) {
+    var h = '<div class="nxw" data-nxk="' + esc(b.anahtar) + '" data-nxb="' + b.sinir + '">';
+    if (b.ser) {
+      var r = b.ser, lab = r.tur === 'simdi' ? 'Şu an' : (r.tur === 'sirada' ? 'Sıradaki dersin' : r.etiket + ' ilk dersin'), buyuk = r.tur === 'simdi' ? '' : r.bas;
+      h += '<button type="button" class="nxs' + (r.tur === 'simdi' ? ' now' : '') + '" data-dt="ak:' + esc(r.ds) + ':' + r.ri + '" data-nxs="' + r.s + '" data-nxe="' + r.e + '" data-nxt="' + r.tur + '"><span class="k" data-bit="' + esc(r.bit) + '">' + esc(lab) + '</span><b>' + r.no + '. ders</b><span class="sn"><u>' + esc(r.sinif) + '</u><span class="nxe">' + (r.tur === 'yarin' ? esc(GUN[tarihCoz(r.ds).getDay()]) : '') + '</span></span><span class="t"><strong class="nxv">' + esc(buyuk) + '</strong></span></button>';
+    }
+    h += '<div class="nxc">';
+    // Nöbet
+    h += '<button type="button" class="nxp' + (b.nobet.var_ ? ' on' : ' dim') + '" style="--c:#3D8FE0" data-dt="nbd"><span class="k"><i></i>Nöbet</span><span class="v"><b>' + esc(b.nobet.yer) + '</b></span><span class="sb">' + esc(b.nobet.alt) + '</span></button>';
+    // Kalan
+    var K = b.kalan, pc = K.top ? Math.round(100 * (K.top - K.kal) / K.top) : 0, kv = K.yok ? '–' : (K.top && !K.kal ? '✓' : String(K.kal)), ks = K.yok ? 'bugün ders yok' : (K.top ? (K.kal ? K.top + ' dersten kalan' : 'bugün tamam') : 'bugün ders yok');
+    h += '<button type="button" class="nxp" style="--c:#2BA899" data-dt="gun:' + esc(K.ds) + '"><span class="k"><i></i>Kalan</span><span class="v"><span class="rg" style="--p:' + pc + '"><b>' + kv + '</b></span></span><span class="sb">' + ks + '</span></button>';
+    // Hafta
+    var H = b.hafta, mxv = Math.max(1, H.mx);
+    h += '<button type="button" class="nxp" style="--c:#7F62E0" data-dt="hf"><span class="k"><i></i>Hafta</span><span class="v"><span class="bars">' + H.say.map(function (n, j) { return '<i class="' + (j === H.bug ? 't' : '') + '" style="height:' + Math.max(4, Math.round(30 * n / mxv)) + 'px"></i>'; }).join('') + '</span></span><span class="sb">' + (H.mx ? 'Yoğun: ' + NXG[H.mi] + ' · ' + H.mx : 'program yok') + '</span></button>';
+    return h + '</div></div>';
+  }
+  // saniyelik güncelleme: şerit metni yerinde; sınır aşılınca (ders başladı/bitti) alt alan yeniden kurulur
+  function nxGuncelle(C) {
+    var w = document.querySelector('.nxw'); if (!w) return;
+    if (C.T >= (+w.dataset.nxb || 0) && +w.dataset.nxb < 86400) {
+      var pl = !!programVar(C.y), tmp = document.createElement('div'); tmp.innerHTML = pl ? nxHtml(nxBilgi(C)) : nxHtmlO(nxBilgiO(C));
+      if (tmp.firstChild) w.parentNode.replaceChild(tmp.firstChild, w); w = document.querySelector('.nxw'); if (!w) return;
+    }
+    var sr = w.querySelector('.nxs'); if (!sr) return;
+    var tur = sr.dataset.nxt, s0 = +sr.dataset.nxs, e0 = +sr.dataset.nxe, el = sr.querySelector('.nxe'), v = sr.querySelector('.nxv');
+    if (tur === 'sirada' && el) el.textContent = sureTxt(Math.max(0, s0 - C.T)) + ' sonra';
+    else if (tur === 'teneffus') { if (v) v.textContent = sureTxt(Math.max(0, s0 - C.T)); }
+    else if (tur === 'simdi') { if (v) v.textContent = sureTxt(Math.max(0, e0 - C.T)); if (el) el.textContent = sr.dataset.nxo ? 'kalan' : 'kalan · bitiş ' + sr.querySelector('.k').dataset.bit; }
+  }
+
+  // ---- 0.16.2 Kişisel programı olmayanlar için okul geneli alt alan (aynı cam dil, aynı tıklama/geri davranışı)
+  function nxBilgiO(C) {
+    var T = C.T, b = { ser: null, bugun: null, kalan: null, yak: null, sinir: 0 }, i, k = null, onc = null;
+    var G0 = C.gb.tip === 'ders' ? gunBaglam(C.d) : null, ders = [];
+    if (G0) G0.sc.forEach(function (r, ri) { if (r[0] === 'ders') ders.push({ r: r, ri: ri, no: dersNo(r), s: mdk(r[2]) * 60, e: mdk(r[3]) * 60 }); });
+    ders.forEach(function (x, j) { if (!k && T < x.e) { k = x; onc = j; } });
+    if (k) {
+      var tur = T >= k.s ? 'simdi' : (onc === 0 ? 'sirada' : 'teneffus');
+      b.ser = { tur: tur, ds: G0.gb.ds, ri: k.ri, no: k.no, bas: k.r[2], bit: k.r[3], s: k.s, e: k.e, etiket: '' };
+      b.sinir = tur === 'simdi' ? k.e : k.s;
+    } else {
+      var nx = sonrakiOkul(C);
+      if (nx) { var G1 = gunBaglam(nx.d), r1 = null; G1.sc.forEach(function (r, ri) { if (!r1 && r[0] === 'ders') r1 = { r: r, ri: ri }; });
+        if (r1) b.ser = { tur: 'yarin', ds: nx.gb.ds, ri: r1.ri, no: dersNo(r1.r), bas: r1.r[2], bit: r1.r[3], s: 0, e: 0, etiket: nx.etiket }; }
+      b.sinir = 86400;
+    }
+    // Bugün
+    var gb = C.gb, ds0 = iso(C.d);
+    if (gb.tip === 'ders') b.bugun = { v: ders.length + ' ders', alt: gb.yarim ? ((gb.ad && !/^yarım gün$/i.test(gb.ad)) ? 'Yarım gün · ' + gb.ad : 'Yarım gün') : (ders.length ? 'son ders ' + ders[ders.length - 1].r[3] : ''), on: !!(gb.yarim || gb.gecici), ds: ds0 };
+    else if (gb.tip === 'tatil') b.bugun = { v: 'Tatil', alt: gb.ad || 'okul kapalı', on: true, ds: ds0 };
+    else b.bugun = { v: gb.tip === 'hs' ? 'Hafta sonu' : 'Ders yok', alt: gb.tip === 'hs' ? 'okul kapalı' : '', on: false, ds: ds0 };
+    // Kalan
+    if (ders.length) { var kal = 0; ders.forEach(function (x) { if (T < x.e) kal++; }); b.kalan = { kal: kal, top: ders.length, ds: ds0 }; } else b.kalan = { kal: 0, top: 0, ds: ds0, yok: true };
+    // Yaklaşan (sınav + etkinlik)
+    var yak = null, bg = ds0;
+    olaylar(C.y).forEach(function (o) { if (o.hafta || (o.k !== 'sinav' && o.k !== 'etkinlik') || o.bit < bg) return;
+      if (o.k === 'sinav' && o.bas === bg && o.bit === bg && o.x && saatOk(o.x.saat) && T >= mdk(o.x.saat) * 60) return; var g = o.bas < bg ? bg : o.bas; if (!yak || g < yak.g) yak = { o: o, g: g }; });
+    if (yak) { var fark = Math.round((tarihCoz(yak.g) - tarihCoz(bg)) / 86400000); b.yak = { ad: yak.o.ad, kat: KAT[yak.o.k][0], fark: fark, kod: olayKodu(yak.o), alt: yak.o.alt || '', saat: (yak.o.x && saatOk(yak.o.x.saat)) ? yak.o.x.saat : '' }; }
+    b.anahtar = [b.ser ? b.ser.tur + b.ser.ds + b.ser.ri : '-', b.kalan.kal, b.kalan.top, b.bugun.v, b.bugun.alt, b.yak ? b.yak.kod + b.yak.fark : '-'].join('|');
+    return b;
+  }
+  function nxHtmlO(b) {
+    var h = '<div class="nxw" data-nxk="' + esc(b.anahtar) + '" data-nxb="' + b.sinir + '">';
+    if (b.ser) {
+      var r = b.ser, lab = r.tur === 'simdi' ? 'Şu an' : (r.tur === 'sirada' ? 'Ders başlamadan' : (r.tur === 'teneffus' ? 'Teneffüs · sıradaki ders' : r.etiket + ' ilk ders')), buyuk = r.tur === 'simdi' || r.tur === 'teneffus' ? '' : r.bas;
+      h += '<button type="button" class="nxs' + (r.tur === 'simdi' ? ' now' : '') + '" data-dt="ak:' + esc(r.ds) + ':' + r.ri + '" data-nxs="' + r.s + '" data-nxe="' + r.e + '" data-nxt="' + r.tur + '" data-nxo="1"><span class="k" data-bit="' + esc(r.bit) + '">' + esc(lab) + '</span><b>' + r.no + '. ders</b><span class="sn"><u>' + esc(r.bas + ' – ' + r.bit) + '</u><span class="nxe">' + (r.tur === 'yarin' ? esc(GUN[tarihCoz(r.ds).getDay()]) : '') + '</span></span><span class="t"><strong class="nxv">' + esc(buyuk) + '</strong></span></button>';
+    }
+    h += '<div class="nxc">';
+    var B = b.bugun;
+    h += '<button type="button" class="nxp' + (B.on ? ' on' : '') + '" style="--c:#7F62E0" data-dt="gun:' + esc(B.ds) + '"><span class="k"><i></i>Bugün</span><span class="v"><b>' + esc(B.v) + '</b></span><span class="sb">' + esc(B.alt) + '</span></button>';
+    var K = b.kalan, pc = K.top ? Math.round(100 * (K.top - K.kal) / K.top) : 0, kv = K.yok ? '–' : (K.top && !K.kal ? '✓' : String(K.kal)), ks = K.yok ? 'bugün ders yok' : (K.kal ? K.top + ' dersten kalan' : 'bugün tamam');
+    h += '<button type="button" class="nxp" style="--c:#2BA899" data-dt="gun:' + esc(K.ds) + '"><span class="k"><i></i>Kalan</span><span class="v"><span class="rg" style="--p:' + pc + '"><b>' + kv + '</b></span></span><span class="sb">' + ks + '</span></button>';
+    var Y = b.yak;
+    if (Y) h += '<button type="button" class="nxp' + (Y.fark <= 2 ? ' on' : '') + '" style="--c:#E0703D" data-dt="' + esc(Y.kod) + '"><span class="k"><i></i>Yaklaşan</span><span class="v"><b>' + esc(Y.ad) + '</b></span><span class="sb">' + esc(Y.kat) + ' · ' + (Y.fark <= 0 ? 'bugün' : (Y.fark === 1 ? 'yarın' : Y.fark + ' gün sonra')) + (Y.saat && Y.fark <= 1 ? ' ' + Y.saat : '') + '</span></button>';
+    else h += '<button type="button" class="nxp dim" style="--c:#E0703D" data-go-tab="2"><span class="k"><i></i>Yaklaşan</span><span class="v"><b>Sakin</b></span><span class="sb">sınav/etkinlik yok</span></button>';
+    return h + '</div><div class="nxd">Kişisel programın yüklenince dersin burada sana özel görünür.</div></div>';
+  }
+  function dtHafta() {
+    var C = CTX || baglam(), y = C.y, hs = nxHaftaSay(y), top = hs.say.reduce(function (a, b) { return a + b; }, 0), pt = pazartesi(C.d);
+    var h = '<div class="dbig d">' + top + ' ders</div><div class="dsub">haftalık yükün · ' + hs.say.filter(function (n) { return n; }).length + ' gün</div><div class="rows">';
+    for (var wd = 1; wd <= 5; wd++) {
+      var ds = iso(gunEkle(pt, wd - 1)), sinifs = Object.keys(hs.sn[wd - 1]).join(', ');
+      h += dtSatir('gun:' + ds, NXG[wd - 1], NXGT[wd - 1], sinifs || 'ders yok', hs.say[wd - 1] ? hs.say[wd - 1] + ' ders' : '', hs.say[wd - 1] ? '' : 'dim');
+    }
+    dtGoster('Haftalık yükün', h + '</div>');
+  }
   function sGunum(C) {
     var H = gunumHedef(C); if (!H) return '';
     var G = H.G, ds = G.gb.ds, bugun = H.v === 'b', planli = !!programVar(C.y), les = [], bos = [], benim = 0, dols = 0;
@@ -1002,19 +1152,13 @@
     var h = '<div class="sec" data-k="akis"><h2>Günüm<span>' + esc(alt) + '</span></h2>' + seg;
     var shf = olaylar(C.y).filter(function (o) { return o.hafta && o.bas <= ds && ds <= o.bit; })[0];
     if (G.gb.gecici || G.gb.yarim || shf) h += '<div class="chp" style="margin:12px 0 0">' + (shf ? '<span style="background:#7F62E038;background:color-mix(in srgb,#7F62E0 22%,transparent)">' + esc(shf.ad) + '</span>' : '') + (G.gb.yarim ? '<span>Yarım gün' + (G.gb.ad ? ', ' + esc(G.gb.ad) : '') + '</span>' : '') + (G.gb.gecici ? '<span>' + esc(G.gb.gecici) + '</span>' : '') + '</div>';
-    h += gunGovde(les, C, bugun, ds, planli);
+    var gg = gunGovde(les, C, bugun, ds, planli), kdLej = '', st0 = gvDeger(), li = gg.indexOf('<div class="kdl">');
+    if (st0 === 'd' && li >= 0) { kdLej = gg.slice(li); gg = gg.slice(0, li); }
+    h += gg;
     h += '<button type="button" class="gvh" data-gvay aria-label="Görünümü değiştirmek için dokun"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/></svg>Görünümü değiştirmek için dokun</button>';
-    // özet kutuları
-    var simdiki = null; if (bugun) les.forEach(function (x) { if (!simdiki && C.T < mdk(x.r[3]) * 60) simdiki = x; });
-    var ilk = les[0], t1;
-    if (bugun && simdiki) { var cur = C.T >= mdk(simdiki.r[2]) * 60; t1 = tile('sira', cur ? 'Şu an' : 'Sıradaki', simdiki.no + '. ders', simdiki.r[2] + (simdiki.m ? ' · ' + simdiki.m.sinif : ''), 'ak:' + ds + ':' + simdiki.ri, 'var(--gold)'); }
-    else if (ilk) t1 = tile('sira', 'İlk ders', ilk.no + '. ders', ilk.r[2] + (ilk.m ? ' · ' + ilk.m.sinif : ''), 'ak:' + ds + ':' + ilk.ri, 'var(--gold)');
-    else t1 = '';
-    var t2 = tile('say', bugun ? 'Bugün' : H.etiket, (planli ? benim : les.length) + ' ders', planli ? (bos.length ? bos.length + ' boş saat' : 'boş saat yok') : (les.length ? les[0].r[2] + ' – ' + les[les.length - 1].r[3] : ''), 'gun:' + ds, '#7F62E0');
-    var t3 = planli ? tile('bos', 'Boş saatlerim', bos.length ? bos.length + ' saat' : 'Yok', bos.length ? bos.map(function (n) { return n + '.'; }).join(' ') + ' ders' : 'bütün saatler dolu', 'gun:' + ds, '#2BA899') : '';
-    var yer = nobetYer(C.y, G.gb.wd, ds), t4 = tile('nbt', 'Nöbetim', yer || 'Yok', yer ? 'nöbet yerin' : 'nöbetin yok', 'nbd', '#3D8FE0');
-    h += '<div class="tls">' + t1 + t2 + t3 + t4 + '</div></div>';
-    return h;
+    if (planli) { h += nxHtml(nxBilgi(C)) + (st0 === 'd' ? kdLej : ''); }
+    else { h += nxHtmlO(nxBilgiO(C)) + (st0 === 'd' ? kdLej : ''); }
+    return h + '</div>';
   }
   // ---- Yaklaşanlar: bu hafta / bu ay
   function sYaklasan(C) {
@@ -2304,10 +2448,19 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
       if (cur) { dk.textContent = 'Şu an'; dn.textContent = cur.dataset.no + '. ders'; dd.textContent = (cur.dataset.c ? cur.dataset.c + ' · ' : '') + 'kalan ' + sureTxt(+cur.dataset.e - C.T); }
       else if (nxt) { var onc = C.T < a0; dk.textContent = onc ? 'Ders başlamadan' : 'Teneffüs'; dn.textContent = sureTxt(+nxt.dataset.s - C.T); dd.textContent = (onc ? '1. ders ' : 'Sıradaki ' + nxt.dataset.no + '. ders · ') + (onc ? nxt.dataset.t.slice(0, 5) : nxt.dataset.t.slice(0, 5)) + (nxt.dataset.c ? ' · ' + nxt.dataset.c : ''); }
       else { dk.textContent = 'Bugün'; dn.textContent = 'Bitti'; dd.textContent = ''; }
+      var l2 = dl.querySelector('.mkl2'), bp = dl.querySelector('.mkbp'), mw = dl.querySelector('.mkw'), mt = dl.querySelector('.mkt'), fr2 = 0, t2 = '', hal2 = 'b', ks = -1;
+      if (cur) { ks = +cur.dataset.e - C.T; hal2 = 'd'; fr2 = (C.T - (+cur.dataset.s)) / ((+cur.dataset.e) - (+cur.dataset.s)); }
+      else if (nxt && C.T >= a0) { var arc = [].slice.call(dl.querySelectorAll('.ar')), ix = arc.indexOf(nxt), pe = ix > 0 ? +arc[ix - 1].dataset.e : a0; ks = +nxt.dataset.s - C.T; hal2 = 't'; fr2 = (C.T - pe) / Math.max(1, (+nxt.dataset.s) - pe); }
+      else if (nxt) { ks = +nxt.dataset.s - C.T; hal2 = 'b'; }
+      else { hal2 = 'k'; fr2 = 1; }
+      if (ks >= 0) { ks = Math.ceil(ks); var kh = Math.floor(ks / 3600), km = Math.floor(ks % 3600 / 60), kss = ks % 60; t2 = (kh ? kh + ':' + (km < 10 ? '0' : '') + km : (km < 10 ? '0' : '') + km) + ':' + (kss < 10 ? '0' : '') + kss; }
+      if (l2) l2.textContent = t2; if (bp) bp.setAttribute('width', (64 * Math.max(0, Math.min(1, fr2))).toFixed(1)); if (mw) mw.setAttribute('class', 'mkw ' + hal2);
+      if (mt) { var hh = Math.floor(C.T / 3600) % 24, mm = Math.floor(C.T % 3600 / 60); mt.innerHTML = (hh < 10 ? '0' : '') + hh + '<tspan class="mkc">:</tspan>' + (mm < 10 ? '0' : '') + mm; }
       var pg = dl.querySelector('.apg');
       if (pg) { if (cur) { var g0 = +cur.dataset.g0, g1 = +cur.dataset.g1, fr = (C.T - (+cur.dataset.s)) / ((+cur.dataset.e) - (+cur.dataset.s)); pg.setAttribute('d', kdSek(g0, g0 + (g1 - g0) * Math.max(0, Math.min(1, fr)), KD.R + KD.W / 2 + 2, KD.R + KD.W / 2 + 6)); pg.style.display = ''; } else pg.style.display = 'none'; }
     }
     [].forEach.call(document.querySelectorAll('.gzr[data-bg="1"]'), function (rt) { gzGuncelle(rt, C); });
+    nxGuncelle(C);
     cetvelHizala();
     kaymaDurumu();
   }
@@ -2425,6 +2578,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     if (t === 'gun') return dtGun(p[1]);
     if (t === 'nb') return dtNobetci(+p[1]);
     if (t === 'nbd') return dtNbd();
+    if (t === 'hf') return dtHafta();
     if (t === 'du') return dtDuyuru(+p[1]);
     if (t === 'hb') return dtHaber(+p[1]);
     if (t === 'bg') return dtBelirli();

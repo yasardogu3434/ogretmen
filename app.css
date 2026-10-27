@@ -790,8 +790,10 @@ button,[data-dt],[data-n],[data-c],.shd,.cov,.dtd{touch-action:manipulation}
 .kdl span{display:inline-flex;align-items:center;gap:6px}.kdl i{display:inline-block;width:16px;height:9px;border-radius:3px}
 .kdl .a{background:var(--k-my)}.kdl .b{background:var(--k-oth)}.kdl .c{background:var(--gold)}.kdl .e{background:var(--cv)}
 .kdl .d{height:0;border-top:3px dotted var(--k-ten);border-radius:0}.kdl .t{height:0;border-top:2px dotted var(--k-ten);border-radius:0;opacity:.7}
-.gvh{display:flex;align-items:center;justify-content:center;gap:6px;margin:10px auto 0;min-height:36px;padding:6px 10px;background:none;border:0;color:var(--mut);font:inherit;font-size:12.5px;font-weight:600;cursor:pointer}
-.gvh svg{width:15px;height:15px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.gvh{display:flex;align-items:center;justify-content:center;gap:8px;margin:12px auto 0;min-height:38px;padding:8px 16px;width:max-content;max-width:100%;background:none;border:1.5px solid rgba(255,255,255,.9);border-radius:99px;box-shadow:0 0 0 1px rgba(90,80,170,.16),0 1px 0 rgba(255,255,255,.9) inset,0 6px 14px -10px rgba(60,50,140,.4);color:var(--tx);font:inherit;font-size:13px;font-weight:650;cursor:pointer}
+:root[data-th=dark] .gvh{border:1px solid rgba(255,255,255,.26);box-shadow:0 1px 0 rgba(255,255,255,.2) inset,0 6px 14px -10px rgba(0,0,0,.6)}
+@media(prefers-color-scheme:dark){:root:not([data-th=light]) .gvh{border:1px solid rgba(255,255,255,.26);box-shadow:0 1px 0 rgba(255,255,255,.2) inset,0 6px 14px -10px rgba(0,0,0,.6)}}
+.gvh svg{width:16px;height:16px;flex:none;fill:none;stroke:var(--gold);stroke-width:1.9;stroke-linecap:round}
 .thn svg{width:62px;height:50px;display:block}.thn .gq0{fill:var(--line)}.thn .gq1{fill:var(--mut)}.thn .gq2{fill:var(--gold)}.thn .gl0{fill:none;stroke:var(--line);stroke-width:3}.thn .gl2{fill:none;stroke:var(--gold);stroke-width:3.5;stroke-linecap:round}
 .gzr{margin-top:16px}
 .gzr button{font:inherit;color:inherit;border:0;cursor:pointer;margin:0}
@@ -1031,3 +1033,84 @@ button,[data-dt],[data-n],[data-c],.shd,.cov,.dtd{touch-action:manipulation}
 :root[data-th=dark] .gzr.gzf .gzh-st.bos .o{box-shadow:inset 0 0 0 1.5px var(--k-ten),inset 0 1px 0 rgba(255,255,255,.25)}
 /* çizgi boncukların arkasında kesilir (metin çizgiyle çakışmasın); aralarda görünür */
 .gzr.gzf .gzh-l{-webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(50% - var(--sd) / 2 + 3px),transparent calc(50% - var(--sd) / 2 + 3px),transparent calc(50% + var(--sd) / 2 - 3px),#000 calc(50% + var(--sd) / 2 - 3px));mask-image:linear-gradient(90deg,#000 0,#000 calc(50% - var(--sd) / 2 + 3px),transparent calc(50% - var(--sd) / 2 + 3px),transparent calc(50% + var(--sd) / 2 - 3px),#000 calc(50% + var(--sd) / 2 - 3px));-webkit-mask-size:calc(100% / (var(--n) - 1)) 100%;mask-size:calc(100% / (var(--n) - 1)) 100%;-webkit-mask-repeat:repeat-x;mask-repeat:repeat-x;-webkit-mask-position:calc(100% / (var(--n) - 1) / -2) 0;mask-position:calc(100% / (var(--n) - 1) / -2) 0}
+
+/* ===== 0.16.1 Günüm alt alanı: tam saydam cam çipler ===== */
+.nxw{margin-top:12px;display:grid;gap:9px}
+.nxw button{font:inherit;color:inherit;cursor:pointer;text-align:left;margin:0}
+.nxs{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 12px;padding:12px 14px;border-radius:18px;background:linear-gradient(120deg,color-mix(in srgb,var(--gold) 16%,transparent),transparent 65%);border:1.5px solid rgba(255,255,255,.95);box-shadow:0 0 0 1px rgba(90,80,170,.18),0 1px 0 rgba(255,255,255,.95) inset,0 14px 18px -18px rgba(255,255,255,.7) inset,0 8px 20px -14px rgba(60,50,140,.35),inset 3px 0 0 var(--gold)}
+.nxs .k{grid-column:1;font-size:11.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--mut)}
+.nxs b{grid-column:1;font-size:18px;font-weight:600;letter-spacing:-.3px;line-height:1.15}
+.nxs .sn{grid-column:1;display:inline-flex;align-items:center;gap:8px;margin-top:3px;font-size:13px;color:var(--mut);font-weight:600}
+.nxs .sn u{text-decoration:none;font-weight:700;font-size:12.5px;padding:2px 9px;border-radius:99px;background:color-mix(in srgb,var(--gold) 28%,transparent);color:var(--tx)}
+.nxs .t{grid-column:2;grid-row:1/5;text-align:right}.nxs .t strong{font-size:24px;font-weight:700;color:var(--goldt);line-height:1;letter-spacing:-.4px}
+.nxc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.nxp{padding:10px 10px 9px;border-radius:16px;background:none;border:1.5px solid rgba(255,255,255,.9);box-shadow:0 0 0 1px rgba(90,80,170,.14),0 1px 0 rgba(255,255,255,.9) inset,0 8px 16px -16px rgba(255,255,255,.7) inset,0 6px 16px -12px rgba(60,50,140,.3);display:flex;flex-direction:column;gap:5px;min-width:0}
+.nxp .k{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:var(--mut);white-space:nowrap}
+.nxp .k i{width:8px;height:8px;border-radius:50%;background:var(--c);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 22%,transparent);flex:none}
+.nxp .v{display:flex;align-items:center;min-height:34px}
+.nxp .v>b{font-size:15.5px;font-weight:600;line-height:1.1;overflow-wrap:anywhere}
+.nxp .sb{font-size:11.5px;color:var(--mut);font-weight:600;line-height:1.2}
+.nxp .rg{position:relative;width:36px;height:36px;border-radius:50%;display:grid;place-items:center}
+.nxp .rg::before{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(var(--c) calc(var(--p)*1%),rgba(120,110,190,.2) 0);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 5px),#000 calc(100% - 4.5px));mask:radial-gradient(farthest-side,transparent calc(100% - 5px),#000 calc(100% - 4.5px))}
+.nxp .rg b{position:relative;font-size:15px;font-weight:700}
+.nxp .bars{display:flex;align-items:flex-end;gap:4px;height:34px}
+.nxp .bars i{width:7px;border-radius:3px;background:color-mix(in srgb,var(--c) 38%,transparent)}.nxp .bars i.t{background:var(--c);box-shadow:0 0 8px color-mix(in srgb,var(--c) 60%,transparent)}
+.nxp.on{background:linear-gradient(160deg,color-mix(in srgb,var(--c) 22%,transparent),transparent 70%);border-color:color-mix(in srgb,var(--c) 70%,#fff);box-shadow:0 0 0 1px color-mix(in srgb,var(--c) 35%,transparent),0 1px 0 rgba(255,255,255,.9) inset,0 0 16px -4px color-mix(in srgb,var(--c) 55%,transparent)}
+.nxp.dim .v>b{color:var(--mut)}
+.nxs:active,.nxp:active{transform:scale(.985)}
+:root[data-th=dark] .nxs,:root[data-th=dark] .nxp{border:1px solid rgba(255,255,255,.24);box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 8px 18px -14px rgba(0,0,0,.6)}
+:root[data-th=dark] .nxs{box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 8px 18px -14px rgba(0,0,0,.6),inset 3px 0 0 var(--gold)}
+:root[data-th=dark] .nxp.on{border-color:color-mix(in srgb,var(--c) 75%,transparent);box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 0 16px -4px color-mix(in srgb,var(--c) 60%,transparent)}
+:root[data-th=dark] .nxp .rg::before{background:conic-gradient(var(--c) calc(var(--p)*1%),rgba(255,255,255,.16) 0)}
+@media(prefers-color-scheme:dark){:root:not([data-th=light]) .nxs,:root:not([data-th=light]) .nxp{border:1px solid rgba(255,255,255,.24);box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 8px 18px -14px rgba(0,0,0,.6)}:root:not([data-th=light]) .nxs{box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 8px 18px -14px rgba(0,0,0,.6),inset 3px 0 0 var(--gold)}:root:not([data-th=light]) .nxp.on{border-color:color-mix(in srgb,var(--c) 75%,transparent);box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 0 16px -4px color-mix(in srgb,var(--c) 60%,transparent)}:root:not([data-th=light]) .nxp .rg::before{background:conic-gradient(var(--c) calc(var(--p)*1%),rgba(255,255,255,.16) 0)}}
+.nxw+.kdl{margin-top:12px}
+.nxs b{line-height:1.3}.nxp .v>b{line-height:1.3}.nxp .rg b{line-height:1.3}.nxs .t strong{line-height:1.2}
+.nxd{display:flex;align-items:center;justify-content:center;gap:6px;text-align:center;font-size:11.5px;line-height:1.3;color:var(--mut);font-weight:600;opacity:.85;padding:2px 8px 0}
+.nxp .sb:empty{display:none}
+
+/* ===== 0.16.2 Kadran: boş ders = cam yay + "Boş" hapı; ders numaraları büyük ===== */
+.dial.kdy .ar.bos{fill:rgba(255,255,255,.16);stroke:var(--teal);stroke-width:1.6;stroke-dasharray:none;stroke-linejoin:round}
+:root[data-th=dark] .dial.kdy .ar.bos{fill:rgba(255,255,255,.07)}
+.kdy .dnb{fill:rgba(255,255,255,.6);stroke:var(--teal);stroke-width:1;pointer-events:none}
+:root[data-th=dark] .kdy .dnb{fill:rgba(8,16,40,.55)}
+.kdy .dnb.pt{opacity:.6}
+.kdy .dno.bos{stroke:none;fill:var(--teal);font-size:12px;font-weight:700}
+:root[data-th=dark] .kdy .dno.bos{fill:color-mix(in srgb,var(--teal) 70%,#fff)}
+.kdy .kdb text{font-size:13.5px}
+@media(prefers-color-scheme:dark){:root:not([data-th=light]) .dial.kdy .ar.bos{fill:rgba(255,255,255,.07)}:root:not([data-th=light]) .kdy .dnb{fill:rgba(8,16,40,.55)}:root:not([data-th=light]) .kdy .dno.bos{fill:color-mix(in srgb,var(--teal) 70%,#fff)}}
+
+/* ===== 0.16.2 Kadran merkezi: saat dokusu + durum penceresi + dijital saat; kadran altındaki metin yalnız ekran okuyucuya ===== */
+.dial.kdy .dc{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+.mka{stop-color:#fff;stop-opacity:.46}.mkb{stop-color:#fff;stop-opacity:.07}.mkc0{stop-color:#fff;stop-opacity:0}.mkd0{stop-color:#fff;stop-opacity:.16}
+:root[data-th=dark] .mka{stop-opacity:.2}:root[data-th=dark] .mkd0{stop-opacity:.08}
+@media(prefers-color-scheme:dark){:root:not([data-th=light]) .mka{stop-opacity:.2}:root:not([data-th=light]) .mkd0{stop-opacity:.08}}
+.mkl{stroke:var(--mut);stroke-width:.35;opacity:.16}.mkl.b{stroke-width:.7;opacity:.3}
+.mkr{fill:none;stroke:var(--mut);stroke-width:.4;opacity:.1}.mkr.b{opacity:.2}
+.mkn{fill:var(--gold);opacity:.8}
+.mkh{fill:none;stroke:var(--gold);stroke-width:.9;opacity:.7}
+.mkpr{fill:rgba(255,255,255,.28);stroke:rgba(255,255,255,.95);stroke-width:1.2;filter:drop-shadow(0 3px 5px rgba(60,50,140,.22))}
+.mkpi{fill:rgba(255,255,255,.22);stroke:rgba(90,80,170,.18);stroke-width:.8}
+:root[data-th=dark] .mkpr{fill:rgba(255,255,255,.07);stroke:rgba(255,255,255,.28);filter:drop-shadow(0 3px 5px rgba(0,0,0,.45))}
+:root[data-th=dark] .mkpi{fill:rgba(0,0,0,.28);stroke:rgba(255,255,255,.1)}
+@media(prefers-color-scheme:dark){:root:not([data-th=light]) .mkpr{fill:rgba(255,255,255,.07);stroke:rgba(255,255,255,.28);filter:drop-shadow(0 3px 5px rgba(0,0,0,.45))}:root:not([data-th=light]) .mkpi{fill:rgba(0,0,0,.28);stroke:rgba(255,255,255,.1)}}
+.mkd{font:700 16.5px 'Baloo 2',sans-serif;font-variant-numeric:tabular-nums;fill:var(--tx);letter-spacing:.5px}
+.mkc{animation:mkbl 1s steps(1) infinite}@keyframes mkbl{50%{opacity:.25}}
+@media(prefers-reduced-motion:reduce){.mkc{animation:none}}
+.mkv{font:700 20px 'Baloo 2',sans-serif;font-variant-numeric:tabular-nums;letter-spacing:.6px;fill:var(--mut)}
+.mkw.d .mkv{fill:var(--goldt);filter:drop-shadow(0 0 5px color-mix(in srgb,var(--gold) 55%,transparent))}
+.mkw.t .mkv{fill:var(--teal);filter:drop-shadow(0 0 5px color-mix(in srgb,var(--teal) 55%,transparent))}
+.mkw.d .mkpr{stroke:color-mix(in srgb,var(--gold) 70%,#fff)}.mkw.t .mkpr{stroke:color-mix(in srgb,var(--teal) 70%,#fff)}
+:root[data-th=dark] .mkw.d .mkv{fill:var(--gold)}
+:root[data-th=dark] .mkw.d .mkpr{stroke:color-mix(in srgb,var(--gold) 65%,transparent)}:root[data-th=dark] .mkw.t .mkpr{stroke:color-mix(in srgb,var(--teal) 65%,transparent)}
+@media(prefers-color-scheme:dark){:root:not([data-th=light]) .mkw.d .mkv{fill:var(--gold)}:root:not([data-th=light]) .mkw.d .mkpr{stroke:color-mix(in srgb,var(--gold) 65%,transparent)}:root:not([data-th=light]) .mkw.t .mkpr{stroke:color-mix(in srgb,var(--teal) 65%,transparent)}}
+.mkbg{fill:var(--mut);opacity:.2}.mkw.d .mkbp{fill:var(--gold)}.mkw.t .mkbp{fill:var(--teal)}.mkw.o .mkbp{fill:var(--mut)}
+
+/* durumlar: d ders (altın) · t teneffüs (yeşil) · b okul öncesi (soluk geri sayım) · k gün bitti (tik) · x ders günü değil (sönük çizgiler) */
+.mkck{display:none;fill:none;stroke:var(--gold);stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 4px color-mix(in srgb,var(--gold) 60%,transparent))}
+.mkw.k .mkck{display:block}.mkw.k .mkv{display:none}
+.mkw.k .mkpr{stroke:color-mix(in srgb,var(--gold) 70%,#fff)}:root[data-th=dark] .mkw.k .mkpr{stroke:color-mix(in srgb,var(--gold) 65%,transparent)}
+@media(prefers-color-scheme:dark){:root:not([data-th=light]) .mkw.k .mkpr{stroke:color-mix(in srgb,var(--gold) 65%,transparent)}}
+.mkw.k .mkbp{fill:var(--gold)}.mkw.k .mkbg{opacity:.35}
+.mkw.b .mkv{fill:var(--mut);opacity:.85}.mkw.b .mkbp{fill:var(--mut)}
+.mkw.x .mkv{fill:var(--mut);opacity:.4;letter-spacing:1.4px}.mkw.x .mkbg,.mkw.x .mkbp{opacity:.1}
+.mkw.k .mkbg,.mkw.k .mkbp{display:none}
