@@ -1114,3 +1114,11 @@ button,[data-dt],[data-n],[data-c],.shd,.cov,.dtd{touch-action:manipulation}
 .mkw.b .mkv{fill:var(--mut);opacity:.85}.mkw.b .mkbp{fill:var(--mut)}
 .mkw.x .mkv{fill:var(--mut);opacity:.4;letter-spacing:1.4px}.mkw.x .mkbg,.mkw.x .mkbp{opacity:.1}
 .mkw.k .mkbg,.mkw.k .mkbp{display:none}
+
+/* 0.16.3 küçük pencere, hep görünen soluk akrep */
+.mkv{font-size:16.5px}
+.kdy .nd.sol{opacity:.2;filter:none}
+.kdy .nd.sol .hb{stroke-width:2.4}
+.mkw.x .mkv{opacity:.62;letter-spacing:.8px}
+.mkw.x .mkbg,.mkw.x .mkbp{opacity:0;display:none}
+.mkw.k .mkbg,.mkw.k .mkbp{display:none}
