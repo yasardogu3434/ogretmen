@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.16.3'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.16.4'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu', kd: 'ogr_kd' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -497,14 +497,54 @@
     if (k === '10-28' && d.getHours() >= 13) return { ad: 'Cumhuriyet Bayramı arifesi', t: 'Yarın Cumhuriyet Bayramı' };
     return null;
   }
-  var BAYRAK_SEKIL = '<rect x="0" y="-30" width="90" height="60" fill="#E30A17"/><circle cx="30" cy="0" r="15" fill="#fff"/><circle cx="33.75" cy="0" r="12" fill="#E30A17"/><path d="M41.75 0l13.568-4.408-8.386 11.541V-7.133l8.386 11.541z" fill="#fff"/>';
-  function bayrakHTML(b) {
-    var s = '<svg class="bflag" viewBox="0 -30 90 60" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">', n = 18, w = 90 / n, i;
-    for (i = 0; i < n; i++) {
-      var x = (i * w).toFixed(3), ww = (w + 0.15).toFixed(3);
-      s += '<svg x="' + x + '" y="-30" width="' + ww + '" height="60" viewBox="' + x + ' -30 ' + ww + ' 60"><g class="bw" style="animation-delay:' + (-(i * 0.2)).toFixed(2) + 's">' + BAYRAK_SEKIL + '<rect class="bsh" x="0" y="-30" width="90" height="60" fill="#000" style="animation-delay:' + (-(i * 0.2) - 0.65).toFixed(2) + 's"/></g></svg>';
+  // ---- 0.16.4: dalgalanan bayrak canvas ile çizilir (2 piksellik ince dilimler; basamak/kesik görünmez). Yalnız bayrak görünürken çalışır.
+  var BY = { on: false, son: 0, t0: 0, W: 0, H: 0, off: null, A: 0 };
+  var BY_AZ = !!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches);
+  function bayrakOff(W, H) {
+    var A = 17 * 2, FH = H + 4 * A, o = document.createElement('canvas'); o.width = W; o.height = FH;
+    var g = o.getContext('2d'), sc = W / 90;
+    g.fillStyle = '#E30A17'; g.fillRect(0, 0, W, FH);
+    g.setTransform(sc, 0, 0, sc, 0, FH / 2);
+    g.fillStyle = '#fff'; g.beginPath(); g.arc(30, 0, 15, 0, 6.2832); g.fill();
+    g.fillStyle = '#E30A17'; g.beginPath(); g.arc(33.75, 0, 12, 0, 6.2832); g.fill();
+    g.fillStyle = '#fff'; g.fill(new Path2D('M41.75 0l13.568-4.408-8.386 11.541V-7.133l8.386 11.541z'));
+    BY.off = o; BY.W = W; BY.H = H; BY.A = A; BY.FH = FH;
+  }
+  function bayrakCiz(cv, t) {
+    var dpr = Math.min(2, window.devicePixelRatio || 1), W = Math.round(cv.clientWidth * dpr), H = Math.round(cv.clientHeight * dpr);
+    if (W < 20 || H < 20) return;
+    if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
+    if (!BY.off || BY.W !== W || BY.H !== H) bayrakOff(W, H);
+    var c = cv.getContext('2d'), A = BY.A * dpr / 2, FH = BY.FH, FW = W, SW = 2, x, u, ph, amp, dy, sl, dh;
+    c.clearRect(0, 0, W, H);
+    for (x = 0; x < FW; x += SW) {
+      u = (x + SW / 2) / FW; ph = u * 7 - t * 3.1; amp = A * (0.25 + 0.9 * u);
+      dy = Math.sin(ph) * amp + Math.sin(ph * 1.9 + 1.3) * amp * 0.18;
+      sl = Math.cos(ph) * (0.25 + 0.9 * u); dh = FH * (1 + 0.06 * sl);
+      c.drawImage(BY.off, x, 0, SW, FH, x, (H - dh) / 2 + dy, SW, dh);
+      c.fillStyle = sl > 0 ? 'rgba(0,0,0,' + (sl * 0.34).toFixed(3) + ')' : 'rgba(255,255,255,' + (-sl * 0.2).toFixed(3) + ')';
+      c.fillRect(x, 0, SW, H);
     }
-    return '<div class="bay" role="img" aria-label="Dalgalanan Türk bayrağı. ' + esc(b.t) + '">' + s + '</svg><div class="bsc"></div><div class="btx"><small>' + esc(b.ad) + '</small><b>' + esc(b.t) + '</b></div></div>';
+  }
+  function bayrakDongu(ts) {
+    var cv = document.querySelector('.hcar > .sl:not(.out) canvas.bcv');
+    if (!cv || document.hidden) { BY.on = false; if (cv || BY.bekle) { BY.bekle = true; setTimeout(function () { BY.bekle = false; bayrakBasla(); }, 500); } return; }
+    var r = cv.getBoundingClientRect();
+    if (r.bottom > 0 && r.top < (window.innerHeight || 800) && (ts - BY.son >= 33 || BY_AZ)) {
+      BY.son = ts;
+      try { bayrakCiz(cv, BY_AZ ? 0.6 : (ts - BY.t0) / 1000); } catch (e) {}
+    }
+    if (BY_AZ && cv.getAttribute('data-ok')) { BY.on = false; BY.bekle = true; setTimeout(function () { BY.bekle = false; bayrakBasla(); }, 700); return; }
+    if (BY_AZ) cv.setAttribute('data-ok', '1');
+    requestAnimationFrame(bayrakDongu);
+  }
+  function bayrakBasla() {
+    if (BY.on) return; BY.on = true; if (!BY.t0) BY.t0 = performance.now();
+    requestAnimationFrame(bayrakDongu);
+  }
+  function bayrakHTML(b) {
+    setTimeout(bayrakBasla, 0);
+    return '<div class="bay" role="img" aria-label="Dalgalanan Türk bayrağı. ' + esc(b.t) + '"><canvas class="bcv" aria-hidden="true"></canvas><div class="bsc"></div><div class="btx"><small>' + esc(b.ad) + '</small><b>' + esc(b.t) + '</b></div></div>';
   }
   function heroSlaytlar(C) {
     var y = C.y, s = [], akt = dersAnimi(C), bay = bayramBugun(C.d);
@@ -549,6 +589,7 @@
   function slaytKopya() {
     var sl = document.querySelector('#top .hcar > .sl'); if (!sl) return null;
     var k = sl.cloneNode(true), q = [k].concat([].slice.call(k.querySelectorAll('*')));
+    [].forEach.call(sl.querySelectorAll('canvas.bcv'), function (c0, i) { var c1 = k.querySelectorAll('canvas.bcv')[i]; if (c1 && c0.width) { c1.width = c0.width; c1.height = c0.height; try { c1.getContext('2d').drawImage(c0, 0, 0); } catch (e) {} } });
     q.forEach(function (e) { ['id', 'data-hc', 'data-dt', 'data-lv', 'data-i', 'data-sk'].forEach(function (a) { e.removeAttribute(a); }); });
     k.classList.remove('fx', 'fxs', 'fxr', 'one'); k.setAttribute('aria-hidden', 'true'); k.setAttribute('inert', '');
     return k;
