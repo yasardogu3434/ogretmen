@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.16.4'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.16.5'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu', kd: 'ogr_kd' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -354,6 +354,9 @@
   function dersAnimi(C) { return C.gb.tip === 'ders' && !!guncel(C)[0]; }
   function heroKip(C, mine) {
     if (mine) return 'sayac';
+    var tu = torenUyari(C);
+    if (tu) { if (HUK !== tu.k) { HUK = tu.k; HO = true; HI = 0; HSON = Date.now(); HLAST = HSON; } return HO === false ? 'sayac' : 'slayt'; }
+    if (HUK) { HUK = ''; HO = null; }
     if (!dersAnimi(C)) { HO = null; return 'slayt'; }
     if (HO === true && Date.now() - HSON > GERI_MS) HO = null;
     return HO === true ? 'slayt' : 'sayac';
@@ -490,17 +493,32 @@
     return out;
   }
   // ---- 0.15.0: milli bayram günlerinde ilk slayt dalgalanan Türk bayrağı (hareketi azalt açıksa durağan kalır)
-  var BAYRAM = { '10-29': ['Cumhuriyet Bayramı', 'Cumhuriyetimizin {y}. yılı kutlu olsun', 1923], '04-23': ['Ulusal Egemenlik ve Çocuk Bayramı', '23 Nisan kutlu olsun'], '05-19': ['Atatürk’ü Anma, Gençlik ve Spor Bayramı', '19 Mayıs kutlu olsun'], '08-30': ['Zafer Bayramı', 'Zafer Bayramımız kutlu olsun'], '07-15': ['Demokrasi ve Milli Birlik Günü', 'Şehitlerimizi saygıyla anıyoruz'], '05-01': ['Emek ve Dayanışma Günü', '1 Mayıs kutlu olsun'] };
+  var BAYRAM = { '10-29': ['Cumhuriyet Bayramı', 'Cumhuriyetimizin {y}. yılı kutlu olsun', 1923], '04-23': ['Ulusal Egemenlik ve Çocuk Bayramı', 'Ulusal Egemenlik ve Çocuk Bayramı’mızın {y}. yılı kutlu olsun', 1920], '05-19': ['Atatürk’ü Anma, Gençlik ve Spor Bayramı', 'Samsun’a çıkışımızın {y}. yılı kutlu olsun', 1919], '08-30': ['Zafer Bayramı', 'Büyük Zaferimizin {y}. yılı kutlu olsun', 1922], '07-15': ['Demokrasi ve Milli Birlik Günü', 'Şehitlerimizi {y}. yılında saygıyla anıyoruz', 2016], '05-01': ['Emek ve Dayanışma Günü', '1 Mayıs kutlu olsun'], '11-10': ['Atatürk’ü Anma Günü', 'Ölümünün {y}. yılında saygıyla anıyoruz', 1938, 'a'], '03-12': ['İstiklal Marşı’nın Kabulü', 'İstiklal Marşı’mızın kabulünün {y}. yılı kutlu olsun', 1921], '03-18': ['Çanakkale Zaferi', 'Çanakkale Zaferi’nin {y}. yılında şehitlerimizi saygıyla anıyoruz', 1915], '11-24': ['Öğretmenler Günü', 'Öğretmenler Günümüz kutlu olsun'] };
+  // ---- 0.16.5: ders sürerken de görünen anma/tören hatırlatmaları (yalnız ders olan günlerde)
+  var HUK = '';
+  function f2s(n) { return (n < 10 ? '0' : '') + n; }
+  function torenUyari(C) {
+    var gb = C.gb, T = C.T; if (!gb || gb.tip !== 'ders' || !gb.ders || !gb.ders.length) return null;
+    var md = f2(C.d.getMonth() + 1) + '-' + f2(C.d.getDate());
+    if (md === '11-10') { var a = 9 * 3600 + 5 * 60; if (T >= a - 300 && T < a) return { k: 'on', m: 'a', kalan: a - T }; if (T >= a && T < a + 120) return { k: 'dur', m: 'a' }; }
+    if (!GIZLE.tor && gb.wd === 5) { var Z = mdk(gb.ders[gb.ders.length - 1][2]) * 60; if (T >= Z - 600 && T < Z) return { k: 'tor', m: '' }; }
+    return null;
+  }
+  function torenSlayt(u, C) {
+    if (u.k === 'on') return { id: 'tor', h: bayrakHTML({ ad: '10 Kasım · Saygı duruşu', h: 'Saat 09.05’e <span data-lv="tk">' + f2s(Math.floor(u.kalan / 60)) + ':' + f2s(u.kalan % 60) + '</span> kaldı', a: 'Saat 09.05’te saygı duruşu', m: 'a' }) };
+    if (u.k === 'dur') return { id: 'tor', h: bayrakHTML({ ad: '10 Kasım · 09.05', t: 'Saygı duruşu ve İstiklal Marşı', m: 'a' }) };
+    return { id: 'tor', h: bayrakHTML({ ad: 'Cuma töreni · Son 10 dakika', t: 'İstiklal Marşı okuma töreni', m: '' }) };
+  }
   function bayramBugun(d) {
     var k = f2(d.getMonth() + 1) + '-' + f2(d.getDate()), b = BAYRAM[k];
-    if (b) return { ad: b[0], t: b[1].replace('{y}', b[2] ? (d.getFullYear() - b[2]) : '') };
+    if (b) return { ad: b[0], t: b[1].replace('{y}', b[2] ? (d.getFullYear() - b[2]) : ''), m: b[3] || '' };
     if (k === '10-28' && d.getHours() >= 13) return { ad: 'Cumhuriyet Bayramı arifesi', t: 'Yarın Cumhuriyet Bayramı' };
     return null;
   }
   // ---- 0.16.4: dalgalanan bayrak canvas ile çizilir (2 piksellik ince dilimler; basamak/kesik görünmez). Yalnız bayrak görünürken çalışır.
   var BY = { on: false, son: 0, t0: 0, W: 0, H: 0, off: null, A: 0 };
   var BY_AZ = !!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches);
-  function bayrakOff(W, H) {
+  function bayrakOff(W, H, m) {
     var A = 17 * 2, FH = H + 4 * A, o = document.createElement('canvas'); o.width = W; o.height = FH;
     var g = o.getContext('2d'), sc = W / 90;
     g.fillStyle = '#E30A17'; g.fillRect(0, 0, W, FH);
@@ -508,23 +526,37 @@
     g.fillStyle = '#fff'; g.beginPath(); g.arc(30, 0, 15, 0, 6.2832); g.fill();
     g.fillStyle = '#E30A17'; g.beginPath(); g.arc(33.75, 0, 12, 0, 6.2832); g.fill();
     g.fillStyle = '#fff'; g.fill(new Path2D('M41.75 0l13.568-4.408-8.386 11.541V-7.133l8.386 11.541z'));
-    BY.off = o; BY.W = W; BY.H = H; BY.A = A; BY.FH = FH;
+    BY.off = o; BY.W = W; BY.H = H; BY.A = A; BY.FH = FH; BY.m = m;
+  }
+  function bayrakKurdele(c, W) {
+    var ks = W / 350;
+    c.save(); c.setTransform(ks, 0, 0, ks, W - 54 * ks, 14 * ks);
+    c.fillStyle = '#08080A'; c.strokeStyle = 'rgba(255,255,255,0.3)'; c.lineWidth = 1;
+    c.beginPath();
+    c.moveTo(20, 32); c.bezierCurveTo(4, 22, 2, 6, 14, 2); c.bezierCurveTo(20, 0, 22, 0, 26, 2); c.bezierCurveTo(38, 6, 36, 22, 20, 32); c.closePath();
+    c.moveTo(20, 25); c.bezierCurveTo(13, 19, 11, 11, 16, 8); c.bezierCurveTo(19, 7, 21, 7, 24, 8); c.bezierCurveTo(29, 11, 27, 19, 20, 25); c.closePath();
+    c.fill('evenodd'); c.stroke();
+    c.beginPath(); c.moveTo(14, 28); c.lineTo(23, 32); c.lineTo(12, 57); c.lineTo(2, 52); c.closePath(); c.fill(); c.stroke();
+    c.beginPath(); c.moveTo(26, 28); c.lineTo(17, 32); c.lineTo(28, 57); c.lineTo(38, 52); c.closePath(); c.fill(); c.stroke();
+    c.restore();
   }
   function bayrakCiz(cv, t) {
     var dpr = Math.min(2, window.devicePixelRatio || 1), W = Math.round(cv.clientWidth * dpr), H = Math.round(cv.clientHeight * dpr);
     if (W < 20 || H < 20) return;
     if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
-    if (!BY.off || BY.W !== W || BY.H !== H) bayrakOff(W, H);
-    var c = cv.getContext('2d'), A = BY.A * dpr / 2, FH = BY.FH, FW = W, SW = 2, x, u, ph, amp, dy, sl, dh;
+    var m = cv.getAttribute('data-m') || '';
+    if (!BY.off || BY.W !== W || BY.H !== H || BY.m !== m) bayrakOff(W, H, m);
+    var c = cv.getContext('2d'), kz = m === 'a' ? 0.5 : 1, A = BY.A * dpr / 2 * kz, FH = BY.FH, FW = W, SW = 2, x, u, ph, amp, dy, sl, dh;
     c.clearRect(0, 0, W, H);
     for (x = 0; x < FW; x += SW) {
-      u = (x + SW / 2) / FW; ph = u * 7 - t * 3.1; amp = A * (0.25 + 0.9 * u);
+      u = (x + SW / 2) / FW; ph = u * 7 - t * 3.1 * (m === 'a' ? 0.6 : 1); amp = A * (0.25 + 0.9 * u);
       dy = Math.sin(ph) * amp + Math.sin(ph * 1.9 + 1.3) * amp * 0.18;
       sl = Math.cos(ph) * (0.25 + 0.9 * u); dh = FH * (1 + 0.06 * sl);
       c.drawImage(BY.off, x, 0, SW, FH, x, (H - dh) / 2 + dy, SW, dh);
       c.fillStyle = sl > 0 ? 'rgba(0,0,0,' + (sl * 0.34).toFixed(3) + ')' : 'rgba(255,255,255,' + (-sl * 0.2).toFixed(3) + ')';
       c.fillRect(x, 0, SW, H);
     }
+    if (m === 'a') { c.fillStyle = 'rgba(8,10,24,0.3)'; c.fillRect(0, 0, W, H); bayrakKurdele(c, W); }
   }
   function bayrakDongu(ts) {
     var cv = document.querySelector('.hcar > .sl:not(.out) canvas.bcv');
@@ -544,10 +576,11 @@
   }
   function bayrakHTML(b) {
     setTimeout(bayrakBasla, 0);
-    return '<div class="bay" role="img" aria-label="Dalgalanan Türk bayrağı. ' + esc(b.t) + '"><canvas class="bcv" aria-hidden="true"></canvas><div class="bsc"></div><div class="btx"><small>' + esc(b.ad) + '</small><b>' + esc(b.t) + '</b></div></div>';
+    return '<div class="bay" role="img" aria-label="Dalgalanan Türk bayrağı. ' + esc(b.a || b.t) + '"><canvas class="bcv" aria-hidden="true"' + (b.m ? ' data-m="' + b.m + '"' : '') + '></canvas><div class="bsc"></div><div class="btx"><small>' + esc(b.ad) + '</small><b>' + (b.h != null ? b.h : esc(b.t)) + '</b></div></div>';
   }
   function heroSlaytlar(C) {
     var y = C.y, s = [], akt = dersAnimi(C), bay = bayramBugun(C.d);
+    var tu = torenUyari(C); if (tu) s.push(torenSlayt(tu, C));
     if (bay) s.push({ id: 'bayrak', h: bayrakHTML(bay) });
     if (yayinlandi(y, 'gokyuzu')) s.push({ id: 'gokyuzu' });
     if (!akt) s.push({ id: 'durum', h: durumKarti(C, 0) });
@@ -2926,7 +2959,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
   })();
 
   // ================= AYARLAR =================
-  var TOG = [['pano', 'Slaytta yarın ve belirli günler'], ['notes', 'Okulda neler var'], ['yk', 'Yaklaşanlar'], ['board', 'Panoda yeni'], ['nobet', 'Nöbetçiler'], ['dolt', 'Bugün ders doldurma listesi'], ['akis', 'Günüm']];
+  var TOG = [['tor', 'Cuma İstiklal Marşı töreni hatırlatması'], ['pano', 'Slaytta yarın ve belirli günler'], ['notes', 'Okulda neler var'], ['yk', 'Yaklaşanlar'], ['board', 'Panoda yeni'], ['nobet', 'Nöbetçiler'], ['dolt', 'Bugün ders doldurma listesi'], ['akis', 'Günüm']];
   function secenek(id, deger, liste) { return '<div class="opts" id="' + id + '">' + liste.map(function (x) { return '<button type="button" data-v="' + esc(x[0]) + '"' + (deger === x[0] ? ' class="on"' : '') + '>' + esc(x[1]) + '</button>'; }).join('') + '</div>'; }
 
   var GVO = [['a', 'Izgara', '<span class="th tha"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span>'], ['b', 'Liste', '<span class="th thb"><i></i><i></i><i class="on"></i><i></i><i></i></span>'], ['v', 'Akış', '<span class="th thv"><i></i><i></i><i class="on"></i><i></i></span>'], ['d', 'Kadran', '<span class="th thd"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" class="g0"/><path d="M20 6a14 14 0 0 1 12.1 7" class="g1"/><path d="M33 16a14 14 0 0 1 0 8" class="g1"/><path d="M31 27a14 14 0 0 1-9 7.5" class="g2"/><path d="M17 34.4a14 14 0 0 1-9-6" class="g1"/><path d="M6.7 23a14 14 0 0 1 0-6" class="g1"/></svg></span>'], ['e', 'Şerit', '<span class="th thn"><svg viewBox="0 0 62 50"><rect class="gq1" x="2" y="8" width="10" height="14" rx="3"/><rect class="gq1" x="14" y="8" width="10" height="14" rx="3"/><rect class="gq2" x="26" y="8" width="12" height="14" rx="3"/><rect class="gq0" x="40" y="8" width="9" height="14" rx="3"/><rect class="gq0" x="51" y="8" width="9" height="14" rx="3"/><rect class="gq0" x="2" y="28" width="58" height="18" rx="4"/></svg></span>'], ['f', 'Hat', '<span class="th thn"><svg viewBox="0 0 62 50"><path class="gl0" d="M6 25h50"/><circle class="gq1" cx="8" cy="25" r="5"/><circle class="gq1" cx="22" cy="25" r="5"/><circle class="gq2" cx="36" cy="25" r="7"/><circle class="gq0" cx="50" cy="25" r="5"/></svg></span>'], ['g', 'Gün takvimi', '<span class="th thn"><svg viewBox="0 0 62 50"><path class="gl0" d="M4 6h54M4 24h54M4 42h54"/><rect class="gq1" x="14" y="8" width="44" height="10" rx="3"/><rect class="gq2" x="14" y="21" width="44" height="12" rx="3"/><rect class="gq0" x="14" y="36" width="44" height="10" rx="3"/></svg></span>'], ['h', 'Odak', '<span class="th thn"><svg viewBox="0 0 62 50"><circle class="gl0" cx="31" cy="20" r="14"/><path class="gl2" d="M31 6a14 14 0 0 1 14 14"/><rect class="gq0" x="3" y="38" width="26" height="10" rx="3"/><rect class="gq0" x="33" y="38" width="26" height="10" rx="3"/></svg></span>']];
@@ -3242,7 +3275,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
   setInterval(function () {
     if (document.hidden || kilit || !HX || TAB !== 0 || !CTX || DT.acik) return;
     var n = Date.now(); if (n - HSON < SLAYT_MS || n - HLAST < SLAYT_MS) return;
-    if (heroKip(CTX, 0) !== 'slayt' || heroSlaytlar(CTX).length < 2) return;
+    if (heroKip(CTX, 0) !== 'slayt' || heroSlaytlar(CTX).length < 2 || torenUyari(CTX)) return;
     slaytGecis(function () { HLAST = n; HI++; HFX = true; HYON = 1; tick(true); HYON = 0; }, 1);
   }, 1000);
   setInterval(function () { if (!document.hidden && !kilit) tick(); }, 1000);
