@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.16.6'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.16.7'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu', kd: 'ogr_kd' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -2675,7 +2675,9 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
 
   // ================= KAZANIMLAR (MEB yıllık planı; uygulamayla birlikte gelen statik dosyalar, öğretmenin cihazında okunur) =================
   var KZ = { idx: null, dos: {}, cur: null, sel: -1, bekle: {} };
-  var KZ_ANAH = { mat: 'mat', matematik: 'mat', turkce: 'tur', fen: 'fen', fenbilimleri: 'fen', ing: 'ing', ingilizce: 'ing', sosyal: 'sos', sosyalbilgiler: 'sos', inklap: 'ita', inkilap: 'ita', ita: 'ita', dink: 'dkab', dkab: 'dkab', muzik: 'muz', bedegt: 'bes', bedenegitimi: 'bes', resim: 'gs', gorselsanatlar: 'gs', tektsr: 'tt', tektas: 'tt', teknolojitasarim: 'tt', blsm: 'bty', bilisim: 'bty', dinkulturu: 'dkab', dinkulturuveahlakbilgisi: 'dkab', teknolojivetasarim: 'tt', bilisimteknolojileri: 'bty', bilisimteknolojilerivezilim: 'bty', tcinkilaptarihi: 'ita', inkilaptarihi: 'ita', inkilaptarihivataturkculuk: 'ita', inkilaptarihiveataturkculuk: 'ita', gorselsanat: 'gs', afets: 'afet', afetbilinci: 'afet', ahlks: 'ahlk', ahlakvevatandaslik: 'ahlk', cevres: 'cevre', cevreegitimi: 'cevre' };
+  var KZ_ANAH = { mat: 'mat', matematik: 'mat', turkce: 'tur', fen: 'fen', fenbilimleri: 'fen', ing: 'ing', ingilizce: 'ing', sosyal: 'sos', sosyalbilgiler: 'sos', inklap: 'ita', inkilap: 'ita', ita: 'ita', dink: 'dkab', dkab: 'dkab', muzik: 'muz', bedegt: 'bes', bedenegitimi: 'bes', resim: 'gs', gorselsanatlar: 'gs', tektsr: 'tt', tektas: 'tt', teknolojitasarim: 'tt', blsm: 'bty', bilisim: 'bty', dinkulturu: 'dkab', dinkulturuveahlakbilgisi: 'dkab', teknolojivetasarim: 'tt', bilisimteknolojileri: 'bty', bilisimteknolojilerivezilim: 'bty', tcinkilaptarihi: 'ita', inkilaptarihi: 'ita', inkilaptarihivataturkculuk: 'ita', inkilaptarihiveataturkculuk: 'ita', gorselsanat: 'gs', afets: 'afet', afetbilinci: 'afet', ahlks: 'ahlk', ahlakvevatandaslik: 'ahlk', cevres: 'cevre', cevreegitimi: 'cevre',
+    gkn: 'gkn', gkns: 'gkn', gorgukurallarivenezaket: 'gkn', kultmed: 'kultmed', kultmeds: 'kultmed', kulturmed: 'kultmed', kulturmeds: 'kultmed', kulturvemedeniyetimizeyonverenler: 'kultmed',
+    spor: 'spor', spors: 'spor', sporvefizikietkinlikler: 'spor', yabdil: 'yabdil', yabdils: 'yabdil', yabancidil: 'yabdil', yabancidils: 'yabdil' };
   // Ders kısaltması esnek eşlenir: tam ad ya da en az 3 harflik ön ek ("Müz.", "BedEğ", "Blşm."); birden çok farklı derse uyuyorsa eşleşmez.
   function kzA(d) {
     var x = kzAd(d); if (!x) return null; if (KZ_ANAH[x]) return KZ_ANAH[x];
@@ -2686,6 +2688,19 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
   }
   // Kazanımı bilerek olmayan dersler (seçmeli, rehberlik); bunlarda sessiz kalınır, başka her eşleşmeme görünür bir not alır.
   var KZ_DOSYA = { afet: 'afet1.json', ahlk: 'ahlk1.json', cevre: 'cevre8.json' };
+  // index.json'da kaydı olmayan yeni seçmeli planlar (index'teki kayıt her zaman önceliklidir)
+  var KZ_EK = [
+    { a: 'gkn', ad: 'Görgü Kuralları ve Nezaket', s: 5, f: 'gkn1.json', h: 34 },
+    { a: 'gkn', ad: 'Görgü Kuralları ve Nezaket', s: 6, f: 'gkn2.json', h: 34 },
+    { a: 'gkn', ad: 'Görgü Kuralları ve Nezaket', s: 8, f: 'gkn1.json', h: 34 },
+    { a: 'kultmed', ad: 'Kültür ve Medeniyetimize Yön Verenler', s: 8, f: 'kmyv1.json', h: 34 },
+    { a: 'spor', ad: 'Spor ve Fiziki Etkinlikler', s: 7, f: 'spor1.json', h: 34 },
+    { a: 'yabdil', ad: 'Yabancı Dil (Seçmeli İngilizce)', s: 5, f: 'yabdil5.json', h: 31 },
+    { a: 'yabdil', ad: 'Yabancı Dil (Seçmeli İngilizce)', s: 6, f: 'yabdil6.json', h: 31 },
+    { a: 'yabdil', ad: 'Yabancı Dil (Seçmeli İngilizce)', s: 7, f: 'yabdil7.json', h: 36 },
+    { a: 'yabdil', ad: 'Yabancı Dil (Seçmeli İngilizce)', s: 8, f: 'yabdil8.json', h: 36 }
+  ];
+  function kzEk(a, g) { for (var i = 0; i < KZ_EK.length; i++) if (KZ_EK[i].a === a && KZ_EK[i].s === g) return KZ_EK[i]; return null; }
   var KZ_YOK = /^(reh|spor|yabdil|yabancidil|gkn|kultmed|kulturmed|dersdoldurma|doldurma)/;
   var KZ_TANI = { son: '', idx: '', dosya: '' };
   // Hücredeki ders adından eşle; ders adı yoksa ya da tanınmıyorsa öğretmenin kayıtlı branşından yedek eşleme (açıkça kazanımsız dersler hariç).
@@ -2709,7 +2724,8 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
   function kzPlan(my, a) {
     if (!my || !a) return null;
     var g = parseInt(my.sinif, 10); if (!(g >= 5 && g <= 8)) return null;
-    if (KZ.idx) { for (var i = 0; i < KZ.idx.plan.length; i++) if (KZ.idx.plan[i].a === a && KZ.idx.plan[i].s === g) return KZ.idx.plan[i]; return null; }
+    if (KZ.idx) { for (var i = 0; i < KZ.idx.plan.length; i++) if (KZ.idx.plan[i].a === a && KZ.idx.plan[i].s === g) return KZ.idx.plan[i]; return kzEk(a, g); }
+    var ek = kzEk(a, g); if (ek) return ek;
     // Liste dosyası yüklenemediyse dosya adı doğrudan türetilir (liste olmadan da çalışsın)
     return { a: a, s: g, f: (g === 6 && (a === 'ahlk' || a === 'afet')) ? a + '2.json' : (KZ_DOSYA[a] || (a + g + '.json')), yedekAd: true };
   }

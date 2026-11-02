@@ -1,0 +1,1472 @@
+{
+ "ders": "Yabancı Dil (Seçmeli İngilizce)",
+ "anahtar": "yabdil",
+ "sinif": 5,
+ "kaynak": "5. sınıf Seçmeli İngilizce 2026-2027 yıllık planı (ingilizceciyiz.com); TYMM kazanım kodları. Metinlerde dil bilgisi, yazım ve ifade düzeltmeleri yapılmıştır (İngiliz yazımı esas alındı); kazanım kodları ve kapsam kaynak plana uygundur.",
+ "haftalar": [
+  {
+   "n": 1,
+   "s": 2,
+   "u": "Orientation",
+   "m": [],
+   "bas": "2026-09-14",
+   "bit": "2026-09-18",
+   "nt": "Oryantasyon haftası"
+  },
+  {
+   "n": 2,
+   "s": 2,
+   "u": "Revision",
+   "m": [],
+   "bas": "2026-09-21",
+   "bit": "2026-09-25",
+   "nt": "Tekrar haftası"
+  },
+  {
+   "n": 3,
+   "s": 2,
+   "u": "Revision",
+   "m": [],
+   "bas": "2026-09-28",
+   "bit": "2026-10-02",
+   "nt": "Tekrar haftası"
+  },
+  {
+   "n": 4,
+   "s": 2,
+   "u": "School Life",
+   "m": [
+    {
+     "k": "ENG.5.1.L1",
+     "b": "Listening",
+     "t": "Students can prepare carefully for the listening/watching-comprehension process related to the current content on school life with people, places, and rules at school; school clubs; countries; national days and celebrations.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.1.R1",
+     "b": "Reading",
+     "t": "Students can prepare for the reading-comprehension process related to the current content on school life with people, places, and rules at school; school clubs; countries; national days and celebrations.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.1.W1",
+     "b": "Writing",
+     "t": "Students can prepare for the writing-expression process related to the current content on school life with people, places, and rules at school; school clubs; countries; national days and celebrations.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.1.S1",
+     "b": "Speaking",
+     "t": "Students can prepare for the speaking-expression process related to the current content on school life with people, places, and rules at school; school clubs; countries; national days and celebrations.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.1.V1",
+     "b": "Vocabulary",
+     "t": "Students can select the target vocabulary of the current content on school life with people, places, and rules at school; school clubs; countries; national days and celebrations, and use it accurately, authentically, spontaneously, naturally, appropriately, and effectively when communicating with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.1.G1",
+     "b": "Grammar",
+     "t": "Students can select the target grammatical elements of the current content on school life with people, places, and rules at school; school clubs; countries; national days and celebrations, and use them accurately, authentically, spontaneously, naturally, appropriately, and effectively when communicating with others.",
+     "d": []
+    }
+   ],
+   "bas": "2026-10-05",
+   "bit": "2026-10-09",
+   "kn": "Sub-themes: People, places, and rules at school; school clubs; countries; national days and celebrations",
+   "o": "PERFORMANCE ASSIGNMENT: Students will create a colourful poster about a fictional international school, including people, places, rules, school clubs, and countries. They will describe important school staff such as the headmaster/headmistress or teachers, highlight places such as the library or sports field, and list three key rules such as “Be on time” or “No running in the corridor”. The poster will also include information about two school clubs with simple descriptions of their activities. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 5,
+   "s": 2,
+   "u": "School Life",
+   "m": [
+    {
+     "k": "ENG.5.1.L2",
+     "b": "Listening",
+     "t": "Students can bring together information about the current content on school life with people, places, and rules at school; school clubs; countries; national days and celebrations through significant details and main ideas while listening/watching.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.1.R2",
+     "b": "Reading",
+     "t": "Students can bring together information about the current content on school life with people, places, and rules at school; school clubs; countries; national days and celebrations by skimming (looking quickly at the audio-visual elements) and reading the content very quickly.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.1.W2",
+     "b": "Writing",
+     "t": "Students can understand the model/example for the writing task related to the current content on school life with people, places, and rules at school; school clubs; countries; national days and celebrations.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.1.S2",
+     "b": "Speaking",
+     "t": "Students can use the model/example to produce verbal content related to the current content on school life with people, places, and rules at school; school clubs; countries; national days and celebrations.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.1.P1",
+     "b": "Phonology",
+     "t": "Students can select the target phonological elements of the current content on school life with people, places, and rules at school; school clubs; countries; national days and celebrations, and use them accurately, authentically, and naturally through spontaneous decision-making processes, appropriately and effectively, when communicating with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.1.L3",
+     "b": "Listening",
+     "t": "Students can make sense of and derive meaning from the current content on school life with people, places, and rules at school; school clubs; countries; national days and celebrations through significant details by listening/watching carefully.",
+     "d": []
+    }
+   ],
+   "bas": "2026-10-12",
+   "bit": "2026-10-16",
+   "o": "PERFORMANCE ASSIGNMENT: Students will create a colourful poster about a fictional international school, including people, places, rules, school clubs, and countries. They will describe important school staff such as the headmaster/headmistress or teachers, highlight places such as the library or sports field, and list three key rules such as “Be on time” or “No running in the corridor”. The poster will also include information about two school clubs with simple descriptions of their activities. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 6,
+   "s": 2,
+   "u": "School Life",
+   "m": [
+    {
+     "k": "ENG.5.1.L4",
+     "b": "Listening",
+     "t": "Students can convey their carefully examined knowledge, experiences, thoughts, and feelings about the whole listening/watching-comprehension process in relation to the current content on school life with people, places, and rules at school; school clubs; countries; national days and celebrations.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.1.R3",
+     "b": "Reading",
+     "t": "Students can make sense of and derive meaning from the current content on school life with people, places, and rules at school; school clubs; countries; national days and celebrations by reading it carefully.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.1.W3",
+     "b": "Writing",
+     "t": "Students can organise content for the assigned writing task related to the current content on school life with people, places, and rules at school; school clubs; countries; national days and celebrations, based on the model/example provided.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.1.S3",
+     "b": "Speaking",
+     "t": "Students can organise new verbal content on school life with people, places, and rules at school; school clubs; countries; national days and celebrations by speaking accurately, efficiently, and authentically.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.1.R4",
+     "b": "Reading",
+     "t": "Students can convey their knowledge, experiences, thoughts, and feelings related to the reading-comprehension process about the current content on school life with people, places, and rules at school; school clubs; countries; national days and celebrations, in relation to themselves or others, both individually and/or with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.1.W4",
+     "b": "Writing",
+     "t": "Students can individually construct/form content for the assigned writing task related to the current content on school life with people, places, and rules at school; school clubs; countries; national days and celebrations.",
+     "d": []
+    }
+   ],
+   "bas": "2026-10-19",
+   "bit": "2026-10-23",
+   "o": "PERFORMANCE ASSIGNMENT: Students will create a colourful poster about a fictional international school, including people, places, rules, school clubs, and countries. They will describe important school staff such as the headmaster/headmistress or teachers, highlight places such as the library or sports field, and list three key rules such as “Be on time” or “No running in the corridor”. The poster will also include information about two school clubs with simple descriptions of their activities. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 7,
+   "s": 2,
+   "u": "School Life",
+   "m": [
+    {
+     "k": "ENG.5.1.W5",
+     "b": "Writing",
+     "t": "Students can reorganise (reconstruct) and use information about school life with people, places, and rules at school; school clubs; countries; national days and celebrations in new written tasks to communicate with other people.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.1.S4",
+     "b": "Speaking",
+     "t": "Students can construct new verbal content on school life with people, places, and rules at school; school clubs; countries; national days and celebrations by speaking accurately, efficiently, and authentically.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.1.W6",
+     "b": "Writing",
+     "t": "Students can reflect on their knowledge, experiences, thoughts, and feelings related to the writing-expression process about the current content on school life with people, places, and rules at school; school clubs; countries; national days and celebrations, in relation to themselves or others, both individually and/or with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.1.S5",
+     "b": "Speaking",
+     "t": "Students can reorganise (reconstruct) and use information about school life with people, places, and rules at school; school clubs; countries; national days and celebrations to communicate with other people.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.1.S6",
+     "b": "Speaking",
+     "t": "Students can convey their knowledge, experiences, thoughts, and feelings related to the speaking-expression process about the current content on school life with people, places, and rules at school; school clubs; countries; national days and celebrations to communicate with other people, in relation to themselves or others, both individually and/or with others.",
+     "d": []
+    }
+   ],
+   "bas": "2026-10-26",
+   "bit": "2026-10-30",
+   "o": "PERFORMANCE ASSIGNMENT: Students will create a colourful poster about a fictional international school, including people, places, rules, school clubs, and countries. They will describe important school staff such as the headmaster/headmistress or teachers, highlight places such as the library or sports field, and list three key rules such as “Be on time” or “No running in the corridor”. The poster will also include information about two school clubs with simple descriptions of their activities. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 8,
+   "s": 2,
+   "u": "Classroom Life",
+   "m": [
+    {
+     "k": "ENG.5.2.L1",
+     "b": "Listening",
+     "t": "Students can prepare carefully for the listening/watching-comprehension process related to the current content on classroom life with classroom rules and classroom language; school subjects; timetables; classroom objects; days of the week; time.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.2.R1",
+     "b": "Reading",
+     "t": "Students can prepare for the reading-comprehension process related to the current content on classroom life with classroom rules and classroom language; school subjects; timetables; classroom objects; days of the week; time.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.2.W1",
+     "b": "Writing",
+     "t": "Students can prepare for the writing-expression process related to the current content on classroom life with classroom rules and classroom language; school subjects; timetables; classroom objects; days of the week; time.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.2.S1",
+     "b": "Speaking",
+     "t": "Students can prepare for the speaking-expression process related to the current content on classroom life with classroom rules and classroom language; school subjects; timetables; classroom objects; days of the week; time.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.2.V1",
+     "b": "Vocabulary",
+     "t": "Students can select the target vocabulary of the current content on classroom life with classroom rules and classroom language; school subjects; timetables; classroom objects; days of the week; time, and use it accurately, authentically, spontaneously, naturally, appropriately, and effectively when communicating with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.2.G1",
+     "b": "Grammar",
+     "t": "Students can select the target grammatical elements of the current content on classroom life with classroom rules and classroom language; school subjects; timetables; classroom objects; days of the week; time, and use them accurately, authentically, spontaneously, naturally, appropriately, and effectively when communicating with others.",
+     "d": []
+    }
+   ],
+   "bas": "2026-11-02",
+   "bit": "2026-11-06",
+   "kn": "Sub-themes: Classroom rules and classroom language; school subjects; timetables; classroom objects; days of the week; time",
+   "o": "PERFORMANCE ASSIGNMENT: Students will write a digital diary/journal describing their “daily routines, activities, and their timing in their personal lives” during a school term. They will present it with digital resources and/or realia (real objects) by acting out the routines recorded in it. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 9,
+   "s": 2,
+   "u": "School-Based Planning",
+   "m": [],
+   "bas": "2026-11-09",
+   "bit": "2026-11-13",
+   "nt": "Okul temelli planlama haftası"
+  },
+  {
+   "n": 10,
+   "s": 2,
+   "u": "Classroom Life",
+   "m": [
+    {
+     "k": "ENG.5.2.L2",
+     "b": "Listening",
+     "t": "Students can bring together information about the current content on classroom life with classroom rules and classroom language; school subjects; timetables; classroom objects; days of the week; time through significant details and main ideas while listening/watching.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.2.R2",
+     "b": "Reading",
+     "t": "Students can bring together information about the current content on classroom life with classroom rules and classroom language; school subjects; timetables; classroom objects; days of the week; time by skimming (looking quickly at the audio-visual elements) and reading the content very quickly.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.2.W2",
+     "b": "Writing",
+     "t": "Students can understand the model/example for the writing task related to the current content on classroom life with classroom rules and classroom language; school subjects; timetables; classroom objects; days of the week; time.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.2.S2",
+     "b": "Speaking",
+     "t": "Students can use the model/example to produce verbal content related to the current content on classroom life with classroom rules and classroom language; school subjects; timetables; classroom objects; days of the week; time.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.2.P1",
+     "b": "Phonology",
+     "t": "Students can select the target phonological elements of the current content on classroom life with classroom rules and classroom language; school subjects; timetables; classroom objects; days of the week; time, and use them accurately, authentically, and naturally through spontaneous decision-making processes, appropriately and effectively, when communicating with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.2.L3",
+     "b": "Listening",
+     "t": "Students can make sense of and derive meaning from the current content on classroom life with classroom rules and classroom language; school subjects; timetables; classroom objects; days of the week; time through significant details by listening/watching carefully.",
+     "d": []
+    }
+   ],
+   "bas": "2026-11-23",
+   "bit": "2026-11-27",
+   "o": "PERFORMANCE ASSIGNMENT: Students will write a digital diary/journal describing their “daily routines, activities, and their timing in their personal lives” during a school term. They will present it with digital resources and/or realia (real objects) by acting out the routines recorded in it. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 11,
+   "s": 2,
+   "u": "Classroom Life",
+   "m": [
+    {
+     "k": "ENG.5.2.L4",
+     "b": "Listening",
+     "t": "Students can convey their carefully examined knowledge, experiences, thoughts, and feelings about the whole listening/watching-comprehension process in relation to the current content on classroom life with classroom rules and classroom language; school subjects; timetables; classroom objects; days of the week; time.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.2.R3",
+     "b": "Reading",
+     "t": "Students can make sense of and derive meaning from the current content on classroom life with classroom rules and classroom language; school subjects; timetables; classroom objects; days of the week; time by reading it carefully.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.2.W3",
+     "b": "Writing",
+     "t": "Students can organise content for the assigned writing task related to the current content on classroom life with classroom rules and classroom language; school subjects; timetables; classroom objects; days of the week; time, based on the model/example provided.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.2.S3",
+     "b": "Speaking",
+     "t": "Students can organise new verbal content on classroom life with classroom rules and classroom language; school subjects; timetables; classroom objects; days of the week; time by speaking accurately, efficiently, and authentically.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.2.R4",
+     "b": "Reading",
+     "t": "Students can convey their knowledge, experiences, thoughts, and feelings related to the reading-comprehension process about the current content on classroom life with classroom rules and classroom language; school subjects; timetables; classroom objects; days of the week; time, in relation to themselves or others, both individually and/or with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.2.W4",
+     "b": "Writing",
+     "t": "Students can individually construct/form content for the assigned writing task related to the current content on classroom life with classroom rules and classroom language; school subjects; timetables; classroom objects; days of the week; time.",
+     "d": []
+    }
+   ],
+   "bas": "2026-11-30",
+   "bit": "2026-12-04",
+   "o": "PERFORMANCE ASSIGNMENT: Students will write a digital diary/journal describing their “daily routines, activities, and their timing in their personal lives” during a school term. They will present it with digital resources and/or realia (real objects) by acting out the routines recorded in it. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 12,
+   "s": 2,
+   "u": "Classroom Life",
+   "m": [
+    {
+     "k": "ENG.5.2.W5",
+     "b": "Writing",
+     "t": "Students can reorganise (reconstruct) and use information about classroom life with classroom rules and classroom language; school subjects; timetables; classroom objects; days of the week; time in new written tasks to communicate with other people.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.2.S4",
+     "b": "Speaking",
+     "t": "Students can construct new verbal content on classroom life with classroom rules and classroom language; school subjects; timetables; classroom objects; days of the week; time by speaking accurately, efficiently, and authentically.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.2.W6",
+     "b": "Writing",
+     "t": "Students can reflect on their knowledge, experiences, thoughts, and feelings related to the writing-expression process about the current content on classroom life with classroom rules and classroom language; school subjects; timetables; classroom objects; days of the week; time, in relation to themselves or others, both individually and/or with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.2.S5",
+     "b": "Speaking",
+     "t": "Students can reorganise (reconstruct) and use information about classroom life with classroom rules and classroom language; school subjects; timetables; classroom objects; days of the week; time to communicate with other people.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.2.S6",
+     "b": "Speaking",
+     "t": "Students can convey their knowledge, experiences, thoughts, and feelings related to the speaking-expression process about the current content on classroom life with classroom rules and classroom language; school subjects; timetables; classroom objects; days of the week; time to communicate with other people, in relation to themselves or others, both individually and/or with others.",
+     "d": []
+    }
+   ],
+   "bas": "2026-12-07",
+   "bit": "2026-12-11",
+   "o": "PERFORMANCE ASSIGNMENT: Students will write a digital diary/journal describing their “daily routines, activities, and their timing in their personal lives” during a school term. They will present it with digital resources and/or realia (real objects) by acting out the routines recorded in it. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 13,
+   "s": 2,
+   "u": "Personal Life",
+   "m": [
+    {
+     "k": "ENG.5.3.L1",
+     "b": "Listening",
+     "t": "Students can prepare carefully for the listening/watching-comprehension process related to the current content on personal life with basic body parts and physical features; clothes; daily routines and activities.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.3.R1",
+     "b": "Reading",
+     "t": "Students can prepare for the reading-comprehension process related to the current content on personal life with basic body parts and physical features; clothes; daily routines and activities.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.3.W1",
+     "b": "Writing",
+     "t": "Students can prepare for the writing-expression process related to the current content on personal life with basic body parts and physical features; clothes; daily routines and activities.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.3.S1",
+     "b": "Speaking",
+     "t": "Students can prepare for the speaking-expression process related to the current content on personal life with basic body parts and physical features; clothes; daily routines and activities.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.3.V1",
+     "b": "Vocabulary",
+     "t": "Students can select the target vocabulary of the current content on personal life with basic body parts and physical features; clothes; daily routines and activities, and use it accurately, authentically, spontaneously, naturally, appropriately, and effectively when communicating with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.3.G1",
+     "b": "Grammar",
+     "t": "Students can select the target grammatical elements of the current content on personal life with basic body parts and physical features; clothes; daily routines and activities, and use them accurately, authentically, spontaneously, naturally, appropriately, and effectively when communicating with others.",
+     "d": []
+    }
+   ],
+   "bas": "2026-12-14",
+   "bit": "2026-12-18",
+   "kn": "Sub-themes: Basic body parts and physical features; clothes; daily routines and activities",
+   "o": "PERFORMANCE ASSIGNMENT: Students will write a digital diary/journal describing their “daily routines, activities, and their timing in their personal lives” during a school term. They will present it with digital resources and/or realia (real objects) by acting out the routines recorded in it. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 14,
+   "s": 2,
+   "u": "Personal Life",
+   "m": [
+    {
+     "k": "ENG.5.3.L2",
+     "b": "Listening",
+     "t": "Students can bring together information about the current content on personal life with basic body parts and physical features; clothes; daily routines and activities through significant details and main ideas while listening/watching.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.3.R2",
+     "b": "Reading",
+     "t": "Students can bring together information about the current content on personal life with basic body parts and physical features; clothes; daily routines and activities by skimming (looking quickly at the audio-visual elements) and reading the content very quickly.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.3.W2",
+     "b": "Writing",
+     "t": "Students can understand the model/example for the writing task related to the current content on personal life with basic body parts and physical features; clothes; daily routines and activities.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.3.S2",
+     "b": "Speaking",
+     "t": "Students can use the model/example to produce verbal content related to the current content on personal life with basic body parts and physical features; clothes; daily routines and activities.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.3.P1",
+     "b": "Phonology",
+     "t": "Students can select the target phonological elements of the current content on personal life with basic body parts and physical features; clothes; daily routines and activities, and use them accurately, authentically, and naturally through spontaneous decision-making processes, appropriately and effectively, when communicating with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.3.L3",
+     "b": "Listening",
+     "t": "Students can make sense of and derive meaning from the current content on personal life with basic body parts and physical features; clothes; daily routines and activities through significant details by listening/watching carefully.",
+     "d": []
+    }
+   ],
+   "bas": "2026-12-21",
+   "bit": "2026-12-25",
+   "o": "PERFORMANCE ASSIGNMENT: Students will write a digital diary/journal describing their “daily routines, activities, and their timing in their personal lives” during a school term. They will present it with digital resources and/or realia (real objects) by acting out the routines recorded in it. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 15,
+   "s": 2,
+   "u": "Personal Life",
+   "m": [
+    {
+     "k": "ENG.5.3.L4",
+     "b": "Listening",
+     "t": "Students can convey their carefully examined knowledge, experiences, thoughts, and feelings about the whole listening/watching-comprehension process in relation to the current content on personal life with basic body parts and physical features; clothes; daily routines and activities.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.3.R3",
+     "b": "Reading",
+     "t": "Students can make sense of and derive meaning from the current content on personal life with basic body parts and physical features; clothes; daily routines and activities by reading it carefully.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.3.W3",
+     "b": "Writing",
+     "t": "Students can organise content for the assigned writing task related to the current content on personal life with basic body parts and physical features; clothes; daily routines and activities, based on the model/example provided.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.3.S3",
+     "b": "Speaking",
+     "t": "Students can organise new verbal content on personal life with basic body parts and physical features; clothes; daily routines and activities by speaking accurately, efficiently, and authentically.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.3.R4",
+     "b": "Reading",
+     "t": "Students can convey their knowledge, experiences, thoughts, and feelings related to the reading-comprehension process about the current content on personal life with basic body parts and physical features; clothes; daily routines and activities, in relation to themselves or others, both individually and/or with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.3.W4",
+     "b": "Writing",
+     "t": "Students can individually construct/form content for the assigned writing task related to the current content on personal life with basic body parts and physical features; clothes; daily routines and activities.",
+     "d": []
+    }
+   ],
+   "bas": "2026-12-28",
+   "bit": "2026-12-31",
+   "o": "PERFORMANCE ASSIGNMENT: Students will write a digital diary/journal describing their “daily routines, activities, and their timing in their personal lives” during a school term. They will present it with digital resources and/or realia (real objects) by acting out the routines recorded in it. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 16,
+   "s": 2,
+   "u": "Personal Life",
+   "m": [
+    {
+     "k": "ENG.5.3.W5",
+     "b": "Writing",
+     "t": "Students can reorganise (reconstruct) and use information about personal life with basic body parts and physical features; clothes; daily routines and activities in new written tasks to communicate with other people.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.3.S4",
+     "b": "Speaking",
+     "t": "Students can construct new verbal content on personal life with basic body parts and physical features; clothes; daily routines and activities by speaking accurately, efficiently, and authentically.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.3.W6",
+     "b": "Writing",
+     "t": "Students can reflect on their knowledge, experiences, thoughts, and feelings related to the writing-expression process about the current content on personal life with basic body parts and physical features; clothes; daily routines and activities, in relation to themselves or others, both individually and/or with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.3.S5",
+     "b": "Speaking",
+     "t": "Students can reorganise (reconstruct) and use information about personal life with basic body parts and physical features; clothes; daily routines and activities to communicate with other people.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.3.S6",
+     "b": "Speaking",
+     "t": "Students can convey their knowledge, experiences, thoughts, and feelings related to the speaking-expression process about the current content on personal life with basic body parts and physical features; clothes; daily routines and activities to communicate with other people, in relation to themselves or others, both individually and/or with others.",
+     "d": []
+    }
+   ],
+   "bas": "2027-01-04",
+   "bit": "2027-01-08",
+   "o": "PERFORMANCE ASSIGNMENT: Students will write a digital diary/journal describing their “daily routines, activities, and their timing in their personal lives” during a school term. They will present it with digital resources and/or realia (real objects) by acting out the routines recorded in it. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 17,
+   "s": 2,
+   "u": "Family Life",
+   "m": [
+    {
+     "k": "ENG.5.4.L1",
+     "b": "Listening",
+     "t": "Students can prepare carefully for the listening/watching-comprehension process related to the current content on family life with family members’ routines; family members’ hobbies and activities.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.4.R1",
+     "b": "Reading",
+     "t": "Students can prepare for the reading-comprehension process related to the current content on family life with family members’ routines; family members’ hobbies and activities.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.4.W1",
+     "b": "Writing",
+     "t": "Students can prepare for the writing-expression process related to the current content on family life with family members’ routines; family members’ hobbies and activities.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.4.S1",
+     "b": "Speaking",
+     "t": "Students can prepare for the speaking-expression process related to the current content on family life with family members’ routines; family members’ hobbies and activities.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.4.V1",
+     "b": "Vocabulary",
+     "t": "Students can select the target vocabulary of the current content on family life with family members’ routines; family members’ hobbies and activities, and use it accurately, authentically, spontaneously, naturally, appropriately, and effectively when communicating with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.4.G1",
+     "b": "Grammar",
+     "t": "Students can select the target grammatical elements of the current content on family life with family members’ routines; family members’ hobbies and activities, and use them accurately, authentically, spontaneously, naturally, appropriately, and effectively when communicating with others.",
+     "d": []
+    }
+   ],
+   "bas": "2027-01-11",
+   "bit": "2027-01-15",
+   "kn": "Sub-themes: Family members’ routines; family members’ hobbies and activities",
+   "o": "PERFORMANCE ASSIGNMENT: Students will conduct a questionnaire on the daily routines, free-time activities, and hobbies of their family members through interviews and present the written results with digital resources and/or realia (real objects) by acting out some of the routines, free-time activities, and hobbies reported in the questionnaire. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 18,
+   "s": 2,
+   "u": "Family Life",
+   "m": [
+    {
+     "k": "ENG.5.4.L2",
+     "b": "Listening",
+     "t": "Students can bring together information about the current content on family life with family members’ routines; family members’ hobbies and activities through significant details and main ideas while listening/watching.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.4.R2",
+     "b": "Reading",
+     "t": "Students can bring together information about the current content on family life with family members’ routines; family members’ hobbies and activities by skimming (looking quickly at the audio-visual elements) and reading the content very quickly.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.4.W2",
+     "b": "Writing",
+     "t": "Students can understand the model/example for the writing task related to the current content on family life with family members’ routines; family members’ hobbies and activities.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.4.S2",
+     "b": "Speaking",
+     "t": "Students can use the model/example to produce verbal content related to the current content on family life with family members’ routines; family members’ hobbies and activities.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.4.P1",
+     "b": "Phonology",
+     "t": "Students can select the target phonological elements of the current content on family life with family members’ routines; family members’ hobbies and activities, and use them accurately, authentically, and naturally through spontaneous decision-making processes, appropriately and effectively, when communicating with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.4.L3",
+     "b": "Listening",
+     "t": "Students can make sense of and derive meaning from the current content on family life with family members’ routines; family members’ hobbies and activities through significant details by listening/watching carefully.",
+     "d": []
+    }
+   ],
+   "bas": "2027-01-18",
+   "bit": "2027-01-22",
+   "o": "PERFORMANCE ASSIGNMENT: Students will conduct a questionnaire on the daily routines, free-time activities, and hobbies of their family members through interviews and present the written results with digital resources and/or realia (real objects) by acting out some of the routines, free-time activities, and hobbies reported in the questionnaire. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 19,
+   "s": 2,
+   "u": "Family Life",
+   "m": [
+    {
+     "k": "ENG.5.4.L4",
+     "b": "Listening",
+     "t": "Students can convey their carefully examined knowledge, experiences, thoughts, and feelings about the whole listening/watching-comprehension process in relation to the current content on family life with family members’ routines; family members’ hobbies and activities.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.4.R3",
+     "b": "Reading",
+     "t": "Students can make sense of and derive meaning from the current content on family life with family members’ routines; family members’ hobbies and activities by reading it carefully.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.4.W3",
+     "b": "Writing",
+     "t": "Students can organise content for the assigned writing task related to the current content on family life with family members’ routines; family members’ hobbies and activities, based on the model/example provided.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.4.S3",
+     "b": "Speaking",
+     "t": "Students can organise new verbal content on family life with family members’ routines; family members’ hobbies and activities by speaking accurately, efficiently, and authentically.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.4.R4",
+     "b": "Reading",
+     "t": "Students can convey their knowledge, experiences, thoughts, and feelings related to the reading-comprehension process about the current content on family life with family members’ routines; family members’ hobbies and activities, in relation to themselves or others, both individually and/or with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.4.W4",
+     "b": "Writing",
+     "t": "Students can individually construct/form content for the assigned writing task related to the current content on family life with family members’ routines; family members’ hobbies and activities.",
+     "d": []
+    }
+   ],
+   "bas": "2027-02-08",
+   "bit": "2027-02-12",
+   "o": "PERFORMANCE ASSIGNMENT: Students will conduct a questionnaire on the daily routines, free-time activities, and hobbies of their family members through interviews and present the written results with digital resources and/or realia (real objects) by acting out some of the routines, free-time activities, and hobbies reported in the questionnaire. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 20,
+   "s": 2,
+   "u": "Family Life",
+   "m": [
+    {
+     "k": "ENG.5.4.W5",
+     "b": "Writing",
+     "t": "Students can reorganise (reconstruct) and use information about family life with family members’ routines; family members’ hobbies and activities in new written tasks to communicate with other people.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.4.S4",
+     "b": "Speaking",
+     "t": "Students can construct new verbal content on family life with family members’ routines; family members’ hobbies and activities by speaking accurately, efficiently, and authentically.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.4.W6",
+     "b": "Writing",
+     "t": "Students can reflect on their knowledge, experiences, thoughts, and feelings related to the writing-expression process about the current content on family life with family members’ routines; family members’ hobbies and activities, in relation to themselves or others, both individually and/or with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.4.S5",
+     "b": "Speaking",
+     "t": "Students can reorganise (reconstruct) and use information about family life with family members’ routines; family members’ hobbies and activities to communicate with other people.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.4.S6",
+     "b": "Speaking",
+     "t": "Students can convey their knowledge, experiences, thoughts, and feelings related to the speaking-expression process about the current content on family life with family members’ routines; family members’ hobbies and activities to communicate with other people, in relation to themselves or others, both individually and/or with others.",
+     "d": []
+    }
+   ],
+   "bas": "2027-02-15",
+   "bit": "2027-02-19",
+   "o": "PERFORMANCE ASSIGNMENT: Students will conduct a questionnaire on the daily routines, free-time activities, and hobbies of their family members through interviews and present the written results with digital resources and/or realia (real objects) by acting out some of the routines, free-time activities, and hobbies reported in the questionnaire. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 21,
+   "s": 2,
+   "u": "Life in the Neighbourhood and City",
+   "m": [
+    {
+     "k": "ENG.5.5.L1",
+     "b": "Listening",
+     "t": "Students can prepare carefully for the listening/watching-comprehension process related to the current content on life in the neighbourhood and city with places for recreation and attractions in the neighbourhood and city; different types of houses.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.5.V1",
+     "b": "Vocabulary",
+     "t": "Students can select the target vocabulary of the current content on life in the neighbourhood and city with places for recreation and attractions in the neighbourhood and city; different types of houses, and use it accurately, authentically, spontaneously, naturally, appropriately, and effectively when communicating with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.5.G1",
+     "b": "Grammar",
+     "t": "Students can select the target grammatical elements of the current content on life in the neighbourhood and city with places for recreation and attractions in the neighbourhood and city; different types of houses, and use them accurately, authentically, spontaneously, naturally, appropriately, and effectively when communicating with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.5.W1",
+     "b": "Writing",
+     "t": "Students can prepare for the writing-expression process related to the current content on life in the neighbourhood and city with places for recreation and attractions in the neighbourhood and city; different types of houses.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.5.P1",
+     "b": "Phonology",
+     "t": "Students can select the target phonological elements of the current content on life in the neighbourhood and city with places for recreation and attractions in the neighbourhood and city; different types of houses, and use them accurately, authentically, and naturally through spontaneous decision-making processes, appropriately and effectively, when communicating with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.5.R1",
+     "b": "Reading",
+     "t": "Students can prepare for the reading-comprehension process related to the current content on life in the neighbourhood and city with places for recreation and attractions in the neighbourhood and city; different types of houses.",
+     "d": []
+    }
+   ],
+   "bas": "2027-02-22",
+   "bit": "2027-02-26",
+   "kn": "Sub-themes: Places for recreation and attractions in the neighbourhood and city; different types of houses",
+   "o": "PERFORMANCE ASSIGNMENT: Students will search the Internet for the types of houses that they have learnt about in the theme so as to collect more information about them. Students will create a dream house for themselves by drawing it by hand or using pictures and/or digital sources. Then they will present it to the class. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 22,
+   "s": 2,
+   "u": "Life in the Neighbourhood and City",
+   "m": [
+    {
+     "k": "ENG.5.5.L2",
+     "b": "Listening",
+     "t": "Students can bring together information about the current content on life in the neighbourhood and city with places for recreation and attractions in the neighbourhood and city; different types of houses through significant details and main ideas while listening/watching.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.5.R2",
+     "b": "Reading",
+     "t": "Students can bring together information about the current content on life in the neighbourhood and city with places for recreation and attractions in the neighbourhood and city; different types of houses by skimming (looking quickly at the audio-visual elements) and reading the content very quickly.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.5.W2",
+     "b": "Writing",
+     "t": "Students can understand the model/example for the writing task related to the current content on life in the neighbourhood and city with places for recreation and attractions in the neighbourhood and city; different types of houses.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.5.S2",
+     "b": "Speaking",
+     "t": "Students can use the model/example to produce verbal content related to the current content on life in the neighbourhood and city with places for recreation and attractions in the neighbourhood and city; different types of houses.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.5.P1",
+     "b": "Phonology",
+     "t": "Students can select the target phonological elements of the current content on life in the neighbourhood and city with places for recreation and attractions in the neighbourhood and city; different types of houses, and use them accurately, authentically, and naturally through spontaneous decision-making processes, appropriately and effectively, when communicating with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.5.L3",
+     "b": "Listening",
+     "t": "Students can make sense of and derive meaning from the current content on life in the neighbourhood and city with places for recreation and attractions in the neighbourhood and city; different types of houses through significant details by listening/watching carefully.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.5.L4",
+     "b": "Listening",
+     "t": "Students can convey their carefully examined knowledge, experiences, thoughts, and feelings about the whole listening/watching-comprehension process in relation to the current content on life in the neighbourhood and city with places for recreation and attractions in the neighbourhood and city; different types of houses.",
+     "d": []
+    }
+   ],
+   "bas": "2027-03-01",
+   "bit": "2027-03-05",
+   "o": "PERFORMANCE ASSIGNMENT: Students will search the Internet for the types of houses that they have learnt about in the theme so as to collect more information about them. Students will create a dream house for themselves by drawing it by hand or using pictures and/or digital sources. Then they will present it to the class. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 23,
+   "s": 2,
+   "u": "Life in the Neighbourhood and City",
+   "m": [
+    {
+     "k": "ENG.5.5.R3",
+     "b": "Reading",
+     "t": "Students can make sense of and derive meaning from the current content on life in the neighbourhood and city with places for recreation and attractions in the neighbourhood and city; different types of houses by reading it carefully.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.5.W3",
+     "b": "Writing",
+     "t": "Students can organise content for the assigned writing task related to the current content on life in the neighbourhood and city with places for recreation and attractions in the neighbourhood and city; different types of houses, based on the model/example provided.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.5.S3",
+     "b": "Speaking",
+     "t": "Students can organise new verbal content on life in the neighbourhood and city with places for recreation and attractions in the neighbourhood and city; different types of houses by speaking accurately, efficiently, and authentically.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.5.R4",
+     "b": "Reading",
+     "t": "Students can convey their knowledge, experiences, thoughts, and feelings related to the reading-comprehension process about the current content on life in the neighbourhood and city with places for recreation and attractions in the neighbourhood and city; different types of houses, in relation to themselves or others, both individually and/or with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.5.W4",
+     "b": "Writing",
+     "t": "Students can individually construct/form content for the assigned writing task related to the current content on life in the neighbourhood and city with places for recreation and attractions in the neighbourhood and city; different types of houses.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.5.W5",
+     "b": "Writing",
+     "t": "Students can reorganise (reconstruct) and use information about life in the neighbourhood and city with places for recreation and attractions in the neighbourhood and city; different types of houses in new written tasks to communicate with other people.",
+     "d": []
+    }
+   ],
+   "bas": "2027-03-15",
+   "bit": "2027-03-19",
+   "o": "PERFORMANCE ASSIGNMENT: Students will search the Internet for the types of houses that they have learnt about in the theme so as to collect more information about them. Students will create a dream house for themselves by drawing it by hand or using pictures and/or digital sources. Then they will present it to the class. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 24,
+   "s": 2,
+   "u": "Life in the Neighbourhood and City",
+   "m": [
+    {
+     "k": "ENG.5.5.S4",
+     "b": "Speaking",
+     "t": "Students can construct new verbal content on life in the neighbourhood and city with places for recreation and attractions in the neighbourhood and city; different types of houses by speaking accurately, efficiently, and authentically.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.5.W6",
+     "b": "Writing",
+     "t": "Students can reflect on their knowledge, experiences, thoughts, and feelings related to the writing-expression process about the current content on life in the neighbourhood and city with places for recreation and attractions in the neighbourhood and city; different types of houses, in relation to themselves or others, both individually and/or with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.5.S5",
+     "b": "Speaking",
+     "t": "Students can reorganise (reconstruct) and use information about life in the neighbourhood and city with places for recreation and attractions in the neighbourhood and city; different types of houses to communicate with other people.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.5.S6",
+     "b": "Speaking",
+     "t": "Students can convey their knowledge, experiences, thoughts, and feelings related to the speaking-expression process about the current content on life in the neighbourhood and city with places for recreation and attractions in the neighbourhood and city; different types of houses to communicate with other people, in relation to themselves or others, both individually and/or with others.",
+     "d": []
+    }
+   ],
+   "bas": "2027-03-22",
+   "bit": "2027-03-26",
+   "o": "PERFORMANCE ASSIGNMENT: Students will search the Internet for the types of houses that they have learnt about in the theme so as to collect more information about them. Students will create a dream house for themselves by drawing it by hand or using pictures and/or digital sources. Then they will present it to the class. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 25,
+   "s": 2,
+   "u": "Life in the World",
+   "m": [
+    {
+     "k": "ENG.5.6.L1",
+     "b": "Listening",
+     "t": "Students can prepare carefully for the listening/watching-comprehension process related to the current content on life in the world with basic food types; ordering in a restaurant; food events in the city.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.6.R1",
+     "b": "Reading",
+     "t": "Students can prepare for the reading-comprehension process related to the current content on life in the world with basic food types; ordering in a restaurant; food events in the city.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.6.W1",
+     "b": "Writing",
+     "t": "Students can prepare for the writing-expression process related to the current content on life in the world with basic food types; ordering in a restaurant; food events in the city.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.6.S1",
+     "b": "Speaking",
+     "t": "Students can prepare for the speaking-expression process related to the current content on life in the world with basic food types; ordering in a restaurant; food events in the city.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.6.V1",
+     "b": "Vocabulary",
+     "t": "Students can select the target vocabulary of the current content on life in the world with basic food types; ordering in a restaurant; food events in the city, and use it accurately, authentically, spontaneously, naturally, appropriately, and effectively when communicating with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.6.G1",
+     "b": "Grammar",
+     "t": "Students can select the target grammatical elements of the current content on life in the world with basic food types; ordering in a restaurant; food events in the city, and use them accurately, authentically, spontaneously, naturally, appropriately, and effectively when communicating with others.",
+     "d": []
+    }
+   ],
+   "bas": "2027-03-29",
+   "bit": "2027-04-02",
+   "kn": "Sub-themes: Basic food types; ordering in a restaurant; food events in the city",
+   "o": "PERFORMANCE ASSIGNMENT: Students will work in pairs to create a short dialogue about ordering food in different types of restaurants and cafés. Each pair will include things like greetings, asking about the menu, choosing food, and talking about preferences. Then they will act out their dialogue in front of the class. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 26,
+   "s": 2,
+   "u": "Life in the World",
+   "m": [
+    {
+     "k": "ENG.5.6.L2",
+     "b": "Listening",
+     "t": "Students can bring together information about the current content on life in the world with basic food types; ordering in a restaurant; food events in the city through significant details and main ideas while listening/watching.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.6.R2",
+     "b": "Reading",
+     "t": "Students can bring together information about the current content on life in the world with basic food types; ordering in a restaurant; food events in the city by skimming (looking quickly at the audio-visual elements) and reading the content very quickly.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.6.W2",
+     "b": "Writing",
+     "t": "Students can understand the model/example for the writing task related to the current content on life in the world with basic food types; ordering in a restaurant; food events in the city.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.6.S2",
+     "b": "Speaking",
+     "t": "Students can use the model/example to produce verbal content related to the current content on life in the world with basic food types; ordering in a restaurant; food events in the city.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.6.P1",
+     "b": "Phonology",
+     "t": "Students can select the target phonological elements of the current content on life in the world with basic food types; ordering in a restaurant; food events in the city, and use them accurately, authentically, and naturally through spontaneous decision-making processes, appropriately and effectively, when communicating with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.6.L3",
+     "b": "Listening",
+     "t": "Students can make sense of and derive meaning from the current content on life in the world with basic food types; ordering in a restaurant; food events in the city through significant details by listening/watching carefully.",
+     "d": []
+    }
+   ],
+   "bas": "2027-04-05",
+   "bit": "2027-04-09",
+   "o": "PERFORMANCE ASSIGNMENT: Students will work in pairs to create a short dialogue about ordering food in different types of restaurants and cafés. Each pair will include things like greetings, asking about the menu, choosing food, and talking about preferences. Then they will act out their dialogue in front of the class. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 27,
+   "s": 2,
+   "u": "School-Based Planning",
+   "m": [],
+   "bas": "2027-04-12",
+   "bit": "2027-04-16",
+   "nt": "Okul temelli planlama haftası"
+  },
+  {
+   "n": 28,
+   "s": 2,
+   "u": "Life in the World",
+   "m": [
+    {
+     "k": "ENG.5.6.L4",
+     "b": "Listening",
+     "t": "Students can convey their carefully examined knowledge, experiences, thoughts, and feelings about the whole listening/watching-comprehension process in relation to the current content on life in the world with basic food types; ordering in a restaurant; food events in the city.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.6.R3",
+     "b": "Reading",
+     "t": "Students can make sense of and derive meaning from the current content on life in the world with basic food types; ordering in a restaurant; food events in the city by reading it carefully.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.6.W3",
+     "b": "Writing",
+     "t": "Students can organise content for the assigned writing task related to the current content on life in the world with basic food types; ordering in a restaurant; food events in the city, based on the model/example provided.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.6.S3",
+     "b": "Speaking",
+     "t": "Students can organise new verbal content on life in the world with basic food types; ordering in a restaurant; food events in the city by speaking accurately, efficiently, and authentically.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.6.R4",
+     "b": "Reading",
+     "t": "Students can convey their knowledge, experiences, thoughts, and feelings related to the reading-comprehension process about the current content on life in the world with basic food types; ordering in a restaurant; food events in the city, in relation to themselves or others, both individually and/or with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.6.W4",
+     "b": "Writing",
+     "t": "Students can individually construct/form content for the assigned writing task related to the current content on life in the world with basic food types; ordering in a restaurant; food events in the city.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.6.W5",
+     "b": "Writing",
+     "t": "Students can reorganise (reconstruct) and use information about life in the world with basic food types; ordering in a restaurant; food events in the city in new written tasks to communicate with other people.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.6.S4",
+     "b": "Speaking",
+     "t": "Students can construct new verbal content on life in the world with basic food types; ordering in a restaurant; food events in the city by speaking accurately, efficiently, and authentically.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.6.W6",
+     "b": "Writing",
+     "t": "Students can reflect on their knowledge, experiences, thoughts, and feelings related to the writing-expression process about the current content on life in the world with basic food types; ordering in a restaurant; food events in the city, in relation to themselves or others, both individually and/or with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.6.S5",
+     "b": "Speaking",
+     "t": "Students can reorganise (reconstruct) and use information about life in the world with basic food types; ordering in a restaurant; food events in the city to communicate with other people.",
+     "d": []
+    }
+   ],
+   "bas": "2027-04-19",
+   "bit": "2027-04-23",
+   "o": "PERFORMANCE ASSIGNMENT: Students will work in pairs to create a short dialogue about ordering food in different types of restaurants and cafés. Each pair will include things like greetings, asking about the menu, choosing food, and talking about preferences. Then they will act out their dialogue in front of the class. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 29,
+   "s": 2,
+   "u": "Life in Nature",
+   "m": [
+    {
+     "k": "ENG.5.7.L1",
+     "b": "Listening",
+     "t": "Students can prepare carefully for the listening/watching-comprehension process related to the current content on life in nature with types of animals in nature; wild animals in nature; their habitats.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.7.R1",
+     "b": "Reading",
+     "t": "Students can prepare for the reading-comprehension process related to the current content on life in nature with types of animals in nature; wild animals in nature; their habitats.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.7.W1",
+     "b": "Writing",
+     "t": "Students can prepare for the writing-expression process related to the current content on life in nature with types of animals in nature; wild animals in nature; their habitats.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.7.S1",
+     "b": "Speaking",
+     "t": "Students can prepare for the speaking-expression process related to the current content on life in nature with types of animals in nature; wild animals in nature; their habitats.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.7.V1",
+     "b": "Vocabulary",
+     "t": "Students can select the target vocabulary of the current content on life in nature with types of animals in nature; wild animals in nature; their habitats, and use it accurately, authentically, spontaneously, naturally, appropriately, and effectively when communicating with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.7.G1",
+     "b": "Grammar",
+     "t": "Students can select the target grammatical elements of the current content on life in nature with types of animals in nature; wild animals in nature; their habitats, and use them accurately, authentically, spontaneously, naturally, appropriately, and effectively when communicating with others.",
+     "d": []
+    }
+   ],
+   "bas": "2027-04-26",
+   "bit": "2027-04-30",
+   "kn": "Sub-themes: Types of animals in nature; wild animals in nature; their habitats",
+   "o": "PERFORMANCE ASSIGNMENT: Students will write a project about wild animals in terms of their living conditions and their protection. The project could include an Internet search, collecting pictures, recording sounds, etc. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 30,
+   "s": 2,
+   "u": "Life in Nature",
+   "m": [
+    {
+     "k": "ENG.5.7.L2",
+     "b": "Listening",
+     "t": "Students can bring together information about the current content on life in nature with types of animals in nature; wild animals in nature; their habitats through significant details and main ideas while listening/watching.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.7.R2",
+     "b": "Reading",
+     "t": "Students can bring together information about the current content on life in nature with types of animals in nature; wild animals in nature; their habitats by skimming (looking quickly at the audio-visual elements) and reading the content very quickly.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.7.W2",
+     "b": "Writing",
+     "t": "Students can understand the model/example for the writing task related to the current content on life in nature with types of animals in nature; wild animals in nature; their habitats.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.7.S2",
+     "b": "Speaking",
+     "t": "Students can use the model/example to produce verbal content related to the current content on life in nature with types of animals in nature; wild animals in nature; their habitats.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.7.P1",
+     "b": "Phonology",
+     "t": "Students can select the target phonological elements of the current content on life in nature with types of animals in nature; wild animals in nature; their habitats, and use them accurately, authentically, and naturally through spontaneous decision-making processes, appropriately and effectively, when communicating with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.7.L3",
+     "b": "Listening",
+     "t": "Students can make sense of and derive meaning from the current content on life in nature with types of animals in nature; wild animals in nature; their habitats through significant details by listening/watching carefully.",
+     "d": []
+    }
+   ],
+   "bas": "2027-05-03",
+   "bit": "2027-05-07",
+   "o": "PERFORMANCE ASSIGNMENT: Students will write a project about wild animals in terms of their living conditions and their protection. The project could include an Internet search, collecting pictures, recording sounds, etc. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 31,
+   "s": 2,
+   "u": "Life in Nature",
+   "m": [
+    {
+     "k": "ENG.5.7.L4",
+     "b": "Listening",
+     "t": "Students can convey their carefully examined knowledge, experiences, thoughts, and feelings about the whole listening/watching-comprehension process in relation to the current content on life in nature with types of animals in nature; wild animals in nature; their habitats.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.7.R3",
+     "b": "Reading",
+     "t": "Students can make sense of and derive meaning from the current content on life in nature with types of animals in nature; wild animals in nature; their habitats by reading it carefully.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.7.W3",
+     "b": "Writing",
+     "t": "Students can organise content for the assigned writing task related to the current content on life in nature with types of animals in nature; wild animals in nature; their habitats, based on the model/example provided.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.7.S3",
+     "b": "Speaking",
+     "t": "Students can organise new verbal content on life in nature with types of animals in nature; wild animals in nature; their habitats by speaking accurately, efficiently, and authentically.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.7.R4",
+     "b": "Reading",
+     "t": "Students can convey their knowledge, experiences, thoughts, and feelings related to the reading-comprehension process about the current content on life in nature with types of animals in nature; wild animals in nature; their habitats, in relation to themselves or others, both individually and/or with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.7.W4",
+     "b": "Writing",
+     "t": "Students can individually construct/form content for the assigned writing task related to the current content on life in nature with types of animals in nature; wild animals in nature; their habitats.",
+     "d": []
+    }
+   ],
+   "bas": "2027-05-10",
+   "bit": "2027-05-14",
+   "o": "PERFORMANCE ASSIGNMENT: Students will write a project about wild animals in terms of their living conditions and their protection. The project could include an Internet search, collecting pictures, recording sounds, etc. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 32,
+   "s": 2,
+   "u": "Life in Nature",
+   "m": [
+    {
+     "k": "ENG.5.7.W5",
+     "b": "Writing",
+     "t": "Students can reorganise (reconstruct) and use information about life in nature with types of animals in nature; wild animals in nature; their habitats in new written tasks to communicate with other people.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.7.S4",
+     "b": "Speaking",
+     "t": "Students can construct new verbal content on life in nature with types of animals in nature; wild animals in nature; their habitats by speaking accurately, efficiently, and authentically.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.7.W6",
+     "b": "Writing",
+     "t": "Students can reflect on their knowledge, experiences, thoughts, and feelings related to the writing-expression process about the current content on life in nature with types of animals in nature; wild animals in nature; their habitats, in relation to themselves or others, both individually and/or with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.7.S5",
+     "b": "Speaking",
+     "t": "Students can reorganise (reconstruct) and use information about life in nature with types of animals in nature; wild animals in nature; their habitats to communicate with other people.",
+     "d": []
+    }
+   ],
+   "bas": "2027-05-20",
+   "bit": "2027-05-21",
+   "o": "PERFORMANCE ASSIGNMENT: Students will write a project about wild animals in terms of their living conditions and their protection. The project could include an Internet search, collecting pictures, recording sounds, etc. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 33,
+   "s": 2,
+   "u": "Life in the Universe and Future",
+   "m": [
+    {
+     "k": "ENG.5.8.L1",
+     "b": "Listening",
+     "t": "Students can prepare carefully for the listening/watching-comprehension process related to the current content on life in the universe and future with planet Earth; holidays; school holidays, places, activities, and plans for holidays.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.8.P1",
+     "b": "Phonology",
+     "t": "Students can select the target phonological elements of the current content on life in the universe and future with planet Earth; holidays; school holidays, places, activities, and plans for holidays, and use them accurately, authentically, and naturally through spontaneous decision-making processes, appropriately and effectively, when communicating with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.8.R1",
+     "b": "Reading",
+     "t": "Students can prepare for the reading-comprehension process related to the current content on life in the universe and future with planet Earth; holidays; school holidays, places, activities, and plans for holidays.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.8.V1",
+     "b": "Vocabulary",
+     "t": "Students can select the target vocabulary of the current content on life in the universe and future with planet Earth; holidays; school holidays, places, activities, and plans for holidays, and use it accurately, authentically, spontaneously, naturally, appropriately, and effectively when communicating with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.8.G1",
+     "b": "Grammar",
+     "t": "Students can select the target grammatical elements of the current content on life in the universe and future with planet Earth; holidays; school holidays, places, activities, and plans for holidays, and use them accurately, authentically, spontaneously, naturally, appropriately, and effectively when communicating with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.8.W1",
+     "b": "Writing",
+     "t": "Students can prepare for the writing-expression process related to the current content on life in the universe and future with planet Earth; holidays; school holidays, places, activities, and plans for holidays.",
+     "d": []
+    }
+   ],
+   "bas": "2027-05-24",
+   "bit": "2027-05-28",
+   "kn": "Sub-themes: Planet Earth; holidays; school holidays, places, activities, and plans for holidays",
+   "o": "PERFORMANCE ASSIGNMENT: Students will create a project about their dream summer holiday. The project will include an Internet search to find interesting places, collecting pictures, and recording sounds that represent their ideal holiday. They can also add short descriptions and creative elements to show what activities, places, and experiences they would like to enjoy during their dream summer vacation. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 34,
+   "s": 2,
+   "u": "Life in the Universe and Future",
+   "m": [
+    {
+     "k": "ENG.5.8.L2",
+     "b": "Listening",
+     "t": "Students can bring together information about the current content on life in the universe and future with planet Earth; holidays; school holidays, places, activities, and plans for holidays through significant details and main ideas while listening/watching.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.8.R2",
+     "b": "Reading",
+     "t": "Students can bring together information about the current content on life in the universe and future with planet Earth; holidays; school holidays, places, activities, and plans for holidays by skimming (looking quickly at the audio-visual elements) and reading the content very quickly.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.8.W2",
+     "b": "Writing",
+     "t": "Students can understand the model/example for the writing task related to the current content on life in the universe and future with planet Earth; holidays; school holidays, places, activities, and plans for holidays.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.8.S2",
+     "b": "Speaking",
+     "t": "Students can use the model/example to produce verbal content related to the current content on life in the universe and future with planet Earth; holidays; school holidays, places, activities, and plans for holidays.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.8.P1",
+     "b": "Phonology",
+     "t": "Students can select the target phonological elements of the current content on life in the universe and future with planet Earth; holidays; school holidays, places, activities, and plans for holidays, and use them accurately, authentically, and naturally through spontaneous decision-making processes, appropriately and effectively, when communicating with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.8.L3",
+     "b": "Listening",
+     "t": "Students can make sense of and derive meaning from the current content on life in the universe and future with planet Earth; holidays; school holidays, places, activities, and plans for holidays through significant details by listening/watching carefully.",
+     "d": []
+    }
+   ],
+   "bas": "2027-05-31",
+   "bit": "2027-06-04",
+   "o": "PERFORMANCE ASSIGNMENT: Students will create a project about their dream summer holiday. The project will include an Internet search to find interesting places, collecting pictures, and recording sounds that represent their ideal holiday. They can also add short descriptions and creative elements to show what activities, places, and experiences they would like to enjoy during their dream summer vacation. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 35,
+   "s": 2,
+   "u": "Life in the Universe and Future",
+   "m": [
+    {
+     "k": "ENG.5.8.L4",
+     "b": "Listening",
+     "t": "Students can convey their carefully examined knowledge, experiences, thoughts, and feelings about the whole listening/watching-comprehension process in relation to the current content on life in the universe and future with planet Earth; holidays; school holidays, places, activities, and plans for holidays.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.8.R3",
+     "b": "Reading",
+     "t": "Students can make sense of and derive meaning from the current content on life in the universe and future with planet Earth; holidays; school holidays, places, activities, and plans for holidays by reading it carefully.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.8.W3",
+     "b": "Writing",
+     "t": "Students can organise content for the assigned writing task related to the current content on life in the universe and future with planet Earth; holidays; school holidays, places, activities, and plans for holidays, based on the model/example provided.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.8.S3",
+     "b": "Speaking",
+     "t": "Students can organise new verbal content on life in the universe and future with planet Earth; holidays; school holidays, places, activities, and plans for holidays by speaking accurately, efficiently, and authentically.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.8.R4",
+     "b": "Reading",
+     "t": "Students can convey their knowledge, experiences, thoughts, and feelings related to the reading-comprehension process about the current content on life in the universe and future with planet Earth; holidays; school holidays, places, activities, and plans for holidays, in relation to themselves or others, both individually and/or with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.8.W4",
+     "b": "Writing",
+     "t": "Students can individually construct/form content for the assigned writing task related to the current content on life in the universe and future with planet Earth; holidays; school holidays, places, activities, and plans for holidays.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.8.W5",
+     "b": "Writing",
+     "t": "Students can reorganise (reconstruct) and use information about life in the universe and future with planet Earth; holidays; school holidays, places, activities, and plans for holidays in new written tasks to communicate with other people.",
+     "d": []
+    }
+   ],
+   "bas": "2027-06-07",
+   "bit": "2027-06-11",
+   "o": "PERFORMANCE ASSIGNMENT: Students will create a project about their dream summer holiday. The project will include an Internet search to find interesting places, collecting pictures, and recording sounds that represent their ideal holiday. They can also add short descriptions and creative elements to show what activities, places, and experiences they would like to enjoy during their dream summer vacation. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 36,
+   "s": 2,
+   "u": "Life in the Universe and Future",
+   "m": [
+    {
+     "k": "ENG.5.8.S4",
+     "b": "Speaking",
+     "t": "Students can construct new verbal content on life in the universe and future with planet Earth; holidays; school holidays, places, activities, and plans for holidays by speaking accurately, efficiently, and authentically.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.8.W6",
+     "b": "Writing",
+     "t": "Students can reflect on their knowledge, experiences, thoughts, and feelings related to the writing-expression process about the current content on life in the universe and future with planet Earth; holidays; school holidays, places, activities, and plans for holidays, in relation to themselves or others, both individually and/or with others.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.8.S5",
+     "b": "Speaking",
+     "t": "Students can reorganise (reconstruct) and use information about life in the universe and future with planet Earth; holidays; school holidays, places, activities, and plans for holidays to communicate with other people.",
+     "d": []
+    },
+    {
+     "k": "ENG.5.8.W5",
+     "b": "Writing",
+     "t": "Students can reorganise (reconstruct) and use information about life in the universe and future with planet Earth; holidays; school holidays, places, activities, and plans for holidays in new written tasks to communicate with other people.",
+     "d": []
+    }
+   ],
+   "bas": "2027-06-14",
+   "bit": "2027-06-18",
+   "o": "PERFORMANCE ASSIGNMENT: Students will create a project about their dream summer holiday. The project will include an Internet search to find interesting places, collecting pictures, and recording sounds that represent their ideal holiday. They can also add short descriptions and creative elements to show what activities, places, and experiences they would like to enjoy during their dream summer vacation. The assignment will be evaluated by using a rubric scheme, a rating scale, and/or a marking scheme."
+  },
+  {
+   "n": 37,
+   "s": 2,
+   "u": "Social Activities",
+   "m": [],
+   "bas": "2027-06-21",
+   "bit": "2027-06-25",
+   "nt": "Sosyal etkinlikler haftası"
+  }
+ ]
+}

@@ -1,0 +1,1781 @@
+{
+ "ders": "Yabancı Dil (Seçmeli İngilizce)",
+ "anahtar": "yabdil",
+ "sinif": 7,
+ "kaynak": "7. sınıf Seçmeli İngilizce 2026-2027 yıllık planı (ingilizceciyiz.com); plandaki kazanım kodları (E7...). Metinlerde dil bilgisi, yazım ve ifade düzeltmeleri yapılmıştır (İngiliz yazımı esas alındı); kazanım kodları ve kapsam kaynak plana uygundur.",
+ "haftalar": [
+  {
+   "n": 1,
+   "s": 2,
+   "u": "Unit 1: Appearance and Personality",
+   "m": [
+    {
+     "k": "E7.1.L1",
+     "b": "Listening",
+     "t": "Students will be able to understand clear, standard speech on appearances and personalities.",
+     "d": []
+    },
+    {
+     "k": "E7.1.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to talk about other people’s appearances and personalities.",
+     "d": []
+    },
+    {
+     "k": "E7.1.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to report on the appearances and personalities of other people.",
+     "d": []
+    },
+    {
+     "k": "E7.1.R1",
+     "b": "Reading",
+     "t": "Students will be able to understand a simple text about appearances, personalities, and comparisons, including explanations and reasons.",
+     "d": []
+    },
+    {
+     "k": "E7.1.W1",
+     "b": "Writing",
+     "t": "Students will be able to write simple texts comparing people.",
+     "d": []
+    }
+   ],
+   "bas": "2026-09-14",
+   "bit": "2026-09-18",
+   "kn": "Describing characters/people (Making simple inquiries) —What does your best friend look like? —S/he is beautiful/handsome, with curly hair and green eyes. —What is s/he like? —S/he is slimmer than me and s/he has short and dark hair. —My cousin is more outgoing than me; s/he has a lot of friends."
+  },
+  {
+   "n": 2,
+   "s": 2,
+   "u": "Unit 1: Appearance and Personality",
+   "m": [
+    {
+     "k": "E7.1.L1",
+     "b": "Listening",
+     "t": "Students will be able to understand clear, standard speech on appearances and personalities.",
+     "d": []
+    },
+    {
+     "k": "E7.1.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to talk about other people’s appearances and personalities.",
+     "d": []
+    },
+    {
+     "k": "E7.1.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to report on the appearances and personalities of other people.",
+     "d": []
+    },
+    {
+     "k": "E7.1.R1",
+     "b": "Reading",
+     "t": "Students will be able to understand a simple text about appearances, personalities, and comparisons, including explanations and reasons.",
+     "d": []
+    },
+    {
+     "k": "E7.1.W1",
+     "b": "Writing",
+     "t": "Students will be able to write simple texts comparing people.",
+     "d": []
+    }
+   ],
+   "bas": "2026-09-21",
+   "bit": "2026-09-25",
+   "kn": "Describing characters/people (Making simple inquiries) —What does your best friend look like? —S/he is beautiful/handsome, with curly hair and green eyes. —What is s/he like? —S/he is slimmer than me and s/he has short and dark hair. —My cousin is more outgoing than me; s/he has a lot of friends."
+  },
+  {
+   "n": 3,
+   "s": 2,
+   "u": "Unit 1: Appearance and Personality",
+   "m": [
+    {
+     "k": "E7.1.L1",
+     "b": "Listening",
+     "t": "Students will be able to understand clear, standard speech on appearances and personalities.",
+     "d": []
+    },
+    {
+     "k": "E7.1.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to talk about other people’s appearances and personalities.",
+     "d": []
+    },
+    {
+     "k": "E7.1.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to report on the appearances and personalities of other people.",
+     "d": []
+    },
+    {
+     "k": "E7.1.R1",
+     "b": "Reading",
+     "t": "Students will be able to understand a simple text about appearances, personalities, and comparisons, including explanations and reasons.",
+     "d": []
+    },
+    {
+     "k": "E7.1.W1",
+     "b": "Writing",
+     "t": "Students will be able to write simple texts comparing people.",
+     "d": []
+    }
+   ],
+   "bas": "2026-09-28",
+   "bit": "2026-10-02",
+   "kn": "Describing characters/people (Making simple inquiries) —What does your best friend look like? —S/he is beautiful/handsome, with curly hair and green eyes. —What is s/he like? —S/he is slimmer than me and s/he has short and dark hair. —My cousin is more outgoing than me; s/he has a lot of friends."
+  },
+  {
+   "n": 4,
+   "s": 2,
+   "u": "Unit 2: Sports",
+   "m": [
+    {
+     "k": "E7.2.L1",
+     "b": "Listening",
+     "t": "Students will be able to recognise frequency adverbs in simple oral texts.",
+     "d": []
+    },
+    {
+     "k": "E7.2.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to ask questions related to the frequency of events.",
+     "d": []
+    },
+    {
+     "k": "E7.2.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to talk about routines and daily activities using frequency adverbs and by giving explanations and reasons.",
+     "d": []
+    },
+    {
+     "k": "E7.2.R1",
+     "b": "Reading",
+     "t": "Students will be able to understand short and simple texts on sports.",
+     "d": []
+    },
+    {
+     "k": "E7.2.W1",
+     "b": "Writing",
+     "t": "Students will be able to write short texts about routines and daily activities using frequency adverbs.",
+     "d": []
+    }
+   ],
+   "bas": "2026-10-05",
+   "bit": "2026-10-09",
+   "kn": "Talking about routines and daily activities —Do you often go on a diet? —I never/sometimes/often/usually/always go on a diet. —How often do you exercise/train? —Once a month./Twice a day./Three times a week. He usually goes jogging in the park."
+  },
+  {
+   "n": 5,
+   "s": 2,
+   "u": "Unit 2: Sports",
+   "m": [
+    {
+     "k": "E7.2.L1",
+     "b": "Listening",
+     "t": "Students will be able to recognise frequency adverbs in simple oral texts.",
+     "d": []
+    },
+    {
+     "k": "E7.2.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to ask questions related to the frequency of events.",
+     "d": []
+    },
+    {
+     "k": "E7.2.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to talk about routines and daily activities using frequency adverbs and by giving explanations and reasons.",
+     "d": []
+    },
+    {
+     "k": "E7.2.R1",
+     "b": "Reading",
+     "t": "Students will be able to understand short and simple texts on sports.",
+     "d": []
+    },
+    {
+     "k": "E7.2.W1",
+     "b": "Writing",
+     "t": "Students will be able to write short texts about routines and daily activities using frequency adverbs.",
+     "d": []
+    }
+   ],
+   "bas": "2026-10-12",
+   "bit": "2026-10-16",
+   "kn": "Talking about routines and daily activities —Do you often go on a diet? —I never/sometimes/often/usually/always go on a diet. —How often do you exercise/train? —Once a month./Twice a day./Three times a week. He usually goes jogging in the park."
+  },
+  {
+   "n": 6,
+   "s": 2,
+   "u": "Unit 2: Sports",
+   "m": [
+    {
+     "k": "E7.2.L1",
+     "b": "Listening",
+     "t": "Students will be able to recognise frequency adverbs in simple oral texts.",
+     "d": []
+    },
+    {
+     "k": "E7.2.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to ask questions related to the frequency of events.",
+     "d": []
+    },
+    {
+     "k": "E7.2.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to talk about routines and daily activities using frequency adverbs and by giving explanations and reasons.",
+     "d": []
+    },
+    {
+     "k": "E7.2.R1",
+     "b": "Reading",
+     "t": "Students will be able to understand short and simple texts on sports.",
+     "d": []
+    },
+    {
+     "k": "E7.2.W1",
+     "b": "Writing",
+     "t": "Students will be able to write short texts about routines and daily activities using frequency adverbs.",
+     "d": []
+    }
+   ],
+   "bas": "2026-10-19",
+   "bit": "2026-10-23",
+   "kn": "Talking about routines and daily activities —Do you often go on a diet? —I never/sometimes/often/usually/always go on a diet. —How often do you exercise/train? —Once a month./Twice a day./Three times a week. He usually goes jogging in the park."
+  },
+  {
+   "n": 7,
+   "s": 2,
+   "u": "Unit 2: Sports",
+   "m": [
+    {
+     "k": "E7.2.L1",
+     "b": "Listening",
+     "t": "Students will be able to recognise frequency adverbs in simple oral texts.",
+     "d": []
+    },
+    {
+     "k": "E7.2.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to ask questions related to the frequency of events.",
+     "d": []
+    },
+    {
+     "k": "E7.2.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to talk about routines and daily activities using frequency adverbs and by giving explanations and reasons.",
+     "d": []
+    },
+    {
+     "k": "E7.2.R1",
+     "b": "Reading",
+     "t": "Students will be able to understand short and simple texts on sports.",
+     "d": []
+    },
+    {
+     "k": "E7.2.W1",
+     "b": "Writing",
+     "t": "Students will be able to write short texts about routines and daily activities using frequency adverbs.",
+     "d": []
+    }
+   ],
+   "bas": "2026-10-26",
+   "bit": "2026-10-30",
+   "kn": "Talking about routines and daily activities —Do you often go on a diet? —I never/sometimes/often/usually/always go on a diet. —How often do you exercise/train? —Once a month./Twice a day./Three times a week. He usually goes jogging in the park."
+  },
+  {
+   "n": 8,
+   "s": 2,
+   "u": "Unit 3: Biographies",
+   "m": [
+    {
+     "k": "E7.3.L1",
+     "b": "Listening",
+     "t": "Students will be able to recognise specific information in oral texts about past events and dates.",
+     "d": []
+    },
+    {
+     "k": "E7.3.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to talk about past events at a definite time.",
+     "d": []
+    },
+    {
+     "k": "E7.3.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to describe past events and experiences.",
+     "d": []
+    },
+    {
+     "k": "E7.3.R1",
+     "b": "Reading",
+     "t": "Students will be able to spot specific information, such as names and dates, about past events in written texts.",
+     "d": []
+    },
+    {
+     "k": "E7.3.W1",
+     "b": "Writing",
+     "t": "Students will be able to write a short, simple report about past events.",
+     "d": []
+    }
+   ],
+   "bas": "2026-11-02",
+   "bit": "2026-11-06",
+   "kn": "Talking about past events (Making simple inquiries) S/he was a hardworking person. S/he was alone and s/he had an interesting life. Why did s/he move to Manchester? —S/he moved to Manchester to study physics. Telling the time, days and dates S/he was born in London in 1970."
+  },
+  {
+   "n": 9,
+   "s": 2,
+   "u": "Unit 3: Biographies",
+   "m": [
+    {
+     "k": "E7.3.L1",
+     "b": "Listening",
+     "t": "Students will be able to recognise specific information in oral texts about past events and dates.",
+     "d": []
+    },
+    {
+     "k": "E7.3.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to talk about past events at a definite time.",
+     "d": []
+    },
+    {
+     "k": "E7.3.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to describe past events and experiences.",
+     "d": []
+    },
+    {
+     "k": "E7.3.R1",
+     "b": "Reading",
+     "t": "Students will be able to spot specific information, such as names and dates, about past events in written texts.",
+     "d": []
+    },
+    {
+     "k": "E7.3.W1",
+     "b": "Writing",
+     "t": "Students will be able to write a short, simple report about past events.",
+     "d": []
+    }
+   ],
+   "bas": "2026-11-09",
+   "bit": "2026-11-13",
+   "kn": "Talking about past events (Making simple inquiries) S/he was a hardworking person. S/he was alone and s/he had an interesting life. Why did s/he move to Manchester? —S/he moved to Manchester to study physics. Telling the time, days and dates S/he was born in London in 1970."
+  },
+  {
+   "n": 10,
+   "s": 2,
+   "u": "Unit 3: Biographies",
+   "m": [
+    {
+     "k": "E7.3.L1",
+     "b": "Listening",
+     "t": "Students will be able to recognise specific information in oral texts about past events and dates.",
+     "d": []
+    },
+    {
+     "k": "E7.3.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to talk about past events at a definite time.",
+     "d": []
+    },
+    {
+     "k": "E7.3.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to describe past events and experiences.",
+     "d": []
+    },
+    {
+     "k": "E7.3.R1",
+     "b": "Reading",
+     "t": "Students will be able to spot specific information, such as names and dates, about past events in written texts.",
+     "d": []
+    },
+    {
+     "k": "E7.3.W1",
+     "b": "Writing",
+     "t": "Students will be able to write a short, simple report about past events.",
+     "d": []
+    }
+   ],
+   "bas": "2026-11-23",
+   "bit": "2026-11-27",
+   "kn": "Talking about past events (Making simple inquiries) S/he was a hardworking person. S/he was alone and s/he had an interesting life. Why did s/he move to Manchester? —S/he moved to Manchester to study physics. Telling the time, days and dates S/he was born in London in 1970."
+  },
+  {
+   "n": 11,
+   "s": 2,
+   "u": "Unit 3: Biographies",
+   "m": [
+    {
+     "k": "E7.3.L1",
+     "b": "Listening",
+     "t": "Students will be able to recognise specific information in oral texts about past events and dates.",
+     "d": []
+    },
+    {
+     "k": "E7.3.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to talk about past events at a definite time.",
+     "d": []
+    },
+    {
+     "k": "E7.3.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to describe past events and experiences.",
+     "d": []
+    },
+    {
+     "k": "E7.3.R1",
+     "b": "Reading",
+     "t": "Students will be able to spot specific information, such as names and dates, about past events in written texts.",
+     "d": []
+    },
+    {
+     "k": "E7.3.W1",
+     "b": "Writing",
+     "t": "Students will be able to write a short, simple report about past events.",
+     "d": []
+    }
+   ],
+   "bas": "2026-11-30",
+   "bit": "2026-12-04",
+   "kn": "Talking about past events (Making simple inquiries) S/he was a hardworking person. S/he was alone and s/he had an interesting life. Why did s/he move to Manchester? —S/he moved to Manchester to study physics. Telling the time, days and dates S/he was born in London in 1970."
+  },
+  {
+   "n": 12,
+   "s": 2,
+   "u": "Unit 4: Wild Animals",
+   "m": [
+    {
+     "k": "E7.4.L1",
+     "b": "Listening",
+     "t": "Students will be able to understand past and present events in oral texts.",
+     "d": []
+    },
+    {
+     "k": "E7.4.L2",
+     "b": "Listening",
+     "t": "Students will be able to identify the names of wild animals in simple oral texts.",
+     "d": []
+    },
+    {
+     "k": "E7.4.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to ask people questions about the characteristics of wild animals.",
+     "d": []
+    },
+    {
+     "k": "E7.4.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to make simple suggestions.",
+     "d": []
+    },
+    {
+     "k": "E7.4.SP2",
+     "b": "Spoken Production",
+     "t": "Students will be able to report on past and present events.",
+     "d": []
+    },
+    {
+     "k": "E7.4.R1",
+     "b": "Reading",
+     "t": "Students will be able to understand past and present events in simple texts including explanations and reasons.",
+     "d": []
+    },
+    {
+     "k": "E7.4.R2",
+     "b": "Reading",
+     "t": "Students will be able to spot the names of wild animals in simple texts.",
+     "d": []
+    },
+    {
+     "k": "E7.4.W1",
+     "b": "Writing",
+     "t": "Students will be able to write short texts describing wildlife.",
+     "d": []
+    }
+   ],
+   "bas": "2026-12-07",
+   "bit": "2026-12-11",
+   "kn": "Describing the frequency of actions Tigers usually hunt during the day. Making simple inquiries Where do tigers live? —They live in Asia. Which animals are now extinct? Making simple suggestions What should we do to protect wildlife? —We should protect wild animals. —We shouldn’t hunt them."
+  },
+  {
+   "n": 13,
+   "s": 2,
+   "u": "Unit 4: Wild Animals",
+   "m": [
+    {
+     "k": "E7.4.L1",
+     "b": "Listening",
+     "t": "Students will be able to understand past and present events in oral texts.",
+     "d": []
+    },
+    {
+     "k": "E7.4.L2",
+     "b": "Listening",
+     "t": "Students will be able to identify the names of wild animals in simple oral texts.",
+     "d": []
+    },
+    {
+     "k": "E7.4.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to ask people questions about the characteristics of wild animals.",
+     "d": []
+    },
+    {
+     "k": "E7.4.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to make simple suggestions.",
+     "d": []
+    },
+    {
+     "k": "E7.4.SP2",
+     "b": "Spoken Production",
+     "t": "Students will be able to report on past and present events.",
+     "d": []
+    },
+    {
+     "k": "E7.4.R1",
+     "b": "Reading",
+     "t": "Students will be able to understand past and present events in simple texts including explanations and reasons.",
+     "d": []
+    },
+    {
+     "k": "E7.4.R2",
+     "b": "Reading",
+     "t": "Students will be able to spot the names of wild animals in simple texts.",
+     "d": []
+    },
+    {
+     "k": "E7.4.W1",
+     "b": "Writing",
+     "t": "Students will be able to write short texts describing wildlife.",
+     "d": []
+    }
+   ],
+   "bas": "2026-12-14",
+   "bit": "2026-12-18",
+   "kn": "Describing the frequency of actions Tigers usually hunt during the day. Making simple inquiries Where do tigers live? —They live in Asia. Which animals are now extinct? Making simple suggestions What should we do to protect wildlife? —We should protect wild animals. —We shouldn’t hunt them."
+  },
+  {
+   "n": 14,
+   "s": 2,
+   "u": "Unit 4: Wild Animals",
+   "m": [
+    {
+     "k": "E7.4.L1",
+     "b": "Listening",
+     "t": "Students will be able to understand past and present events in oral texts.",
+     "d": []
+    },
+    {
+     "k": "E7.4.L2",
+     "b": "Listening",
+     "t": "Students will be able to identify the names of wild animals in simple oral texts.",
+     "d": []
+    },
+    {
+     "k": "E7.4.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to ask people questions about the characteristics of wild animals.",
+     "d": []
+    },
+    {
+     "k": "E7.4.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to make simple suggestions.",
+     "d": []
+    },
+    {
+     "k": "E7.4.SP2",
+     "b": "Spoken Production",
+     "t": "Students will be able to report on past and present events.",
+     "d": []
+    },
+    {
+     "k": "E7.4.R1",
+     "b": "Reading",
+     "t": "Students will be able to understand past and present events in simple texts including explanations and reasons.",
+     "d": []
+    },
+    {
+     "k": "E7.4.R2",
+     "b": "Reading",
+     "t": "Students will be able to spot the names of wild animals in simple texts.",
+     "d": []
+    },
+    {
+     "k": "E7.4.W1",
+     "b": "Writing",
+     "t": "Students will be able to write short texts describing wildlife.",
+     "d": []
+    }
+   ],
+   "bas": "2026-12-21",
+   "bit": "2026-12-25",
+   "kn": "Describing the frequency of actions Tigers usually hunt during the day. Making simple inquiries Where do tigers live? —They live in Asia. Which animals are now extinct? Making simple suggestions What should we do to protect wildlife? —We should protect wild animals. —We shouldn’t hunt them."
+  },
+  {
+   "n": 15,
+   "s": 2,
+   "u": "Unit 5: Television",
+   "m": [
+    {
+     "k": "E7.5.L1",
+     "b": "Listening",
+     "t": "Students will be able to understand simple oral texts about daily routines and preferences.",
+     "d": []
+    },
+    {
+     "k": "E7.5.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to ask questions about preferences of other people.",
+     "d": []
+    },
+    {
+     "k": "E7.5.SI2",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to talk about past events and personal experiences.",
+     "d": []
+    },
+    {
+     "k": "E7.5.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to state their preferences.",
+     "d": []
+    },
+    {
+     "k": "E7.5.SP2",
+     "b": "Spoken Production",
+     "t": "Students will be able to describe past events in a simple way.",
+     "d": []
+    },
+    {
+     "k": "E7.5.R1",
+     "b": "Reading",
+     "t": "Students will be able to understand simple texts about daily routines and preferences.",
+     "d": []
+    },
+    {
+     "k": "E7.5.R2",
+     "b": "Reading",
+     "t": "Students will be able to understand simple texts about past events.",
+     "d": []
+    },
+    {
+     "k": "E7.5.W1",
+     "b": "Writing",
+     "t": "Students will be able to write short texts about daily routines and preferences.",
+     "d": []
+    }
+   ],
+   "bas": "2026-12-28",
+   "bit": "2026-12-31",
+   "kn": "Describing what people do regularly I never/sometimes/often/usually/always watch football matches at weekends. I can’t wait for it. Expressing preferences I prefer movies to TV series. S/he prefers talk shows to reality shows."
+  },
+  {
+   "n": 16,
+   "s": 2,
+   "u": "Unit 5: Television",
+   "m": [
+    {
+     "k": "E7.5.L1",
+     "b": "Listening",
+     "t": "Students will be able to understand simple oral texts about daily routines and preferences.",
+     "d": []
+    },
+    {
+     "k": "E7.5.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to ask questions about preferences of other people.",
+     "d": []
+    },
+    {
+     "k": "E7.5.SI2",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to talk about past events and personal experiences.",
+     "d": []
+    },
+    {
+     "k": "E7.5.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to state their preferences.",
+     "d": []
+    },
+    {
+     "k": "E7.5.SP2",
+     "b": "Spoken Production",
+     "t": "Students will be able to describe past events in a simple way.",
+     "d": []
+    },
+    {
+     "k": "E7.5.R1",
+     "b": "Reading",
+     "t": "Students will be able to understand simple texts about daily routines and preferences.",
+     "d": []
+    },
+    {
+     "k": "E7.5.R2",
+     "b": "Reading",
+     "t": "Students will be able to understand simple texts about past events.",
+     "d": []
+    },
+    {
+     "k": "E7.5.W1",
+     "b": "Writing",
+     "t": "Students will be able to write short texts about daily routines and preferences.",
+     "d": []
+    }
+   ],
+   "bas": "2027-01-04",
+   "bit": "2027-01-08",
+   "kn": "Describing what people do regularly I never/sometimes/often/usually/always watch football matches at weekends. I can’t wait for it. Expressing preferences I prefer movies to TV series. S/he prefers talk shows to reality shows."
+  },
+  {
+   "n": 17,
+   "s": 2,
+   "u": "Unit 5: Television",
+   "m": [
+    {
+     "k": "E7.5.L1",
+     "b": "Listening",
+     "t": "Students will be able to understand simple oral texts about daily routines and preferences.",
+     "d": []
+    },
+    {
+     "k": "E7.5.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to ask questions about preferences of other people.",
+     "d": []
+    },
+    {
+     "k": "E7.5.SI2",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to talk about past events and personal experiences.",
+     "d": []
+    },
+    {
+     "k": "E7.5.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to state their preferences.",
+     "d": []
+    },
+    {
+     "k": "E7.5.SP2",
+     "b": "Spoken Production",
+     "t": "Students will be able to describe past events in a simple way.",
+     "d": []
+    },
+    {
+     "k": "E7.5.R1",
+     "b": "Reading",
+     "t": "Students will be able to understand simple texts about daily routines and preferences.",
+     "d": []
+    },
+    {
+     "k": "E7.5.R2",
+     "b": "Reading",
+     "t": "Students will be able to understand simple texts about past events.",
+     "d": []
+    },
+    {
+     "k": "E7.5.W1",
+     "b": "Writing",
+     "t": "Students will be able to write short texts about daily routines and preferences.",
+     "d": []
+    }
+   ],
+   "bas": "2027-01-11",
+   "bit": "2027-01-15",
+   "kn": "Describing what people do regularly I never/sometimes/often/usually/always watch football matches at weekends. I can’t wait for it. Expressing preferences I prefer movies to TV series. S/he prefers talk shows to reality shows."
+  },
+  {
+   "n": 18,
+   "s": 2,
+   "u": "Unit 5: Television",
+   "m": [
+    {
+     "k": "E7.5.L1",
+     "b": "Listening",
+     "t": "Students will be able to understand simple oral texts about daily routines and preferences.",
+     "d": []
+    },
+    {
+     "k": "E7.5.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to ask questions about preferences of other people.",
+     "d": []
+    },
+    {
+     "k": "E7.5.SI2",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to talk about past events and personal experiences.",
+     "d": []
+    },
+    {
+     "k": "E7.5.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to state their preferences.",
+     "d": []
+    },
+    {
+     "k": "E7.5.SP2",
+     "b": "Spoken Production",
+     "t": "Students will be able to describe past events in a simple way.",
+     "d": []
+    },
+    {
+     "k": "E7.5.R1",
+     "b": "Reading",
+     "t": "Students will be able to understand simple texts about daily routines and preferences.",
+     "d": []
+    },
+    {
+     "k": "E7.5.R2",
+     "b": "Reading",
+     "t": "Students will be able to understand simple texts about past events.",
+     "d": []
+    },
+    {
+     "k": "E7.5.W1",
+     "b": "Writing",
+     "t": "Students will be able to write short texts about daily routines and preferences.",
+     "d": []
+    }
+   ],
+   "bas": "2027-01-18",
+   "bit": "2027-01-22",
+   "kn": "Describing what people do regularly I never/sometimes/often/usually/always watch football matches at weekends. I can’t wait for it. Expressing preferences I prefer movies to TV series. S/he prefers talk shows to reality shows."
+  },
+  {
+   "n": 19,
+   "s": 2,
+   "u": "Unit 6: Celebrations",
+   "m": [
+    {
+     "k": "E7.6.L1",
+     "b": "Listening",
+     "t": "Students will be able to recognise utterances related to suggestions, needs, and quantities of things.",
+     "d": []
+    },
+    {
+     "k": "E7.6.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to talk about arrangements and sequences of actions.",
+     "d": []
+    },
+    {
+     "k": "E7.6.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to make suggestions.",
+     "d": []
+    },
+    {
+     "k": "E7.6.SP2",
+     "b": "Spoken Production",
+     "t": "Students will be able to express needs and quantities.",
+     "d": []
+    },
+    {
+     "k": "E7.6.R1",
+     "b": "Reading",
+     "t": "Students will be able to understand short, simple texts about celebrations.",
+     "d": []
+    },
+    {
+     "k": "E7.6.W1",
+     "b": "Writing",
+     "t": "Students will be able to write invitation cards.",
+     "d": []
+    }
+   ],
+   "bas": "2027-02-08",
+   "bit": "2027-02-12",
+   "kn": "Making simple suggestions (Accepting and refusing) Would you like some cake? —Yes, please. Just a little. I’ll get a sandwich. Would you like one? —No, thanks. I am full. Making arrangements and sequencing the actions It is easy to organise a birthday party. First, you should prepare a guest list."
+  },
+  {
+   "n": 20,
+   "s": 2,
+   "u": "Unit 6: Celebrations",
+   "m": [
+    {
+     "k": "E7.6.L1",
+     "b": "Listening",
+     "t": "Students will be able to recognise utterances related to suggestions, needs, and quantities of things.",
+     "d": []
+    },
+    {
+     "k": "E7.6.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to talk about arrangements and sequences of actions.",
+     "d": []
+    },
+    {
+     "k": "E7.6.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to make suggestions.",
+     "d": []
+    },
+    {
+     "k": "E7.6.SP2",
+     "b": "Spoken Production",
+     "t": "Students will be able to express needs and quantities.",
+     "d": []
+    },
+    {
+     "k": "E7.6.R1",
+     "b": "Reading",
+     "t": "Students will be able to understand short, simple texts about celebrations.",
+     "d": []
+    },
+    {
+     "k": "E7.6.W1",
+     "b": "Writing",
+     "t": "Students will be able to write invitation cards.",
+     "d": []
+    }
+   ],
+   "bas": "2027-02-15",
+   "bit": "2027-02-19",
+   "kn": "Making simple suggestions (Accepting and refusing) Would you like some cake? —Yes, please. Just a little. I’ll get a sandwich. Would you like one? —No, thanks. I am full. Making arrangements and sequencing the actions It is easy to organise a birthday party. First, you should prepare a guest list."
+  },
+  {
+   "n": 21,
+   "s": 2,
+   "u": "Unit 6: Celebrations",
+   "m": [
+    {
+     "k": "E7.6.L1",
+     "b": "Listening",
+     "t": "Students will be able to recognise utterances related to suggestions, needs, and quantities of things.",
+     "d": []
+    },
+    {
+     "k": "E7.6.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to talk about arrangements and sequences of actions.",
+     "d": []
+    },
+    {
+     "k": "E7.6.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to make suggestions.",
+     "d": []
+    },
+    {
+     "k": "E7.6.SP2",
+     "b": "Spoken Production",
+     "t": "Students will be able to express needs and quantities.",
+     "d": []
+    },
+    {
+     "k": "E7.6.R1",
+     "b": "Reading",
+     "t": "Students will be able to understand short, simple texts about celebrations.",
+     "d": []
+    },
+    {
+     "k": "E7.6.W1",
+     "b": "Writing",
+     "t": "Students will be able to write invitation cards.",
+     "d": []
+    }
+   ],
+   "bas": "2027-02-22",
+   "bit": "2027-02-26",
+   "kn": "Making simple suggestions (Accepting and refusing) Would you like some cake? —Yes, please. Just a little. I’ll get a sandwich. Would you like one? —No, thanks. I am full. Making arrangements and sequencing the actions It is easy to organise a birthday party. First, you should prepare a guest list."
+  },
+  {
+   "n": 22,
+   "s": 2,
+   "u": "Unit 7: Dreams",
+   "m": [
+    {
+     "k": "E7.7.L1",
+     "b": "Listening",
+     "t": "Students will be able to understand utterances about predictions and future events in simple oral texts.",
+     "d": []
+    },
+    {
+     "k": "E7.7.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to talk about simple predictions.",
+     "d": []
+    },
+    {
+     "k": "E7.7.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to report on simple predictions.",
+     "d": []
+    },
+    {
+     "k": "E7.7.R1",
+     "b": "Reading",
+     "t": "Students will be able to understand short and simple texts about predictions.",
+     "d": []
+    },
+    {
+     "k": "E7.7.W1",
+     "b": "Writing",
+     "t": "Students will be able to write short texts about predictions and future events.",
+     "d": []
+    }
+   ],
+   "bas": "2027-03-01",
+   "bit": "2027-03-05",
+   "kn": "Giving explanations/reasons You should play in the new park to make friends. S/he can go to shopping malls to buy anything. You may go to the police station to report the burglary. I usually visit the hospital to see my doctor. S/he went to the cinema to watch a documentary about wild life."
+  },
+  {
+   "n": 23,
+   "s": 2,
+   "u": "Unit 7: Dreams",
+   "m": [
+    {
+     "k": "E7.7.L1",
+     "b": "Listening",
+     "t": "Students will be able to understand utterances about predictions and future events in simple oral texts.",
+     "d": []
+    },
+    {
+     "k": "E7.7.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to talk about simple predictions.",
+     "d": []
+    },
+    {
+     "k": "E7.7.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to report on simple predictions.",
+     "d": []
+    },
+    {
+     "k": "E7.7.R1",
+     "b": "Reading",
+     "t": "Students will be able to understand short and simple texts about predictions.",
+     "d": []
+    },
+    {
+     "k": "E7.7.W1",
+     "b": "Writing",
+     "t": "Students will be able to write short texts about predictions and future events.",
+     "d": []
+    }
+   ],
+   "bas": "2027-03-15",
+   "bit": "2027-03-19",
+   "kn": "Giving explanations/reasons You should play in the new park to make friends. S/he can go to shopping malls to buy anything. You may go to the police station to report the burglary. I usually visit the hospital to see my doctor. S/he went to the cinema to watch a documentary about wild life."
+  },
+  {
+   "n": 24,
+   "s": 2,
+   "u": "Unit 7: Dreams",
+   "m": [
+    {
+     "k": "E7.7.L1",
+     "b": "Listening",
+     "t": "Students will be able to understand utterances about predictions and future events in simple oral texts.",
+     "d": []
+    },
+    {
+     "k": "E7.7.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to talk about simple predictions.",
+     "d": []
+    },
+    {
+     "k": "E7.7.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to report on simple predictions.",
+     "d": []
+    },
+    {
+     "k": "E7.7.R1",
+     "b": "Reading",
+     "t": "Students will be able to understand short and simple texts about predictions.",
+     "d": []
+    },
+    {
+     "k": "E7.7.W1",
+     "b": "Writing",
+     "t": "Students will be able to write short texts about predictions and future events.",
+     "d": []
+    }
+   ],
+   "bas": "2027-03-22",
+   "bit": "2027-03-26",
+   "kn": "Giving explanations/reasons You should play in the new park to make friends. S/he can go to shopping malls to buy anything. You may go to the police station to report the burglary. I usually visit the hospital to see my doctor. S/he went to the cinema to watch a documentary about wild life."
+  },
+  {
+   "n": 25,
+   "s": 2,
+   "u": "Unit 8: Public Buildings",
+   "m": [
+    {
+     "k": "E7.8.L1",
+     "b": "Listening",
+     "t": "Students will be able to recognise the names of the public buildings.",
+     "d": []
+    },
+    {
+     "k": "E7.8.L2",
+     "b": "Listening",
+     "t": "Students will be able to understand explanations with reasons.",
+     "d": []
+    },
+    {
+     "k": "E7.8.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to give explanations with reasons.",
+     "d": []
+    },
+    {
+     "k": "E7.8.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to report explanations with reasons.",
+     "d": []
+    },
+    {
+     "k": "E7.8.R1",
+     "b": "Reading",
+     "t": "Students will be able to understand simple expressions and recognise familiar words in texts that give explanations with reasons.",
+     "d": []
+    },
+    {
+     "k": "E7.8.W1",
+     "b": "Writing",
+     "t": "Students will be able to write short texts that give explanations with reasons.",
+     "d": []
+    }
+   ],
+   "bas": "2027-03-29",
+   "bit": "2027-04-02",
+   "kn": "Giving explanations/reasons You should play in the new park to make friends. S/he can go to shopping malls to buy anything. You may go to the police station to report the burglary. I usually visit the hospital to see my doctor. S/he went to the cinema to watch a documentary about wild life."
+  },
+  {
+   "n": 26,
+   "s": 2,
+   "u": "Unit 8: Public Buildings",
+   "m": [
+    {
+     "k": "E7.8.L1",
+     "b": "Listening",
+     "t": "Students will be able to recognise the names of the public buildings.",
+     "d": []
+    },
+    {
+     "k": "E7.8.L2",
+     "b": "Listening",
+     "t": "Students will be able to understand explanations with reasons.",
+     "d": []
+    },
+    {
+     "k": "E7.8.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to give explanations with reasons.",
+     "d": []
+    },
+    {
+     "k": "E7.8.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to report explanations with reasons.",
+     "d": []
+    },
+    {
+     "k": "E7.8.R1",
+     "b": "Reading",
+     "t": "Students will be able to understand simple expressions and recognise familiar words in texts that give explanations with reasons.",
+     "d": []
+    },
+    {
+     "k": "E7.8.W1",
+     "b": "Writing",
+     "t": "Students will be able to write short texts that give explanations with reasons.",
+     "d": []
+    }
+   ],
+   "bas": "2027-04-05",
+   "bit": "2027-04-09",
+   "kn": "Giving explanations/reasons You should play in the new park to make friends. S/he can go to shopping malls to buy anything. You may go to the police station to report the burglary. I usually visit the hospital to see my doctor. S/he went to the cinema to watch a documentary about wild life."
+  },
+  {
+   "n": 27,
+   "s": 2,
+   "u": "Unit 8: Public Buildings",
+   "m": [
+    {
+     "k": "E7.8.L1",
+     "b": "Listening",
+     "t": "Students will be able to recognise the names of the public buildings.",
+     "d": []
+    },
+    {
+     "k": "E7.8.L2",
+     "b": "Listening",
+     "t": "Students will be able to understand explanations with reasons.",
+     "d": []
+    },
+    {
+     "k": "E7.8.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to give explanations with reasons.",
+     "d": []
+    },
+    {
+     "k": "E7.8.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to report explanations with reasons.",
+     "d": []
+    },
+    {
+     "k": "E7.8.R1",
+     "b": "Reading",
+     "t": "Students will be able to understand simple expressions and recognise familiar words in texts that give explanations with reasons.",
+     "d": []
+    },
+    {
+     "k": "E7.8.W1",
+     "b": "Writing",
+     "t": "Students will be able to write short texts that give explanations with reasons.",
+     "d": []
+    }
+   ],
+   "bas": "2027-04-12",
+   "bit": "2027-04-16",
+   "kn": "Giving explanations/reasons You should play in the new park to make friends. S/he can go to shopping malls to buy anything. You may go to the police station to report the burglary. I usually visit the hospital to see my doctor. S/he went to the cinema to watch a documentary about wild life."
+  },
+  {
+   "n": 28,
+   "s": 2,
+   "u": "Unit 9: Environment",
+   "m": [
+    {
+     "k": "E7.9.L1",
+     "b": "Listening",
+     "t": "Students will be able to understand phrases and high-frequency vocabulary related to the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.L2",
+     "b": "Listening",
+     "t": "Students will be able to follow how a simple process is described in clear oral texts.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to talk about obligations.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SI2",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to give simple instructions for a specific process.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to give a simple description or presentation of a process.",
+     "d": []
+    },
+    {
+     "k": "E7.9.R1",
+     "b": "Reading",
+     "t": "Students will be able to identify specific information in various texts about the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.W1",
+     "b": "Writing",
+     "t": "Students will be able to write short, simple messages about the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.W2",
+     "b": "Writing",
+     "t": "Students will be able to write a short description of a process.",
+     "d": []
+    }
+   ],
+   "bas": "2027-04-19",
+   "bit": "2027-04-23",
+   "kn": "Describing simple processes First, get the seeds. Then, plant and water them. Expressing obligation What should we do for our environment? —We have to start using public transportation. —Stop polluting the rivers. We must stop destroying forests."
+  },
+  {
+   "n": 29,
+   "s": 2,
+   "u": "Unit 9: Environment",
+   "m": [
+    {
+     "k": "E7.9.L1",
+     "b": "Listening",
+     "t": "Students will be able to understand phrases and high-frequency vocabulary related to the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.L2",
+     "b": "Listening",
+     "t": "Students will be able to follow how a simple process is described in clear oral texts.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to talk about obligations.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SI2",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to give simple instructions for a specific process.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to give a simple description or presentation of a process.",
+     "d": []
+    },
+    {
+     "k": "E7.9.R1",
+     "b": "Reading",
+     "t": "Students will be able to identify specific information in various texts about the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.W1",
+     "b": "Writing",
+     "t": "Students will be able to write short, simple messages about the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.W2",
+     "b": "Writing",
+     "t": "Students will be able to write a short description of a process.",
+     "d": []
+    }
+   ],
+   "bas": "2027-04-26",
+   "bit": "2027-04-30",
+   "kn": "Describing simple processes First, get the seeds. Then, plant and water them. Expressing obligation What should we do for our environment? —We have to start using public transportation. —Stop polluting the rivers. We must stop destroying forests."
+  },
+  {
+   "n": 30,
+   "s": 2,
+   "u": "Unit 9: Environment",
+   "m": [
+    {
+     "k": "E7.9.L1",
+     "b": "Listening",
+     "t": "Students will be able to understand phrases and high-frequency vocabulary related to the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.L2",
+     "b": "Listening",
+     "t": "Students will be able to follow how a simple process is described in clear oral texts.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to talk about obligations.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SI2",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to give simple instructions for a specific process.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to give a simple description or presentation of a process.",
+     "d": []
+    },
+    {
+     "k": "E7.9.R1",
+     "b": "Reading",
+     "t": "Students will be able to identify specific information in various texts about the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.W1",
+     "b": "Writing",
+     "t": "Students will be able to write short, simple messages about the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.W2",
+     "b": "Writing",
+     "t": "Students will be able to write a short description of a process.",
+     "d": []
+    }
+   ],
+   "bas": "2027-05-03",
+   "bit": "2027-05-07",
+   "kn": "Describing simple processes First, get the seeds. Then, plant and water them. Expressing obligation What should we do for our environment? —We have to start using public transportation. —Stop polluting the rivers. We must stop destroying forests."
+  },
+  {
+   "n": 31,
+   "s": 2,
+   "u": "Unit 9: Environment",
+   "m": [
+    {
+     "k": "E7.9.L1",
+     "b": "Listening",
+     "t": "Students will be able to understand phrases and high-frequency vocabulary related to the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.L2",
+     "b": "Listening",
+     "t": "Students will be able to follow how a simple process is described in clear oral texts.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to talk about obligations.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SI2",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to give simple instructions for a specific process.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to give a simple description or presentation of a process.",
+     "d": []
+    },
+    {
+     "k": "E7.9.R1",
+     "b": "Reading",
+     "t": "Students will be able to identify specific information in various texts about the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.W1",
+     "b": "Writing",
+     "t": "Students will be able to write short, simple messages about the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.W2",
+     "b": "Writing",
+     "t": "Students will be able to write a short description of a process.",
+     "d": []
+    }
+   ],
+   "bas": "2027-05-10",
+   "bit": "2027-05-14",
+   "kn": "Describing simple processes First, get the seeds. Then, plant and water them. Expressing obligation What should we do for our environment? —We have to start using public transportation. —Stop polluting the rivers. We must stop destroying forests."
+  },
+  {
+   "n": 32,
+   "s": 2,
+   "u": "Unit 10: Planets",
+   "m": [
+    {
+     "k": "E7.9.L1",
+     "b": "Listening",
+     "t": "Students will be able to understand phrases and high-frequency vocabulary related to the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.L2",
+     "b": "Listening",
+     "t": "Students will be able to follow how a simple process is described in clear oral texts.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to talk about obligations.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SI2",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to give simple instructions for a specific process.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to give a simple description or presentation of a process.",
+     "d": []
+    },
+    {
+     "k": "E7.9.R1",
+     "b": "Reading",
+     "t": "Students will be able to identify specific information in various texts about the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.W1",
+     "b": "Writing",
+     "t": "Students will be able to write short, simple messages about the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.W2",
+     "b": "Writing",
+     "t": "Students will be able to write a short description of a process.",
+     "d": []
+    }
+   ],
+   "bas": "2027-05-20",
+   "bit": "2027-05-21",
+   "kn": "Not: Kaynak planda bu haftanın kazanım kodları 9. üniteyle aynıdır (E7.9...)."
+  },
+  {
+   "n": 33,
+   "s": 2,
+   "u": "Unit 10: Planets",
+   "m": [
+    {
+     "k": "E7.9.L1",
+     "b": "Listening",
+     "t": "Students will be able to understand phrases and high-frequency vocabulary related to the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.L2",
+     "b": "Listening",
+     "t": "Students will be able to follow how a simple process is described in clear oral texts.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to talk about obligations.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SI2",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to give simple instructions for a specific process.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to give a simple description or presentation of a process.",
+     "d": []
+    },
+    {
+     "k": "E7.9.R1",
+     "b": "Reading",
+     "t": "Students will be able to identify specific information in various texts about the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.W1",
+     "b": "Writing",
+     "t": "Students will be able to write short, simple messages about the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.W2",
+     "b": "Writing",
+     "t": "Students will be able to write a short description of a process.",
+     "d": []
+    }
+   ],
+   "bas": "2027-05-24",
+   "bit": "2027-05-28",
+   "kn": "Not: Kaynak planda bu haftanın kazanım kodları 9. üniteyle aynıdır (E7.9...)."
+  },
+  {
+   "n": 34,
+   "s": 2,
+   "u": "Unit 10: Planets",
+   "m": [
+    {
+     "k": "E7.9.L1",
+     "b": "Listening",
+     "t": "Students will be able to understand phrases and high-frequency vocabulary related to the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.L2",
+     "b": "Listening",
+     "t": "Students will be able to follow how a simple process is described in clear oral texts.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to talk about obligations.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SI2",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to give simple instructions for a specific process.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to give a simple description or presentation of a process.",
+     "d": []
+    },
+    {
+     "k": "E7.9.R1",
+     "b": "Reading",
+     "t": "Students will be able to identify specific information in various texts about the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.W1",
+     "b": "Writing",
+     "t": "Students will be able to write short, simple messages about the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.W2",
+     "b": "Writing",
+     "t": "Students will be able to write a short description of a process.",
+     "d": []
+    }
+   ],
+   "bas": "2027-05-31",
+   "bit": "2027-06-04",
+   "kn": "Not: Kaynak planda bu haftanın kazanım kodları 9. üniteyle aynıdır (E7.9...)."
+  },
+  {
+   "n": 35,
+   "s": 2,
+   "u": "Unit 10: Planets",
+   "m": [
+    {
+     "k": "E7.9.L1",
+     "b": "Listening",
+     "t": "Students will be able to understand phrases and high-frequency vocabulary related to the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.L2",
+     "b": "Listening",
+     "t": "Students will be able to follow how a simple process is described in clear oral texts.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to talk about obligations.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SI2",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to give simple instructions for a specific process.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to give a simple description or presentation of a process.",
+     "d": []
+    },
+    {
+     "k": "E7.9.R1",
+     "b": "Reading",
+     "t": "Students will be able to identify specific information in various texts about the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.W1",
+     "b": "Writing",
+     "t": "Students will be able to write short, simple messages about the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.W2",
+     "b": "Writing",
+     "t": "Students will be able to write a short description of a process.",
+     "d": []
+    }
+   ],
+   "bas": "2027-06-07",
+   "bit": "2027-06-11",
+   "kn": "Not: Kaynak planda bu haftanın kazanım kodları 9. üniteyle aynıdır (E7.9...)."
+  },
+  {
+   "n": 36,
+   "s": 2,
+   "u": "Unit 10: Planets",
+   "m": [
+    {
+     "k": "E7.9.L1",
+     "b": "Listening",
+     "t": "Students will be able to understand phrases and high-frequency vocabulary related to the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.L2",
+     "b": "Listening",
+     "t": "Students will be able to follow how a simple process is described in clear oral texts.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SI1",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to talk about obligations.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SI2",
+     "b": "Spoken Interaction",
+     "t": "Students will be able to give simple instructions for a specific process.",
+     "d": []
+    },
+    {
+     "k": "E7.9.SP1",
+     "b": "Spoken Production",
+     "t": "Students will be able to give a simple description or presentation of a process.",
+     "d": []
+    },
+    {
+     "k": "E7.9.R1",
+     "b": "Reading",
+     "t": "Students will be able to identify specific information in various texts about the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.W1",
+     "b": "Writing",
+     "t": "Students will be able to write short, simple messages about the environment.",
+     "d": []
+    },
+    {
+     "k": "E7.9.W2",
+     "b": "Writing",
+     "t": "Students will be able to write a short description of a process.",
+     "d": []
+    }
+   ],
+   "bas": "2027-06-14",
+   "bit": "2027-06-18",
+   "kn": "Not: Kaynak planda bu haftanın kazanım kodları 9. üniteyle aynıdır (E7.9...)."
+  },
+  {
+   "n": 37,
+   "s": 2,
+   "u": "Social Activities",
+   "m": [],
+   "bas": "2027-06-21",
+   "bit": "2027-06-25",
+   "nt": "Sosyal etkinlikler haftası"
+  }
+ ]
+}

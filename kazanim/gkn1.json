@@ -1,0 +1,650 @@
+{
+ "ders": "Görgü Kuralları ve Nezaket",
+ "anahtar": "gkn",
+ "sinif": 1,
+ "kaynak": "MEB Görgü Kuralları ve Nezaket Dersi Öğretim Programı (2026), I. düzey (haftada 2 ders saati). Haftalara dağıtım tema sürelerine göre yapılmıştır; MEB programında hafta hafta plan yoktur.",
+ "haftalar": [
+  {
+   "n": 1,
+   "s": 2,
+   "u": "1. Görgü Kuralları ve Nezaketin Gücü",
+   "m": [
+    {
+     "k": "GKN.1.1.1",
+     "t": "Görgü kuralları ve nezaket ile ilgili temel kavramlar hakkında bilgi toplayabilme",
+     "d": [
+      "a) Görgü kuralları ve nezaket ile ilgili temel kavramlar hakkında bilgilere ulaşmak için kullanacağı araçları belirler.",
+      "b) Belirlediği aracı kullanarak görgü kuralları ve nezaket ile ilgili temel kavramlar hakkındaki bilgileri bulur.",
+      "c) Görgü kuralları ve nezaket ile ilgili temel kavramlar hakkında ulaşılan bilgileri doğrular.",
+      "ç) Görgü kuralları ve nezaket ile ilgili temel kavramlar hakkında ulaşılan bilgileri kaydeder."
+     ]
+    }
+   ],
+   "bas": "2026-09-14",
+   "bit": "2026-09-18"
+  },
+  {
+   "n": 2,
+   "s": 2,
+   "u": "1. Görgü Kuralları ve Nezaketin Gücü",
+   "m": [
+    {
+     "k": "GKN.1.1.1",
+     "t": "Görgü kuralları ve nezaket ile ilgili temel kavramlar hakkında bilgi toplayabilme",
+     "d": [
+      "a) Görgü kuralları ve nezaket ile ilgili temel kavramlar hakkında bilgilere ulaşmak için kullanacağı araçları belirler.",
+      "b) Belirlediği aracı kullanarak görgü kuralları ve nezaket ile ilgili temel kavramlar hakkındaki bilgileri bulur.",
+      "c) Görgü kuralları ve nezaket ile ilgili temel kavramlar hakkında ulaşılan bilgileri doğrular.",
+      "ç) Görgü kuralları ve nezaket ile ilgili temel kavramlar hakkında ulaşılan bilgileri kaydeder."
+     ]
+    }
+   ],
+   "bas": "2026-09-21",
+   "bit": "2026-09-25"
+  },
+  {
+   "n": 3,
+   "s": 2,
+   "u": "1. Görgü Kuralları ve Nezaketin Gücü",
+   "m": [
+    {
+     "k": "GKN.1.1.1",
+     "t": "Görgü kuralları ve nezaket ile ilgili temel kavramlar hakkında bilgi toplayabilme",
+     "d": [
+      "a) Görgü kuralları ve nezaket ile ilgili temel kavramlar hakkında bilgilere ulaşmak için kullanacağı araçları belirler.",
+      "b) Belirlediği aracı kullanarak görgü kuralları ve nezaket ile ilgili temel kavramlar hakkındaki bilgileri bulur.",
+      "c) Görgü kuralları ve nezaket ile ilgili temel kavramlar hakkında ulaşılan bilgileri doğrular.",
+      "ç) Görgü kuralları ve nezaket ile ilgili temel kavramlar hakkında ulaşılan bilgileri kaydeder."
+     ]
+    }
+   ],
+   "bas": "2026-09-28",
+   "bit": "2026-10-02"
+  },
+  {
+   "n": 4,
+   "s": 2,
+   "u": "1. Görgü Kuralları ve Nezaketin Gücü",
+   "m": [
+    {
+     "k": "GKN.1.1.2",
+     "t": "Aile, kültür, din, ahlak kaynaklarının görgü kuralları ve nezakete etkisini yorumlayabilme",
+     "d": [
+      "a) Aile, kültür, din, ahlak kaynaklarının görgü kuralları ve nezakete etkisini inceler.",
+      "b) Aile, kültür, din, ahlak kaynaklarının görgü kuralları ve nezakete etkisini bağlamdan kopmadan dönüştürür.",
+      "c) Kendi ifadeleriyle aile, kültür, din, ahlak kaynaklarının görgü kuralları ve nezakete etkisini yeniden ifade eder."
+     ]
+    }
+   ],
+   "bas": "2026-10-05",
+   "bit": "2026-10-09"
+  },
+  {
+   "n": 5,
+   "s": 2,
+   "u": "1. Görgü Kuralları ve Nezaketin Gücü",
+   "m": [
+    {
+     "k": "GKN.1.1.2",
+     "t": "Aile, kültür, din, ahlak kaynaklarının görgü kuralları ve nezakete etkisini yorumlayabilme",
+     "d": [
+      "a) Aile, kültür, din, ahlak kaynaklarının görgü kuralları ve nezakete etkisini inceler.",
+      "b) Aile, kültür, din, ahlak kaynaklarının görgü kuralları ve nezakete etkisini bağlamdan kopmadan dönüştürür.",
+      "c) Kendi ifadeleriyle aile, kültür, din, ahlak kaynaklarının görgü kuralları ve nezakete etkisini yeniden ifade eder."
+     ]
+    }
+   ],
+   "bas": "2026-10-12",
+   "bit": "2026-10-16"
+  },
+  {
+   "n": 6,
+   "s": 2,
+   "u": "1. Görgü Kuralları ve Nezaketin Gücü",
+   "m": [
+    {
+     "k": "GKN.1.1.2",
+     "t": "Aile, kültür, din, ahlak kaynaklarının görgü kuralları ve nezakete etkisini yorumlayabilme",
+     "d": [
+      "a) Aile, kültür, din, ahlak kaynaklarının görgü kuralları ve nezakete etkisini inceler.",
+      "b) Aile, kültür, din, ahlak kaynaklarının görgü kuralları ve nezakete etkisini bağlamdan kopmadan dönüştürür.",
+      "c) Kendi ifadeleriyle aile, kültür, din, ahlak kaynaklarının görgü kuralları ve nezakete etkisini yeniden ifade eder."
+     ]
+    }
+   ],
+   "bas": "2026-10-19",
+   "bit": "2026-10-23"
+  },
+  {
+   "n": 7,
+   "s": 2,
+   "u": "1. Görgü Kuralları ve Nezaketin Gücü",
+   "m": [
+    {
+     "k": "GKN.1.1.3",
+     "t": "Birlikte yaşama kültüründe görgü kuralları ve nezaketin yerini yorumlayabilme",
+     "d": [
+      "a) Birlikte yaşama kültüründe görgü kuralları ve nezaketin yerini inceler.",
+      "b) Birlikte yaşama kültüründe görgü kuralları ve nezaketin yerine ilişkin örnekleri bağlamdan kopmadan dönüştürür.",
+      "c) Birlikte yaşama kültüründe görgü kuralları ve nezaketin yerini yeniden ifade eder."
+     ]
+    }
+   ],
+   "bas": "2026-10-26",
+   "bit": "2026-10-30"
+  },
+  {
+   "n": 8,
+   "s": 2,
+   "u": "1. Görgü Kuralları ve Nezaketin Gücü",
+   "m": [
+    {
+     "k": "GKN.1.1.3",
+     "t": "Birlikte yaşama kültüründe görgü kuralları ve nezaketin yerini yorumlayabilme",
+     "d": [
+      "a) Birlikte yaşama kültüründe görgü kuralları ve nezaketin yerini inceler.",
+      "b) Birlikte yaşama kültüründe görgü kuralları ve nezaketin yerine ilişkin örnekleri bağlamdan kopmadan dönüştürür.",
+      "c) Birlikte yaşama kültüründe görgü kuralları ve nezaketin yerini yeniden ifade eder."
+     ]
+    }
+   ],
+   "bas": "2026-11-02",
+   "bit": "2026-11-06"
+  },
+  {
+   "n": 9,
+   "s": 2,
+   "u": "1. Görgü Kuralları ve Nezaketin Gücü",
+   "m": [
+    {
+     "k": "GKN.1.1.3",
+     "t": "Birlikte yaşama kültüründe görgü kuralları ve nezaketin yerini yorumlayabilme",
+     "d": [
+      "a) Birlikte yaşama kültüründe görgü kuralları ve nezaketin yerini inceler.",
+      "b) Birlikte yaşama kültüründe görgü kuralları ve nezaketin yerine ilişkin örnekleri bağlamdan kopmadan dönüştürür.",
+      "c) Birlikte yaşama kültüründe görgü kuralları ve nezaketin yerini yeniden ifade eder."
+     ]
+    }
+   ],
+   "bas": "2026-11-09",
+   "bit": "2026-11-13"
+  },
+  {
+   "n": 10,
+   "s": 2,
+   "u": "1. Görgü Kuralları ve Nezaketin Gücü",
+   "m": [
+    {
+     "k": "GKN.1.1.3",
+     "t": "Birlikte yaşama kültüründe görgü kuralları ve nezaketin yerini yorumlayabilme",
+     "d": [
+      "a) Birlikte yaşama kültüründe görgü kuralları ve nezaketin yerini inceler.",
+      "b) Birlikte yaşama kültüründe görgü kuralları ve nezaketin yerine ilişkin örnekleri bağlamdan kopmadan dönüştürür.",
+      "c) Birlikte yaşama kültüründe görgü kuralları ve nezaketin yerini yeniden ifade eder."
+     ]
+    }
+   ],
+   "bas": "2026-11-23",
+   "bit": "2026-11-27"
+  },
+  {
+   "n": 11,
+   "s": 2,
+   "u": "2. Erdemli İnsandan Huzurlu Aileye",
+   "m": [
+    {
+     "k": "GKN.1.2.1",
+     "t": "Görgü kuralları ve nezaketin öz bakımı etkileyen unsurlarını çözümleyebilme",
+     "d": [
+      "a) Görgü kuralları ve nezaketin öz bakımı etkileyen unsurlarını belirler.",
+      "b) Görgü kuralları ve nezaketin öz bakımı etkileyen unsurları arasındaki ilişkileri belirler."
+     ]
+    }
+   ],
+   "bas": "2026-11-30",
+   "bit": "2026-12-04"
+  },
+  {
+   "n": 12,
+   "s": 2,
+   "u": "2. Erdemli İnsandan Huzurlu Aileye",
+   "m": [
+    {
+     "k": "GKN.1.2.1",
+     "t": "Görgü kuralları ve nezaketin öz bakımı etkileyen unsurlarını çözümleyebilme",
+     "d": [
+      "a) Görgü kuralları ve nezaketin öz bakımı etkileyen unsurlarını belirler.",
+      "b) Görgü kuralları ve nezaketin öz bakımı etkileyen unsurları arasındaki ilişkileri belirler."
+     ]
+    }
+   ],
+   "bas": "2026-12-07",
+   "bit": "2026-12-11"
+  },
+  {
+   "n": 13,
+   "s": 2,
+   "u": "2. Erdemli İnsandan Huzurlu Aileye",
+   "m": [
+    {
+     "k": "GKN.1.2.1",
+     "t": "Görgü kuralları ve nezaketin öz bakımı etkileyen unsurlarını çözümleyebilme",
+     "d": [
+      "a) Görgü kuralları ve nezaketin öz bakımı etkileyen unsurlarını belirler.",
+      "b) Görgü kuralları ve nezaketin öz bakımı etkileyen unsurları arasındaki ilişkileri belirler."
+     ]
+    }
+   ],
+   "bas": "2026-12-14",
+   "bit": "2026-12-18"
+  },
+  {
+   "n": 14,
+   "s": 2,
+   "u": "2. Erdemli İnsandan Huzurlu Aileye",
+   "m": [
+    {
+     "k": "GKN.1.2.2",
+     "t": "Aile içi davranış kültürünü yorumlayabilme",
+     "d": [
+      "a) Aile içi davranış kültürünü inceler.",
+      "b) Aile içi davranış kültürüne ilişkin örnekleri bağlamdan kopmadan dönüştürür.",
+      "c) Kendi ifadeleriyle aile içi davranış kültürünü yeniden ifade eder."
+     ]
+    }
+   ],
+   "bas": "2026-12-21",
+   "bit": "2026-12-25"
+  },
+  {
+   "n": 15,
+   "s": 2,
+   "u": "2. Erdemli İnsandan Huzurlu Aileye",
+   "m": [
+    {
+     "k": "GKN.1.2.2",
+     "t": "Aile içi davranış kültürünü yorumlayabilme",
+     "d": [
+      "a) Aile içi davranış kültürünü inceler.",
+      "b) Aile içi davranış kültürüne ilişkin örnekleri bağlamdan kopmadan dönüştürür.",
+      "c) Kendi ifadeleriyle aile içi davranış kültürünü yeniden ifade eder."
+     ]
+    }
+   ],
+   "bas": "2026-12-28",
+   "bit": "2026-12-31"
+  },
+  {
+   "n": 16,
+   "s": 2,
+   "u": "2. Erdemli İnsandan Huzurlu Aileye",
+   "m": [
+    {
+     "k": "GKN.1.2.2",
+     "t": "Aile içi davranış kültürünü yorumlayabilme",
+     "d": [
+      "a) Aile içi davranış kültürünü inceler.",
+      "b) Aile içi davranış kültürüne ilişkin örnekleri bağlamdan kopmadan dönüştürür.",
+      "c) Kendi ifadeleriyle aile içi davranış kültürünü yeniden ifade eder."
+     ]
+    }
+   ],
+   "bas": "2027-01-04",
+   "bit": "2027-01-08"
+  },
+  {
+   "n": 17,
+   "s": 2,
+   "u": "2. Erdemli İnsandan Huzurlu Aileye",
+   "m": [
+    {
+     "k": "GKN.1.2.2",
+     "t": "Aile içi davranış kültürünü yorumlayabilme",
+     "d": [
+      "a) Aile içi davranış kültürünü inceler.",
+      "b) Aile içi davranış kültürüne ilişkin örnekleri bağlamdan kopmadan dönüştürür.",
+      "c) Kendi ifadeleriyle aile içi davranış kültürünü yeniden ifade eder."
+     ]
+    }
+   ],
+   "bas": "2027-01-11",
+   "bit": "2027-01-15"
+  },
+  {
+   "n": 18,
+   "s": 2,
+   "u": "3. Nazik Öğrenciden Mutlu Okula",
+   "m": [
+    {
+     "k": "GKN.1.3.1",
+     "t": "Okul içi iletişimde gösterilen tutum ve davranışlara ilişkin çıkarım yapabilme",
+     "d": [
+      "a) Okul içi iletişimde gösterilen tutum ve davranışlara ilişkin varsayımda bulunur.",
+      "b) Okul içi iletişimde gösterilen tutum ve davranış örüntülerini listeler.",
+      "c) Okul içi iletişimde gösterilen tutum ve davranışları; nezaket kurallarına uygunluk, taraflar üzerindeki duygusal etkiler, okul iklimine katkısı ve iletişim sürecini kolaylaştırma/zorlaştırma durumları bakımından karşılaştırır.",
+      "ç) Okul içi iletişimde gösterilen tutum ve davranışlara dair önerme sunar.",
+      "d) Okul içi iletişimde gösterilen tutum ve davranışları değerlendirir."
+     ]
+    }
+   ],
+   "bas": "2027-01-18",
+   "bit": "2027-01-22"
+  },
+  {
+   "n": 19,
+   "s": 2,
+   "u": "3. Nazik Öğrenciden Mutlu Okula",
+   "m": [
+    {
+     "k": "GKN.1.3.1",
+     "t": "Okul içi iletişimde gösterilen tutum ve davranışlara ilişkin çıkarım yapabilme",
+     "d": [
+      "a) Okul içi iletişimde gösterilen tutum ve davranışlara ilişkin varsayımda bulunur.",
+      "b) Okul içi iletişimde gösterilen tutum ve davranış örüntülerini listeler.",
+      "c) Okul içi iletişimde gösterilen tutum ve davranışları; nezaket kurallarına uygunluk, taraflar üzerindeki duygusal etkiler, okul iklimine katkısı ve iletişim sürecini kolaylaştırma/zorlaştırma durumları bakımından karşılaştırır.",
+      "ç) Okul içi iletişimde gösterilen tutum ve davranışlara dair önerme sunar.",
+      "d) Okul içi iletişimde gösterilen tutum ve davranışları değerlendirir."
+     ]
+    }
+   ],
+   "bas": "2027-02-08",
+   "bit": "2027-02-12"
+  },
+  {
+   "n": 20,
+   "s": 2,
+   "u": "3. Nazik Öğrenciden Mutlu Okula",
+   "m": [
+    {
+     "k": "GKN.1.3.1",
+     "t": "Okul içi iletişimde gösterilen tutum ve davranışlara ilişkin çıkarım yapabilme",
+     "d": [
+      "a) Okul içi iletişimde gösterilen tutum ve davranışlara ilişkin varsayımda bulunur.",
+      "b) Okul içi iletişimde gösterilen tutum ve davranış örüntülerini listeler.",
+      "c) Okul içi iletişimde gösterilen tutum ve davranışları; nezaket kurallarına uygunluk, taraflar üzerindeki duygusal etkiler, okul iklimine katkısı ve iletişim sürecini kolaylaştırma/zorlaştırma durumları bakımından karşılaştırır.",
+      "ç) Okul içi iletişimde gösterilen tutum ve davranışlara dair önerme sunar.",
+      "d) Okul içi iletişimde gösterilen tutum ve davranışları değerlendirir."
+     ]
+    }
+   ],
+   "bas": "2027-02-15",
+   "bit": "2027-02-19"
+  },
+  {
+   "n": 21,
+   "s": 2,
+   "u": "3. Nazik Öğrenciden Mutlu Okula",
+   "m": [
+    {
+     "k": "GKN.1.3.1",
+     "t": "Okul içi iletişimde gösterilen tutum ve davranışlara ilişkin çıkarım yapabilme",
+     "d": [
+      "a) Okul içi iletişimde gösterilen tutum ve davranışlara ilişkin varsayımda bulunur.",
+      "b) Okul içi iletişimde gösterilen tutum ve davranış örüntülerini listeler.",
+      "c) Okul içi iletişimde gösterilen tutum ve davranışları; nezaket kurallarına uygunluk, taraflar üzerindeki duygusal etkiler, okul iklimine katkısı ve iletişim sürecini kolaylaştırma/zorlaştırma durumları bakımından karşılaştırır.",
+      "ç) Okul içi iletişimde gösterilen tutum ve davranışlara dair önerme sunar.",
+      "d) Okul içi iletişimde gösterilen tutum ve davranışları değerlendirir."
+     ]
+    }
+   ],
+   "bas": "2027-02-22",
+   "bit": "2027-02-26"
+  },
+  {
+   "n": 22,
+   "s": 2,
+   "u": "3. Nazik Öğrenciden Mutlu Okula",
+   "m": [
+    {
+     "k": "GKN.1.3.2",
+     "t": "Okul kaynaklarını verimli kullanma, temizlik ve tasarruf kültürünü hayatına yansıtabilme",
+     "d": [
+      "a) Okul kaynaklarını verimli kullanma, temizlik ve tasarruf kültürünü hayatına yansıtma ile ilgili deneyimlerini gözden geçirir.",
+      "b) Okul kaynaklarını verimli kullanma, temizlik ve tasarruf kültürü ile ilgili deneyimlerine dayalı çıkarım yapar.",
+      "c) Okul kaynaklarını verimli kullanma, temizlik ve tasarruf kültürünü hayatına yansıtabilme ile ilgili ulaşılan çıkarımları değerlendirir."
+     ]
+    }
+   ],
+   "bas": "2027-03-01",
+   "bit": "2027-03-05"
+  },
+  {
+   "n": 23,
+   "s": 2,
+   "u": "3. Nazik Öğrenciden Mutlu Okula",
+   "m": [
+    {
+     "k": "GKN.1.3.2",
+     "t": "Okul kaynaklarını verimli kullanma, temizlik ve tasarruf kültürünü hayatına yansıtabilme",
+     "d": [
+      "a) Okul kaynaklarını verimli kullanma, temizlik ve tasarruf kültürünü hayatına yansıtma ile ilgili deneyimlerini gözden geçirir.",
+      "b) Okul kaynaklarını verimli kullanma, temizlik ve tasarruf kültürü ile ilgili deneyimlerine dayalı çıkarım yapar.",
+      "c) Okul kaynaklarını verimli kullanma, temizlik ve tasarruf kültürünü hayatına yansıtabilme ile ilgili ulaşılan çıkarımları değerlendirir."
+     ]
+    }
+   ],
+   "bas": "2027-03-15",
+   "bit": "2027-03-19"
+  },
+  {
+   "n": 24,
+   "s": 2,
+   "u": "3. Nazik Öğrenciden Mutlu Okula",
+   "m": [
+    {
+     "k": "GKN.1.3.2",
+     "t": "Okul kaynaklarını verimli kullanma, temizlik ve tasarruf kültürünü hayatına yansıtabilme",
+     "d": [
+      "a) Okul kaynaklarını verimli kullanma, temizlik ve tasarruf kültürünü hayatına yansıtma ile ilgili deneyimlerini gözden geçirir.",
+      "b) Okul kaynaklarını verimli kullanma, temizlik ve tasarruf kültürü ile ilgili deneyimlerine dayalı çıkarım yapar.",
+      "c) Okul kaynaklarını verimli kullanma, temizlik ve tasarruf kültürünü hayatına yansıtabilme ile ilgili ulaşılan çıkarımları değerlendirir."
+     ]
+    }
+   ],
+   "bas": "2027-03-22",
+   "bit": "2027-03-26"
+  },
+  {
+   "n": 25,
+   "s": 2,
+   "u": "3. Nazik Öğrenciden Mutlu Okula",
+   "m": [
+    {
+     "k": "GKN.1.3.2",
+     "t": "Okul kaynaklarını verimli kullanma, temizlik ve tasarruf kültürünü hayatına yansıtabilme",
+     "d": [
+      "a) Okul kaynaklarını verimli kullanma, temizlik ve tasarruf kültürünü hayatına yansıtma ile ilgili deneyimlerini gözden geçirir.",
+      "b) Okul kaynaklarını verimli kullanma, temizlik ve tasarruf kültürü ile ilgili deneyimlerine dayalı çıkarım yapar.",
+      "c) Okul kaynaklarını verimli kullanma, temizlik ve tasarruf kültürünü hayatına yansıtabilme ile ilgili ulaşılan çıkarımları değerlendirir."
+     ]
+    }
+   ],
+   "bas": "2027-03-29",
+   "bit": "2027-04-02"
+  },
+  {
+   "n": 26,
+   "s": 2,
+   "u": "3. Nazik Öğrenciden Mutlu Okula",
+   "m": [
+    {
+     "k": "GKN.1.3.2",
+     "t": "Okul kaynaklarını verimli kullanma, temizlik ve tasarruf kültürünü hayatına yansıtabilme",
+     "d": [
+      "a) Okul kaynaklarını verimli kullanma, temizlik ve tasarruf kültürünü hayatına yansıtma ile ilgili deneyimlerini gözden geçirir.",
+      "b) Okul kaynaklarını verimli kullanma, temizlik ve tasarruf kültürü ile ilgili deneyimlerine dayalı çıkarım yapar.",
+      "c) Okul kaynaklarını verimli kullanma, temizlik ve tasarruf kültürünü hayatına yansıtabilme ile ilgili ulaşılan çıkarımları değerlendirir."
+     ]
+    }
+   ],
+   "bas": "2027-04-05",
+   "bit": "2027-04-09"
+  },
+  {
+   "n": 27,
+   "s": 2,
+   "u": "4. Bir Arada Yaşamanın İncelikleri",
+   "m": [
+    {
+     "k": "GKN.1.4.1",
+     "t": "Toplumsal yaşamda ortak alanlarda görgü kuralları ve nezaketin önemini yorumlayabilme",
+     "d": [
+      "a) Toplumsal yaşamda ortak alanlarda görgü kuralları ve nezaketin önemini inceler.",
+      "b) Toplumsal yaşamda ortak alanlarda görgü kuralları ve nezaketin önemine ilişkin örnekleri bağlamdan kopmadan dönüştürür.",
+      "c) Kendi ifadeleriyle toplumsal yaşamda ortak alanlarda görgü kuralları ve nezaketin önemini yeniden ifade eder."
+     ]
+    }
+   ],
+   "bas": "2027-04-12",
+   "bit": "2027-04-16"
+  },
+  {
+   "n": 28,
+   "s": 2,
+   "u": "4. Bir Arada Yaşamanın İncelikleri",
+   "m": [
+    {
+     "k": "GKN.1.4.1",
+     "t": "Toplumsal yaşamda ortak alanlarda görgü kuralları ve nezaketin önemini yorumlayabilme",
+     "d": [
+      "a) Toplumsal yaşamda ortak alanlarda görgü kuralları ve nezaketin önemini inceler.",
+      "b) Toplumsal yaşamda ortak alanlarda görgü kuralları ve nezaketin önemine ilişkin örnekleri bağlamdan kopmadan dönüştürür.",
+      "c) Kendi ifadeleriyle toplumsal yaşamda ortak alanlarda görgü kuralları ve nezaketin önemini yeniden ifade eder."
+     ]
+    }
+   ],
+   "bas": "2027-04-19",
+   "bit": "2027-04-23"
+  },
+  {
+   "n": 29,
+   "s": 2,
+   "u": "4. Bir Arada Yaşamanın İncelikleri",
+   "m": [
+    {
+     "k": "GKN.1.4.1",
+     "t": "Toplumsal yaşamda ortak alanlarda görgü kuralları ve nezaketin önemini yorumlayabilme",
+     "d": [
+      "a) Toplumsal yaşamda ortak alanlarda görgü kuralları ve nezaketin önemini inceler.",
+      "b) Toplumsal yaşamda ortak alanlarda görgü kuralları ve nezaketin önemine ilişkin örnekleri bağlamdan kopmadan dönüştürür.",
+      "c) Kendi ifadeleriyle toplumsal yaşamda ortak alanlarda görgü kuralları ve nezaketin önemini yeniden ifade eder."
+     ]
+    }
+   ],
+   "bas": "2027-04-26",
+   "bit": "2027-04-30"
+  },
+  {
+   "n": 30,
+   "s": 2,
+   "u": "4. Bir Arada Yaşamanın İncelikleri",
+   "m": [
+    {
+     "k": "GKN.1.4.1",
+     "t": "Toplumsal yaşamda ortak alanlarda görgü kuralları ve nezaketin önemini yorumlayabilme",
+     "d": [
+      "a) Toplumsal yaşamda ortak alanlarda görgü kuralları ve nezaketin önemini inceler.",
+      "b) Toplumsal yaşamda ortak alanlarda görgü kuralları ve nezaketin önemine ilişkin örnekleri bağlamdan kopmadan dönüştürür.",
+      "c) Kendi ifadeleriyle toplumsal yaşamda ortak alanlarda görgü kuralları ve nezaketin önemini yeniden ifade eder."
+     ]
+    }
+   ],
+   "bas": "2027-05-03",
+   "bit": "2027-05-07"
+  },
+  {
+   "n": 31,
+   "s": 2,
+   "u": "4. Bir Arada Yaşamanın İncelikleri",
+   "m": [
+    {
+     "k": "GKN.1.4.2",
+     "t": "Millî ve manevi değerlerin görgü kuralları ve nezaketle ilişkisine dair unsurları çözümleyebilme",
+     "d": [
+      "a) Millî ve manevi değerlerin görgü kuralları ve nezaketle ilişkisine dair unsurları belirler.",
+      "b) Millî ve manevi değerlerin görgü kuralları ve nezaketle ilişkisine dair unsurlar arasındaki ilişkileri belirler."
+     ]
+    }
+   ],
+   "bas": "2027-05-10",
+   "bit": "2027-05-14"
+  },
+  {
+   "n": 32,
+   "s": 2,
+   "u": "4. Bir Arada Yaşamanın İncelikleri",
+   "m": [
+    {
+     "k": "GKN.1.4.2",
+     "t": "Millî ve manevi değerlerin görgü kuralları ve nezaketle ilişkisine dair unsurları çözümleyebilme",
+     "d": [
+      "a) Millî ve manevi değerlerin görgü kuralları ve nezaketle ilişkisine dair unsurları belirler.",
+      "b) Millî ve manevi değerlerin görgü kuralları ve nezaketle ilişkisine dair unsurlar arasındaki ilişkileri belirler."
+     ]
+    }
+   ],
+   "bas": "2027-05-20",
+   "bit": "2027-05-21"
+  },
+  {
+   "n": 33,
+   "s": 2,
+   "u": "4. Bir Arada Yaşamanın İncelikleri",
+   "m": [
+    {
+     "k": "GKN.1.4.2",
+     "t": "Millî ve manevi değerlerin görgü kuralları ve nezaketle ilişkisine dair unsurları çözümleyebilme",
+     "d": [
+      "a) Millî ve manevi değerlerin görgü kuralları ve nezaketle ilişkisine dair unsurları belirler.",
+      "b) Millî ve manevi değerlerin görgü kuralları ve nezaketle ilişkisine dair unsurlar arasındaki ilişkileri belirler."
+     ]
+    }
+   ],
+   "bas": "2027-05-24",
+   "bit": "2027-05-28"
+  },
+  {
+   "n": 34,
+   "s": 2,
+   "u": "4. Bir Arada Yaşamanın İncelikleri",
+   "m": [
+    {
+     "k": "GKN.1.4.2",
+     "t": "Millî ve manevi değerlerin görgü kuralları ve nezaketle ilişkisine dair unsurları çözümleyebilme",
+     "d": [
+      "a) Millî ve manevi değerlerin görgü kuralları ve nezaketle ilişkisine dair unsurları belirler.",
+      "b) Millî ve manevi değerlerin görgü kuralları ve nezaketle ilişkisine dair unsurlar arasındaki ilişkileri belirler."
+     ]
+    }
+   ],
+   "bas": "2027-05-31",
+   "bit": "2027-06-04"
+  },
+  {
+   "n": 35,
+   "s": 2,
+   "u": "Okul temelli planlama",
+   "m": [],
+   "nt": "Okul temelli planlama haftası (zümrece belirlenir)",
+   "bas": "2027-06-07",
+   "bit": "2027-06-11"
+  },
+  {
+   "n": 36,
+   "s": 2,
+   "u": "Okul temelli planlama",
+   "m": [],
+   "nt": "Okul temelli planlama haftası (zümrece belirlenir)",
+   "bas": "2027-06-14",
+   "bit": "2027-06-18"
+  },
+  {
+   "n": 37,
+   "s": 2,
+   "m": [],
+   "nt": "Planlanan kazanım yok",
+   "bas": "2027-06-21",
+   "bit": "2027-06-25"
+  }
+ ]
+}

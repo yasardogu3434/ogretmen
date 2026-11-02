@@ -1,0 +1,629 @@
+{
+ "ders": "Spor ve Fiziki Etkinlikler",
+ "anahtar": "spor",
+ "sinif": 1,
+ "kaynak": "MEB Spor ve Fiziki Etkinlikler Dersi Öğretim Programı (2026), haftada 2 ders saati. Haftalara dağıtım ünite sürelerine göre yapılmıştır; MEB programında hafta hafta plan yoktur.",
+ "haftalar": [
+  {
+   "n": 1,
+   "s": 2,
+   "u": "1. Spor Branşımı Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.1.1",
+     "t": "Seçilen spor branşının tarihsel gelişimini özetleyebilme",
+     "d": [
+      "a) Seçilen spor branşının tarihsel gelişimini çözümler.",
+      "b) Seçilen spor branşının gelişim sürecinde yer alan önemli dönem ve gelişmeleri sınıflandırır.",
+      "c) Seçilen spor branşının gelişimini etkileyen faktörleri neden sonuç ilişkileriyle yorumlar."
+     ]
+    }
+   ],
+   "bas": "2026-09-14",
+   "bit": "2026-09-18"
+  },
+  {
+   "n": 2,
+   "s": 2,
+   "u": "1. Spor Branşımı Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.1.1",
+     "t": "Seçilen spor branşının tarihsel gelişimini özetleyebilme",
+     "d": [
+      "a) Seçilen spor branşının tarihsel gelişimini çözümler.",
+      "b) Seçilen spor branşının gelişim sürecinde yer alan önemli dönem ve gelişmeleri sınıflandırır.",
+      "c) Seçilen spor branşının gelişimini etkileyen faktörleri neden sonuç ilişkileriyle yorumlar."
+     ]
+    }
+   ],
+   "bas": "2026-09-21",
+   "bit": "2026-09-25"
+  },
+  {
+   "n": 3,
+   "s": 2,
+   "u": "1. Spor Branşımı Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.1.1",
+     "t": "Seçilen spor branşının tarihsel gelişimini özetleyebilme",
+     "d": [
+      "a) Seçilen spor branşının tarihsel gelişimini çözümler.",
+      "b) Seçilen spor branşının gelişim sürecinde yer alan önemli dönem ve gelişmeleri sınıflandırır.",
+      "c) Seçilen spor branşının gelişimini etkileyen faktörleri neden sonuç ilişkileriyle yorumlar."
+     ]
+    }
+   ],
+   "bas": "2026-09-28",
+   "bit": "2026-10-02"
+  },
+  {
+   "n": 4,
+   "s": 2,
+   "u": "1. Spor Branşımı Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.1.2",
+     "t": "Seçilen spor branşının kurallarını çözümleyebilme",
+     "d": [
+      "a) Seçilen spor branşının kurallarını oluşturan temel ögeleri belirler.",
+      "b) Seçilen spor branşının kuralları arasındaki mantıksal ilişkileri belirler."
+     ]
+    }
+   ],
+   "bas": "2026-10-05",
+   "bit": "2026-10-09"
+  },
+  {
+   "n": 5,
+   "s": 2,
+   "u": "1. Spor Branşımı Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.1.2",
+     "t": "Seçilen spor branşının kurallarını çözümleyebilme",
+     "d": [
+      "a) Seçilen spor branşının kurallarını oluşturan temel ögeleri belirler.",
+      "b) Seçilen spor branşının kuralları arasındaki mantıksal ilişkileri belirler."
+     ]
+    }
+   ],
+   "bas": "2026-10-12",
+   "bit": "2026-10-16"
+  },
+  {
+   "n": 6,
+   "s": 2,
+   "u": "1. Spor Branşımı Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.1.2",
+     "t": "Seçilen spor branşının kurallarını çözümleyebilme",
+     "d": [
+      "a) Seçilen spor branşının kurallarını oluşturan temel ögeleri belirler.",
+      "b) Seçilen spor branşının kuralları arasındaki mantıksal ilişkileri belirler."
+     ]
+    }
+   ],
+   "bas": "2026-10-19",
+   "bit": "2026-10-23"
+  },
+  {
+   "n": 7,
+   "s": 2,
+   "u": "2. Spor Branşına Özgü Hareket Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.2.1",
+     "t": "Seçilen spor branşında güvenli ortam oluşturabilme",
+     "d": [
+      "a) Seçilen spor branşında ortaya çıkabilecek riskleri belirler.",
+      "b) Belirlediği risklere karşı önleyici tedbirler alır."
+     ]
+    }
+   ],
+   "bas": "2026-10-26",
+   "bit": "2026-10-30"
+  },
+  {
+   "n": 8,
+   "s": 2,
+   "u": "2. Spor Branşına Özgü Hareket Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.2.1",
+     "t": "Seçilen spor branşında güvenli ortam oluşturabilme",
+     "d": [
+      "a) Seçilen spor branşında ortaya çıkabilecek riskleri belirler.",
+      "b) Belirlediği risklere karşı önleyici tedbirler alır."
+     ]
+    }
+   ],
+   "bas": "2026-11-02",
+   "bit": "2026-11-06"
+  },
+  {
+   "n": 9,
+   "s": 2,
+   "u": "2. Spor Branşına Özgü Hareket Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.2.1",
+     "t": "Seçilen spor branşında güvenli ortam oluşturabilme",
+     "d": [
+      "a) Seçilen spor branşında ortaya çıkabilecek riskleri belirler.",
+      "b) Belirlediği risklere karşı önleyici tedbirler alır."
+     ]
+    }
+   ],
+   "bas": "2026-11-09",
+   "bit": "2026-11-13"
+  },
+  {
+   "n": 10,
+   "s": 2,
+   "u": "2. Spor Branşına Özgü Hareket Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.2.1",
+     "t": "Seçilen spor branşında güvenli ortam oluşturabilme",
+     "d": [
+      "a) Seçilen spor branşında ortaya çıkabilecek riskleri belirler.",
+      "b) Belirlediği risklere karşı önleyici tedbirler alır."
+     ]
+    }
+   ],
+   "bas": "2026-11-23",
+   "bit": "2026-11-27"
+  },
+  {
+   "n": 11,
+   "s": 2,
+   "u": "2. Spor Branşına Özgü Hareket Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.2.2",
+     "t": "Seçilen spor branşına özgü hareket becerilerini sergileyebilme",
+     "d": [
+      "a) Seçilen spor branşına özgü hareket becerilerini algılar.",
+      "b) Seçilen spor branşına özgü hareket becerisinin basamaklarını gösterir.",
+      "c) Seçilen spor branşına özgü hareket becerilerini oyun, yarışma veya antrenman ortamlarında uygular."
+     ]
+    }
+   ],
+   "bas": "2026-11-30",
+   "bit": "2026-12-04"
+  },
+  {
+   "n": 12,
+   "s": 2,
+   "u": "2. Spor Branşına Özgü Hareket Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.2.2",
+     "t": "Seçilen spor branşına özgü hareket becerilerini sergileyebilme",
+     "d": [
+      "a) Seçilen spor branşına özgü hareket becerilerini algılar.",
+      "b) Seçilen spor branşına özgü hareket becerisinin basamaklarını gösterir.",
+      "c) Seçilen spor branşına özgü hareket becerilerini oyun, yarışma veya antrenman ortamlarında uygular."
+     ]
+    }
+   ],
+   "bas": "2026-12-07",
+   "bit": "2026-12-11"
+  },
+  {
+   "n": 13,
+   "s": 2,
+   "u": "2. Spor Branşına Özgü Hareket Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.2.2",
+     "t": "Seçilen spor branşına özgü hareket becerilerini sergileyebilme",
+     "d": [
+      "a) Seçilen spor branşına özgü hareket becerilerini algılar.",
+      "b) Seçilen spor branşına özgü hareket becerisinin basamaklarını gösterir.",
+      "c) Seçilen spor branşına özgü hareket becerilerini oyun, yarışma veya antrenman ortamlarında uygular."
+     ]
+    }
+   ],
+   "bas": "2026-12-14",
+   "bit": "2026-12-18"
+  },
+  {
+   "n": 14,
+   "s": 2,
+   "u": "2. Spor Branşına Özgü Hareket Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.2.2",
+     "t": "Seçilen spor branşına özgü hareket becerilerini sergileyebilme",
+     "d": [
+      "a) Seçilen spor branşına özgü hareket becerilerini algılar.",
+      "b) Seçilen spor branşına özgü hareket becerisinin basamaklarını gösterir.",
+      "c) Seçilen spor branşına özgü hareket becerilerini oyun, yarışma veya antrenman ortamlarında uygular."
+     ]
+    }
+   ],
+   "bas": "2026-12-21",
+   "bit": "2026-12-25"
+  },
+  {
+   "n": 15,
+   "s": 2,
+   "u": "2. Spor Branşına Özgü Hareket Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.2.2",
+     "t": "Seçilen spor branşına özgü hareket becerilerini sergileyebilme",
+     "d": [
+      "a) Seçilen spor branşına özgü hareket becerilerini algılar.",
+      "b) Seçilen spor branşına özgü hareket becerisinin basamaklarını gösterir.",
+      "c) Seçilen spor branşına özgü hareket becerilerini oyun, yarışma veya antrenman ortamlarında uygular."
+     ]
+    }
+   ],
+   "bas": "2026-12-28",
+   "bit": "2026-12-31"
+  },
+  {
+   "n": 16,
+   "s": 2,
+   "u": "2. Spor Branşına Özgü Hareket Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.2.3",
+     "t": "Seçilen spor branşına özgü fiziksel uygunluğu sağlayabilme",
+     "d": [
+      "a) Seçilen spor branşına özgü fiziksel uygunluk bileşenlerini açıklar.",
+      "b) Seçilen spor branşına yönelik fiziksel uygunluk bileşenlerini geliştirmeye yönelik hareketleri (sürat koşusu, denge egzersizi vb.) uygular.",
+      "c) Seçilen spor branşına özgü fiziksel uygunluk bileşenlerini geliştirir."
+     ]
+    }
+   ],
+   "bas": "2027-01-04",
+   "bit": "2027-01-08"
+  },
+  {
+   "n": 17,
+   "s": 2,
+   "u": "2. Spor Branşına Özgü Hareket Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.2.3",
+     "t": "Seçilen spor branşına özgü fiziksel uygunluğu sağlayabilme",
+     "d": [
+      "a) Seçilen spor branşına özgü fiziksel uygunluk bileşenlerini açıklar.",
+      "b) Seçilen spor branşına yönelik fiziksel uygunluk bileşenlerini geliştirmeye yönelik hareketleri (sürat koşusu, denge egzersizi vb.) uygular.",
+      "c) Seçilen spor branşına özgü fiziksel uygunluk bileşenlerini geliştirir."
+     ]
+    }
+   ],
+   "bas": "2027-01-11",
+   "bit": "2027-01-15"
+  },
+  {
+   "n": 18,
+   "s": 2,
+   "u": "2. Spor Branşına Özgü Hareket Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.2.3",
+     "t": "Seçilen spor branşına özgü fiziksel uygunluğu sağlayabilme",
+     "d": [
+      "a) Seçilen spor branşına özgü fiziksel uygunluk bileşenlerini açıklar.",
+      "b) Seçilen spor branşına yönelik fiziksel uygunluk bileşenlerini geliştirmeye yönelik hareketleri (sürat koşusu, denge egzersizi vb.) uygular.",
+      "c) Seçilen spor branşına özgü fiziksel uygunluk bileşenlerini geliştirir."
+     ]
+    }
+   ],
+   "bas": "2027-01-18",
+   "bit": "2027-01-22"
+  },
+  {
+   "n": 19,
+   "s": 2,
+   "u": "2. Spor Branşına Özgü Hareket Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.2.3",
+     "t": "Seçilen spor branşına özgü fiziksel uygunluğu sağlayabilme",
+     "d": [
+      "a) Seçilen spor branşına özgü fiziksel uygunluk bileşenlerini açıklar.",
+      "b) Seçilen spor branşına yönelik fiziksel uygunluk bileşenlerini geliştirmeye yönelik hareketleri (sürat koşusu, denge egzersizi vb.) uygular.",
+      "c) Seçilen spor branşına özgü fiziksel uygunluk bileşenlerini geliştirir."
+     ]
+    }
+   ],
+   "bas": "2027-02-08",
+   "bit": "2027-02-12"
+  },
+  {
+   "n": 20,
+   "s": 2,
+   "u": "2. Spor Branşına Özgü Hareket Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.2.3",
+     "t": "Seçilen spor branşına özgü fiziksel uygunluğu sağlayabilme",
+     "d": [
+      "a) Seçilen spor branşına özgü fiziksel uygunluk bileşenlerini açıklar.",
+      "b) Seçilen spor branşına yönelik fiziksel uygunluk bileşenlerini geliştirmeye yönelik hareketleri (sürat koşusu, denge egzersizi vb.) uygular.",
+      "c) Seçilen spor branşına özgü fiziksel uygunluk bileşenlerini geliştirir."
+     ]
+    }
+   ],
+   "bas": "2027-02-15",
+   "bit": "2027-02-19"
+  },
+  {
+   "n": 21,
+   "s": 2,
+   "u": "3. Spor Branşının Taktik Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.3.1",
+     "t": "Seçilen Spor branşına özgü taktik ve strateji geliştirebilme",
+     "d": [
+      "a) Seçilen spor branşına özgü taktiksel ve stratejik problemleri belirler.",
+      "b) Seçilen spor branşına özgü belirlenen taktiksel ve stratejik duruma yönelik çözüm önerileri sunar.",
+      "c) Seçilen spor branşına özgü geliştirilen taktik veya stratejiyi oyun ve yarışma ortamında uygular."
+     ]
+    }
+   ],
+   "bas": "2027-02-22",
+   "bit": "2027-02-26"
+  },
+  {
+   "n": 22,
+   "s": 2,
+   "u": "3. Spor Branşının Taktik Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.3.1",
+     "t": "Seçilen Spor branşına özgü taktik ve strateji geliştirebilme",
+     "d": [
+      "a) Seçilen spor branşına özgü taktiksel ve stratejik problemleri belirler.",
+      "b) Seçilen spor branşına özgü belirlenen taktiksel ve stratejik duruma yönelik çözüm önerileri sunar.",
+      "c) Seçilen spor branşına özgü geliştirilen taktik veya stratejiyi oyun ve yarışma ortamında uygular."
+     ]
+    }
+   ],
+   "bas": "2027-03-01",
+   "bit": "2027-03-05"
+  },
+  {
+   "n": 23,
+   "s": 2,
+   "u": "3. Spor Branşının Taktik Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.3.1",
+     "t": "Seçilen Spor branşına özgü taktik ve strateji geliştirebilme",
+     "d": [
+      "a) Seçilen spor branşına özgü taktiksel ve stratejik problemleri belirler.",
+      "b) Seçilen spor branşına özgü belirlenen taktiksel ve stratejik duruma yönelik çözüm önerileri sunar.",
+      "c) Seçilen spor branşına özgü geliştirilen taktik veya stratejiyi oyun ve yarışma ortamında uygular."
+     ]
+    }
+   ],
+   "bas": "2027-03-15",
+   "bit": "2027-03-19"
+  },
+  {
+   "n": 24,
+   "s": 2,
+   "u": "3. Spor Branşının Taktik Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.3.1",
+     "t": "Seçilen Spor branşına özgü taktik ve strateji geliştirebilme",
+     "d": [
+      "a) Seçilen spor branşına özgü taktiksel ve stratejik problemleri belirler.",
+      "b) Seçilen spor branşına özgü belirlenen taktiksel ve stratejik duruma yönelik çözüm önerileri sunar.",
+      "c) Seçilen spor branşına özgü geliştirilen taktik veya stratejiyi oyun ve yarışma ortamında uygular."
+     ]
+    }
+   ],
+   "bas": "2027-03-22",
+   "bit": "2027-03-26"
+  },
+  {
+   "n": 25,
+   "s": 2,
+   "u": "3. Spor Branşının Taktik Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.3.2",
+     "t": "Seçilen spor branşında adil oyun anlayışına uygun davranabilme",
+     "d": [
+      "a) Seçilen spor branşında adil oyun ilkelerini açıklar.",
+      "b) Seçilen spor branşında adil oyun anlayışına uygun davranır."
+     ]
+    }
+   ],
+   "bas": "2027-03-29",
+   "bit": "2027-04-02"
+  },
+  {
+   "n": 26,
+   "s": 2,
+   "u": "3. Spor Branşının Taktik Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.3.2",
+     "t": "Seçilen spor branşında adil oyun anlayışına uygun davranabilme",
+     "d": [
+      "a) Seçilen spor branşında adil oyun ilkelerini açıklar.",
+      "b) Seçilen spor branşında adil oyun anlayışına uygun davranır."
+     ]
+    }
+   ],
+   "bas": "2027-04-05",
+   "bit": "2027-04-09"
+  },
+  {
+   "n": 27,
+   "s": 2,
+   "u": "3. Spor Branşının Taktik Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.3.2",
+     "t": "Seçilen spor branşında adil oyun anlayışına uygun davranabilme",
+     "d": [
+      "a) Seçilen spor branşında adil oyun ilkelerini açıklar.",
+      "b) Seçilen spor branşında adil oyun anlayışına uygun davranır."
+     ]
+    }
+   ],
+   "bas": "2027-04-12",
+   "bit": "2027-04-16"
+  },
+  {
+   "n": 28,
+   "s": 2,
+   "u": "3. Spor Branşının Taktik Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.3.2",
+     "t": "Seçilen spor branşında adil oyun anlayışına uygun davranabilme",
+     "d": [
+      "a) Seçilen spor branşında adil oyun ilkelerini açıklar.",
+      "b) Seçilen spor branşında adil oyun anlayışına uygun davranır."
+     ]
+    }
+   ],
+   "bas": "2027-04-19",
+   "bit": "2027-04-23"
+  },
+  {
+   "n": 29,
+   "s": 2,
+   "u": "3. Spor Branşının Taktik Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.3.2",
+     "t": "Seçilen spor branşında adil oyun anlayışına uygun davranabilme",
+     "d": [
+      "a) Seçilen spor branşında adil oyun ilkelerini açıklar.",
+      "b) Seçilen spor branşında adil oyun anlayışına uygun davranır."
+     ]
+    }
+   ],
+   "bas": "2027-04-26",
+   "bit": "2027-04-30"
+  },
+  {
+   "n": 30,
+   "s": 2,
+   "u": "3. Spor Branşının Taktik Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.3.3",
+     "t": "Seçilen spor branşında takım/grup liderliği sergileme",
+     "d": [
+      "a) Seçilen spor branşında takım/grup liderliği özelliklerini tanır.",
+      "b) Seçilen spor branşında takım/grup liderliği özelliklerini gösterir."
+     ]
+    }
+   ],
+   "bas": "2027-05-03",
+   "bit": "2027-05-07"
+  },
+  {
+   "n": 31,
+   "s": 2,
+   "u": "3. Spor Branşının Taktik Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.3.3",
+     "t": "Seçilen spor branşında takım/grup liderliği sergileme",
+     "d": [
+      "a) Seçilen spor branşında takım/grup liderliği özelliklerini tanır.",
+      "b) Seçilen spor branşında takım/grup liderliği özelliklerini gösterir."
+     ]
+    }
+   ],
+   "bas": "2027-05-10",
+   "bit": "2027-05-14"
+  },
+  {
+   "n": 32,
+   "s": 2,
+   "u": "3. Spor Branşının Taktik Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.3.3",
+     "t": "Seçilen spor branşında takım/grup liderliği sergileme",
+     "d": [
+      "a) Seçilen spor branşında takım/grup liderliği özelliklerini tanır.",
+      "b) Seçilen spor branşında takım/grup liderliği özelliklerini gösterir."
+     ]
+    }
+   ],
+   "bas": "2027-05-20",
+   "bit": "2027-05-21"
+  },
+  {
+   "n": 33,
+   "s": 2,
+   "u": "3. Spor Branşının Taktik Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.3.3",
+     "t": "Seçilen spor branşında takım/grup liderliği sergileme",
+     "d": [
+      "a) Seçilen spor branşında takım/grup liderliği özelliklerini tanır.",
+      "b) Seçilen spor branşında takım/grup liderliği özelliklerini gösterir."
+     ]
+    }
+   ],
+   "bas": "2027-05-24",
+   "bit": "2027-05-28"
+  },
+  {
+   "n": 34,
+   "s": 2,
+   "u": "3. Spor Branşının Taktik Becerilerini Öğreniyorum",
+   "m": [
+    {
+     "k": "SFE.3.3",
+     "t": "Seçilen spor branşında takım/grup liderliği sergileme",
+     "d": [
+      "a) Seçilen spor branşında takım/grup liderliği özelliklerini tanır.",
+      "b) Seçilen spor branşında takım/grup liderliği özelliklerini gösterir."
+     ]
+    }
+   ],
+   "bas": "2027-05-31",
+   "bit": "2027-06-04"
+  },
+  {
+   "n": 35,
+   "s": 2,
+   "u": "Okul temelli planlama",
+   "m": [],
+   "nt": "Okul temelli planlama haftası (zümrece belirlenir)",
+   "bas": "2027-06-07",
+   "bit": "2027-06-11"
+  },
+  {
+   "n": 36,
+   "s": 2,
+   "u": "Okul temelli planlama",
+   "m": [],
+   "nt": "Okul temelli planlama haftası (zümrece belirlenir)",
+   "bas": "2027-06-14",
+   "bit": "2027-06-18"
+  },
+  {
+   "n": 37,
+   "s": 2,
+   "m": [],
+   "nt": "Planlanan kazanım yok",
+   "bas": "2027-06-21",
+   "bit": "2027-06-25"
+  }
+ ]
+}

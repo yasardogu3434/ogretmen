@@ -1,0 +1,673 @@
+{
+ "ders": "Kültür ve Medeniyetimize Yön Verenler",
+ "anahtar": "kultmed",
+ "sinif": 1,
+ "kaynak": "MEB Kültür ve Medeniyetimize Yön Verenler Dersi Öğretim Programı (2026), I. düzey (haftada 2 ders saati). Haftalara dağıtım ünite sürelerine göre yapılmıştır; MEB programında hafta hafta plan yoktur.",
+ "haftalar": [
+  {
+   "n": 1,
+   "s": 2,
+   "u": "1. Kültür ve Medeniyet",
+   "m": [
+    {
+     "k": "KMYV.1.1.1",
+     "t": "Kültür ve medeniyet arasındaki ilişkiyi yorumlayabilme",
+     "d": [
+      "a) Kültür ve medeniyet arasındaki ilişkiyi inceler.",
+      "b) Kültür ve medeniyet arasındaki ilişkiyi bağlamdan kopmadan dönüştürür.",
+      "c) Kültür ve medeniyet arasındaki ilişkiyi kendi ifadeleriyle doğru ve anlamı değiştirmeyecek şekilde yeniden ifade eder."
+     ]
+    }
+   ],
+   "bas": "2026-09-14",
+   "bit": "2026-09-18"
+  },
+  {
+   "n": 2,
+   "s": 2,
+   "u": "1. Kültür ve Medeniyet",
+   "m": [
+    {
+     "k": "KMYV.1.1.1",
+     "t": "Kültür ve medeniyet arasındaki ilişkiyi yorumlayabilme",
+     "d": [
+      "a) Kültür ve medeniyet arasındaki ilişkiyi inceler.",
+      "b) Kültür ve medeniyet arasındaki ilişkiyi bağlamdan kopmadan dönüştürür.",
+      "c) Kültür ve medeniyet arasındaki ilişkiyi kendi ifadeleriyle doğru ve anlamı değiştirmeyecek şekilde yeniden ifade eder."
+     ]
+    }
+   ],
+   "bas": "2026-09-21",
+   "bit": "2026-09-25"
+  },
+  {
+   "n": 3,
+   "s": 2,
+   "u": "1. Kültür ve Medeniyet",
+   "m": [
+    {
+     "k": "KMYV.1.1.1",
+     "t": "Kültür ve medeniyet arasındaki ilişkiyi yorumlayabilme",
+     "d": [
+      "a) Kültür ve medeniyet arasındaki ilişkiyi inceler.",
+      "b) Kültür ve medeniyet arasındaki ilişkiyi bağlamdan kopmadan dönüştürür.",
+      "c) Kültür ve medeniyet arasındaki ilişkiyi kendi ifadeleriyle doğru ve anlamı değiştirmeyecek şekilde yeniden ifade eder."
+     ]
+    }
+   ],
+   "bas": "2026-09-28",
+   "bit": "2026-10-02"
+  },
+  {
+   "n": 4,
+   "s": 2,
+   "u": "1. Kültür ve Medeniyet",
+   "m": [
+    {
+     "k": "KMYV.1.1.2",
+     "t": "Kültür ve medeniyetin korunmasının kültür ve medeniyetin sürdürülebilirliğine katkısına yönelik çıkarım yapabilme",
+     "d": [
+      "a) Kültür ve medeniyeti koruma uygulamalarının kültür ve medeniyetin sürdürülebilirliğine sağladığı faydalara dair varsayımlarda bulunur.",
+      "b) Kültür ve medeniyeti koruma uygulamalarının kültür ve medeniyetin sürdürülebilirliğine sağladığı faydaları listeler.",
+      "c) Kültür ve medeniyeti koruma uygulamalarının kültür ve medeniyetin sürdürülebilirliğine sağladığı faydaları benzerlik ve farklılıklarıyla karşılaştırır.",
+      "ç) Kültür ve medeniyeti koruma uygulamalarının kültür ve medeniyetin sürdürülebilirliğine katkısını açıklayan mantıksal önermeler sunar.",
+      "d) Kültür ve medeniyetin korunmasının sürdürülebilirliğe katkısına ilişkin ulaştığı çıkarımları tutarlılık, geçerlilik ve kapsayıcılık ölçütlerine göre değerlendirir."
+     ]
+    }
+   ],
+   "bas": "2026-10-05",
+   "bit": "2026-10-09"
+  },
+  {
+   "n": 5,
+   "s": 2,
+   "u": "1. Kültür ve Medeniyet",
+   "m": [
+    {
+     "k": "KMYV.1.1.2",
+     "t": "Kültür ve medeniyetin korunmasının kültür ve medeniyetin sürdürülebilirliğine katkısına yönelik çıkarım yapabilme",
+     "d": [
+      "a) Kültür ve medeniyeti koruma uygulamalarının kültür ve medeniyetin sürdürülebilirliğine sağladığı faydalara dair varsayımlarda bulunur.",
+      "b) Kültür ve medeniyeti koruma uygulamalarının kültür ve medeniyetin sürdürülebilirliğine sağladığı faydaları listeler.",
+      "c) Kültür ve medeniyeti koruma uygulamalarının kültür ve medeniyetin sürdürülebilirliğine sağladığı faydaları benzerlik ve farklılıklarıyla karşılaştırır.",
+      "ç) Kültür ve medeniyeti koruma uygulamalarının kültür ve medeniyetin sürdürülebilirliğine katkısını açıklayan mantıksal önermeler sunar.",
+      "d) Kültür ve medeniyetin korunmasının sürdürülebilirliğe katkısına ilişkin ulaştığı çıkarımları tutarlılık, geçerlilik ve kapsayıcılık ölçütlerine göre değerlendirir."
+     ]
+    }
+   ],
+   "bas": "2026-10-12",
+   "bit": "2026-10-16"
+  },
+  {
+   "n": 6,
+   "s": 2,
+   "u": "1. Kültür ve Medeniyet",
+   "m": [
+    {
+     "k": "KMYV.1.1.2",
+     "t": "Kültür ve medeniyetin korunmasının kültür ve medeniyetin sürdürülebilirliğine katkısına yönelik çıkarım yapabilme",
+     "d": [
+      "a) Kültür ve medeniyeti koruma uygulamalarının kültür ve medeniyetin sürdürülebilirliğine sağladığı faydalara dair varsayımlarda bulunur.",
+      "b) Kültür ve medeniyeti koruma uygulamalarının kültür ve medeniyetin sürdürülebilirliğine sağladığı faydaları listeler.",
+      "c) Kültür ve medeniyeti koruma uygulamalarının kültür ve medeniyetin sürdürülebilirliğine sağladığı faydaları benzerlik ve farklılıklarıyla karşılaştırır.",
+      "ç) Kültür ve medeniyeti koruma uygulamalarının kültür ve medeniyetin sürdürülebilirliğine katkısını açıklayan mantıksal önermeler sunar.",
+      "d) Kültür ve medeniyetin korunmasının sürdürülebilirliğe katkısına ilişkin ulaştığı çıkarımları tutarlılık, geçerlilik ve kapsayıcılık ölçütlerine göre değerlendirir."
+     ]
+    }
+   ],
+   "bas": "2026-10-19",
+   "bit": "2026-10-23"
+  },
+  {
+   "n": 7,
+   "s": 2,
+   "u": "2. Kültür ve Medeniyetimizin Rehberleri",
+   "m": [
+    {
+     "k": "KMYV.1.2.1",
+     "t": "Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında meraka dayalı sorular sorabilme",
+     "d": [
+      "a) Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler ile ilgili merak ettiği konuları belirler.",
+      "b) Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler ile ilgili merak ettiği konular hakkında sorular sorar."
+     ]
+    }
+   ],
+   "bas": "2026-10-26",
+   "bit": "2026-10-30"
+  },
+  {
+   "n": 8,
+   "s": 2,
+   "u": "2. Kültür ve Medeniyetimizin Rehberleri",
+   "m": [
+    {
+     "k": "KMYV.1.2.1",
+     "t": "Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında meraka dayalı sorular sorabilme",
+     "d": [
+      "a) Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler ile ilgili merak ettiği konuları belirler.",
+      "b) Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler ile ilgili merak ettiği konular hakkında sorular sorar."
+     ]
+    }
+   ],
+   "bas": "2026-11-02",
+   "bit": "2026-11-06"
+  },
+  {
+   "n": 9,
+   "s": 2,
+   "u": "2. Kültür ve Medeniyetimizin Rehberleri",
+   "m": [
+    {
+     "k": "KMYV.1.2.2",
+     "t": "Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında kaynaklardan bilgi toplayabilme",
+     "d": [
+      "a) Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında bilgi toplayabileceği kaynakları belirler.",
+      "b) Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında belirlediği kaynaklardan ilgili bilgileri bulur.",
+      "c) Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında topladığı kaynakların uygunluğunu açıklar.",
+      "ç) Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında topladığı bilgileri kaydeder."
+     ]
+    }
+   ],
+   "bas": "2026-11-09",
+   "bit": "2026-11-13"
+  },
+  {
+   "n": 10,
+   "s": 2,
+   "u": "2. Kültür ve Medeniyetimizin Rehberleri",
+   "m": [
+    {
+     "k": "KMYV.1.2.2",
+     "t": "Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında kaynaklardan bilgi toplayabilme",
+     "d": [
+      "a) Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında bilgi toplayabileceği kaynakları belirler.",
+      "b) Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında belirlediği kaynaklardan ilgili bilgileri bulur.",
+      "c) Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında topladığı kaynakların uygunluğunu açıklar.",
+      "ç) Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında topladığı bilgileri kaydeder."
+     ]
+    }
+   ],
+   "bas": "2026-11-23",
+   "bit": "2026-11-27"
+  },
+  {
+   "n": 11,
+   "s": 2,
+   "u": "2. Kültür ve Medeniyetimizin Rehberleri",
+   "m": [
+    {
+     "k": "KMYV.1.2.2",
+     "t": "Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında kaynaklardan bilgi toplayabilme",
+     "d": [
+      "a) Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında bilgi toplayabileceği kaynakları belirler.",
+      "b) Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında belirlediği kaynaklardan ilgili bilgileri bulur.",
+      "c) Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında topladığı kaynakların uygunluğunu açıklar.",
+      "ç) Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında topladığı bilgileri kaydeder."
+     ]
+    }
+   ],
+   "bas": "2026-11-30",
+   "bit": "2026-12-04"
+  },
+  {
+   "n": 12,
+   "s": 2,
+   "u": "2. Kültür ve Medeniyetimizin Rehberleri",
+   "m": [
+    {
+     "k": "KMYV.1.2.3",
+     "t": "Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında kanıta dayalı ürün oluşturabilme ve paylaşabilme",
+     "d": [
+      "a) Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında kanıtlara dayanarak çıkarım yapar.",
+      "b) Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında kanıtlardan elde ettiği çıkarım üzerine kişisel görüşünü yansıtan bir ürün oluşturur.",
+      "c) Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında oluşturduğu ürünü paylaşır."
+     ]
+    }
+   ],
+   "bas": "2026-12-07",
+   "bit": "2026-12-11"
+  },
+  {
+   "n": 13,
+   "s": 2,
+   "u": "2. Kültür ve Medeniyetimizin Rehberleri",
+   "m": [
+    {
+     "k": "KMYV.1.2.3",
+     "t": "Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında kanıta dayalı ürün oluşturabilme ve paylaşabilme",
+     "d": [
+      "a) Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında kanıtlara dayanarak çıkarım yapar.",
+      "b) Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında kanıtlardan elde ettiği çıkarım üzerine kişisel görüşünü yansıtan bir ürün oluşturur.",
+      "c) Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında oluşturduğu ürünü paylaşır."
+     ]
+    }
+   ],
+   "bas": "2026-12-14",
+   "bit": "2026-12-18"
+  },
+  {
+   "n": 14,
+   "s": 2,
+   "u": "2. Kültür ve Medeniyetimizin Rehberleri",
+   "m": [
+    {
+     "k": "KMYV.1.2.3",
+     "t": "Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında kanıta dayalı ürün oluşturabilme ve paylaşabilme",
+     "d": [
+      "a) Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında kanıtlara dayanarak çıkarım yapar.",
+      "b) Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında kanıtlardan elde ettiği çıkarım üzerine kişisel görüşünü yansıtan bir ürün oluşturur.",
+      "c) Kültür ve medeniyetimizin gelişimine rehberlik eden şahsiyetler hakkında oluşturduğu ürünü paylaşır."
+     ]
+    }
+   ],
+   "bas": "2026-12-21",
+   "bit": "2026-12-25"
+  },
+  {
+   "n": 15,
+   "s": 2,
+   "u": "3. Bilim, Düşünce ve Teknoloji Tarihimizde İz Bırakanlar",
+   "m": [
+    {
+     "k": "KMYV.1.3.1",
+     "t": "Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin hayatı ve eserleri hakkında bilgi toplayabilme",
+     "d": [
+      "a) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin hayatı ve eserleri hakkında bilgi toplayabileceği kaynakları belirler.",
+      "b) Belirlediği kaynakları kullanarak Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetler hakkında bilgilere ulaşır.",
+      "c) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetler hakkında ulaştığı bilgileri farklı kaynaklardan doğrular.",
+      "ç) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetler hakkında ulaştığı bilgileri kaydeder."
+     ]
+    }
+   ],
+   "bas": "2026-12-28",
+   "bit": "2026-12-31"
+  },
+  {
+   "n": 16,
+   "s": 2,
+   "u": "3. Bilim, Düşünce ve Teknoloji Tarihimizde İz Bırakanlar",
+   "m": [
+    {
+     "k": "KMYV.1.3.1",
+     "t": "Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin hayatı ve eserleri hakkında bilgi toplayabilme",
+     "d": [
+      "a) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin hayatı ve eserleri hakkında bilgi toplayabileceği kaynakları belirler.",
+      "b) Belirlediği kaynakları kullanarak Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetler hakkında bilgilere ulaşır.",
+      "c) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetler hakkında ulaştığı bilgileri farklı kaynaklardan doğrular.",
+      "ç) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetler hakkında ulaştığı bilgileri kaydeder."
+     ]
+    }
+   ],
+   "bas": "2027-01-04",
+   "bit": "2027-01-08"
+  },
+  {
+   "n": 17,
+   "s": 2,
+   "u": "3. Bilim, Düşünce ve Teknoloji Tarihimizde İz Bırakanlar",
+   "m": [
+    {
+     "k": "KMYV.1.3.1",
+     "t": "Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin hayatı ve eserleri hakkında bilgi toplayabilme",
+     "d": [
+      "a) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin hayatı ve eserleri hakkında bilgi toplayabileceği kaynakları belirler.",
+      "b) Belirlediği kaynakları kullanarak Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetler hakkında bilgilere ulaşır.",
+      "c) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetler hakkında ulaştığı bilgileri farklı kaynaklardan doğrular.",
+      "ç) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetler hakkında ulaştığı bilgileri kaydeder."
+     ]
+    }
+   ],
+   "bas": "2027-01-11",
+   "bit": "2027-01-15"
+  },
+  {
+   "n": 18,
+   "s": 2,
+   "u": "3. Bilim, Düşünce ve Teknoloji Tarihimizde İz Bırakanlar",
+   "m": [
+    {
+     "k": "KMYV.1.3.1",
+     "t": "Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin hayatı ve eserleri hakkında bilgi toplayabilme",
+     "d": [
+      "a) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin hayatı ve eserleri hakkında bilgi toplayabileceği kaynakları belirler.",
+      "b) Belirlediği kaynakları kullanarak Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetler hakkında bilgilere ulaşır.",
+      "c) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetler hakkında ulaştığı bilgileri farklı kaynaklardan doğrular.",
+      "ç) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetler hakkında ulaştığı bilgileri kaydeder."
+     ]
+    }
+   ],
+   "bas": "2027-01-18",
+   "bit": "2027-01-22"
+  },
+  {
+   "n": 19,
+   "s": 2,
+   "u": "3. Bilim, Düşünce ve Teknoloji Tarihimizde İz Bırakanlar",
+   "m": [
+    {
+     "k": "KMYV.1.3.1",
+     "t": "Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin hayatı ve eserleri hakkında bilgi toplayabilme",
+     "d": [
+      "a) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin hayatı ve eserleri hakkında bilgi toplayabileceği kaynakları belirler.",
+      "b) Belirlediği kaynakları kullanarak Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetler hakkında bilgilere ulaşır.",
+      "c) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetler hakkında ulaştığı bilgileri farklı kaynaklardan doğrular.",
+      "ç) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetler hakkında ulaştığı bilgileri kaydeder."
+     ]
+    }
+   ],
+   "bas": "2027-02-08",
+   "bit": "2027-02-12"
+  },
+  {
+   "n": 20,
+   "s": 2,
+   "u": "3. Bilim, Düşünce ve Teknoloji Tarihimizde İz Bırakanlar",
+   "m": [
+    {
+     "k": "KMYV.1.3.2",
+     "t": "Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarını sorgulayabilme",
+     "d": [
+      "a) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarıyla ilgili merak ettiği konuyu tanımlar.",
+      "b) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarıyla ilgili sorular sorar.",
+      "c) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarıyla ilgili bilgi toplar.",
+      "ç) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarına ilişkin topladığı bilgilerin doğruluğunu değerlendirir.",
+      "d) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarına ilişkin elde ettiği verilerden hareketle çıkarım yapar."
+     ]
+    }
+   ],
+   "bas": "2027-02-15",
+   "bit": "2027-02-19"
+  },
+  {
+   "n": 21,
+   "s": 2,
+   "u": "3. Bilim, Düşünce ve Teknoloji Tarihimizde İz Bırakanlar",
+   "m": [
+    {
+     "k": "KMYV.1.3.2",
+     "t": "Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarını sorgulayabilme",
+     "d": [
+      "a) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarıyla ilgili merak ettiği konuyu tanımlar.",
+      "b) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarıyla ilgili sorular sorar.",
+      "c) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarıyla ilgili bilgi toplar.",
+      "ç) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarına ilişkin topladığı bilgilerin doğruluğunu değerlendirir.",
+      "d) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarına ilişkin elde ettiği verilerden hareketle çıkarım yapar."
+     ]
+    }
+   ],
+   "bas": "2027-02-22",
+   "bit": "2027-02-26"
+  },
+  {
+   "n": 22,
+   "s": 2,
+   "u": "3. Bilim, Düşünce ve Teknoloji Tarihimizde İz Bırakanlar",
+   "m": [
+    {
+     "k": "KMYV.1.3.2",
+     "t": "Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarını sorgulayabilme",
+     "d": [
+      "a) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarıyla ilgili merak ettiği konuyu tanımlar.",
+      "b) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarıyla ilgili sorular sorar.",
+      "c) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarıyla ilgili bilgi toplar.",
+      "ç) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarına ilişkin topladığı bilgilerin doğruluğunu değerlendirir.",
+      "d) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarına ilişkin elde ettiği verilerden hareketle çıkarım yapar."
+     ]
+    }
+   ],
+   "bas": "2027-03-01",
+   "bit": "2027-03-05"
+  },
+  {
+   "n": 23,
+   "s": 2,
+   "u": "3. Bilim, Düşünce ve Teknoloji Tarihimizde İz Bırakanlar",
+   "m": [
+    {
+     "k": "KMYV.1.3.2",
+     "t": "Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarını sorgulayabilme",
+     "d": [
+      "a) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarıyla ilgili merak ettiği konuyu tanımlar.",
+      "b) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarıyla ilgili sorular sorar.",
+      "c) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarıyla ilgili bilgi toplar.",
+      "ç) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarına ilişkin topladığı bilgilerin doğruluğunu değerlendirir.",
+      "d) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarına ilişkin elde ettiği verilerden hareketle çıkarım yapar."
+     ]
+    }
+   ],
+   "bas": "2027-03-15",
+   "bit": "2027-03-19"
+  },
+  {
+   "n": 24,
+   "s": 2,
+   "u": "3. Bilim, Düşünce ve Teknoloji Tarihimizde İz Bırakanlar",
+   "m": [
+    {
+     "k": "KMYV.1.3.2",
+     "t": "Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarını sorgulayabilme",
+     "d": [
+      "a) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarıyla ilgili merak ettiği konuyu tanımlar.",
+      "b) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarıyla ilgili sorular sorar.",
+      "c) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarıyla ilgili bilgi toplar.",
+      "ç) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarına ilişkin topladığı bilgilerin doğruluğunu değerlendirir.",
+      "d) Türk-İslam bilim ve düşünce havzasında yetişen şahsiyetlerin kültür ve medeniyetimize katkılarına ilişkin elde ettiği verilerden hareketle çıkarım yapar."
+     ]
+    }
+   ],
+   "bas": "2027-03-22",
+   "bit": "2027-03-26"
+  },
+  {
+   "n": 25,
+   "s": 2,
+   "u": "4. Kültür ve Medeniyetimizin Sanat Önderleri",
+   "m": [
+    {
+     "k": "KMYV.1.4.1",
+     "t": "Kültür ve medeniyetimize yön veren sanat önderleri hakkında bilgi toplayabilme",
+     "d": [
+      "a) Kültür ve medeniyetimize yön veren sanat önderleri hakkında bilgi toplayabileceği kaynakları belirler.",
+      "b) Belirlediği kaynakları kullanarak kültür ve medeniyetimize yön veren sanat önderleri hakkında bilgilere ulaşır.",
+      "c) Sanat önderleri hakkında ulaştığı bilgileri farklı kaynaklardan doğrular.",
+      "ç) Sanat önderleri hakkında ulaştığı bilgileri kaydeder."
+     ]
+    }
+   ],
+   "bas": "2027-03-29",
+   "bit": "2027-04-02"
+  },
+  {
+   "n": 26,
+   "s": 2,
+   "u": "4. Kültür ve Medeniyetimizin Sanat Önderleri",
+   "m": [
+    {
+     "k": "KMYV.1.4.1",
+     "t": "Kültür ve medeniyetimize yön veren sanat önderleri hakkında bilgi toplayabilme",
+     "d": [
+      "a) Kültür ve medeniyetimize yön veren sanat önderleri hakkında bilgi toplayabileceği kaynakları belirler.",
+      "b) Belirlediği kaynakları kullanarak kültür ve medeniyetimize yön veren sanat önderleri hakkında bilgilere ulaşır.",
+      "c) Sanat önderleri hakkında ulaştığı bilgileri farklı kaynaklardan doğrular.",
+      "ç) Sanat önderleri hakkında ulaştığı bilgileri kaydeder."
+     ]
+    }
+   ],
+   "bas": "2027-04-05",
+   "bit": "2027-04-09"
+  },
+  {
+   "n": 27,
+   "s": 2,
+   "u": "4. Kültür ve Medeniyetimizin Sanat Önderleri",
+   "m": [
+    {
+     "k": "KMYV.1.4.1",
+     "t": "Kültür ve medeniyetimize yön veren sanat önderleri hakkında bilgi toplayabilme",
+     "d": [
+      "a) Kültür ve medeniyetimize yön veren sanat önderleri hakkında bilgi toplayabileceği kaynakları belirler.",
+      "b) Belirlediği kaynakları kullanarak kültür ve medeniyetimize yön veren sanat önderleri hakkında bilgilere ulaşır.",
+      "c) Sanat önderleri hakkında ulaştığı bilgileri farklı kaynaklardan doğrular.",
+      "ç) Sanat önderleri hakkında ulaştığı bilgileri kaydeder."
+     ]
+    }
+   ],
+   "bas": "2027-04-12",
+   "bit": "2027-04-16"
+  },
+  {
+   "n": 28,
+   "s": 2,
+   "u": "4. Kültür ve Medeniyetimizin Sanat Önderleri",
+   "m": [
+    {
+     "k": "KMYV.1.4.1",
+     "t": "Kültür ve medeniyetimize yön veren sanat önderleri hakkında bilgi toplayabilme",
+     "d": [
+      "a) Kültür ve medeniyetimize yön veren sanat önderleri hakkında bilgi toplayabileceği kaynakları belirler.",
+      "b) Belirlediği kaynakları kullanarak kültür ve medeniyetimize yön veren sanat önderleri hakkında bilgilere ulaşır.",
+      "c) Sanat önderleri hakkında ulaştığı bilgileri farklı kaynaklardan doğrular.",
+      "ç) Sanat önderleri hakkında ulaştığı bilgileri kaydeder."
+     ]
+    }
+   ],
+   "bas": "2027-04-19",
+   "bit": "2027-04-23"
+  },
+  {
+   "n": 29,
+   "s": 2,
+   "u": "4. Kültür ve Medeniyetimizin Sanat Önderleri",
+   "m": [
+    {
+     "k": "KMYV.1.4.1",
+     "t": "Kültür ve medeniyetimize yön veren sanat önderleri hakkında bilgi toplayabilme",
+     "d": [
+      "a) Kültür ve medeniyetimize yön veren sanat önderleri hakkında bilgi toplayabileceği kaynakları belirler.",
+      "b) Belirlediği kaynakları kullanarak kültür ve medeniyetimize yön veren sanat önderleri hakkında bilgilere ulaşır.",
+      "c) Sanat önderleri hakkında ulaştığı bilgileri farklı kaynaklardan doğrular.",
+      "ç) Sanat önderleri hakkında ulaştığı bilgileri kaydeder."
+     ]
+    }
+   ],
+   "bas": "2027-04-26",
+   "bit": "2027-04-30"
+  },
+  {
+   "n": 30,
+   "s": 2,
+   "u": "4. Kültür ve Medeniyetimizin Sanat Önderleri",
+   "m": [
+    {
+     "k": "KMYV.1.4.2",
+     "t": "Kültür ve medeniyetimize yön veren sanat önderlerinin kültür ve medeniyetimize katkılarını yorumlayabilme",
+     "d": [
+      "a) Sanat önderlerinin kültür ve medeniyetimize sağladığı katkıları inceler.",
+      "b) Sanat önderlerinin kültür ve medeniyetimize sağladığı katkıları bağlamdan kopmadan dönüştürür.",
+      "c) Sanat önderlerinin kültür ve medeniyetimize katkıları kendi cümleleri ile nesnel, doğru ve anlamı değiştirmeyecek şekilde yeniden ifade eder."
+     ]
+    }
+   ],
+   "bas": "2027-05-03",
+   "bit": "2027-05-07"
+  },
+  {
+   "n": 31,
+   "s": 2,
+   "u": "4. Kültür ve Medeniyetimizin Sanat Önderleri",
+   "m": [
+    {
+     "k": "KMYV.1.4.2",
+     "t": "Kültür ve medeniyetimize yön veren sanat önderlerinin kültür ve medeniyetimize katkılarını yorumlayabilme",
+     "d": [
+      "a) Sanat önderlerinin kültür ve medeniyetimize sağladığı katkıları inceler.",
+      "b) Sanat önderlerinin kültür ve medeniyetimize sağladığı katkıları bağlamdan kopmadan dönüştürür.",
+      "c) Sanat önderlerinin kültür ve medeniyetimize katkıları kendi cümleleri ile nesnel, doğru ve anlamı değiştirmeyecek şekilde yeniden ifade eder."
+     ]
+    }
+   ],
+   "bas": "2027-05-10",
+   "bit": "2027-05-14"
+  },
+  {
+   "n": 32,
+   "s": 2,
+   "u": "4. Kültür ve Medeniyetimizin Sanat Önderleri",
+   "m": [
+    {
+     "k": "KMYV.1.4.2",
+     "t": "Kültür ve medeniyetimize yön veren sanat önderlerinin kültür ve medeniyetimize katkılarını yorumlayabilme",
+     "d": [
+      "a) Sanat önderlerinin kültür ve medeniyetimize sağladığı katkıları inceler.",
+      "b) Sanat önderlerinin kültür ve medeniyetimize sağladığı katkıları bağlamdan kopmadan dönüştürür.",
+      "c) Sanat önderlerinin kültür ve medeniyetimize katkıları kendi cümleleri ile nesnel, doğru ve anlamı değiştirmeyecek şekilde yeniden ifade eder."
+     ]
+    }
+   ],
+   "bas": "2027-05-20",
+   "bit": "2027-05-21"
+  },
+  {
+   "n": 33,
+   "s": 2,
+   "u": "4. Kültür ve Medeniyetimizin Sanat Önderleri",
+   "m": [
+    {
+     "k": "KMYV.1.4.2",
+     "t": "Kültür ve medeniyetimize yön veren sanat önderlerinin kültür ve medeniyetimize katkılarını yorumlayabilme",
+     "d": [
+      "a) Sanat önderlerinin kültür ve medeniyetimize sağladığı katkıları inceler.",
+      "b) Sanat önderlerinin kültür ve medeniyetimize sağladığı katkıları bağlamdan kopmadan dönüştürür.",
+      "c) Sanat önderlerinin kültür ve medeniyetimize katkıları kendi cümleleri ile nesnel, doğru ve anlamı değiştirmeyecek şekilde yeniden ifade eder."
+     ]
+    }
+   ],
+   "bas": "2027-05-24",
+   "bit": "2027-05-28"
+  },
+  {
+   "n": 34,
+   "s": 2,
+   "u": "4. Kültür ve Medeniyetimizin Sanat Önderleri",
+   "m": [
+    {
+     "k": "KMYV.1.4.2",
+     "t": "Kültür ve medeniyetimize yön veren sanat önderlerinin kültür ve medeniyetimize katkılarını yorumlayabilme",
+     "d": [
+      "a) Sanat önderlerinin kültür ve medeniyetimize sağladığı katkıları inceler.",
+      "b) Sanat önderlerinin kültür ve medeniyetimize sağladığı katkıları bağlamdan kopmadan dönüştürür.",
+      "c) Sanat önderlerinin kültür ve medeniyetimize katkıları kendi cümleleri ile nesnel, doğru ve anlamı değiştirmeyecek şekilde yeniden ifade eder."
+     ]
+    }
+   ],
+   "bas": "2027-05-31",
+   "bit": "2027-06-04"
+  },
+  {
+   "n": 35,
+   "s": 2,
+   "u": "Okul temelli planlama",
+   "m": [],
+   "nt": "Okul temelli planlama haftası (zümrece belirlenir)",
+   "bas": "2027-06-07",
+   "bit": "2027-06-11"
+  },
+  {
+   "n": 36,
+   "s": 2,
+   "u": "Okul temelli planlama",
+   "m": [],
+   "nt": "Okul temelli planlama haftası (zümrece belirlenir)",
+   "bas": "2027-06-14",
+   "bit": "2027-06-18"
+  },
+  {
+   "n": 37,
+   "s": 2,
+   "m": [],
+   "nt": "Planlanan kazanım yok",
+   "bas": "2027-06-21",
+   "bit": "2027-06-25"
+  }
+ ]
+}
