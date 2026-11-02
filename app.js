@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.16.5'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.16.6'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu', kd: 'ogr_kd' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -2812,8 +2812,8 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     h += dtSatir('gun:' + ds, '', 'Günün tamamı', '', '');
     h += '</div>';
     if (my || cv) h += '<button class="lk" type="button" data-nt="' + (G.gb.wd - 1) + ',' + (no - 1) + '" style="margin-top:16px">Bu derse not ekle</button>';
-    if (my) h += subeOgrBolumu(G.y ? { y: G.y, ben: norm(G.y.kisi && G.y.kisi.ad) } : {}, my.sinif);
     if (my && kzEsle(my)) h += '<div class="kzw" id="kzw" data-ds="' + ds + '"><div class="kzn">Kazanımlar yükleniyor…</div></div>';
+    if (my) h += subeOgrBolumu(G.y ? { y: G.y, ben: norm(G.y.kisi && G.y.kisi.ad) } : {}, my.sinif);
     dtGoster(les ? r[1] : r[1], h);
     if (my && kzEsle(my)) kzDoldur(my, ds);
   }
@@ -2870,8 +2870,8 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     });
     h += '</div>';
     var my = { sinif: g.sinif, ders: g.ders };
-    h += subeOgrBolumu(C, g.sinif);
     if (kzEsle(my)) h += '<div class="kzw" id="kzw" data-ds="' + ilk + '"><div class="kzn">Kazanımlar yükleniyor…</div></div>';
+    h += subeOgrBolumu(C, g.sinif);
     dtGoster('Ders', h);
     if (kzEsle(my)) kzDoldur(my, ilk);
   }
