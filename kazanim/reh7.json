@@ -1,0 +1,578 @@
+{
+ "ders": "Rehberlik ve Yönlendirme",
+ "anahtar": "reh",
+ "sinif": 7,
+ "kaynak": "7. sınıf — MEB Sınıf Rehberlik Programı (2020) kazanımları. Kazanımlar programdaki işleniş sırası ve hafta sayılarına göre dağıtılmıştır; ilk hafta öğrenci tanıma çalışmasına ayrılmıştır.",
+ "haftalar": [
+  {
+   "n": 1,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [],
+   "nt": "Öğrenci tanıma formlarının güncellenmesi",
+   "bas": "2026-09-14",
+   "bit": "2026-09-18"
+  },
+  {
+   "n": 2,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.1",
+     "b": "Sınıf Rehberlik",
+     "t": "Yeni durumlar ve değişimlerle ilgili duygularını ifade eder.",
+     "d": []
+    }
+   ],
+   "bas": "2026-09-21",
+   "bit": "2026-09-25"
+  },
+  {
+   "n": 3,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.2",
+     "b": "Sınıf Rehberlik",
+     "t": "Zamanını etkili kullanmanın akademik gelişimine etkisini açıklar.",
+     "d": [
+      "Genel zaman planlamaya odaklanılır."
+     ]
+    }
+   ],
+   "bas": "2026-09-28",
+   "bit": "2026-10-02"
+  },
+  {
+   "n": 4,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.2-2",
+     "b": "Sınıf Rehberlik",
+     "t": "Zamanını etkili kullanmanın akademik gelişimine etkisini açıklar.",
+     "d": [
+      "Sınav temelli zaman planlamaya odaklanılır."
+     ]
+    }
+   ],
+   "bas": "2026-10-05",
+   "bit": "2026-10-09"
+  },
+  {
+   "n": 5,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.3",
+     "b": "Sınıf Rehberlik",
+     "t": "Eğitsel çabanın akademik hedeflere ulaşmadaki etkisini değerlendirir.",
+     "d": []
+    }
+   ],
+   "bas": "2026-10-12",
+   "bit": "2026-10-16"
+  },
+  {
+   "n": 6,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.4",
+     "b": "Sınıf Rehberlik",
+     "t": "Akademik çalışmalarını zamanında bitirmede kararlı olur.",
+     "d": []
+    }
+   ],
+   "bas": "2026-10-19",
+   "bit": "2026-10-23"
+  },
+  {
+   "n": 7,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.5",
+     "b": "Sınıf Rehberlik",
+     "t": "Yapabildiği ve hoşlandığı etkinliklere dayalı olarak ilgi ve yeteneklerine örnekler verir.",
+     "d": []
+    }
+   ],
+   "bas": "2026-10-26",
+   "bit": "2026-10-30"
+  },
+  {
+   "n": 8,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.6",
+     "b": "Sınıf Rehberlik",
+     "t": "İlgi ve hobilerini ayırt eder.",
+     "d": []
+    }
+   ],
+   "bas": "2026-11-02",
+   "bit": "2026-11-06"
+  },
+  {
+   "n": 9,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.6-2",
+     "b": "Sınıf Rehberlik",
+     "t": "İlgi ve hobilerini ayırt eder.",
+     "d": []
+    }
+   ],
+   "bas": "2026-11-09",
+   "bit": "2026-11-13",
+   "kn": "Not: Sınıf risk haritasının oluşturulması."
+  },
+  {
+   "n": 10,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.7",
+     "b": "Sınıf Rehberlik",
+     "t": "Akademik çalışmaları ile ilgili değişen durumlara uygun davranışlar sergiler.",
+     "d": [
+      "Değişen durumlara göre gözden geçirme ve planlama üzerinde durulur."
+     ]
+    }
+   ],
+   "bas": "2026-11-23",
+   "bit": "2026-11-27"
+  },
+  {
+   "n": 11,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.8",
+     "b": "Sınıf Rehberlik",
+     "t": "Mesleklerle ilgili bilgi kaynaklarına ulaşır.",
+     "d": [
+      "Bilgi kaynaklarına ulaşmak ve bilgiye ulaşma yollarını deneyimlemek amacıyla araştırma yapacağı etkinlikler planlanır."
+     ]
+    }
+   ],
+   "bas": "2026-11-30",
+   "bit": "2026-12-04"
+  },
+  {
+   "n": 12,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.9",
+     "b": "Sınıf Rehberlik",
+     "t": "Her bireyin hak ve sorumlulukları olduğunu bilir.",
+     "d": []
+    }
+   ],
+   "bas": "2026-12-07",
+   "bit": "2026-12-11"
+  },
+  {
+   "n": 13,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.10",
+     "b": "Sınıf Rehberlik",
+     "t": "Kendisi için verimli öğrenme ve ders çalışma koşullarını oluşturur.",
+     "d": []
+    }
+   ],
+   "bas": "2026-12-14",
+   "bit": "2026-12-18"
+  },
+  {
+   "n": 14,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.11",
+     "b": "Sınıf Rehberlik",
+     "t": "Öğrenme etkinliklerine yönelik duygu ve düşüncelerini ifade eder.",
+     "d": []
+    }
+   ],
+   "bas": "2026-12-21",
+   "bit": "2026-12-25"
+  },
+  {
+   "n": 15,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.12",
+     "b": "Sınıf Rehberlik",
+     "t": "Arkadaşlarının olumlu özelliklerini takdir eder.",
+     "d": []
+    }
+   ],
+   "bas": "2026-12-28",
+   "bit": "2026-12-31"
+  },
+  {
+   "n": 16,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.13",
+     "b": "Sınıf Rehberlik",
+     "t": "Arkadaşlık ilişkilerinde yaşadığı sorunları yapıcı yollarla çözer.",
+     "d": []
+    }
+   ],
+   "bas": "2027-01-04",
+   "bit": "2027-01-08"
+  },
+  {
+   "n": 17,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.14",
+     "b": "Sınıf Rehberlik",
+     "t": "Derste dinleme, not alma ve soru sorma gibi teknikleri kullanır.",
+     "d": []
+    }
+   ],
+   "bas": "2027-01-11",
+   "bit": "2027-01-15"
+  },
+  {
+   "n": 18,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.15",
+     "b": "Sınıf Rehberlik",
+     "t": "Belleğini güçlendirecek stratejileri açıklar.",
+     "d": [
+      "Zihin haritaları, kısaltmalar, şiirler, deyişler, akrostişler, hikâyeler üzerinde durulur."
+     ]
+    }
+   ],
+   "bas": "2027-01-18",
+   "bit": "2027-01-22"
+  },
+  {
+   "n": 19,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.16",
+     "b": "Sınıf Rehberlik",
+     "t": "Sınavlara hazırlanmayı etkileyen faktörleri açıklar.",
+     "d": [
+      "Sınav türü, uykusuzluk, açlık, yanlış çalışma alışkanlıkları, sınava ilişkin duygu ve düşünceler üzerinde durulur."
+     ]
+    }
+   ],
+   "bas": "2027-02-08",
+   "bit": "2027-02-12"
+  },
+  {
+   "n": 20,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.17",
+     "b": "Sınıf Rehberlik",
+     "t": "Sınavlara hazırlanma davranışlarını gözden geçirir.",
+     "d": []
+    }
+   ],
+   "bas": "2027-02-15",
+   "bit": "2027-02-19"
+  },
+  {
+   "n": 21,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.18",
+     "b": "Sınıf Rehberlik",
+     "t": "Sosyal ipuçlarını yorumlayarak uygun tepkiler verir.",
+     "d": [
+      "Beden dili, ses tonu ve sosyal ipuçlarına değinilir."
+     ]
+    }
+   ],
+   "bas": "2027-02-22",
+   "bit": "2027-02-26"
+  },
+  {
+   "n": 22,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.19",
+     "b": "Sınıf Rehberlik",
+     "t": "Bilişsel yeterlilikleri ve kişilik özelliklerini geliştirebileceğine inanır.",
+     "d": []
+    }
+   ],
+   "bas": "2027-03-01",
+   "bit": "2027-03-05"
+  },
+  {
+   "n": 23,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.20",
+     "b": "Sınıf Rehberlik",
+     "t": "Zorbalık ve türlerini bilir.",
+     "d": []
+    }
+   ],
+   "bas": "2027-03-15",
+   "bit": "2027-03-19"
+  },
+  {
+   "n": 24,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.21",
+     "b": "Sınıf Rehberlik",
+     "t": "Zorbalıkla baş etme yollarını kullanır.",
+     "d": []
+    }
+   ],
+   "bas": "2027-03-22",
+   "bit": "2027-03-26"
+  },
+  {
+   "n": 25,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.22",
+     "b": "Sınıf Rehberlik",
+     "t": "Yetenekleriyle derslerin etkinliklerini ilişkilendirir.",
+     "d": []
+    }
+   ],
+   "bas": "2027-03-29",
+   "bit": "2027-04-02"
+  },
+  {
+   "n": 26,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.23",
+     "b": "Sınıf Rehberlik",
+     "t": "Yetenekleriyle mesleklerin özelliklerini ilişkilendirir.",
+     "d": []
+    }
+   ],
+   "bas": "2027-04-05",
+   "bit": "2027-04-09"
+  },
+  {
+   "n": 27,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.24",
+     "b": "Sınıf Rehberlik",
+     "t": "Bilişim teknolojileri kullanımında kendini yönetir.",
+     "d": [
+      "Kişisel verilerin korunması, bilişim suçları, siber zorbalık, güvenli internet kullanımı konularına odaklanılır."
+     ]
+    }
+   ],
+   "bas": "2027-04-12",
+   "bit": "2027-04-16"
+  },
+  {
+   "n": 28,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.25",
+     "b": "Sınıf Rehberlik",
+     "t": "Karakter güçleriyle iyi oluşu arasında bağ kurar.",
+     "d": []
+    }
+   ],
+   "bas": "2027-04-19",
+   "bit": "2027-04-23"
+  },
+  {
+   "n": 29,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.26",
+     "b": "Sınıf Rehberlik",
+     "t": "Sahip olduğu karakter güçlerini geliştirmek için çaba gösterir.",
+     "d": []
+    }
+   ],
+   "bas": "2027-04-26",
+   "bit": "2027-04-30"
+  },
+  {
+   "n": 30,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.27",
+     "b": "Sınıf Rehberlik",
+     "t": "Baskı altında serinkanlı davranışlar sergiler.",
+     "d": [
+      "Fiziksel şiddete başvurmadan baskıyı yönetmesine odaklanılır."
+     ]
+    }
+   ],
+   "bas": "2027-05-03",
+   "bit": "2027-05-07",
+   "kn": "Not: RİBA (Rehberlik İhtiyaçlarını Belirleme Anketi) uygulaması."
+  },
+  {
+   "n": 31,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.28",
+     "b": "Sınıf Rehberlik",
+     "t": "Bir ürün ortaya koymanın zaman, çaba ve sabır gerektirdiğini fark eder.",
+     "d": []
+    }
+   ],
+   "bas": "2027-05-10",
+   "bit": "2027-05-14"
+  },
+  {
+   "n": 32,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.29",
+     "b": "Sınıf Rehberlik",
+     "t": "Başarı ve başarısızlık durumlarını açıklama biçimlerini değerlendirir.",
+     "d": []
+    }
+   ],
+   "bas": "2027-05-20",
+   "bit": "2027-05-21"
+  },
+  {
+   "n": 33,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.30",
+     "b": "Sınıf Rehberlik",
+     "t": "Okulun kendisi için önemini açıklar.",
+     "d": []
+    }
+   ],
+   "bas": "2027-05-24",
+   "bit": "2027-05-28"
+  },
+  {
+   "n": 34,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.31",
+     "b": "Sınıf Rehberlik",
+     "t": "Bu zamana kadar verdiği kararları karar verme sürecini etkileyen faktörler açısından değerlendirir.",
+     "d": []
+    }
+   ],
+   "bas": "2027-05-31",
+   "bit": "2027-06-04"
+  },
+  {
+   "n": 35,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.32",
+     "b": "Sınıf Rehberlik",
+     "t": "Karar verme basamaklarını açıklar.",
+     "d": []
+    }
+   ],
+   "bas": "2027-06-07",
+   "bit": "2027-06-11"
+  },
+  {
+   "n": 36,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.33",
+     "b": "Sınıf Rehberlik",
+     "t": "Karar verme basamaklarını kullanır.",
+     "d": []
+    }
+   ],
+   "bas": "2027-06-14",
+   "bit": "2027-06-18"
+  },
+  {
+   "n": 37,
+   "s": 1,
+   "u": "Rehberlik ve Yönlendirme",
+   "m": [
+    {
+     "k": "REH.7.34",
+     "b": "Sınıf Rehberlik",
+     "t": "Sınıf rehberlik programı etkinliklerine/yaşantılarına ilişkin duygu ve düşüncelerini yansıtır.",
+     "d": []
+    }
+   ],
+   "bas": "2027-06-21",
+   "bit": "2027-06-25",
+   "kn": "Not: Rehberlik faaliyetleri yıl sonunda raporlanır."
+  }
+ ]
+}

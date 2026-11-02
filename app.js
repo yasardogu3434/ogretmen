@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.16.7'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.16.8'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu', kd: 'ogr_kd' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -2677,7 +2677,8 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
   var KZ = { idx: null, dos: {}, cur: null, sel: -1, bekle: {} };
   var KZ_ANAH = { mat: 'mat', matematik: 'mat', turkce: 'tur', fen: 'fen', fenbilimleri: 'fen', ing: 'ing', ingilizce: 'ing', sosyal: 'sos', sosyalbilgiler: 'sos', inklap: 'ita', inkilap: 'ita', ita: 'ita', dink: 'dkab', dkab: 'dkab', muzik: 'muz', bedegt: 'bes', bedenegitimi: 'bes', resim: 'gs', gorselsanatlar: 'gs', tektsr: 'tt', tektas: 'tt', teknolojitasarim: 'tt', blsm: 'bty', bilisim: 'bty', dinkulturu: 'dkab', dinkulturuveahlakbilgisi: 'dkab', teknolojivetasarim: 'tt', bilisimteknolojileri: 'bty', bilisimteknolojilerivezilim: 'bty', tcinkilaptarihi: 'ita', inkilaptarihi: 'ita', inkilaptarihivataturkculuk: 'ita', inkilaptarihiveataturkculuk: 'ita', gorselsanat: 'gs', afets: 'afet', afetbilinci: 'afet', ahlks: 'ahlk', ahlakvevatandaslik: 'ahlk', cevres: 'cevre', cevreegitimi: 'cevre',
     gkn: 'gkn', gkns: 'gkn', gorgukurallarivenezaket: 'gkn', kultmed: 'kultmed', kultmeds: 'kultmed', kulturmed: 'kultmed', kulturmeds: 'kultmed', kulturvemedeniyetimizeyonverenler: 'kultmed',
-    spor: 'spor', spors: 'spor', sporvefizikietkinlikler: 'spor', yabdil: 'yabdil', yabdils: 'yabdil', yabancidil: 'yabdil', yabancidils: 'yabdil' };
+    spor: 'spor', spors: 'spor', sporvefizikietkinlikler: 'spor', yabdil: 'yabdil', yabdils: 'yabdil', yabancidil: 'yabdil', yabancidils: 'yabdil',
+    reh: 'reh', rehberlik: 'reh', rehberlikveyonlendirme: 'reh', rehberlikvekariyerplanlama: 'reh' };
   // Ders kısaltması esnek eşlenir: tam ad ya da en az 3 harflik ön ek ("Müz.", "BedEğ", "Blşm."); birden çok farklı derse uyuyorsa eşleşmez.
   function kzA(d) {
     var x = kzAd(d); if (!x) return null; if (KZ_ANAH[x]) return KZ_ANAH[x];
@@ -2695,6 +2696,10 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     { a: 'gkn', ad: 'Görgü Kuralları ve Nezaket', s: 8, f: 'gkn1.json', h: 34 },
     { a: 'kultmed', ad: 'Kültür ve Medeniyetimize Yön Verenler', s: 8, f: 'kmyv1.json', h: 34 },
     { a: 'spor', ad: 'Spor ve Fiziki Etkinlikler', s: 7, f: 'spor1.json', h: 34 },
+    { a: 'reh', ad: 'Rehberlik ve Yönlendirme', s: 5, f: 'reh5.json', h: 36 },
+    { a: 'reh', ad: 'Rehberlik ve Yönlendirme', s: 6, f: 'reh6.json', h: 36 },
+    { a: 'reh', ad: 'Rehberlik ve Yönlendirme', s: 7, f: 'reh7.json', h: 36 },
+    { a: 'reh', ad: 'Rehberlik ve Yönlendirme', s: 8, f: 'reh8.json', h: 36 },
     { a: 'yabdil', ad: 'Yabancı Dil (Seçmeli İngilizce)', s: 5, f: 'yabdil5.json', h: 31 },
     { a: 'yabdil', ad: 'Yabancı Dil (Seçmeli İngilizce)', s: 6, f: 'yabdil6.json', h: 31 },
     { a: 'yabdil', ad: 'Yabancı Dil (Seçmeli İngilizce)', s: 7, f: 'yabdil7.json', h: 36 },
