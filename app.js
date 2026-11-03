@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.16.8'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.16.9'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu', kd: 'ogr_kd' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -3082,14 +3082,15 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
 
   // ================= BAŞLARKEN, BİLGİLENDİRME, VERİLERİM =================
   // Bilgilendirme metni değişirse BILGI_SURUM artırılır; öğretmen yeni metni bir kez daha onaylar.
-  var BILGI_SURUM = 'b1';
+  var BILGI_SURUM = 'b2';
   var BILGI_PILOT = 'Yaşar Doğu Öğretmen, öğretmenlerimizin günlük işlerini kolaylaştırmak ve eğitim-öğretim ortamının kalitesine katkı sağlamak amacıyla hazırlanmış bir pilot uygulamadır. Kusursuzluk iddiası taşımaz; sade ve öğretmen dostu bir yardımcı olmayı hedefler. Henüz eksikleri var ve senin geri bildirimlerinle gelişmeye devam edecek. Hiçbir kâr amacı gütmez, ücretsizdir ve yalnızca okulumuzun öğretmenleri için hazırlanmıştır.';
   var BILGI_PILOT2 = 'Karşılaştığın sorunları ve önerilerini Ayarlar › Tanılama › Sorun bildir bölümünden iletebilirsin.';
   var BILGI_MADDE = [
     'Yalnızca okul yönetiminin yayımladığı bilgiler gösterilir: ad-soyad, ders programı, nöbet ve görevlendirmeler, duyurular. Bu bilgiler okulun kendi Google hesabında tutulur ve okul kodu ile kişisel kodunla açılır.',
     'Kodların sunucuda düz metin olarak değil, geri döndürülemeyen şifrelenmiş (karma) biçimde saklanır.',
     'Notların ve “işlendi” işaretlerin yalnızca bu telefonda saklanır; okul yönetimi dahil kimseye gönderilmez.',
-    'Uygulamada reklam, takip ya da istatistik aracı bulunmaz. Bilgilerin üçüncü kişilerle paylaşılmaz.',
+    'Uygulamada reklam ya da üçüncü kişilere ait takip ve istatistik aracı bulunmaz. Bilgilerin üçüncü kişilerle paylaşılmaz.',
+    'Uygulama açıkken okul yönetimi, hangi öğretmenin uygulamayı ne zaman açık tuttuğunu ve hangi uygulama sürümünü kullandığını görebilir (yalnızca ad, son açık olma saati ve sürüm numarası). Notların, ders programın ya da başka bir bilgin bu kaydın parçası değildir.',
     'Yanlış kod denemelerini sınırlamak için telefonuna ait rastgele bir numara kullanılır. Bu numara kimliğini göstermez ve sunucuda yalnızca kısa süre (yaklaşık 10 dakika) tutulur.',
     'Bağlantı sırasında uygulamayı ve bilgileri sunan hizmetler (GitHub, Google) olağan teknik kayıtları (örneğin IP adresi) tutabilir.'
   ];
@@ -3262,7 +3263,7 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     var okul = oku(K.okul), kod = oku(K.kod);
     if (!okul || !kod || durum.yenileniyor) return;
     durum.yenileniyor = true; if (elle) render();
-    cagri({ okul: okul, kod: kod, cihaz: cihazNo() }).then(function (j) {
+    cagri({ okul: okul, kod: kod, cihaz: cihazNo(), s: APP_SURUM }).then(function (j) {
       durum.yenileniyor = false; sonYenileme = Date.now();
       if (j.ok && (j.yayinDurumu === 'acik' || j.yayinDurumu === 'durduruldu')) {
         var onceki = onbellek();
