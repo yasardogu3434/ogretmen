@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.16.9'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.17.0'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu', kd: 'ogr_kd' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -586,7 +586,12 @@
     if (!akt) s.push({ id: 'durum', h: durumKarti(C, 0) });
     if (!GIZLE.pano) yeniSlaytlar(C).forEach(function (p, i) { s.push({ id: p.sid || 'y' + i, h: oneKart(p, true), dt: p.dt || undefined }); });
     duyuruListe(y).slice(0, 8).forEach(function (d, i) { s.push({ id: 'd' + i, h: duyuruKart(d, C), dt: 'du:' + i }); });
-    if (!GIZLE.pano) oneCikanlar(C).forEach(function (p, i) { s.push({ id: 'o' + i, h: oneKart(p, true), dt: p.dt }); });
+    if (!GIZLE.pano) {
+      // Nöbet düzeni değişiyorsa hatırlatma dizinin sonunda kalıp gözden kaçmasın: baştaki kartın hemen arkasına alınır.
+      var rotK = [];
+      oneCikanlar(C).forEach(function (p, i) { var k = { id: 'o' + i, h: oneKart(p, true), dt: p.dt }; if (p.k === 'Nöbet düzeni') rotK.push(k); else s.push(k); });
+      if (rotK.length) s.splice.apply(s, [Math.min(1, s.length), 0].concat(rotK));
+    }
     if (!s.length) s.push({ id: 'durum', h: durumKarti(C, 0) });
     return s;
   }
