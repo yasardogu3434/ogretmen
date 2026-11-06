@@ -1117,3 +1117,9 @@ button,[data-dt],[data-n],[data-c],.shd,.cov,.dtd{touch-action:manipulation}
 .mkw.x .mkv{opacity:.62;letter-spacing:.8px}
 .mkw.x .mkbg,.mkw.x .mkbp{opacity:0;display:none}
 .mkw.k .mkbg,.mkw.k .mkbp{display:none}
+/* 0.17.1: Gece/Siyah temada Programım tablosu: bugün sütunu sabit krem zemin açık yazıyı siliyordu; nöbet hücresinin koyu kahve yazısı koyu zeminde okunmuyordu. Açık tema DEĞİŞMEDİ. */
+@media(prefers-color-scheme:dark){:root:not([data-th=light]) .tt>.td:not(.nowc){background:var(--goldsoft)}:root:not([data-th=light]) .tt>.nw2:not(.nowc){color:var(--gold)}}
+:root[data-th=dark] .tt>.td:not(.nowc){background:var(--goldsoft)}
+:root[data-th=dark] .tt>.nw2:not(.nowc){color:var(--gold)}
+@media(prefers-color-scheme:dark){:root:not([data-th=light]) .tt>.td.cv:not(.nowc){color:#5FC9B8;border-color:#5FC9B8}}
+:root[data-th=dark] .tt>.td.cv:not(.nowc){color:#5FC9B8;border-color:#5FC9B8}
