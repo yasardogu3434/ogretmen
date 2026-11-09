@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.17.1'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.17.2'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu', kd: 'ogr_kd' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -671,7 +671,7 @@
     var rh = ortak(y, 'slayt:rotasyonHatirlatma');
     if (rh && /^\d{4}-\d{2}-\d{2}$/.test(rh.tarih || '')) {
       var kalan = Math.round((tarihCoz(rh.tarih) - tarihCoz(bg)) / 86400000);
-      if (kalan >= 0 && kalan <= 7) {
+      if (kalan >= 1 && kalan <= 7) { // değişim günü (kalan 0) gösterilmez: yeni düzen zaten yürürlükte
         var nb = nobetim(y), ek = '';
         if (nb.gelecek && nb.gelecek.liste.length) ek = ' Yeni yerin: ' + nb.gelecek.liste.map(function (x) { return GUN[(+x.gun) % 7] + ' ' + x.yer; }).join(', ') + '.';
         out.push({ k: 'Nöbet düzeni', t: 'Nöbet yerleri ' + gunAy(rh.tarih) + ' tarihinde değişiyor', s: ek.trim(), c: 'var(--gold)', dt: 'nbd' });
@@ -1343,9 +1343,9 @@
           if (PAY.thumb) { try { URL.revokeObjectURL(PAY.thumb); } catch (e) {} }
           PAY.blob = pb; PAY.dosya = dosya; PAY.baslik = 'Geçmiş kayıtlar'; PAY.url = URL.createObjectURL(pb); PAY.thumb = URL.createObjectURL(ilk); PAY.file = null;
           try { PAY.file = new File([pb], dosya, { type: 'application/pdf' }); } catch (e) {}
-          var can2 = false; try { can2 = !!(PAY.file && navigator.canShare && navigator.canShare({ files: [PAY.file] })); } catch (e) {}
+          var can2 = false; try { can2 = !!(PAY.file && navigator.canShare && navigator.canShare({ files: [PAY.file] })) && !payOpera(); } catch (e) {}
           ayrintiRenk('ak:0');
-          dtGoster('PDF önizleme', '<img class="payimg" src="' + PAY.thumb + '" alt="Geçmiş kayıtlar PDF önizlemesi"><div class="paybt">' + (can2 ? '<button type="button" class="payb pri" id="paygo">Paylaş</button>' : '') + '<button type="button" class="payb' + (can2 ? '' : ' pri') + '" id="paysave">' + (can2 ? 'PDF kaydet' : 'PDF indir') + '</button></div><p class="oknot" style="margin:10px 0 0">A4 yatay, ' + say + ' sayfa, yazdırmaya hazır.</p>');
+          dtGoster('PDF önizleme', '<img class="payimg" src="' + PAY.thumb + '" alt="Geçmiş kayıtlar PDF önizlemesi"><div class="paybt">' + (can2 ? '<button type="button" class="payb pri" id="paygo">Paylaş</button>' : '') + '<button type="button" class="payb' + (can2 ? '' : ' pri') + '" id="paysave">' + (can2 ? 'PDF kaydet' : 'PDF indir') + '</button></div><p class="oknot" style="margin:10px 0 0">A4 yatay, ' + say + ' sayfa, yazdırmaya hazır. ' + esc(PAY_IPUCU) + '</p>');
         });
         return;
       }
@@ -1795,6 +1795,9 @@
   }
   function pdfKur(blob, gen, yuk, cb) { pdfKurCok([blob], gen, yuk, cb); }
   function pdfBtn(tip, etiket) { return '<button type="button" class="paybtn" data-pay="' + tip + 'pdf"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 16.5h6"/></svg>' + esc(etiket || 'PDF olarak al') + '</button>'; }
+  // Opera'dan "ana ekrana ekle" ile kurulan simge (bağımsız pencere) dosya paylaşımını alıcı uygulamalara ulaştıramıyor; aynı sayfa Opera tarayıcıda açılınca paylaşım çalışıyor (kullanıcı denemesi, 2026-11-09).
+  function payOpera() { try { var sa = (window.matchMedia && (matchMedia('(display-mode: standalone)').matches || matchMedia('(display-mode: minimal-ui)').matches || matchMedia('(display-mode: fullscreen)').matches)) || navigator.standalone === true; return sa && /OPR\/|Opera|OPT\//i.test(navigator.userAgent || ''); } catch (e) { return false; } }
+  var PAY_IPUCU = payOpera() ? 'Ana ekrandaki simgeden açıldığında bu telefonda paylaşım çalışmıyor. Kaydet\'e bas ve dosyayı İndirilenler klasöründen gönder; ya da uygulamayı Opera tarayıcıda açıp Paylaş\'ı kullan.' : 'Paylaş açılmazsa ya da alıcı uygulama dosyayı alamazsa Kaydet\'e bas; dosyayı İndirilenler klasöründen gönderebilirsin.';
   function payHazirla(tip) {
     if (tip === 'gecpdf' || tip === 'gectpdf') { gecmisPdf(tip === 'gecpdf'); return; }
     var pdf = /pdf$/.test(tip); if (pdf) tip = tip.slice(0, -3);
@@ -1841,18 +1844,18 @@
           if (PAY.thumb) { try { URL.revokeObjectURL(PAY.thumb); } catch (e) {} }
           PAY.blob = pb; PAY.dosya = dosya; PAY.baslik = bt; PAY.url = URL.createObjectURL(pb); PAY.thumb = URL.createObjectURL(blob); PAY.file = null;
           try { PAY.file = new File([pb], dosya, { type: 'application/pdf' }); } catch (e) {}
-          var can2 = false; try { can2 = !!(PAY.file && navigator.canShare && navigator.canShare({ files: [PAY.file] })); } catch (e) {}
+          var can2 = false; try { can2 = !!(PAY.file && navigator.canShare && navigator.canShare({ files: [PAY.file] })) && !payOpera(); } catch (e) {}
           ayrintiRenk('ak:0');
-          dtGoster('PDF önizleme', '<img class="payimg" src="' + PAY.thumb + '" alt="' + esc(bt) + ' PDF önizlemesi"><div class="paybt">' + (can2 ? '<button type="button" class="payb pri" id="paygo">Paylaş</button>' : '') + '<button type="button" class="payb' + (can2 ? '' : ' pri') + '" id="paysave">' + (can2 ? 'PDF kaydet' : 'PDF indir') + '</button></div><p class="oknot" style="margin:10px 0 0">A4 yatay, yazdırmaya hazır.</p>');
+          dtGoster('PDF önizleme', '<img class="payimg" src="' + PAY.thumb + '" alt="' + esc(bt) + ' PDF önizlemesi"><div class="paybt">' + (can2 ? '<button type="button" class="payb pri" id="paygo">Paylaş</button>' : '') + '<button type="button" class="payb' + (can2 ? '' : ' pri') + '" id="paysave">' + (can2 ? 'PDF kaydet' : 'PDF indir') + '</button></div><p class="oknot" style="margin:10px 0 0">A4 yatay, yazdırmaya hazır. ' + esc(PAY_IPUCU) + '</p>');
         });
         return;
       }
       if (PAY.url) { try { URL.revokeObjectURL(PAY.url); } catch (e) {} }
       PAY.blob = blob; PAY.dosya = dosya; PAY.baslik = bt; PAY.url = URL.createObjectURL(blob); PAY.file = null;
       try { PAY.file = new File([blob], dosya, { type: 'image/png' }); } catch (e) {}
-      var can = false; try { can = !!(PAY.file && navigator.canShare && navigator.canShare({ files: [PAY.file] })); } catch (e) {}
+      var can = false; try { can = !!(PAY.file && navigator.canShare && navigator.canShare({ files: [PAY.file] })) && !payOpera(); } catch (e) {}
       ayrintiRenk('ak:0');
-      dtGoster('Resim önizleme', '<img class="payimg" src="' + PAY.url + '" alt="' + esc(bt) + ' resmi"><div class="paybt">' + (can ? '<button type="button" class="payb pri" id="paygo">Paylaş</button>' : '') + '<button type="button" class="payb' + (can ? '' : ' pri') + '" id="paysave">' + (can ? 'Kaydet' : 'Resmi indir') + '</button></div><p class="oknot" style="margin:10px 0 0">Resme uzun basarak da kaydedebilirsin.</p>');
+      dtGoster('Resim önizleme', '<img class="payimg" src="' + PAY.url + '" alt="' + esc(bt) + ' resmi"><div class="paybt">' + (can ? '<button type="button" class="payb pri" id="paygo">Paylaş</button>' : '') + '<button type="button" class="payb' + (can ? '' : ' pri') + '" id="paysave">' + (can ? 'Kaydet' : 'Resmi indir') + '</button></div><p class="oknot" style="margin:10px 0 0">Resme uzun basarak da kaydedebilirsin. ' + esc(PAY_IPUCU) + '</p>');
     });
   }
   function payGonder() {
@@ -1862,6 +1865,7 @@
   function payKaydet() {
     if (!PAY.url) return;
     var a = document.createElement('a'); a.href = PAY.url; a.download = PAY.dosya; a.style.display = 'none'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    try { var nt = document.querySelector('.oknot'); if (nt) nt.textContent = 'Kaydedildi (İndirilenler klasörü). WhatsApp ya da e-postaya oradan ekleyebilirsin.'; } catch (e) {}
   }
 
   // ================= 0.15.0: KADEME NOKTASI, HIZLI İŞLEMLER (UZUN BASMA), ŞUBE ÖĞRETMENLERİ =================
