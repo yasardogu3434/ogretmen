@@ -1123,3 +1123,14 @@ button,[data-dt],[data-n],[data-c],.shd,.cov,.dtd{touch-action:manipulation}
 :root[data-th=dark] .tt>.nw2:not(.nowc){color:var(--gold)}
 @media(prefers-color-scheme:dark){:root:not([data-th=light]) .tt>.td.cv:not(.nowc){color:#5FC9B8;border-color:#5FC9B8}}
 :root[data-th=dark] .tt>.td.cv:not(.nowc){color:#5FC9B8;border-color:#5FC9B8}
+
+/* 0.17.3: dar kartta selamlama saatin altında kalıyordu ("İyi akşamlar" / 18:20) — punto kart genişliğine göre ölçeklenir; cqw desteklenmezse eski kurallar geçerli kalır */
+.skyc{container-type:inline-size}
+.skyc .sk-g{font-size:clamp(15px,5.2cqw,24px)}
+.skyc .sk-t{font-size:clamp(30px,11.5cqw,44px)}
+.skyc .sk-g{font-size:calc(clamp(15px,5.2cqw,24px)*var(--gf,1))}
+.skyc .sk-t{font-size:calc(clamp(30px,11.5cqw,44px)*var(--tf,1))}
+/* 0.17.3b: büyük sistem fontu emniyeti */
+.fr .tm,.hct .pill,.wk div,nav button{white-space:nowrap}
+.hct .pill{height:auto;min-height:34px}
+nav button{min-width:0}

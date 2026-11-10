@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.17.2'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.17.3'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu', kd: 'ogr_kd' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -2321,6 +2321,15 @@ function skLocal(now){ const t=new Date(now.getTime()+SK_TZ*3600000); return {y:
     const mo=q('.sk-moon'); mo.style.opacity=v.moonOp.toFixed(2); mo.style.display=v.moonOp>0.01?'block':'none'; mo.style.left=v.moonX.toFixed(2)+'%'; mo.style.top=v.moonY.toFixed(2)+'%';
     sa(q('.sk-mp'),'d', skMoonPath(v.moon));
     set('.sk-tag', v.tag); set('.sk-g', v.g); set('.sk-s', v.sub); set('.sk-t', v.time); set('.sk-d', v.date);
+    // 0.17.3: büyük yazı tipi / dar kartta selamlama saatin altında kalmasın: önce saat kartın %44'ünden geniş olmasın; selamlama saatin soluna kadar uzanır, sığmazsa küçülür/alt satıra sarılır; alt metin onun altına iner
+    try {
+      const kg = q('.sk-g'), kk = q('.sk-clk'), kt = q('.sk-t'), ks = q('.sk-s'), W = root.clientWidth || 320; let tf = 1, gf = 1;
+      kg.style.setProperty('--gf', 1); kt.style.setProperty('--tf', 1);
+      while (kk.offsetWidth > W * 0.44 && tf > 0.5) { tf -= 0.06; kt.style.setProperty('--tf', tf.toFixed(2)); }
+      kg.style.right = (kk.offsetWidth + 36 + 10) + 'px'; kg.style.whiteSpace = 'normal';
+      while (kg.scrollWidth > kg.clientWidth + 1 && gf > 0.5) { gf -= 0.06; kg.style.setProperty('--gf', gf.toFixed(2)); }
+      ks.style.top = ''; const tb = parseFloat(getComputedStyle(ks).top) || 84; ks.style.top = Math.max(tb, kg.offsetTop + kg.offsetHeight + 6) + 'px';
+    } catch (e) {}
     const inf=v.info.split('|'); set('.sk-inf .i1 em', inf[0]); set('.sk-inf .i2 em', inf[1]); set('.sk-inf .i3', 'Gün '+inf[2]);
   }
 
