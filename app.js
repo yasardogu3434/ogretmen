@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var A = window.OGR_AYAR;
-  var APP_SURUM = '0.17.4'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
+  var APP_SURUM = '0.18.1'; // bu dosyanın kendi sürümü; config.js'teki SURUM ile eşleşmezse eski dosya kalmıştır
   var K = { okul: 'ogr_okul', kod: 'ogr_kod', cihaz: 'ogr_cihaz', onb: 'ogr_onbellek', tema: 'ogr_tema', ac: 'ogr_ac', fs: 'ogr_fs', gizle: 'ogr_gizle', notlar: 'ogr_notlar', gorulen: 'ogr_gorulen', acilis: 'ogr_acilis', gun: 'ogr_gun', son: 'ogr_son', isl: 'ogr_islendi', basla: 'ogr_basla', okudum: 'ogr_okudum', ipucu: 'ogr_ipucu', kd: 'ogr_kd' };
   var MESAJ = {
     okul: 'Okul kodu hatalı. Tekrar dene.',
@@ -1422,7 +1422,7 @@
       gunler.forEach(function (d, i) {
         var c = hucreAl(y, i + 1, k + 1, iso(d)), cv = cov[iso(d) + '|' + (k + 1)], cl = '', v = '·', sm = '';
         if (cv) { cl = ' cv'; v = esc(cv.sinif || 'Doldurma'); sm = '<small>doldurma</small>'; }
-        else if (c) { v = esc(c.sinif); if (degis[(i + 1) + ',' + (k + 1)]) { cl = ' nw2'; sm = '<small>yeni</small>'; } }
+        else if (c) { v = esc(c.sinif); var dk = c.ders ? esc(c.ders) : ''; if (degis[(i + 1) + ',' + (k + 1)]) { cl = ' nw2'; sm = '<small class="ds">' + (dk ? dk + ' · ' : '') + 'yeni</small>'; } else if (dk) sm = '<small class="ds">' + dk + '</small>'; }
         else cl = ' em';
         if (iso(d) === C.gb.ds && C.gb.tip === 'ders') { var g = guncel(C); if (g[2] >= 0 && g[0][0] === 'ders' && dersNo(g[0]) === k + 1 && (c || cv)) cl += ' nowc'; }
         var kk = i + ',' + k;
