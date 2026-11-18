@@ -70,8 +70,8 @@ nav button{flex:1;border:0;background:none;font:inherit;display:flex;flex-direct
 .ptabs button{flex:1;border:0;background:none;color:rgba(255,255,255,.7);font:inherit;font-size:13.5px;font-weight:600;padding:8px 0;border-radius:9px;cursor:pointer}
 .ptabs button.on{background:#fff;color:var(--ink)}
 .stamp{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--mut);margin-top:14px}.stamp i{width:7px;height:7px;border-radius:50%;background:var(--teal)}
-.tt{display:grid;grid-template-columns:34px repeat(5,1fr);gap:4px;margin-top:12px}
-.tt>div{min-height:42px;border-radius:9px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;font-weight:650;color:var(--tx);background:var(--surf);border:1px solid var(--line);position:relative}
+.tt{display:grid;grid-template-columns:34px repeat(5,minmax(0,1fr));gap:4px;margin-top:12px}
+.tt>div{min-width:0;min-height:42px;border-radius:9px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;font-weight:650;color:var(--tx);background:var(--surf);border:1px solid var(--line);position:relative}
 .tt>.hd{background:none;border:0;min-height:30px;font-size:12px;color:var(--mut);font-weight:600}.tt>.hd.on{color:var(--tx)}.tt>.hd.on b{color:var(--gold)}
 .tt>.hd b{font-family:'Baloo 2';font-size:15px;color:var(--tx)}
 .tt>.no{background:none;border:0;font-size:12px;color:var(--mut);font-weight:600}
